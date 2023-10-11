@@ -216,6 +216,16 @@ bool Player::Update(float dt)
 			{
 				speed = 0.1f;
 			}
+
+			else if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN)
+			{
+				atacking = true;
+				if (atacking == true)
+				{
+					currentAnimation = &player_atack_1;
+					currentAnimation->Reset();
+				}
+			}
 			else
 			{
 				speed = 0.2f;
@@ -227,18 +237,6 @@ bool Player::Update(float dt)
 
 		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT) {
 
-		}
-
-
-		//Atacks
-		if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN)
-		{
-			atacking = true;
-			if (atacking==true)
-			{
-				currentAnimation = &player_atack_1;
-				currentAnimation->Reset();
-			}
 		}
 
 		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_REPEAT)
