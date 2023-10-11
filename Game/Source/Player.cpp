@@ -151,7 +151,7 @@ bool Player::Start() {
 	player_hurt_1.PushBack({ 0,227, 32, 32 });
 	player_hurt_1.PushBack({ 31,227, 32, 32 });
 	player_hurt_1.PushBack({ 31,227, 32, 32 });
-	player_hurt_1.speed = 100.0f;
+	player_hurt_1.speed = 10.0f;
 	player_hurt_1.loop = false;
 
 	player_hurt_2.PushBack({ 487,227, 32, 32 });
@@ -198,7 +198,7 @@ bool Player::Update(float dt)
 
 	if (rightmode==true)
 	{
-		if (atacking==false)
+		if (atacking==false && dead==false)
 		{
 			currentAnimation = &player_1;
 		}
@@ -253,7 +253,12 @@ bool Player::Update(float dt)
 		}
 		if (app->input->GetKey(SDL_SCANCODE_M) == KEY_REPEAT)
 		{
-			currentAnimation = &player_dead_1;
+			dead = true;
+			if (dead==true)
+			{
+				currentAnimation = &player_hurt_1;
+				currentAnimation->Reset();
+			}
 		}
 
 	}
