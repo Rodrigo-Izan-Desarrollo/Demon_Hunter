@@ -70,10 +70,10 @@ bool Player::Start() {
 	player_speed_2.PushBack({ 455 ,100, 32, 32 });
 	player_speed_2.PushBack({ 423 ,100, 32, 32 });
 	player_speed_2.PushBack({ 391 ,100, 32, 32 });
-	player_speed_2.PushBack({ 352 ,100, 32, 32 });
+	player_speed_2.PushBack({ 359 ,100, 32, 32 });
 	player_speed_2.PushBack({ 327 ,100, 32, 32 });
-	player_speed_2.PushBack({ 304 ,100, 32, 32 });
-	player_speed_2.PushBack({ 281 ,100, 32, 32 });
+	player_speed_2.PushBack({ 295 ,100, 32, 32 });
+	player_speed_2.PushBack({ 263 ,100, 32, 32 });
 	player_speed_2.loop = true;
 	player_speed_2.speed = 0.15f;
 	//Sit
@@ -87,7 +87,7 @@ bool Player::Start() {
 	player_down_2.PushBack({ 487, 129, 32, 32 });
 	player_down_2.PushBack({ 455, 129, 32, 32 });
 	player_down_2.PushBack({ 423, 129, 32, 32 });
-	player_down_2.PushBack({ 391, 129, 32, 32 });
+	player_down_2.PushBack({ 359, 129, 32, 32 });
 	player_down_2.speed = 0.1f;
 	player_down_2.loop = false;
 	//Jumping
@@ -95,10 +95,10 @@ bool Player::Start() {
 	player_jump_2.PushBack({ 455, 163, 32, 32 });
 	player_jump_2.PushBack({ 423, 163, 32, 32 });
 	player_jump_2.PushBack({ 391, 163, 32, 32 });
-	player_jump_2.PushBack({ 352, 163, 32, 32 });
+	player_jump_2.PushBack({ 359, 163, 32, 32 });
 	player_jump_2.PushBack({ 327, 163, 32, 32 });
-	player_jump_2.PushBack({ 304, 163, 32, 32 });
-	player_jump_2.PushBack({ 281, 163, 32, 32 });
+	player_jump_2.PushBack({ 295, 163, 32, 32 });
+	player_jump_2.PushBack({ 263, 163, 32, 32 });
 
 	player_jump_1.PushBack({ 0, 163, 32, 32 });
 	player_jump_1.PushBack({ 31, 163, 32, 32 });
@@ -125,10 +125,10 @@ bool Player::Start() {
 	player_atack_2.PushBack({ 455,259, 32, 32 });
 	player_atack_2.PushBack({ 423,259, 32, 32 });
 	player_atack_2.PushBack({ 391,259, 32, 32 });
-	player_atack_2.PushBack({ 352,259, 32, 32 });
+	player_atack_2.PushBack({ 359,259, 32, 32 });
 	player_atack_2.PushBack({ 327,259, 32, 32 });
-	player_atack_2.PushBack({ 304,259, 32, 32 });
-	player_atack_2.PushBack({ 281,259, 32, 32 });
+	player_atack_2.PushBack({ 291,259, 32, 32 });
+	player_atack_2.PushBack({ 263,259, 32, 32 });
 	player_atack_2.loop = false;
 	player_atack_2.speed = 0.25f;
 	//Invisible
@@ -148,14 +148,26 @@ bool Player::Start() {
 	//Damage resive
 	player_hurt_1.PushBack({ 0,227, 32, 32 });
 	player_hurt_1.PushBack({ 31,227, 32, 32 });
+	player_hurt_1.PushBack({ 31,227, 32, 32 });
+	player_hurt_1.speed = 100.0f;
+	player_hurt_1.loop = false;
 
 	player_hurt_2.PushBack({ 487,227, 32, 32 });
 	player_hurt_2.PushBack({ 455,227, 32, 32 });
 	//Player dead
+	player_dead_1.PushBack({ 0,227, 32, 32 });
+	player_dead_1.PushBack({ 31,227, 32, 32 });
+	player_dead_1.PushBack({ 31,227, 32, 32 });
 	player_dead_1.PushBack({ 63, 227, 32, 32 });
 	player_dead_1.PushBack({ 95, 227, 32, 32 });
 	player_dead_1.PushBack({ 126, 227, 32, 32 });
 	player_dead_1.PushBack({ 159, 227, 32, 32 });
+	player_dead_1.PushBack({ 159, 227, 32, 32 });
+	player_dead_1.PushBack({ 159, 227, 32, 32 });
+	player_dead_1.PushBack({ 159, 227, 32, 32 });
+	player_dead_1.PushBack({ 159, 227, 32, 32 });
+	player_dead_1.speed = 0.25f;
+	player_dead_1.loop = false;
 
 	player_dead_2.PushBack({ 487, 227, 32, 32 });
 	player_dead_2.PushBack({ 455, 227, 32, 32 });
@@ -174,16 +186,17 @@ bool Player::Update(float dt)
 	{
 		leftmode = true;
 		rightmode = false;
-		currentAnimation = &player_2;
 	}
+
 	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 	{
 		rightmode = true;
 		leftmode = false;
-		currentAnimation = &player_1;
 	}
+
 	if (rightmode==true)
 	{
+		currentAnimation = &player_1;
 		//Movement
 		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 		{
@@ -222,9 +235,21 @@ bool Player::Update(float dt)
 		{
 			currentAnimation = &player_no_1;
 		}
+		//Player damage against
+		if (app->input->GetKey(SDL_SCANCODE_H) == KEY_REPEAT)
+		{
+			currentAnimation = &player_hurt_1;
+			position.x -= 7;
+		}
+		if (app->input->GetKey(SDL_SCANCODE_M) == KEY_REPEAT)
+		{
+			currentAnimation = &player_dead_1;
+		}
+
 	}
 	if (leftmode==true)
 	{
+		currentAnimation = &player_2;
 		//Movement
 		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 		{
