@@ -29,6 +29,7 @@ public:
 	//L02: DONE 2: Declare player parameters
 	float speed = 0.2f;
 	SDL_Texture* texture = NULL;
+
 	Animation* currentAnimation;
 	Animation player_1;
 	Animation player_walk_1;
@@ -48,7 +49,11 @@ public:
 	Animation player_hurt_2;
 	Animation player_dead_2;
 	Animation player_atack_2;
+
 	pugi::xml_node config;
+
+	bool leftmode = false;
+	bool rightmode = false;
 };
 
 #endif // __PLAYER_H__
