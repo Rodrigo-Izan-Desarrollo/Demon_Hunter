@@ -118,6 +118,7 @@ bool Player::Start() {
 	player_atack_1.PushBack({ 159,259, 32, 32 });
 	player_atack_1.PushBack({ 191,259, 32, 32 });
 	player_atack_1.PushBack({ 222,259, 32, 32 });
+	player_atack_1.PushBack({ 0,2,32,32 });
 	player_atack_1.loop = false;
 	player_atack_1.speed = 0.25f;
 
@@ -129,6 +130,7 @@ bool Player::Start() {
 	player_atack_2.PushBack({ 327,259, 32, 32 });
 	player_atack_2.PushBack({ 291,259, 32, 32 });
 	player_atack_2.PushBack({ 263,259, 32, 32 });
+	player_atack_2.PushBack({ 487,2,32,32 });
 	player_atack_2.loop = false;
 	player_atack_2.speed = 0.25f;
 	//Invisible
@@ -196,7 +198,10 @@ bool Player::Update(float dt)
 
 	if (rightmode==true)
 	{
-		currentAnimation = &player_1;
+		if (atacking==false)
+		{
+			currentAnimation = &player_1;
+		}
 		//Movement
 		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 		{
@@ -226,9 +231,14 @@ bool Player::Update(float dt)
 
 
 		//Atacks
-		if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_REPEAT)
+		if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN)
 		{
-			currentAnimation = &player_atack_1;
+			atacking = true;
+			if (atacking==true)
+			{
+				currentAnimation = &player_atack_1;
+				currentAnimation->Reset();
+			}
 		}
 
 		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_REPEAT)
@@ -249,7 +259,10 @@ bool Player::Update(float dt)
 	}
 	if (leftmode==true)
 	{
-		currentAnimation = &player_2;
+		if (atacking == false)
+		{
+			currentAnimation = &player_2;
+		}
 		//Movement
 		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 		{
@@ -279,9 +292,14 @@ bool Player::Update(float dt)
 
 
 		//Atacks
-		if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_REPEAT)
+		if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN)
 		{
-			currentAnimation = &player_atack_2;
+			atacking = true;
+			if (atacking == true)
+			{
+				currentAnimation = &player_atack_2;
+				currentAnimation->Reset();
+			}
 		}
 
 		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_REPEAT)

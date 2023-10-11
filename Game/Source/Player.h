@@ -54,6 +54,8 @@ public:
 
 	bool leftmode = false;
 	bool rightmode = false;
+	bool atacking = false;
+	bool invisible = false;
 };
 
 #endif // __PLAYER_H__
