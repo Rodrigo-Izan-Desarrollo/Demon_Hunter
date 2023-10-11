@@ -19,7 +19,7 @@
   </window>
 
   <scene>
-    <player x="100" y="100" texturePath="Assets/Textures/player1.png"/>
+    <player x="100" y="100" texturePath="Assets/Textures/player_1.png"/>
     <map path="Assets/Maps/" name="Hello.tmx"/>
   </scene>
   
