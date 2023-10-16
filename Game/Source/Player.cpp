@@ -198,7 +198,7 @@ bool Player::Update(float dt)
 
 	if (rightmode==true)
 	{
-		if (atacking==false && dead==false)
+		if (atacking==false && dead==false && leftmode == false)
 		{
 			currentAnimation = &player_1;
 		}
@@ -216,33 +216,24 @@ bool Player::Update(float dt)
 			{
 				speed = 0.1f;
 			}
-
-			else if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN)
-			{
-				atacking = true;
-				if (atacking == true)
-				{
-					currentAnimation = &player_atack_1;
-					currentAnimation->Reset();
-				}
-			}
 			else
 			{
 				speed = 0.2f;
+			}
+		}
+		if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_REPEAT)
+		{
+			atacking = true;
+			if (atacking == true)
+			{
+				currentAnimation = &player_atack_1;
+				currentAnimation->Reset();
 			}
 		}
 		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
 			currentAnimation = &player_down_1;
 		}
 
-		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT) {
-
-		}
-
-		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_REPEAT)
-		{
-			currentAnimation = &player_no_1;
-		}
 		//Player damage against
 		if (app->input->GetKey(SDL_SCANCODE_H) == KEY_REPEAT)
 		{
@@ -254,7 +245,7 @@ bool Player::Update(float dt)
 			dead = true;
 			if (dead==true)
 			{
-				currentAnimation = &player_hurt_1;
+				currentAnimation = &player_dead_1;
 				currentAnimation->Reset();
 			}
 		}
@@ -262,7 +253,7 @@ bool Player::Update(float dt)
 	}
 	if (leftmode==true)
 	{
-		if (atacking == false)
+		if (atacking == false && dead == false && rightmode == false)
 		{
 			currentAnimation = &player_2;
 		}
@@ -285,17 +276,7 @@ bool Player::Update(float dt)
 				speed = 0.2f;
 			}
 		}
-		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
-			currentAnimation = &player_down_2;
-		}
-
-		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT) {
-
-		}
-
-
-		//Atacks
-		if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN)
+		if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_REPEAT)
 		{
 			atacking = true;
 			if (atacking == true)
@@ -304,10 +285,24 @@ bool Player::Update(float dt)
 				currentAnimation->Reset();
 			}
 		}
+		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
+			currentAnimation = &player_down_2;
+		}
 
-		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_REPEAT)
+		//Player damage against
+		if (app->input->GetKey(SDL_SCANCODE_H) == KEY_REPEAT)
 		{
-			currentAnimation = &player_no_2;
+			currentAnimation = &player_hurt_2;
+			position.x += 7;
+		}
+		if (app->input->GetKey(SDL_SCANCODE_M) == KEY_REPEAT)
+		{
+			dead = true;
+			if (dead == true)
+			{
+				currentAnimation = &player_dead_2;
+				currentAnimation->Reset();
+			}
 		}
 	}
 		
