@@ -31,32 +31,42 @@ public:
 	SDL_Texture* texture = NULL;
 
 	Animation* currentAnimation;
+
 	Animation player_1;
-	Animation player_walk_1;
-	Animation player_speed_1;
-	Animation player_down_1;
-	Animation player_jump_1;
-	Animation player_no_1;
-	Animation player_hurt_1;
-	Animation player_dead_1;
-	Animation player_atack_1;
 	Animation player_2;
+
+	Animation player_walk_1;
 	Animation player_walk_2;
+	
+	Animation player_speed_1;
 	Animation player_speed_2;
+	
+	Animation player_down_1;	
 	Animation player_down_2;
+
+	Animation player_jump_1;	
 	Animation player_jump_2;
+
+	Animation player_no_1;
 	Animation player_no_2;
+
+	Animation player_hurt_1;
 	Animation player_hurt_2;
+
+	Animation player_dead_1;
 	Animation player_dead_2;
-	Animation player_atack_2;
+
+	Animation player_attack_1;
+	Animation player_attack_2;
 
 	pugi::xml_node config;
 
 	bool leftmode = false;
 	bool rightmode = false;
+
 	bool atacking = false;
-	bool invisible = false;
 	bool dead = false;
+
 };
 
 #endif // __PLAYER_H__

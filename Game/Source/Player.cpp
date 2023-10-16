@@ -110,29 +110,29 @@ bool Player::Start() {
 	player_jump_1.PushBack({ 222, 163, 32, 32 });
 
 	//Normal atack
-	player_atack_1.PushBack({ 0,259, 32, 32 });
-	player_atack_1.PushBack({ 31,259, 32, 32 });
-	player_atack_1.PushBack({ 63,259, 32, 32 });
-	player_atack_1.PushBack({ 95,259, 32, 32 });
-	player_atack_1.PushBack({ 126,259, 32, 32 });
-	player_atack_1.PushBack({ 159,259, 32, 32 });
-	player_atack_1.PushBack({ 191,259, 32, 32 });
-	player_atack_1.PushBack({ 222,259, 32, 32 });
-	player_atack_1.PushBack({ 0,2,32,32 });
-	player_atack_1.loop = false;
-	player_atack_1.speed = 0.25f;
+	player_attack_1.PushBack({ 0,259, 32, 32 });
+	player_attack_1.PushBack({ 31,259, 32, 32 });
+	player_attack_1.PushBack({ 63,259, 32, 32 });
+	player_attack_1.PushBack({ 95,259, 32, 32 });
+	player_attack_1.PushBack({ 126,259, 32, 32 });
+	player_attack_1.PushBack({ 159,259, 32, 32 });
+	player_attack_1.PushBack({ 191,259, 32, 32 });
+	player_attack_1.PushBack({ 224,259, 32, 32 });
+	player_attack_1.PushBack({ 0,2,32,32 });
+	player_attack_1.loop = false;
+	player_attack_1.speed = 0.275f;
 
-	player_atack_2.PushBack({ 487,259, 32, 32 });
-	player_atack_2.PushBack({ 455,259, 32, 32 });
-	player_atack_2.PushBack({ 423,259, 32, 32 });
-	player_atack_2.PushBack({ 391,259, 32, 32 });
-	player_atack_2.PushBack({ 359,259, 32, 32 });
-	player_atack_2.PushBack({ 327,259, 32, 32 });
-	player_atack_2.PushBack({ 291,259, 32, 32 });
-	player_atack_2.PushBack({ 263,259, 32, 32 });
-	player_atack_2.PushBack({ 487,2,32,32 });
-	player_atack_2.loop = false;
-	player_atack_2.speed = 0.25f;
+	player_attack_2.PushBack({ 487,259, 32, 32 });
+	player_attack_2.PushBack({ 455,259, 32, 32 });
+	player_attack_2.PushBack({ 423,259, 32, 32 });
+	player_attack_2.PushBack({ 391,259, 32, 32 });
+	player_attack_2.PushBack({ 359,259, 32, 32 });
+	player_attack_2.PushBack({ 327,259, 32, 32 });
+	player_attack_2.PushBack({ 291,259, 32, 32 });
+	player_attack_2.PushBack({ 263,259, 32, 32 });
+	player_attack_2.PushBack({ 487,2,32,32 });
+	player_attack_2.loop = false;
+	player_attack_2.speed = 0.275f;
 	//Invisible
 	player_no_1.PushBack({ 0, 195, 32, 32 });
 	player_no_1.PushBack({ 31, 195, 32, 32 });
@@ -156,6 +156,8 @@ bool Player::Start() {
 
 	player_hurt_2.PushBack({ 487,227, 32, 32 });
 	player_hurt_2.PushBack({ 455,227, 32, 32 });
+	player_hurt_2.speed = 10.0f;
+	player_hurt_2.loop = false;
 	//Player dead
 	player_dead_1.PushBack({ 0,227, 32, 32 });
 	player_dead_1.PushBack({ 31,227, 32, 32 });
@@ -164,10 +166,6 @@ bool Player::Start() {
 	player_dead_1.PushBack({ 95, 227, 32, 32 });
 	player_dead_1.PushBack({ 126, 227, 32, 32 });
 	player_dead_1.PushBack({ 159, 227, 32, 32 });
-	player_dead_1.PushBack({ 159, 227, 32, 32 });
-	player_dead_1.PushBack({ 159, 227, 32, 32 });
-	player_dead_1.PushBack({ 159, 227, 32, 32 });
-	player_dead_1.PushBack({ 159, 227, 32, 32 });
 	player_dead_1.speed = 0.25f;
 	player_dead_1.loop = false;
 
@@ -175,7 +173,12 @@ bool Player::Start() {
 	player_dead_2.PushBack({ 455, 227, 32, 32 });
 	player_dead_2.PushBack({ 423, 227, 32, 32 });
 	player_dead_2.PushBack({ 391, 227, 32, 32 });
-	
+	player_dead_2.PushBack({ 359, 227, 32, 32 });
+	player_dead_2.PushBack({ 327, 227, 32, 32 });
+	player_dead_2.PushBack({ 291, 227, 32, 32 });
+	player_dead_2.speed = 0.25f;
+	player_dead_2.loop = false;
+
 	currentAnimation = &player_1;
 
 	return true;
@@ -202,12 +205,12 @@ bool Player::Update(float dt)
 		{
 			currentAnimation = &player_1;
 		}
-		//Movement
+
 		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 		{
 			position.x += (int)(speed * dt);
 			currentAnimation = &player_walk_1;
-			if (app->input->GetKey(SDL_SCANCODE_LALT) == KEY_REPEAT)
+			if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT)
 			{
 				currentAnimation = &player_speed_1;
 				speed = 0.3f;
@@ -221,48 +224,52 @@ bool Player::Update(float dt)
 				speed = 0.2f;
 			}
 		}
-		if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_REPEAT)
-		{
-			atacking = true;
-			if (atacking == true)
-			{
-				currentAnimation = &player_atack_1;
-				currentAnimation->Reset();
-			}
-		}
+
 		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
 			currentAnimation = &player_down_1;
 		}
 
-		//Player damage against
-		if (app->input->GetKey(SDL_SCANCODE_H) == KEY_REPEAT)
+		if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_REPEAT)
 		{
-			currentAnimation = &player_hurt_1;
-			position.x -= 7;
-		}
-		if (app->input->GetKey(SDL_SCANCODE_M) == KEY_REPEAT)
-		{
-			dead = true;
-			if (dead==true)
+			atacking = true;
+			if (atacking)
 			{
-				currentAnimation = &player_dead_1;
-				currentAnimation->Reset();
+				currentAnimation = &player_attack_1; 
+				if (currentAnimation)
+				{
+					currentAnimation->Reset();
+				}
 			}
-		}
+		}	
 
+		//if (app->input->GetKey(SDL_SCANCODE_1) == KEY_REPEAT)
+		//{
+		//	currentAnimation = &player_hurt_1;
+		//	position.x -= 7;
+		//}
+
+		//if (app->input->GetKey(SDL_SCANCODE_2) == KEY_REPEAT)
+		//{
+		//	dead = true;
+		//	if (dead==true)
+		//	{
+		//		currentAnimation = &player_dead_1;
+		//		currentAnimation->Reset();
+		//	}
+		//}
 	}
-	if (leftmode==true)
+	if (leftmode == true)
 	{
 		if (atacking == false && dead == false && rightmode == false)
 		{
 			currentAnimation = &player_2;
 		}
-		//Movement
+
 		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 		{
 			position.x -= (int)(speed * dt);
 			currentAnimation = &player_walk_2;
-			if (app->input->GetKey(SDL_SCANCODE_LALT) == KEY_REPEAT)
+			if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT)
 			{
 				currentAnimation = &player_speed_2;
 				speed = 0.3f;
@@ -276,37 +283,38 @@ bool Player::Update(float dt)
 				speed = 0.2f;
 			}
 		}
+
 		if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_REPEAT)
 		{
 			atacking = true;
 			if (atacking == true)
 			{
-				currentAnimation = &player_atack_2;
+				currentAnimation = &player_attack_2;
 				currentAnimation->Reset();
 			}
 		}
+
 		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
 			currentAnimation = &player_down_2;
 		}
 
-		//Player damage against
-		if (app->input->GetKey(SDL_SCANCODE_H) == KEY_REPEAT)
-		{
-			currentAnimation = &player_hurt_2;
-			position.x += 7;
-		}
-		if (app->input->GetKey(SDL_SCANCODE_M) == KEY_REPEAT)
-		{
-			dead = true;
-			if (dead == true)
-			{
-				currentAnimation = &player_dead_2;
-				currentAnimation->Reset();
-			}
-		}
+		//	if (app->input->GetKey(SDL_SCANCODE_1) == KEY_REPEAT)
+		//	{
+		//		currentAnimation = &player_hurt_2;
+		//		position.x += 7;
+		//	}
+		//	if (app->input->GetKey(SDL_SCANCODE_2) == KEY_REPEAT)
+		//	{
+		//		dead = true;
+		//		if (dead == true)
+		//		{
+		//			currentAnimation = &player_dead_2;
+		//			currentAnimation->Reset();
+		//		}
+		//	}
+		//}
+		//	
 	}
-		
-
 	app->render->DrawTexture(texture,position.x,position.y,&currentAnimation->GetCurrentFrame());
 	currentAnimation->Update();
 
