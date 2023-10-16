@@ -6,7 +6,6 @@
 #include "Audio.h"
 #include "Scene.h"
 #include "Map.h"
-#include "Physics.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -32,8 +31,6 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	render = new Render();
 	tex = new Textures();
 	audio = new Audio();
-	//L07 TODO 2: Add Physics module
-	physics = new Physics();
 	scene = new Scene();
 	map = new Map();
 	entityManager = new EntityManager();
@@ -45,8 +42,6 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(input);
 	AddModule(tex);
 	AddModule(audio);
-	//L07 TODO 2: Add Physics module
-	AddModule(physics);
 	AddModule(scene);
 	AddModule(map);
 	AddModule(entityManager);
