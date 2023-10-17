@@ -47,11 +47,8 @@ public:
 	Animation player_down_1;
 	Animation player_down_2;
 
-	Animation player_jumphigh_1;
-	Animation player_jumphigh_2;
-
-	Animation player_jumpdown_1;
-	Animation player_jumpdown_2;
+	Animation player_jump_1;
+	Animation player_jump_2;
 
 	Animation player_no_1;
 	Animation player_no_2;
@@ -71,10 +68,14 @@ public:
 	bool rightmode = false;
 
 	bool atacking = false;
+
 	bool dead = false;
+
 	bool down = false;
+
 	bool jumping = false;
 
+	bool inground = true;
 };
 
 #endif // __PLAYER_H__

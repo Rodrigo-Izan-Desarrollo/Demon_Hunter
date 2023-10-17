@@ -98,27 +98,24 @@ bool Player::Start() {
 	player_down_2.speed = 0.1f;
 	player_down_2.loop = false;
 	//Jumping
-	player_jumphigh_2.PushBack({ 487, 163, 32, 32 });
-	player_jumphigh_2.PushBack({ 455, 163, 32, 32 });
-	player_jumphigh_2.PushBack({ 423, 163, 32, 32 });
-	player_jumphigh_2.PushBack({ 391, 163, 32, 32 });
+	player_jump_2.PushBack({ 487, 163, 32, 32 });
+	player_jump_2.PushBack({ 455, 163, 32, 32 });
+	player_jump_2.PushBack({ 423, 163, 32, 32 });
+	player_jump_2.PushBack({ 391, 163, 32, 32 });
+	player_jump_2.PushBack({ 359, 163, 32, 32 });
+	player_jump_2.speed = 0.25f;
+	player_jump_2.loop = false;
 
-	player_jumpdown_2.PushBack({ 359, 163, 32, 32 });
-	player_jumpdown_2.PushBack({ 327, 163, 32, 32 });
-	player_jumpdown_2.PushBack({ 295, 163, 32, 32 });
-	player_jumpdown_2.PushBack({ 263, 163, 32, 32 });
+	player_jump_1.PushBack({ 31, 163, 32, 32 });
+	player_jump_1.PushBack({ 63, 163, 32, 32 });
+	player_jump_1.PushBack({ 63, 163, 32, 32 });
+	player_jump_1.PushBack({ 95, 163, 32, 32 });
+	player_jump_1.PushBack({ 95, 163, 32, 32 });
+	player_jump_1.PushBack({ 126, 163, 32, 32 });
+	player_jump_1.PushBack({ 126, 163, 32, 32 });
+	player_jump_1.speed= 0.2f;
+	player_jump_1.loop = false;
 
-	player_jumphigh_1.PushBack({ 0, 163, 32, 32 });
-	player_jumphigh_1.PushBack({ 31, 163, 32, 32 });
-	player_jumphigh_1.PushBack({ 63, 163, 32, 32 });
-	player_jumphigh_1.PushBack({ 95, 163, 32, 32 });
-	player_jumphigh_1.speed= 0.025f;
-	player_jumphigh_1.loop = false;
-
-	player_jumpdown_1.PushBack({ 126, 163, 32, 32 });
-	player_jumpdown_1.PushBack({ 159, 163, 32, 32 });
-	player_jumpdown_1.PushBack({ 191, 163, 32, 32 });
-	player_jumpdown_1.PushBack({ 222, 163, 32, 32 });
 
 	//Normal atack
 	player_attack_1.PushBack({ 0,259, 32, 32 });
@@ -128,8 +125,7 @@ bool Player::Start() {
 	player_attack_1.PushBack({ 126,259, 32, 32 });
 	player_attack_1.PushBack({ 159,259, 32, 32 });
 	player_attack_1.PushBack({ 191,259, 32, 32 });
-	player_attack_1.PushBack({ 224,259, 32, 32 });
-	player_attack_1.PushBack({ 0,2,32,32 });
+
 	player_attack_1.loop = false;
 	player_attack_1.speed = 0.275f;
 
@@ -140,8 +136,6 @@ bool Player::Start() {
 	player_attack_2.PushBack({ 359,259, 32, 32 });
 	player_attack_2.PushBack({ 327,259, 32, 32 });
 	player_attack_2.PushBack({ 291,259, 32, 32 });
-	player_attack_2.PushBack({ 263,259, 32, 32 });
-	player_attack_2.PushBack({ 487,2,32,32 });
 	player_attack_2.loop = false;
 	player_attack_2.speed = 0.275f;
 	//Invisible
@@ -217,7 +211,7 @@ bool Player::Update(float dt)
 
 	if (rightmode == true)
 	{
-		if (atacking == false && dead == false && down==false)
+		if (atacking == false && dead == false && down==false && jumping==false && inground==true)
 		{
 			currentAnimation = &player_1;
 		}
@@ -250,19 +244,26 @@ bool Player::Update(float dt)
 				currentAnimation->loopCount = 0;
 			}
 		}
-
 		if (currentAnimation == &player_down_1 && currentAnimation->HasFinished()) {
 			down = false;
-			currentAnimation->Reset();
 		}
+
 		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) 
 		{
-			//veljump.y = -0.3 * dt;
-			currentAnimation = &player_jumphigh_1;
+			jumping = true;
+			inground = false;
+			veljump.y = -0.3 * dt;			
 			pbody->body->SetLinearVelocity(veljump);
+			if (jumping)
+			{
+				currentAnimation = &player_jump_1;
+				currentAnimation->loopCount = 0;
+			}
 		}
-
-
+		if (currentAnimation == &player_jump_1 && currentAnimation->HasFinished() && inground) {
+			currentAnimation->Reset();
+			jumping = false;
+		}
 		if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_REPEAT)
 		{
 			atacking = true;
@@ -274,7 +275,9 @@ bool Player::Update(float dt)
 			}
 		}
 
-		if (currentAnimation == &player_attack_1 && currentAnimation->HasFinished()) atacking = false;
+		if (currentAnimation == &player_attack_1 && currentAnimation->HasFinished()) {
+			atacking = false;
+		} 
 
 	}
 	if (leftmode == true)
@@ -368,6 +371,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::PLATFORM:
 		LOG("Collision PLATFORM");
+		inground = true;
 		break;
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
