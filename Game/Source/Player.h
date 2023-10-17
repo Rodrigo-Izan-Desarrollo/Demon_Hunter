@@ -28,7 +28,6 @@ public:
 
 public:
 	float speed = 0.2f;
-	float impulse = 20;
 	const char* texturePath;
 	SDL_Texture* texture = NULL;
 	PhysBody* pbody;
@@ -70,6 +69,7 @@ public:
 
 	bool atacking = false;
 	bool dead = false;
+	bool down = false;
 
 };
 

@@ -193,7 +193,11 @@ bool Player::Start() {
 
 bool Player::Update(float dt)
 {
-	b2Vec2 vel = b2Vec2(0, -GRAVITY_Y);
+	b2Vec2 veljump = pbody->body->GetLinearVelocity();
+	if (app->input->GetKey(SDL_SCANCODE_A)==KEY_IDLE && app->input->GetKey(SDL_SCANCODE_D)==KEY_IDLE)
+	{
+		veljump.x = 0;
+	}
 
 	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 	{
@@ -209,14 +213,14 @@ bool Player::Update(float dt)
 
 	if (rightmode == true)
 	{
-		if (atacking == false && dead == false)
+		if (atacking == false && dead == false && down==false)
 		{
 			currentAnimation = &player_1;
 		}
 
 		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 		{
-			vel = b2Vec2(speed * dt, -GRAVITY_Y);
+			veljump.x = speed * dt;
 			currentAnimation = &player_walk_1;
 			if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT)
 			{
@@ -233,49 +237,51 @@ bool Player::Update(float dt)
 			}
 		}
 
-		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
-			currentAnimation = &player_down_1;
+		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) 
+		{
+			down = true;
+			if (down)
+			{
+				currentAnimation = &player_down_1;
+				currentAnimation->loopCount = 0;
+			}
 		}
+
+		if (currentAnimation == &player_down_1 && currentAnimation->HasFinished()) {
+			down = false;
+			currentAnimation->Reset();
+		}
+		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT) 
+		{
+			veljump.y = -0.3 * dt;
+			pbody->body->SetLinearVelocity(veljump);
+		}
+
 
 		if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_REPEAT)
 		{
 			atacking = true;
 			if (atacking)
 			{
+				currentAnimation->Reset();
 				currentAnimation = &player_attack_1;
-				if (currentAnimation)
-				{
-					currentAnimation->Reset();
-				}
+				currentAnimation->loopCount = 0;
 			}
 		}
 
-		//if (app->input->GetKey(SDL_SCANCODE_1) == KEY_REPEAT)
-		//{
-		//	currentAnimation = &player_hurt_1;
-		//	position.x -= 7;
-		//}
+		if (currentAnimation == &player_attack_1 && currentAnimation->HasFinished()) atacking = false;
 
-		//if (app->input->GetKey(SDL_SCANCODE_2) == KEY_REPEAT)
-		//{
-		//	dead = true;
-		//	if (dead==true)
-		//	{
-		//		currentAnimation = &player_dead_1;
-		//		currentAnimation->Reset();
-		//	}
-		//}
 	}
 	if (leftmode == true)
 	{
-		if (atacking == false && dead == false)
+		if (atacking == false && dead == false && down == false)
 		{
 			currentAnimation = &player_2;
 		}
 
 		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 		{
-			vel = b2Vec2(-speed * dt, -GRAVITY_Y);
+			veljump.x = -speed*dt;
 			currentAnimation = &player_walk_2;
 			if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT)
 			{
@@ -295,40 +301,42 @@ bool Player::Update(float dt)
 		if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_REPEAT)
 		{
 			atacking = true;
-			if (atacking == true)
+			if (atacking)
 			{
-				currentAnimation = &player_attack_2;
 				currentAnimation->Reset();
+				currentAnimation = &player_attack_2;
+				currentAnimation->loopCount = 0;
 			}
 		}
 
-		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
-			currentAnimation = &player_down_2;
-		}
-		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT) {
-			vel = b2Vec2(-speed * dt, -GRAVITY_Y);
+		if (currentAnimation == &player_attack_2 && currentAnimation->HasFinished()) 
+		{
+			atacking = false;
 		}
 
-		//	if (app->input->GetKey(SDL_SCANCODE_1) == KEY_REPEAT)
-		//	{
-		//		currentAnimation = &player_hurt_2;
-		//		position.x += 7;
-		//	}
-		//	if (app->input->GetKey(SDL_SCANCODE_2) == KEY_REPEAT)
-		//	{
-		//		dead = true;
-		//		if (dead == true)
-		//		{
-		//			currentAnimation = &player_dead_2;
-		//			currentAnimation->Reset();
-		//		}
-		//	}
-		//}
-		//	
+		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
+		{
+			down = true;
+			if (down)
+			{
+				currentAnimation = &player_down_2;
+				currentAnimation->loopCount = 0;
+			}
+		}
+
+		if (currentAnimation == &player_down_2 && currentAnimation->HasFinished()) {
+			down = false;
+			currentAnimation->Reset();
+		}
+		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT) 
+		{
+			veljump.y = -0.3 * dt;
+			pbody->body->SetLinearVelocity(veljump);
+		}
 	}
 
 	//Set the velocity of the pbody of the player
-	pbody->body->SetLinearVelocity(vel);
+	pbody->body->SetLinearVelocity(veljump);
 
 	//Update player position in pixels
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
@@ -342,7 +350,6 @@ bool Player::Update(float dt)
 
 bool Player::CleanUp()
 {
-
 	return true;
 }
 
