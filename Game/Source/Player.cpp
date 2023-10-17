@@ -209,7 +209,7 @@ bool Player::Update(float dt)
 
 	if (rightmode == true)
 	{
-		if (atacking == false && dead == false && leftmode == false)
+		if (atacking == false && dead == false)
 		{
 			currentAnimation = &player_1;
 		}
@@ -268,7 +268,7 @@ bool Player::Update(float dt)
 	}
 	if (leftmode == true)
 	{
-		if (atacking == false && dead == false && rightmode == false)
+		if (atacking == false && dead == false)
 		{
 			currentAnimation = &player_2;
 		}
@@ -304,6 +304,9 @@ bool Player::Update(float dt)
 
 		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
 			currentAnimation = &player_down_2;
+		}
+		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT) {
+			vel = b2Vec2(-speed * dt, -GRAVITY_Y);
 		}
 
 		//	if (app->input->GetKey(SDL_SCANCODE_1) == KEY_REPEAT)
