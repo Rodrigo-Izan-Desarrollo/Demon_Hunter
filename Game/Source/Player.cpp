@@ -216,7 +216,7 @@ bool Player::Update(float dt)
 
 		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 		{
-			position.x += (int)(speed * dt);
+			vel = b2Vec2(speed * dt, -GRAVITY_Y);
 			currentAnimation = &player_walk_1;
 			if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT)
 			{
@@ -275,7 +275,7 @@ bool Player::Update(float dt)
 
 		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 		{
-			position.x -= (int)(speed * dt);
+			vel = b2Vec2(-speed * dt, -GRAVITY_Y);
 			currentAnimation = &player_walk_2;
 			if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT)
 			{
