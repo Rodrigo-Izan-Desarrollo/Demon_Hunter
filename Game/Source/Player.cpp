@@ -98,23 +98,27 @@ bool Player::Start() {
 	player_down_2.speed = 0.1f;
 	player_down_2.loop = false;
 	//Jumping
-	player_jump_2.PushBack({ 487, 163, 32, 32 });
-	player_jump_2.PushBack({ 455, 163, 32, 32 });
-	player_jump_2.PushBack({ 423, 163, 32, 32 });
-	player_jump_2.PushBack({ 391, 163, 32, 32 });
-	player_jump_2.PushBack({ 359, 163, 32, 32 });
-	player_jump_2.PushBack({ 327, 163, 32, 32 });
-	player_jump_2.PushBack({ 295, 163, 32, 32 });
-	player_jump_2.PushBack({ 263, 163, 32, 32 });
+	player_jumphigh_2.PushBack({ 487, 163, 32, 32 });
+	player_jumphigh_2.PushBack({ 455, 163, 32, 32 });
+	player_jumphigh_2.PushBack({ 423, 163, 32, 32 });
+	player_jumphigh_2.PushBack({ 391, 163, 32, 32 });
 
-	player_jump_1.PushBack({ 0, 163, 32, 32 });
-	player_jump_1.PushBack({ 31, 163, 32, 32 });
-	player_jump_1.PushBack({ 63, 163, 32, 32 });
-	player_jump_1.PushBack({ 95, 163, 32, 32 });
-	player_jump_1.PushBack({ 126, 163, 32, 32 });
-	player_jump_1.PushBack({ 159, 163, 32, 32 });
-	player_jump_1.PushBack({ 191, 163, 32, 32 });
-	player_jump_1.PushBack({ 222, 163, 32, 32 });
+	player_jumpdown_2.PushBack({ 359, 163, 32, 32 });
+	player_jumpdown_2.PushBack({ 327, 163, 32, 32 });
+	player_jumpdown_2.PushBack({ 295, 163, 32, 32 });
+	player_jumpdown_2.PushBack({ 263, 163, 32, 32 });
+
+	player_jumphigh_1.PushBack({ 0, 163, 32, 32 });
+	player_jumphigh_1.PushBack({ 31, 163, 32, 32 });
+	player_jumphigh_1.PushBack({ 63, 163, 32, 32 });
+	player_jumphigh_1.PushBack({ 95, 163, 32, 32 });
+	player_jumphigh_1.speed= 0.025f;
+	player_jumphigh_1.loop = false;
+
+	player_jumpdown_1.PushBack({ 126, 163, 32, 32 });
+	player_jumpdown_1.PushBack({ 159, 163, 32, 32 });
+	player_jumpdown_1.PushBack({ 191, 163, 32, 32 });
+	player_jumpdown_1.PushBack({ 222, 163, 32, 32 });
 
 	//Normal atack
 	player_attack_1.PushBack({ 0,259, 32, 32 });
@@ -251,9 +255,10 @@ bool Player::Update(float dt)
 			down = false;
 			currentAnimation->Reset();
 		}
-		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT) 
+		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) 
 		{
-			veljump.y = -0.3 * dt;
+			//veljump.y = -0.3 * dt;
+			currentAnimation = &player_jumphigh_1;
 			pbody->body->SetLinearVelocity(veljump);
 		}
 
