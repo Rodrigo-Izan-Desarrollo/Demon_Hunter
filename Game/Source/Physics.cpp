@@ -48,7 +48,10 @@ bool Physics::Start()
 bool Physics::PreUpdate()
 {
 	bool ret = true;
-
+	if (SDL_SCANCODE_F1 == KEY_DOWN)
+	{
+		debug = !debug;
+	}
 	// Step (update) the World
 	// WARNING: WE ARE STEPPING BY CONSTANT 1/60 SECONDS!
 	world->Step(1.0f / 60.0f, 6, 2);

@@ -125,6 +125,10 @@ bool Player::Update(float dt)
 {
 	b2Vec2 veljump = pbody->body->GetLinearVelocity();
 
+	if (app->input->GetKey(SDL_SCANCODE_F2 == KEY_DOWN))
+	{
+		candie = false;
+	}
 	if (app->input->GetKey(SDL_SCANCODE_A)==KEY_IDLE && app->input->GetKey(SDL_SCANCODE_D)==KEY_IDLE)
 	{
 		veljump.x = 0;
@@ -265,7 +269,10 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	{
 	case ColliderType::ITEM:
 		LOG("Collision ITEM");
-		dieying = true;
+		if (candie)
+		{
+			dieying = true;
+		}
 		app->audio->PlayFx(pickCoinFxId);
 		break;
 	case ColliderType::PLATFORM:
