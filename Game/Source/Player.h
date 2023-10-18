@@ -41,11 +41,9 @@ public:
 
 	Animation player_speed;
 
-	Animation player_down;
-
 	Animation player_jump;
 
-	Animation player_no;
+	Animation player_inv;
 
 	Animation player_hurt;
 

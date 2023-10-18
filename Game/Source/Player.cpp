@@ -63,14 +63,6 @@ bool Player::Start() {
 	player_speed.loop = true;
 	player_speed.speed = 0.15f;
 
-	//Sit
-	player_down.PushBack({ 0, 130, 32, 32 });
-	player_down.PushBack({ 31, 130, 32, 32 });
-	player_down.PushBack({ 63, 130, 32, 32 });
-	player_down.PushBack({ 126, 130, 32, 32 });
-	player_down.speed = 0.1f;
-	player_down.loop = false;
-
 	//Jumping
 	player_jump.PushBack({ 31, 163, 32, 32 });
 	player_jump.PushBack({ 63, 163, 32, 32 });
@@ -95,12 +87,16 @@ bool Player::Start() {
 	player_attack.speed = 0.3f;
 
 	//Invisible
-	player_no.PushBack({ 0, 195, 32, 32 });
-	player_no.PushBack({ 31, 195, 32, 32 });
-	player_no.PushBack({ 63, 195, 32, 32 });
-	player_no.PushBack({ 95, 195, 32, 32 });
-	player_no.speed = 0.1f;
-	player_no.loop = false;
+	player_inv.PushBack({ 31, 195, 32, 32 });
+	player_inv.PushBack({ 63, 195, 32, 32 });
+	player_inv.PushBack({ 95, 195, 32, 32 });
+	player_inv.PushBack({ 1000, 100, 32, 32 });
+	player_inv.PushBack({ 95, 193, 32, 32 });
+	player_inv.PushBack({ 95, 193, 32, 32 });
+	player_inv.PushBack({ 95, 193, 32, 32 });
+	player_inv.PushBack({ 127, 128, 32, 32 });
+	player_inv.speed = 0.2f;
+	player_inv.loop = false;
 
 	//Damage resive
 	player_hurt.PushBack({ 0,227, 32, 32 });
@@ -117,7 +113,7 @@ bool Player::Start() {
 	player_dead.PushBack({ 95, 227, 32, 32 });
 	player_dead.PushBack({ 126, 227, 32, 32 });
 	player_dead.PushBack({ 159, 227, 32, 32 });
-	player_dead.speed = 0.25f;
+	player_dead.speed = 0.18f;
 	player_dead.loop = false;
 
 	currentAnimation = &player;
@@ -165,10 +161,6 @@ bool Player::Update(float dt)
 				currentAnimation = &player_speed;
 				speed = 0.3f;
 			}
-			else if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
-			{
-				speed = 0.1f;
-			}
 			else
 			{
 				speed = 0.2f;
@@ -198,20 +190,6 @@ bool Player::Update(float dt)
 		}
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
-	{
-		down = true;
-		if (atacking)
-		{
-			currentAnimation->Reset();
-			currentAnimation = &player_down;
-			currentAnimation->loopCount = 0;
-		}
-	}
-
-	if (currentAnimation == &player_down && currentAnimation->HasFinished()) {
-		down = false;
-	}
 
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 	{
@@ -237,12 +215,12 @@ bool Player::Update(float dt)
 		{
 			canmove = false;
 			currentAnimation->Reset();
-			currentAnimation = &player_attack;
+			currentAnimation = &player_dead;
 			currentAnimation->loopCount = 0;
 		}
 	}
 
-	if (currentAnimation == &player_attack && currentAnimation->HasFinished()) {
+	if (currentAnimation == &player_dead && currentAnimation->HasFinished()) {
 		atacking = false;
 		canmove = true;
 	}
