@@ -66,6 +66,7 @@ public:
 	bool jumping = false;
 
 	bool inground = false;
+	bool dieying = false;
 
 	bool canmove = true;
 

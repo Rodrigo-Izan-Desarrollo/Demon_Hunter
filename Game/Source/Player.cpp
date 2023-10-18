@@ -130,14 +130,14 @@ bool Player::Update(float dt)
 		veljump.x = 0;
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
+	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && !dieying)
 	{
 		leftmode = true;
 		rightmode = false;
 		speed = -speed;
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
+	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && !dieying)
 	{
 		rightmode = true;
 		leftmode = false;
@@ -191,7 +191,7 @@ bool Player::Update(float dt)
 	}
 
 
-	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && !dieying)
 	{
 		jumping = true;
 		inground = false;
@@ -208,21 +208,29 @@ bool Player::Update(float dt)
 		jumping = false;
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_REPEAT)
+	if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_REPEAT && !dieying)
 	{
 		atacking = true;
 		if (atacking)
 		{
 			canmove = false;
 			currentAnimation->Reset();
-			currentAnimation = &player_dead;
+			currentAnimation = &player_attack;
 			currentAnimation->loopCount = 0;
 		}
 	}
 
-	if (currentAnimation == &player_dead && currentAnimation->HasFinished()) {
+	if (currentAnimation == &player_attack && currentAnimation->HasFinished()) {
 		atacking = false;
 		canmove = true;
+	}
+
+	if (dieying)
+	{
+		canmove = false;
+		currentAnimation->Reset();
+		currentAnimation = &player_dead;
+		currentAnimation->loopCount = 0;
 	}
 
 
@@ -257,6 +265,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	{
 	case ColliderType::ITEM:
 		LOG("Collision ITEM");
+		dieying = true;
 		app->audio->PlayFx(pickCoinFxId);
 		break;
 	case ColliderType::PLATFORM:
