@@ -59,20 +59,17 @@ public:
 
 	bool atacking = false;
 
-	bool dead = false;
-
 	bool down = false;
 
 	bool jumping = false;
 
 	bool inground = false;
 
-	bool dieying = false;
-	bool candie = true;
+	bool Godmode = false;
+	bool enemiecoll = false;
 
 	bool canmove = true;
 
-	bool canjump = true;
 };
 
 #endif // __PLAYER_H__

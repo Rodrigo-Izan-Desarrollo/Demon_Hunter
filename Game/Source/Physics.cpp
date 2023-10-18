@@ -48,10 +48,6 @@ bool Physics::Start()
 bool Physics::PreUpdate()
 {
 	bool ret = true;
-	if (SDL_SCANCODE_F1 == KEY_DOWN)
-	{
-		debug = !debug;
-	}
 	// Step (update) the World
 	// WARNING: WE ARE STEPPING BY CONSTANT 1/60 SECONDS!
 	world->Step(1.0f / 60.0f, 6, 2);
@@ -227,7 +223,7 @@ bool Physics::PostUpdate()
 	bool ret = true;
 
 	// Activate or deactivate debug mode
-	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN)
 		debug = !debug;
 	
 	//  Iterate all objects in the world and draw the bodies
