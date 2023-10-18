@@ -35,37 +35,29 @@ public:
 
 	Animation* currentAnimation;
 
-	Animation player_1;
-	Animation player_2;
+	Animation player;
 
-	Animation player_walk_1;
-	Animation player_walk_2;
+	Animation player_walk;
 
-	Animation player_speed_1;
-	Animation player_speed_2;
+	Animation player_speed;
 
-	Animation player_down_1;
-	Animation player_down_2;
+	Animation player_down;
 
-	Animation player_jump_1;
-	Animation player_jump_2;
+	Animation player_jump;
 
-	Animation player_no_1;
-	Animation player_no_2;
+	Animation player_no;
 
-	Animation player_hurt_1;
-	Animation player_hurt_2;
+	Animation player_hurt;
 
-	Animation player_dead_1;
-	Animation player_dead_2;
+	Animation player_dead;
 
-	Animation player_attack_1;
-	Animation player_attack_2;
+	Animation player_attack;
+
 
 	pugi::xml_node config;
 
 	bool leftmode = false;
-	bool rightmode = false;
+	bool rightmode = true;
 
 	bool atacking = false;
 
@@ -75,7 +67,11 @@ public:
 
 	bool jumping = false;
 
-	bool inground = true;
+	bool inground = false;
+
+	bool canmove = true;
+
+	bool canjump = true;
 };
 
 #endif // __PLAYER_H__
