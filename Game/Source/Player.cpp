@@ -141,9 +141,15 @@ bool Player::Update(float dt)
 		leftmode = false;
 	}
 
-	if (atacking == false && jumping == false && inground == true)
+	if (!atacking && !jumping && inground)
 	{
 		currentAnimation = &player;
+	}
+	if (Godmode)
+	{
+		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
+			veljump.y = -0.3 * dt;
+		}
 	}
 	if (canmove && !jumping)
 	{
@@ -170,6 +176,7 @@ bool Player::Update(float dt)
 			veljump.x = speed * dt;
 			if (inground)
 			{
+		
 				currentAnimation = &player_walk;
 			}
 			if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT)
@@ -204,6 +211,7 @@ bool Player::Update(float dt)
 			}
 		}
 	}
+
 	if (currentAnimation == &player_jump && currentAnimation->HasFinished() && inground) {
 		currentAnimation->Reset();
 		jumping = false;
@@ -234,11 +242,21 @@ bool Player::Update(float dt)
 		currentAnimation->loopCount = 0;
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_F2)==KEY_DOWN)
+	if (currentAnimation == &player_dead && currentAnimation->HasFinished()) {
+		canmove = true;
+		position.x = 30;
+		position.y = 200;
+		currentAnimation = &player;
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_F10)==KEY_DOWN)
 	{
 		Godmode = true;
 	}
-
+	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
+	{
+		position.x = 20;
+	}
 	//Set the velocity of the pbody of the player
 	pbody->body->SetLinearVelocity(veljump);
 
@@ -271,7 +289,10 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	{
 	case ColliderType::ITEM:
 		LOG("Collision ITEM");
-		enemiecoll = true;
+		if (!Godmode)
+		{
+			enemiecoll = true;
+		}
 		app->audio->PlayFx(pickCoinFxId);
 		break;
 	case ColliderType::PLATFORM:
