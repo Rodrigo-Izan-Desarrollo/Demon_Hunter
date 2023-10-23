@@ -246,13 +246,7 @@ bool Player::Update(float dt)
 		canmove = false;
 		currentAnimation = &player_dead;
 		currentAnimation->loopCount = 0;
-		startTime = SDL_GetTicks();
 	} 
-	if ((SDL_GetTicks() - startTime) >=100)
-	{
-		canmove = true;
-		currentAnimation = &player;
-	}
 
 	if (currentAnimation == &player_attack && currentAnimation->HasFinished()) {
 		atacking = false;
