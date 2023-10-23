@@ -74,6 +74,8 @@ bool Player::Start() {
 	player_jump.speed= 0.2f;
 	player_jump.loop = false;
 
+	player_inair.PushBack({ 126, 162, 32, 32 });
+	player_inair.loop = false;
 
 	//Normal atack
 	player_attack.PushBack({ 0,259, 32, 32 });
@@ -127,10 +129,13 @@ bool Player::Update(float dt)
 	//Debug inputs
 	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
 	{
-		Godmode = true;
-		position.x = 100;
+		Godmode = true; 
 	}
 
+	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
+	{
+		pbody->body->SetTransform({ PIXEL_TO_METERS(-700 + 16), PIXEL_TO_METERS(700) }, 0);
+	}
 	//Movement inputs
 	if (app->input->GetKey(SDL_SCANCODE_A)==KEY_IDLE && app->input->GetKey(SDL_SCANCODE_D)==KEY_IDLE)
 	{
@@ -151,8 +156,12 @@ bool Player::Update(float dt)
 
 	if (Godmode)
 	{
+		veljump = b2Vec2(0.0, -0.1675);
 		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
 			veljump.y = -0.3 * dt;
+		}
+		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
+			veljump.y = 0.3 * dt;
 		}
 	}
 
@@ -194,17 +203,12 @@ bool Player::Update(float dt)
 				currentAnimation = &player_speed;
 				speed = 0.3f;
 			}
-			else if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
-			{
-				speed = 0.1f;
-			}
 			else
 			{
 				speed = 0.2f;
 			}
 		}
 	}
-
 
 	if (!jumping)
 	{
@@ -237,18 +241,16 @@ bool Player::Update(float dt)
 
 	//Finished animations
 
-	if (enemiecoll && !Godmode)
+	if (enemiecoll)
 	{
 		canmove = false;
-		currentAnimation->Reset();
 		currentAnimation = &player_dead;
 		currentAnimation->loopCount = 0;
-	}
-
-	if (currentAnimation == &player_dead && currentAnimation->HasFinished()) {
+		startTime = SDL_GetTicks();
+	} 
+	if ((SDL_GetTicks() - startTime) >=100)
+	{
 		canmove = true;
-		position.x = 30;
-		position.y = 200;
 		currentAnimation = &player;
 	}
 
@@ -268,7 +270,6 @@ bool Player::Update(float dt)
 	//Update player position in pixels
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
-
 
 	if (rightmode == true)
 	{

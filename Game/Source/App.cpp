@@ -198,7 +198,14 @@ void App::FinishUpdate()
 	// Average FPS for the whole game life
 	if (lastSecFrameTime.ReadMs() > 1000) {
 		lastSecFrameTime.Start();
-		averageFps = (averageFps + lastSecFrameCount) / 2;
+		if (mitad)
+		{
+			averageFps = (averageFps + lastSecFrameCount) / 3;
+		}
+		else
+		{
+			averageFps = (averageFps + lastSecFrameCount) / 2;
+		}
 		framesPerSecond = lastSecFrameCount; 
 		lastSecFrameCount = 0;
 	}
@@ -215,6 +222,10 @@ void App::FinishUpdate()
 // Call modules before each loop iteration
 bool App::PreUpdate()
 {
+	if (app->input->GetKey(SDL_SCANCODE_F11) == KEY_DOWN)
+	{
+		mitad = true;
+	}
 	bool ret = true;
 
 	ListItem<Module*>* item;

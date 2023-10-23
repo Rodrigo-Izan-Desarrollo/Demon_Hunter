@@ -24,7 +24,7 @@
   <scene>
     <map path="Assets/Maps/" name="MapTemplate.tmx"/>
     <player x="400" y="352" texturepath="Assets/Textures/Player/player_1.png"/>
-    <item x="256" y="515" texturepath="Assets/Textures/goldCoin.png"/>
+    <item x="256" y="515" texturepath="Assets/Textures/Player/goldCoin.png"/>
   </scene>
   
 </config>

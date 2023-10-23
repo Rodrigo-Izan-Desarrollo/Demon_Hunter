@@ -43,6 +43,7 @@ public:
 	Animation player_speed;
 
 	Animation player_jump;
+	Animation player_inair;
 
 	Animation player_inv;
 
@@ -60,8 +61,6 @@ public:
 
 	bool atacking = false;
 
-	bool down = false;
-
 	bool jumping = false;
 
 	bool inground = false;
@@ -71,6 +70,7 @@ public:
 
 	bool canmove = true;
 
+	uint32 startTime;
 };
 
 #endif // __PLAYER_H__
