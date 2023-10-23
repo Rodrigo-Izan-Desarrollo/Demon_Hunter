@@ -124,6 +124,14 @@ bool Player::Start() {
 bool Player::Update(float dt)
 {
 	b2Vec2 veljump = pbody->body->GetLinearVelocity();
+	//Debug inputs
+	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
+	{
+		Godmode = true;
+		position.x = 100;
+	}
+
+	//Movement inputs
 	if (app->input->GetKey(SDL_SCANCODE_A)==KEY_IDLE && app->input->GetKey(SDL_SCANCODE_D)==KEY_IDLE)
 	{
 		veljump.x = 0;
@@ -141,22 +149,24 @@ bool Player::Update(float dt)
 		leftmode = false;
 	}
 
-	if (!atacking && !jumping && inground)
-	{
-		currentAnimation = &player;
-	}
 	if (Godmode)
 	{
 		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
 			veljump.y = -0.3 * dt;
 		}
 	}
-	if (canmove && !jumping)
+
+	if (!atacking && !jumping && inground)
+	{
+		currentAnimation = &player;
+	}
+
+	if (canmove)
 	{
 		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 		{
 			veljump.x = speed * dt;
-			if (inground)
+			if (inground && !jumping)
 			{
 				currentAnimation = &player_walk;
 			}
@@ -174,7 +184,7 @@ bool Player::Update(float dt)
 		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 		{
 			veljump.x = speed * dt;
-			if (inground)
+			if (inground && !jumping)
 			{
 		
 				currentAnimation = &player_walk;
@@ -202,7 +212,7 @@ bool Player::Update(float dt)
 		{
 			jumping = true;
 			inground = false;
-			veljump.y = -0.3 * dt;
+			veljump.y = -0.375 * dt;
 			pbody->body->SetLinearVelocity(veljump);
 			if (jumping)
 			{
@@ -212,11 +222,7 @@ bool Player::Update(float dt)
 		}
 	}
 
-	if (currentAnimation == &player_jump && currentAnimation->HasFinished() && inground) {
-		currentAnimation->Reset();
-		jumping = false;
-	}
-
+	//Ability inputs
 	if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_REPEAT && !enemiecoll)
 	{
 		atacking = true;
@@ -229,10 +235,7 @@ bool Player::Update(float dt)
 		}
 	}
 
-	if (currentAnimation == &player_attack && currentAnimation->HasFinished()) {
-		atacking = false;
-		canmove = true;
-	}
+	//Finished animations
 
 	if (enemiecoll && !Godmode)
 	{
@@ -249,20 +252,23 @@ bool Player::Update(float dt)
 		currentAnimation = &player;
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_F10)==KEY_DOWN)
-	{
-		Godmode = true;
+	if (currentAnimation == &player_attack && currentAnimation->HasFinished()) {
+		atacking = false;
+		canmove = true;
 	}
-	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
-	{
-		position.x = 20;
+
+	if (currentAnimation == &player_jump && currentAnimation->HasFinished() && inground) {
+		currentAnimation->Reset();
+		jumping = false;
 	}
+
 	//Set the velocity of the pbody of the player
 	pbody->body->SetLinearVelocity(veljump);
 
 	//Update player position in pixels
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
+
 
 	if (rightmode == true)
 	{
