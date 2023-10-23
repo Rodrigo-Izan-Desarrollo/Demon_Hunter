@@ -1,26 +1,30 @@
-<!-- Config file for the game -->
-<!-- L01: DONE 1: Create configuration file-->
 <config>
   <app>
-    <title>My video game</title>
+    <title>Game Development template</title>
     <maxFrameDuration value="16"/>
   </app>
 
   <renderer>
-    <vsync value="false"/>
+    <vsync value="true"/>
   </renderer>
 
   <window>
-    <resolution width="1280" height="720" scale="1"/>
+    <resolution width="1024" height="768" scale="1"/>
     <fullscreen value="false"/>
     <borderless value="false"/>
     <resizable value="false"/>
     <fullscreen_window value="false"/>
   </window>
 
+  <audio>
+    <music volume="128"/>
+    <fx volume="128"/>
+  </audio>
+
   <scene>
-    <player x="100" y="100" texturePath="Assets/Textures/player1.png"/>
-    <map path="Assets/Maps/" name="Hello.tmx"/>
+    <map path="Assets/Maps/" name="MapTemplate.tmx"/>
+    <player x="400" y="352" texturepath="Assets/Textures/Player/player_1.png"/>
+    <item x="256" y="515" texturepath="Assets/Textures/Player/goldCoin.png"/>
   </scene>
   
 </config>

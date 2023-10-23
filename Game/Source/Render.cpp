@@ -21,25 +21,22 @@ Render::~Render()
 {}
 
 // Called before render is available
-bool Render::Awake(pugi::xml_node config)
+bool Render::Awake(pugi::xml_node& config)
 {
 	LOG("Create SDL rendering context");
 	bool ret = true;
 
 	Uint32 flags = SDL_RENDERER_ACCELERATED;
 
-	// L04: DONE 6: Load the VSYNC status from config.xml and adapt the code to set it on / off
-	if (config.child("vsync").attribute("value").as_bool()) {
+	if (config.child("vsync").attribute("value").as_bool(true) == true)
+	{
 		flags |= SDL_RENDERER_PRESENTVSYNC;
 		LOG("Using vsync");
 	}
-	else {
-		LOG("vsync OFF");
-	}
-	 
+
 	renderer = SDL_CreateRenderer(app->win->window, -1, flags);
 
-	if(renderer == NULL)
+	if (renderer == NULL)
 	{
 		LOG("Could not create the renderer! SDL_Error: %s\n", SDL_GetError());
 		ret = false;
@@ -107,7 +104,7 @@ void Render::ResetViewPort()
 }
 
 // Blit to screen
-bool Render::DrawTexture(SDL_Texture* texture, int x, int y, const SDL_Rect* section, float speed, double angle, int pivotX, int pivotY) const
+bool Render::DrawTexture(SDL_Texture* texture, int x, int y, const SDL_Rect* section, SDL_RendererFlip flip, float speed, double angle, int pivotX, int pivotY) const
 {
 	bool ret = true;
 	uint scale = app->win->GetScale();
@@ -139,7 +136,7 @@ bool Render::DrawTexture(SDL_Texture* texture, int x, int y, const SDL_Rect* sec
 		p = &pivot;
 	}
 
-	if(SDL_RenderCopyEx(renderer, texture, section, &rect, angle, p, SDL_FLIP_NONE) != 0)
+	if(SDL_RenderCopyEx(renderer, texture, section, &rect, angle, p, flip) != 0)
 	{
 		LOG("Cannot blit to screen. SDL_RenderCopy error: %s", SDL_GetError());
 		ret = false;
@@ -215,8 +212,8 @@ bool Render::DrawCircle(int x, int y, int radius, Uint8 r, Uint8 g, Uint8 b, Uin
 
 	for(uint i = 0; i < 360; ++i)
 	{
-		points[i].x = (int)(x + radius * cos(i * factor));
-		points[i].y = (int)(y + radius * sin(i * factor));
+		points[i].x = (int)(x*scale + camera.x) + (radius * cos(i * factor));
+		points[i].y = (int)(y*scale + camera.y) + (radius * sin(i * factor));
 	}
 
 	result = SDL_RenderDrawPoints(renderer, points, 360);
