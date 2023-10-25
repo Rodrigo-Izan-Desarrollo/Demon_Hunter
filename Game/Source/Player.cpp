@@ -132,21 +132,24 @@ bool Player::Update(float dt)
 	{
 		currentAnimation = &player;
 	}
+
 	//Debug inputs
-	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN && !Godmode)
+	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
 	{
-		Godmode = true; 
+		Godmode = !Godmode;
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 	{
 		pbody->body->SetTransform({ PIXEL_TO_METERS(-700 + 16), PIXEL_TO_METERS(700) }, 0);
 	}
+
 	//Movement inputs
 	if (app->input->GetKey(SDL_SCANCODE_A)==KEY_IDLE && app->input->GetKey(SDL_SCANCODE_D)==KEY_IDLE)
 	{
 		veljump.x = 0;
 	}
+
 	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && !dead)
 	{
 		leftmode = true;

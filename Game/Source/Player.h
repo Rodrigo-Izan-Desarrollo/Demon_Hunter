@@ -65,7 +65,7 @@ public:
 
 	bool inground = false;
 
-	bool Godmode = false;
+	bool Godmode=false;
 
 	bool canmove = true;
 

@@ -224,7 +224,7 @@ bool App::PreUpdate()
 {
 	if (app->input->GetKey(SDL_SCANCODE_F11) == KEY_DOWN)
 	{
-		mitad = true;
+		mitad = !mitad;
 	}
 	bool ret = true;
 
