@@ -299,10 +299,6 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	{
 	case ColliderType::ITEM:
 		LOG("Collision ITEM");
-		if (!Godmode)
-		{
-			dead = true;
-		}
 		app->audio->PlayFx(pickCoinFxId);
 		break;
 	case ColliderType::PLATFORM:
@@ -314,7 +310,10 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 
 	case ColliderType::ENEMY:
-		enemiecoll = true;
+		if (!Godmode)
+		{
+			dead = true;
+		}
 		break;
 	}
 }
