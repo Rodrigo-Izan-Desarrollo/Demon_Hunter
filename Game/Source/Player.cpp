@@ -303,5 +303,9 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
 		break;
+
+	case ColliderType::ENEMY:
+		enemiecoll = true;
+		break;
 	}
 }

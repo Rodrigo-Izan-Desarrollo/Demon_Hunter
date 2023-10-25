@@ -115,6 +115,9 @@ public:
 	// Called each loop iteration
 	bool Update(float dt);
 
+	bool LoadColission();
+		
+
     // Called before quitting
     bool CleanUp();
 
