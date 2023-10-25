@@ -65,10 +65,11 @@ public:
 
 	bool inground = false;
 
-	bool Godmode = false;
-	bool enemiecoll = false;
+	bool Godmode=false;
 
 	bool canmove = true;
+
+	bool dead = false;
 
 	uint32 startTime;
 };

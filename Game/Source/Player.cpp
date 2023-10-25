@@ -74,6 +74,9 @@ bool Player::Start() {
 	player_jump.speed= 0.2f;
 	player_jump.loop = false;
 
+	player_inair.PushBack({ 95, 161, 32, 32 });
+	player_inair.PushBack({ 95, 161, 32, 32 });
+	player_inair.PushBack({ 126, 162, 32, 32 });
 	player_inair.PushBack({ 126, 162, 32, 32 });
 	player_inair.loop = false;
 
@@ -118,37 +121,43 @@ bool Player::Start() {
 	player_dead.speed = 0.18f;
 	player_dead.loop = false;
 
-	currentAnimation = &player;
-
 	return true;
 }
 
 bool Player::Update(float dt)
 {
 	b2Vec2 veljump = pbody->body->GetLinearVelocity();
+
+	if (!atacking && !jumping && inground && !dead)
+	{
+		currentAnimation = &player;
+	}
+
 	//Debug inputs
 	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
 	{
-		Godmode = true; 
+		Godmode = !Godmode;
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 	{
 		pbody->body->SetTransform({ PIXEL_TO_METERS(-700 + 16), PIXEL_TO_METERS(700) }, 0);
 	}
+
 	//Movement inputs
 	if (app->input->GetKey(SDL_SCANCODE_A)==KEY_IDLE && app->input->GetKey(SDL_SCANCODE_D)==KEY_IDLE)
 	{
 		veljump.x = 0;
 	}
-	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && !enemiecoll)
+
+	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && !dead)
 	{
 		leftmode = true;
 		rightmode = false;
 		speed = -speed;
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && !enemiecoll)
+	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && !dead)
 	{
 		rightmode = true;
 		leftmode = false;
@@ -165,11 +174,6 @@ bool Player::Update(float dt)
 		}
 	}
 
-	if (!atacking && !jumping && inground)
-	{
-		currentAnimation = &player;
-	}
-
 	if (canmove)
 	{
 		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
@@ -177,11 +181,10 @@ bool Player::Update(float dt)
 			veljump.x = speed * dt;
 			if (inground && !jumping)
 			{
-				currentAnimation = &player_walk;
+				currentAnimation = &player_speed;
 			}
 			if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT)
 			{
-				currentAnimation = &player_speed;
 				speed = 0.3f;
 			}
 			else
@@ -195,12 +198,10 @@ bool Player::Update(float dt)
 			veljump.x = speed * dt;
 			if (inground && !jumping)
 			{
-		
-				currentAnimation = &player_walk;
+				currentAnimation = &player_speed;
 			}
 			if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT)
 			{
-				currentAnimation = &player_speed;
 				speed = 0.3f;
 			}
 			else
@@ -209,10 +210,17 @@ bool Player::Update(float dt)
 			}
 		}
 	}
-
-	if (!jumping)
+	if (dead && app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
 	{
-		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && !enemiecoll)
+		pbody->body->SetTransform({ PIXEL_TO_METERS(-700 + 16), PIXEL_TO_METERS(700) }, 0);
+		canmove = true;
+		dead = false;
+		rightmode = true;
+		leftmode = false;
+	}
+	if (!jumping && inground)
+	{
+		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && !dead)
 		{
 			jumping = true;
 			inground = false;
@@ -227,7 +235,7 @@ bool Player::Update(float dt)
 	}
 
 	//Ability inputs
-	if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_REPEAT && !enemiecoll)
+	if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_REPEAT && !dead)
 	{
 		atacking = true;
 		if (atacking)
@@ -241,12 +249,13 @@ bool Player::Update(float dt)
 
 	//Finished animations
 
-	if (enemiecoll)
+	if (dead)
 	{
 		canmove = false;
 		currentAnimation = &player_dead;
 		currentAnimation->loopCount = 0;
 	} 
+
 
 	if (currentAnimation == &player_attack && currentAnimation->HasFinished()) {
 		atacking = false;
@@ -292,7 +301,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		LOG("Collision ITEM");
 		if (!Godmode)
 		{
-			enemiecoll = true;
+			dead = true;
 		}
 		app->audio->PlayFx(pickCoinFxId);
 		break;
