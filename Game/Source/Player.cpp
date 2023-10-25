@@ -181,16 +181,11 @@ bool Player::Update(float dt)
 			veljump.x = speed * dt;
 			if (inground && !jumping)
 			{
-				currentAnimation = &player_walk;
+				currentAnimation = &player_speed;
 			}
 			if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT)
 			{
-				currentAnimation = &player_speed;
 				speed = 0.3f;
-			}
-			if (!jumping && !inground)
-			{
-				currentAnimation = &player_inair;
 			}
 			else
 			{
@@ -203,17 +198,11 @@ bool Player::Update(float dt)
 			veljump.x = speed * dt;
 			if (inground && !jumping)
 			{
-		
-				currentAnimation = &player_walk;
+				currentAnimation = &player_speed;
 			}
 			if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT)
 			{
-				currentAnimation = &player_speed;
 				speed = 0.3f;
-			}
-			if (!jumping && !inground)
-			{
-				currentAnimation = &player_inair;
 			}
 			else
 			{
