@@ -9291,7 +9291,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="2" name="colisiones" width="185" height="25" visible="0">
+ <layer id="2" name="colisiones" width="185" height="25">
   <properties>
    <property name="Draw" type="bool" value="false"/>
   </properties>
@@ -9480,6 +9480,7 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="2"/>
    <tile/>
    <tile/>
    <tile/>
@@ -9664,8 +9665,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="2"/>
    <tile gid="15"/>
    <tile/>
    <tile/>
@@ -9850,7 +9850,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="2"/>
    <tile gid="15"/>
    <tile/>
    <tile/>
@@ -10035,7 +10035,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="2"/>
    <tile gid="15"/>
    <tile gid="15"/>
    <tile/>
@@ -10220,7 +10220,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="2"/>
    <tile gid="15"/>
    <tile gid="15"/>
    <tile/>
@@ -10405,7 +10405,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="2"/>
    <tile gid="15"/>
    <tile gid="15"/>
    <tile gid="15"/>
@@ -10590,7 +10590,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="2"/>
    <tile gid="15"/>
    <tile gid="15"/>
    <tile gid="15"/>
