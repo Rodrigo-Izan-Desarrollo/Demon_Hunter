@@ -98,10 +98,10 @@ bool Map::LoadColission() {
                     SDL_Rect r = tileset->GetTileRect(gid);
                     iPoint pos = MapToWorld(x, y);
 
-                    /*app->render->DrawTexture(tileset->texture,
-                        pos.x,
-                        pos.y,
-                        &r);*/
+                    //app->render->DrawTexture(tileset->texture,
+                    //    pos.x,
+                    //    pos.y,
+                    //    &r);
                     if (gid == tileset->firstgid + 0)
                     {
                         PhysBody* c1 = app->physics->CreateRectangle(pos.x+16, pos.y+16, 32, 32, STATIC);

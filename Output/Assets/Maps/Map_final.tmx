@@ -3503,7 +3503,7 @@
    <tile gid="5143"/>
    <tile gid="5144"/>
    <tile gid="5145"/>
-   <tile gid="5146"/>
+   <tile gid="62"/>
    <tile gid="5147"/>
    <tile gid="5148"/>
    <tile gid="5149"/>
@@ -13920,7 +13920,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="2" name="colisiones" width="185" height="25">
+ <layer id="2" name="colisiones" width="185" height="25" visible="0">
   <properties>
    <property name="Draw" type="bool" value="false"/>
   </properties>

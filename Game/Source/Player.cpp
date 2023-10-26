@@ -121,12 +121,15 @@ bool Player::Start() {
 	player_dead.speed = 0.18f;
 	player_dead.loop = false;
 
+	currentAnimation = &player;
+
 	return true;
 }
 
 bool Player::Update(float dt)
 {
 	b2Vec2 veljump = pbody->body->GetLinearVelocity();
+
 
 	if (!atacking && !jumping && inground && !dead)
 	{
@@ -178,35 +181,35 @@ bool Player::Update(float dt)
 	{
 		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 		{
-			veljump.x = speed * dt;
+			veljump.x = 5;
 			if (inground && !jumping)
 			{
 				currentAnimation = &player_speed;
 			}
 			if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT)
 			{
-				speed = 0.3f;
+				speed = 8;
 			}
 			else
 			{
-				speed = 0.2f;
+				speed = 5;
 			}
 		}
 
 		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 		{
-			veljump.x = speed * dt;
+			veljump.x = -5;
 			if (inground && !jumping)
 			{
 				currentAnimation = &player_speed;
 			}
 			if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT)
 			{
-				speed = 0.3f;
+				speed = 8;
 			}
 			else
 			{
-				speed = 0.2f;
+				speed = 5;
 			}
 		}
 	}
@@ -224,7 +227,7 @@ bool Player::Update(float dt)
 		{
 			jumping = true;
 			inground = false;
-			veljump.y = -0.375 * dt;
+			veljump.y = -5;
 			pbody->body->SetLinearVelocity(veljump);
 			if (jumping)
 			{
@@ -274,6 +277,9 @@ bool Player::Update(float dt)
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
 
+
+	currentAnimation->Update();
+
 	if (rightmode == true)
 	{
 		app->render->DrawTexture(texture, position.x, position.y, &currentAnimation->GetCurrentFrame());
@@ -283,7 +289,6 @@ bool Player::Update(float dt)
 		app->render->DrawTexture(texture, position.x, position.y, &currentAnimation->GetCurrentFrame(), SDL_FLIP_HORIZONTAL);
 	}
 
-	currentAnimation->Update();
 
 	return true;
 }
