@@ -33,6 +33,7 @@ public:
 	SDL_Texture* texture = NULL;
 	PhysBody* pbody;
 	int pickCoinFxId;
+	float radius = 13;
 
 	Animation* currentAnimation;
 
