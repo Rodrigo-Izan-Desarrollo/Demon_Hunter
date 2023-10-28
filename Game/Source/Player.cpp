@@ -131,7 +131,7 @@ bool Player::Update(float dt)
 	b2Vec2 veljump = pbody->body->GetLinearVelocity();
 
 
-	if (!atacking && !jumping && inground && !dead)
+	if (!atacking && !jumping && inground && !dead &&!Godmode)
 	{
 		currentAnimation = &player;
 	}
