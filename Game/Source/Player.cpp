@@ -32,7 +32,7 @@ bool Player::Start() {
 	//initilize textures
 	texture = app->tex->Load(texturePath);
 
-	pbody = app->physics->CreateCircle(position.x + 30, position.y + 30, radius, bodyType::DYNAMIC);
+	pbody = app->physics->CreateCircle(position.x + 30, position.y + 30, 13, bodyType::DYNAMIC);
 	pbody->listener = this;
 	pbody->ctype = ColliderType::PLAYER;
 
@@ -136,11 +136,11 @@ bool Player::Update(float dt)
 		currentAnimation = &player;
 	}
 	//Check
-	if (-4890<app->render->camera.x <= -2900)
+	if (-5540 <app->render->camera.x <= -2900)
 	{
 		check_1 = true;
 	}
-	if (app->render->camera.x <= -4890)
+	if (app->render->camera.x <= -5540)
 	{
 		check_2 = true;
 		check_1 = false;
@@ -245,7 +245,7 @@ bool Player::Update(float dt)
 			}
 		}
 	}
-	if (dead && app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
+	if (dead && app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN && respawn>0)
 	{
 		if (!check_1 && !check_2)
 		{
@@ -267,6 +267,7 @@ bool Player::Update(float dt)
 		rightmode = true;
 		leftmode = false;
 		currentAnimation->Reset();
+		respawn--;
 		currentAnimation = &player;
 	}
 	if (!jumping && inground)
