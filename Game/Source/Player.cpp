@@ -113,7 +113,7 @@ bool Player::Start() {
 	//Player dead
 	player_dead.PushBack({ 0,227, 32, 32 });
 	player_dead.PushBack({ 31,227, 32, 32 });
-	player_dead.PushBack({ 31,227, 32, 32 });
+	player_dead.PushBack({ 31,227, 32, 32 });                      
 	player_dead.PushBack({ 63, 227, 32, 32 });
 	player_dead.PushBack({ 95, 227, 32, 32 });
 	player_dead.PushBack({ 126, 227, 32, 32 });
@@ -257,6 +257,7 @@ bool Player::Update(float dt)
 		dead = false;
 		rightmode = true;
 		leftmode = false;
+		currentAnimation->Reset();
 		currentAnimation = &player;
 		app->render->camera.x = 0;
 	}
