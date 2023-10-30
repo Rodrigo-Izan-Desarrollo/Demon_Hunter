@@ -23,8 +23,7 @@
 
   <scene>
     <map path="Assets/Maps/" name="Map_final.tmx"/>
-    <player x="400" y="352" texturepath="Assets/Textures/Player/player_1.png"/>
-    <item x="256" y="515" texturepath="Assets/Textures/Player/goldCoin.png"/>
+    <player x="33" y="670" texturepath="Assets/Textures/Player/player_1.png"/>
   </scene>
   
 </config>

@@ -32,7 +32,7 @@ bool Player::Start() {
 	//initilize textures
 	texture = app->tex->Load(texturePath);
 
-	pbody = app->physics->CreateCircle(position.x + 16, position.y + 16, 16, bodyType::DYNAMIC);
+	pbody = app->physics->CreateCircle(position.x + 30, position.y + 30, radius, bodyType::DYNAMIC);
 	pbody->listener = this;
 	pbody->ctype = ColliderType::PLAYER;
 
@@ -86,8 +86,8 @@ bool Player::Start() {
 	player_attack.PushBack({ 63,259, 32, 32 });
 	player_attack.PushBack({ 95,259, 32, 32 });
 	player_attack.PushBack({ 126,259, 32, 32 });
-	player_attack.PushBack({ 159,259, 32, 32 });
-	player_attack.PushBack({ 191,259, 32, 32 });
+	player_attack.PushBack({ 163,259, 32, 32 });
+	player_attack.PushBack({ 192,259, 32, 32 });
 	player_attack.loop = false;
 	player_attack.speed = 0.3f;
 
@@ -113,7 +113,7 @@ bool Player::Start() {
 	//Player dead
 	player_dead.PushBack({ 0,227, 32, 32 });
 	player_dead.PushBack({ 31,227, 32, 32 });
-	player_dead.PushBack({ 31,227, 32, 32 });
+	player_dead.PushBack({ 31,227, 32, 32 });                      
 	player_dead.PushBack({ 63, 227, 32, 32 });
 	player_dead.PushBack({ 95, 227, 32, 32 });
 	player_dead.PushBack({ 126, 227, 32, 32 });
@@ -131,7 +131,7 @@ bool Player::Update(float dt)
 	b2Vec2 veljump = pbody->body->GetLinearVelocity();
 
 
-	if (!atacking && !jumping && inground && !dead)
+	if (!atacking && !jumping && inground && !dead &&!Godmode)
 	{
 		currentAnimation = &player;
 	}
@@ -144,9 +144,19 @@ bool Player::Update(float dt)
 
 	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 	{
-		pbody->body->SetTransform({ PIXEL_TO_METERS(-700 + 16), PIXEL_TO_METERS(700) }, 0);
+		pbody->body->SetTransform({ PIXEL_TO_METERS(-750 + 16), PIXEL_TO_METERS(700) }, 0);
+		app->render->camera.x = 0;
 	}
-
+	if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
+	{
+		pbody->body->SetTransform({ PIXEL_TO_METERS(2180 + 16), PIXEL_TO_METERS(700) }, 0);
+		app->render->camera.x = -2900;
+	}
+	if (app->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN)
+	{
+		pbody->body->SetTransform({ PIXEL_TO_METERS(4780 + 16), PIXEL_TO_METERS(20) }, 0);
+		app->render->camera.x = -4890;
+	}
 	//Movement inputs
 	if (app->input->GetKey(SDL_SCANCODE_A)==KEY_IDLE && app->input->GetKey(SDL_SCANCODE_D)==KEY_IDLE)
 	{
@@ -170,56 +180,86 @@ bool Player::Update(float dt)
 	{
 		veljump = b2Vec2(0.0, -0.1675);
 		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
-			veljump.y = -0.3 * dt;
+			veljump.y = -5;
 		}
 		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
-			veljump.y = 0.3 * dt;
+			veljump.y = 5 * dt;
 		}
+		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
+			veljump.x = -5;
+			app->render->camera.x += 4.99;
+		}
+		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
+			veljump.x = 5 ;
+			app->render->camera.x -= 4.99;
+		}
+		currentAnimation = &player;
 	}
 
-	if (canmove)
+	if (canmove && !Godmode)
 	{
 		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 		{
-			veljump.x = 5;
+
+			veljump.x = 3.0f;
+			if (app->render->camera.x <= -4800)
+			{
+				app->render->camera.x -= 0;
+			}
+			else
+			{
+				app->render->camera.x -= 2.9f;
+			}
 			if (inground && !jumping)
 			{
 				currentAnimation = &player_speed;
 			}
 			if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT)
 			{
-				speed = 8;
+				veljump.x = 4;
 			}
 			else
 			{
-				speed = 5;
+				veljump.x = 3;
 			}
 		}
 
 		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 		{
-			veljump.x = -5;
+			veljump.x = -3.0f;
+			if (app->render->camera.x >= -10)
+			{
+				app->render->camera.x += 0;
+			}
+			else
+			{
+				app->render->camera.x += 2.99f;
+			}
+
 			if (inground && !jumping)
 			{
 				currentAnimation = &player_speed;
 			}
 			if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT)
 			{
-				speed = 8;
+				veljump.x = -4;
 			}
 			else
 			{
-				speed = 5;
+				veljump.x = -3;
 			}
 		}
 	}
 	if (dead && app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
 	{
-		pbody->body->SetTransform({ PIXEL_TO_METERS(-700 + 16), PIXEL_TO_METERS(700) }, 0);
+		pbody->body->SetTransform({ PIXEL_TO_METERS(-750 + 16), PIXEL_TO_METERS(700) }, 0);
 		canmove = true;
 		dead = false;
 		rightmode = true;
 		leftmode = false;
+		currentAnimation->Reset();
+		currentAnimation = &player;
+		app->render->camera.x = 0;
 	}
 	if (!jumping && inground)
 	{
@@ -227,7 +267,7 @@ bool Player::Update(float dt)
 		{
 			jumping = true;
 			inground = false;
-			veljump.y = -5;
+			veljump.y = -6;
 			pbody->body->SetLinearVelocity(veljump);
 			if (jumping)
 			{
@@ -318,6 +358,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		if (!Godmode)
 		{
 			dead = true;
+			canmove = false;
 		}
 		break;
 	}
