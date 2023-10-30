@@ -136,7 +136,7 @@ bool Player::Update(float dt)
 		currentAnimation = &player;
 	}
 	//Check
-	if (-4890<app->render->camera.x < -2900)
+	if (-4890<app->render->camera.x <= -2900)
 	{
 		check_1 = true;
 	}
@@ -212,14 +212,7 @@ bool Player::Update(float dt)
 		{
 
 			veljump.x = speed *dt;
-			if (position.x <= -4890)
-			{
-				app->render->camera.x += 0;
-			}
-			else
-			{
-				app->render->camera.x = -(position.x - 60);
-			}
+			app->render->camera.x = -(position.x - 60);
 			if (inground && !jumping)
 			{
 				currentAnimation = &player_speed;
@@ -237,14 +230,7 @@ bool Player::Update(float dt)
 		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 		{
 			veljump.x = speed * dt;
-			if (position.x <= -4890)
-			{
-				app->render->camera.x += 0;
-			}
-			else
-			{
-				app->render->camera.x = -(position.x - 60);
-			}
+			app->render->camera.x = -(position.x - 60);
 			if (inground && !jumping)
 			{
 				currentAnimation = &player_speed;
