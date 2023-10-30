@@ -370,5 +370,11 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 			canmove = false;
 		}
 		break;
+
+	case ColliderType::WALL:
+		LOG("Colission WALL");
+		inground = false;
+		break;
 	}
+
 }
