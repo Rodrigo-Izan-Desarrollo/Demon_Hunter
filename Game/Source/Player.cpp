@@ -136,7 +136,7 @@ bool Player::Update(float dt)
 		currentAnimation = &player;
 	}
 	//Check
-	if (-5540 <app->render->camera.x <= -2900)
+	if (app->render->camera.x <= -2900)
 	{
 		check_1 = true;
 	}
@@ -158,7 +158,7 @@ bool Player::Update(float dt)
 	}
 	if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
 	{
-		pbody->body->SetTransform({ PIXEL_TO_METERS(2180 + 16), PIXEL_TO_METERS(700) }, 0);
+		pbody->body->SetTransform({ PIXEL_TO_METERS(2190 + 16), PIXEL_TO_METERS(700) }, 0);
 		app->render->camera.x = -2900;
 	}
 	if (app->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN)
@@ -217,7 +217,7 @@ bool Player::Update(float dt)
 			{
 				currentAnimation = &player_speed;
 			}
-			if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT)
+			if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT && !jumping)
 			{
 				speed = 0.3f;
 			}
@@ -235,7 +235,7 @@ bool Player::Update(float dt)
 			{
 				currentAnimation = &player_speed;
 			}
-			if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT)
+			if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT && !jumping)
 			{
 				speed = 0.3f;
 			}
@@ -254,7 +254,7 @@ bool Player::Update(float dt)
 		}
 		if (check_1)
 		{
-			pbody->body->SetTransform({ PIXEL_TO_METERS(2180 + 16), PIXEL_TO_METERS(700) }, 0);
+			pbody->body->SetTransform({ PIXEL_TO_METERS(2190 + 16), PIXEL_TO_METERS(700) }, 0);
 			app->render->camera.x = -2900;
 		}
 		if (check_2)
