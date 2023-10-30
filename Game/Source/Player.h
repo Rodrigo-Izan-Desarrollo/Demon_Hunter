@@ -72,6 +72,9 @@ public:
 
 	bool dead = false;
 
+	bool check_1 = false;
+	bool check_2 = false;
+
 	uint32 startTime;
 };
 

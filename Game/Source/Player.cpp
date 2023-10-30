@@ -135,7 +135,16 @@ bool Player::Update(float dt)
 	{
 		currentAnimation = &player;
 	}
-
+	//Check
+	if (-4890<app->render->camera.x < -2900)
+	{
+		check_1 = true;
+	}
+	if (app->render->camera.x <= -4890)
+	{
+		check_2 = true;
+		check_1 = false;
+	}
 	//Debug inputs
 	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
 	{
@@ -144,7 +153,7 @@ bool Player::Update(float dt)
 
 	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 	{
-		pbody->body->SetTransform({ PIXEL_TO_METERS(-750 + 16), PIXEL_TO_METERS(700) }, 0);
+		pbody->body->SetTransform({ PIXEL_TO_METERS(-730 + 16), PIXEL_TO_METERS(700) }, 0);
 		app->render->camera.x = 0;
 	}
 	if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
@@ -154,7 +163,7 @@ bool Player::Update(float dt)
 	}
 	if (app->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN)
 	{
-		pbody->body->SetTransform({ PIXEL_TO_METERS(4780 + 16), PIXEL_TO_METERS(20) }, 0);
+		pbody->body->SetTransform({ PIXEL_TO_METERS(4780 + 16), PIXEL_TO_METERS(210) }, 0);
 		app->render->camera.x = -4890;
 	}
 	//Movement inputs
@@ -178,6 +187,7 @@ bool Player::Update(float dt)
 
 	if (Godmode)
 	{
+		speed = 0.5f;
 		veljump = b2Vec2(0.0, -0.1675);
 		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
 			veljump.y = -5;
@@ -186,12 +196,12 @@ bool Player::Update(float dt)
 			veljump.y = 5 * dt;
 		}
 		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
-			veljump.x = -5;
-			app->render->camera.x += 4.99;
+			veljump.x = speed * dt;
+			app->render->camera.x = -(position.x - 60);
 		}
 		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
-			veljump.x = 5 ;
-			app->render->camera.x -= 4.99;
+			veljump.x = speed * dt;
+			app->render->camera.x = -(position.x - 60);
 		}
 		currentAnimation = &player;
 	}
@@ -201,65 +211,77 @@ bool Player::Update(float dt)
 		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 		{
 
-			veljump.x = 3.0f;
-			if (app->render->camera.x <= -4800)
-			{
-				app->render->camera.x -= 0;
-			}
-			else
-			{
-				app->render->camera.x -= 2.9f;
-			}
-			if (inground && !jumping)
-			{
-				currentAnimation = &player_speed;
-			}
-			if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT)
-			{
-				veljump.x = 4;
-			}
-			else
-			{
-				veljump.x = 3;
-			}
-		}
-
-		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
-		{
-			veljump.x = -3.0f;
-			if (app->render->camera.x >= -10)
+			veljump.x = speed *dt;
+			if (position.x <= -4890)
 			{
 				app->render->camera.x += 0;
 			}
 			else
 			{
-				app->render->camera.x += 2.99f;
+				app->render->camera.x = -(position.x - 60);
 			}
-
 			if (inground && !jumping)
 			{
 				currentAnimation = &player_speed;
 			}
 			if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT)
 			{
-				veljump.x = -4;
+				speed = 0.3f;
 			}
 			else
 			{
-				veljump.x = -3;
+				speed = 0.2f;
+			}
+		}
+
+		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
+		{
+			veljump.x = speed * dt;
+			if (position.x <= -4890)
+			{
+				app->render->camera.x += 0;
+			}
+			else
+			{
+				app->render->camera.x = -(position.x - 60);
+			}
+			if (inground && !jumping)
+			{
+				currentAnimation = &player_speed;
+			}
+			if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT)
+			{
+				speed = 0.3f;
+			}
+			else
+			{
+				speed = 0.2f;
 			}
 		}
 	}
 	if (dead && app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
 	{
-		pbody->body->SetTransform({ PIXEL_TO_METERS(-750 + 16), PIXEL_TO_METERS(700) }, 0);
+		if (check_1)
+		{
+			pbody->body->SetTransform({ PIXEL_TO_METERS(4780 + 16), PIXEL_TO_METERS(210) }, 0);
+			app->render->camera.x = -2900;
+		}
+		if (check_2)
+		{
+			pbody->body->SetTransform({ PIXEL_TO_METERS(2180 + 16), PIXEL_TO_METERS(700) }, 0);
+			app->render->camera.x = -4890;
+		}
+		if(!check_1 && !check_2)
+		{
+			pbody->body->SetTransform({ PIXEL_TO_METERS(-730 + 16), PIXEL_TO_METERS(700) }, 0);
+			app->render->camera.x = 0;
+		}
 		canmove = true;
 		dead = false;
 		rightmode = true;
 		leftmode = false;
 		currentAnimation->Reset();
 		currentAnimation = &player;
-		app->render->camera.x = 0;
 	}
 	if (!jumping && inground)
 	{
@@ -278,7 +300,7 @@ bool Player::Update(float dt)
 	}
 
 	//Ability inputs
-	if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_REPEAT && !dead)
+	if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_REPEAT && !dead && !jumping)
 	{
 		atacking = true;
 		if (atacking)

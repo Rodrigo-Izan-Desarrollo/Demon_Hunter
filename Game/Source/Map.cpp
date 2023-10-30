@@ -104,7 +104,7 @@ bool Map::LoadColission() {
                     //    &r);
                     if (gid == tileset->firstgid + 0)
                     {
-                        PhysBody* c1 = app->physics->CreateRectangle(pos.x+16, pos.y+16, 32, 32, STATIC);
+                        PhysBody* c1 = app->physics->CreateRectangle(pos.x+16, pos.y+22, 32, 20, STATIC);
                         c1->ctype = ColliderType::ENEMY;
                     }
                     if (gid == tileset->firstgid + 1)

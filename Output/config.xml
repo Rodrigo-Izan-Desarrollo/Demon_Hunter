@@ -9,8 +9,8 @@
   </renderer>
 
   <window>
-    <resolution width="1024" height="768" scale="1"/>
-    <fullscreen value="false"/>
+    <resolution width="1024" height="735" scale="1"/>
+    <fullscreen value="false "/>
     <borderless value="false"/>
     <resizable value="false"/>
     <fullscreen_window value="false"/>
@@ -23,7 +23,7 @@
 
   <scene>
     <map path="Assets/Maps/" name="Map_final.tmx"/>
-    <player x="33" y="670" texturepath="Assets/Textures/Player/player_1.png"/>
+    <player x="66" y="670" texturepath="Assets/Textures/Player/player_1.png"/>
   </scene>
   
 </config>
