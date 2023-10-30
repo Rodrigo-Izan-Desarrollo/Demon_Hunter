@@ -163,8 +163,8 @@ bool Player::Update(float dt)
 	}
 	if (app->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN)
 	{
-		pbody->body->SetTransform({ PIXEL_TO_METERS(4780 + 16), PIXEL_TO_METERS(210) }, 0);
-		app->render->camera.x = -4890;
+		pbody->body->SetTransform({ PIXEL_TO_METERS(4815 + 16), PIXEL_TO_METERS(460) }, 0);
+		app->render->camera.x = -5540;
 	}
 	//Movement inputs
 	if (app->input->GetKey(SDL_SCANCODE_A)==KEY_IDLE && app->input->GetKey(SDL_SCANCODE_D)==KEY_IDLE)
@@ -189,14 +189,14 @@ bool Player::Update(float dt)
 	{
 		speed = 0.5f;
 		veljump = b2Vec2(0.0, -0.1675);
-		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
+		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {               
 			veljump.y = -5;
 		}
 		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
 			veljump.y = 5 * dt;
 		}
 		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
-			veljump.x = speed * dt;
+			veljump.x = -speed * dt;
 			app->render->camera.x = -(position.x - 60);
 		}
 		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
@@ -247,20 +247,20 @@ bool Player::Update(float dt)
 	}
 	if (dead && app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
 	{
+		if (!check_1 && !check_2)
+		{
+			pbody->body->SetTransform({ PIXEL_TO_METERS(-730 + 16), PIXEL_TO_METERS(700) }, 0);
+			app->render->camera.x = 0;
+		}
 		if (check_1)
 		{
-			pbody->body->SetTransform({ PIXEL_TO_METERS(4780 + 16), PIXEL_TO_METERS(210) }, 0);
+			pbody->body->SetTransform({ PIXEL_TO_METERS(2180 + 16), PIXEL_TO_METERS(700) }, 0);
 			app->render->camera.x = -2900;
 		}
 		if (check_2)
 		{
-			pbody->body->SetTransform({ PIXEL_TO_METERS(2180 + 16), PIXEL_TO_METERS(700) }, 0);
-			app->render->camera.x = -4890;
-		}
-		if(!check_1 && !check_2)
-		{
-			pbody->body->SetTransform({ PIXEL_TO_METERS(-730 + 16), PIXEL_TO_METERS(700) }, 0);
-			app->render->camera.x = 0;
+			pbody->body->SetTransform({ PIXEL_TO_METERS(4815 + 16), PIXEL_TO_METERS(460) }, 0);
+			app->render->camera.x = -5540;
 		}
 		canmove = true;
 		dead = false;
