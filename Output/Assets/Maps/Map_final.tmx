@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="216" height="25" tilewidth="32" tileheight="32" infinite="0" nextlayerid="13" nextobjectid="59">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="216" height="25" tilewidth="32" tileheight="32" infinite="0" nextlayerid="13" nextobjectid="59">
  <tileset firstgid="1" name="MapMetadata" tilewidth="32" tileheight="32" spacing="1" margin="1" tilecount="5" columns="5">
   <image source="MapMetadata.png" width="166" height="34"/>
  </tileset>
@@ -26,6 +26,9 @@
  </tileset>
  <tileset firstgid="5710" name="Second_Part" tilewidth="32" tileheight="32" tilecount="2990" columns="130">
   <image source="Second_Part.png" width="4171" height="742"/>
+ </tileset>
+ <tileset firstgid="8700" name="cartel" tilewidth="32" tileheight="32" tilecount="8" columns="4">
+  <image source="CARTEL.png" width="128" height="64"/>
  </tileset>
  <layer id="5" name="Copiar desde Map" width="216" height="25">
   <properties>
@@ -9543,10 +9546,10 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="8700"/>
+   <tile gid="8701"/>
+   <tile gid="8702"/>
+   <tile gid="8703"/>
    <tile/>
    <tile/>
    <tile/>
@@ -9759,10 +9762,10 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="8704"/>
+   <tile gid="8705"/>
+   <tile gid="8706"/>
+   <tile gid="8707"/>
    <tile/>
    <tile/>
    <tile/>
