@@ -62,6 +62,8 @@ public:
 	bool leftmode = false;
 	bool rightmode = true;
 
+	bool moving = false;
+
 	bool atacking = false;
 
 	bool jumping = false;

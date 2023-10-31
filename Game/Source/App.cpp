@@ -198,14 +198,7 @@ void App::FinishUpdate()
 	// Average FPS for the whole game life
 	if (lastSecFrameTime.ReadMs() > 1000) {
 		lastSecFrameTime.Start();
-		if (mitad)
-		{
-			averageFps = (averageFps + lastSecFrameCount) / 3;
-		}
-		else
-		{
-			averageFps = (averageFps + lastSecFrameCount) / 2;
-		}
+		averageFps = (averageFps + lastSecFrameCount) / 2;
 		framesPerSecond = lastSecFrameCount; 
 		lastSecFrameCount = 0;
 	}

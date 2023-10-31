@@ -131,7 +131,7 @@ bool Player::Update(float dt)
 	b2Vec2 veljump = pbody->body->GetLinearVelocity();
 
 
-	if (!atacking && !jumping && inground && !dead &&!Godmode)
+	if (!atacking && !jumping && inground && !dead && !Godmode && !moving)
 	{
 		currentAnimation = &player;
 	}
@@ -208,9 +208,8 @@ bool Player::Update(float dt)
 
 	if (canmove && !Godmode)
 	{
-		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
+		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && !atacking)
 		{
-
 			veljump.x = speed *dt;
 			app->render->camera.x = -(position.x - 60);
 			if (inground && !jumping)
@@ -227,7 +226,7 @@ bool Player::Update(float dt)
 			}
 		}
 
-		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
+		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && !atacking)
 		{
 			veljump.x = speed * dt;
 			app->render->camera.x = -(position.x - 60);
@@ -287,17 +286,17 @@ bool Player::Update(float dt)
 	}
 
 	//Ability inputs
-	if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_REPEAT && !dead && !jumping)
-	{
-		atacking = true;
-		if (atacking)
-		{
-			canmove = false;
-			currentAnimation->Reset();
-			currentAnimation = &player_attack;
-			currentAnimation->loopCount = 0;
-		}
-	}
+	//if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_REPEAT && !dead && !jumping)
+	//{
+	//	atacking = true;
+	//	if (atacking)
+	//	{
+	//		canmove = false;
+	//		currentAnimation->Reset();
+	//		currentAnimation = &player_attack;
+	//		currentAnimation->loopCount = 0;
+	//	}
+	//}
 
 	//Finished animations
 
