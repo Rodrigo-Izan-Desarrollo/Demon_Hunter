@@ -111,7 +111,7 @@ private:
 	uint32 lastSecFrameCount = 0;
 
 	float averageFps = 0.0f;
-	bool mitad;
+	bool unlimited = false;
 	uint32 secondsSinceStartup = 0;
 
 	uint32 maxFrameDuration = 16;

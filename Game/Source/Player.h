@@ -34,7 +34,7 @@ public:
 	PhysBody* pbody;
 	int pickCoinFxId;
 
-	int respawn = 3;
+	int respawn = 2;
 
 
 	Animation* currentAnimation;

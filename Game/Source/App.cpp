@@ -217,7 +217,15 @@ bool App::PreUpdate()
 {
 	if (app->input->GetKey(SDL_SCANCODE_F11) == KEY_DOWN)
 	{
-		mitad = !mitad;
+		unlimited = !unlimited;
+	}
+	if (unlimited)
+	{
+		maxFrameDuration = 32;
+	}
+	else
+	{
+		maxFrameDuration = 16;
 	}
 	bool ret = true;
 

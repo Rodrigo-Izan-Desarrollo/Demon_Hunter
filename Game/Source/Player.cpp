@@ -210,7 +210,7 @@ bool Player::Update(float dt)
 	{
 		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && !atacking)
 		{
-			veljump.x = speed *dt;
+			veljump.x = 3;
 			app->render->camera.x = -(position.x - 60);
 			if (inground && !jumping)
 			{
@@ -218,17 +218,17 @@ bool Player::Update(float dt)
 			}
 			if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT && !jumping)
 			{
-				speed = 0.3f;
+				speed = 5;
 			}
 			else
 			{
-				speed = 0.2f;
+				speed = 3;
 			}
 		}
 
 		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && !atacking)
 		{
-			veljump.x = speed * dt;
+			veljump.x = -3;
 			app->render->camera.x = -(position.x - 60);
 			if (inground && !jumping)
 			{
@@ -236,11 +236,11 @@ bool Player::Update(float dt)
 			}
 			if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT && !jumping)
 			{
-				speed = 0.3f;
+				speed = -5;
 			}
 			else
 			{
-				speed = 0.2f;
+				speed = -3;
 			}
 		}
 	}
