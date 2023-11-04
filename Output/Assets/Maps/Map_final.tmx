@@ -9114,10 +9114,10 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="40"/>
+   <tile gid="40"/>
+   <tile gid="40"/>
+   <tile gid="41"/>
    <tile/>
    <tile/>
    <tile/>
@@ -9330,10 +9330,10 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="40"/>
-   <tile gid="40"/>
-   <tile gid="40"/>
-   <tile gid="41"/>
+   <tile gid="1365"/>
+   <tile/>
+   <tile/>
+   <tile gid="1366"/>
    <tile/>
    <tile/>
    <tile/>
@@ -9546,10 +9546,10 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="1365"/>
-   <tile/>
-   <tile/>
-   <tile gid="1366"/>
+   <tile gid="8700"/>
+   <tile gid="8701"/>
+   <tile gid="8702"/>
+   <tile gid="8703"/>
    <tile/>
    <tile/>
    <tile/>
@@ -9762,10 +9762,10 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="8700"/>
-   <tile gid="8701"/>
-   <tile gid="8702"/>
-   <tile gid="8703"/>
+   <tile gid="8704"/>
+   <tile gid="8705"/>
+   <tile gid="8706"/>
+   <tile gid="8707"/>
    <tile/>
    <tile/>
    <tile/>
@@ -9978,10 +9978,10 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="8704"/>
-   <tile gid="8705"/>
-   <tile gid="8706"/>
-   <tile gid="8707"/>
+   <tile gid="1335"/>
+   <tile gid="1335"/>
+   <tile gid="1336"/>
+   <tile/>
    <tile gid="63"/>
    <tile/>
    <tile/>
@@ -10194,9 +10194,9 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="1334"/>
-   <tile gid="1335"/>
-   <tile gid="1335"/>
+   <tile gid="1338"/>
+   <tile gid="1338"/>
+   <tile gid="1338"/>
    <tile gid="1335"/>
    <tile gid="1335"/>
    <tile gid="1335"/>
@@ -16251,7 +16251,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="2" name="colisiones" width="216" height="25">
+ <layer id="2" name="colisiones" width="216" height="25" visible="0">
   <properties>
    <property name="Draw" type="bool" value="false"/>
   </properties>
@@ -19930,8 +19930,8 @@
    <tile/>
    <tile gid="2"/>
    <tile gid="2"/>
-   <tile/>
-   <tile/>
+   <tile gid="2"/>
+   <tile gid="2"/>
    <tile/>
    <tile/>
    <tile/>
@@ -20144,10 +20144,10 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="2"/>
-   <tile gid="2"/>
-   <tile gid="2"/>
-   <tile gid="2"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
@@ -20795,7 +20795,7 @@
    <tile gid="2"/>
    <tile gid="2"/>
    <tile gid="2"/>
-   <tile gid="2"/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
