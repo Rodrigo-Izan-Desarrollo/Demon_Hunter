@@ -131,7 +131,7 @@ bool Player::Update(float dt)
 	b2Vec2 veljump = pbody->body->GetLinearVelocity();
 
 
-	if (!atacking && !jumping && inground && !dead && !Godmode && !moving)
+	if (!atacking && !jumping && inground && !dead && !Godmode)
 	{
 		currentAnimation = &player;
 	}
@@ -146,22 +146,22 @@ bool Player::Update(float dt)
 		check_1 = false;
 	}
 	//Debug inputs
-	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN && !dead)
 	{
 		Godmode = !Godmode;
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN && !dead)
 	{
 		pbody->body->SetTransform({ PIXEL_TO_METERS(-730 + 16), PIXEL_TO_METERS(700) }, 0);
 		app->render->camera.x = 0;
 	}
-	if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN && !dead)
 	{
 		pbody->body->SetTransform({ PIXEL_TO_METERS(2190 + 16), PIXEL_TO_METERS(700) }, 0);
 		app->render->camera.x = -2900;
 	}
-	if (app->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN && !dead)
 	{
 		pbody->body->SetTransform({ PIXEL_TO_METERS(4815 + 16), PIXEL_TO_METERS(460) }, 0);
 		app->render->camera.x = -5540;
@@ -172,24 +172,11 @@ bool Player::Update(float dt)
 		veljump.x = 0;
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && !dead)
-	{
-		leftmode = true;
-		rightmode = false;
-		speed = -speed;
-	}
-
-	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && !dead)
-	{
-		rightmode = true;
-		leftmode = false;
-	}
-
-	if (Godmode)
+	if (Godmode && !dead)
 	{
 		speed = 0.5f;
 		veljump = b2Vec2(0.0, -0.1675);
-		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {               
+		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
 			veljump.y = -5;
 		}
 		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
@@ -206,10 +193,12 @@ bool Player::Update(float dt)
 		currentAnimation = &player;
 	}
 
-	if (canmove && !Godmode)
+	if (canmove && !Godmode && !dead)
 	{
 		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && !atacking)
 		{
+			rightmode = true;
+			leftmode = false;
 			veljump.x = 3;
 			app->render->camera.x = -(position.x - 60);
 			if (inground && !jumping)
@@ -218,16 +207,19 @@ bool Player::Update(float dt)
 			}
 			if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT && !jumping)
 			{
-				speed = 5;
+				veljump.x = 4;
 			}
 			else
 			{
-				speed = 3;
+				veljump.x = 3;
 			}
 		}
 
 		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && !atacking)
 		{
+			leftmode = true;
+			rightmode = false;
+			speed = -speed;
 			veljump.x = -3;
 			app->render->camera.x = -(position.x - 60);
 			if (inground && !jumping)
@@ -236,15 +228,15 @@ bool Player::Update(float dt)
 			}
 			if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT && !jumping)
 			{
-				speed = -5;
+				veljump.x = -4;
 			}
 			else
 			{
-				speed = -3;
+				veljump.x = -3;
 			}
 		}
 	}
-	if (dead && app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN && respawn>0)
+	if (app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN && respawn>0 && dead)
 	{
 		if (!check_1 && !check_2)
 		{
@@ -261,17 +253,17 @@ bool Player::Update(float dt)
 			pbody->body->SetTransform({ PIXEL_TO_METERS(4815 + 16), PIXEL_TO_METERS(460) }, 0);
 			app->render->camera.x = -5540;
 		}
+		currentAnimation->Reset();
 		canmove = true;
 		dead = false;
 		rightmode = true;
 		leftmode = false;
-		currentAnimation->Reset();
 		respawn--;
 		currentAnimation = &player;
 	}
-	if (!jumping && inground)
+	if (!jumping && inground && !dead)
 	{
-		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && !dead)
+		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN )
 		{
 			jumping = true;
 			inground = false;
@@ -308,10 +300,10 @@ bool Player::Update(float dt)
 	} 
 
 
-	if (currentAnimation == &player_attack && currentAnimation->HasFinished()) {
-		atacking = false;
-		canmove = true;
-	}
+	//if (currentAnimation == &player_attack && currentAnimation->HasFinished()) {
+	//	atacking = false;
+	//	canmove = true;
+	//}
 
 	if (currentAnimation == &player_jump && currentAnimation->HasFinished() && inground) {
 		currentAnimation->Reset();
