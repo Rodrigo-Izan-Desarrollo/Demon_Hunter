@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="216" height="25" tilewidth="32" tileheight="32" infinite="0" nextlayerid="13" nextobjectid="59">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="216" height="25" tilewidth="32" tileheight="32" infinite="0" nextlayerid="13" nextobjectid="59">
  <tileset firstgid="1" name="MapMetadata" tilewidth="32" tileheight="32" spacing="1" margin="1" tilecount="5" columns="5">
   <image source="MapMetadata.png" width="166" height="34"/>
  </tileset>
@@ -9114,10 +9114,10 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="40"/>
-   <tile gid="40"/>
-   <tile gid="40"/>
-   <tile gid="41"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
@@ -9330,10 +9330,10 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="1365"/>
-   <tile/>
-   <tile/>
-   <tile gid="1366"/>
+   <tile gid="40"/>
+   <tile gid="40"/>
+   <tile gid="40"/>
+   <tile gid="41"/>
    <tile/>
    <tile/>
    <tile/>
@@ -9546,10 +9546,10 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="8700"/>
-   <tile gid="8701"/>
-   <tile gid="8702"/>
-   <tile gid="8703"/>
+   <tile gid="1365"/>
+   <tile/>
+   <tile/>
+   <tile gid="1366"/>
    <tile/>
    <tile/>
    <tile/>
@@ -9762,10 +9762,10 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="8704"/>
-   <tile gid="8705"/>
-   <tile gid="8706"/>
-   <tile gid="8707"/>
+   <tile gid="8700"/>
+   <tile gid="8701"/>
+   <tile gid="8702"/>
+   <tile gid="8703"/>
    <tile/>
    <tile/>
    <tile/>
@@ -9978,10 +9978,10 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile gid="63"/>
+   <tile gid="8704"/>
+   <tile gid="8705"/>
+   <tile gid="8706"/>
+   <tile gid="8707"/>
    <tile gid="63"/>
    <tile/>
    <tile/>
@@ -19930,8 +19930,8 @@
    <tile/>
    <tile gid="2"/>
    <tile gid="2"/>
-   <tile gid="2"/>
-   <tile gid="2"/>
+   <tile/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
@@ -20146,8 +20146,8 @@
    <tile/>
    <tile gid="2"/>
    <tile gid="2"/>
-   <tile/>
-   <tile/>
+   <tile gid="2"/>
+   <tile gid="2"/>
    <tile/>
    <tile/>
    <tile/>
@@ -20794,8 +20794,8 @@
    <tile/>
    <tile gid="2"/>
    <tile gid="2"/>
-   <tile/>
-   <tile/>
+   <tile gid="2"/>
+   <tile gid="2"/>
    <tile/>
    <tile/>
    <tile/>
