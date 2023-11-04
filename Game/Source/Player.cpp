@@ -36,90 +36,40 @@ bool Player::Start() {
 	pbody->listener = this;
 	pbody->ctype = ColliderType::PLAYER;
 
-	pickCoinFxId = app->audio->LoadFx("Assets/Audio/Fx/retro-video-game-coin-pickup-38299.ogg");
+	player.LoadAnimations("player");
+	player_speed.LoadAnimations("player_speed");
+	player_jump.LoadAnimations("player_jump");
+	player_dead.LoadAnimations("player_dead");
 
-	player.PushBack({ 0,2,32,32 });
-	player.PushBack({ 31,2,32,32 });
-	player.loop = true;
-	player.speed = 0.075f;
-
-	//Walking
-	player_walk.PushBack({ 0, 67, 32, 32 });
-	player_walk.PushBack({ 31, 67, 32, 32 });
-	player_walk.PushBack({ 63, 67, 32, 32 });
-	player_walk.PushBack({ 95, 67, 32, 32 });
-	player_walk.loop = true;
-	player_walk.speed = 0.1f;
-
-	//Runing
-	player_speed.PushBack({ 0 ,100, 32, 32 });
-	player_speed.PushBack({ 31 ,100, 32, 32 });
-	player_speed.PushBack({ 63 ,100, 32, 32 });
-	player_speed.PushBack({ 95 ,100, 32, 32 });
-	player_speed.PushBack({ 126 ,100, 32, 32 });
-	player_speed.PushBack({ 159 ,100, 32, 32 });
-	player_speed.PushBack({ 191 ,100, 32, 32 });
-	player_speed.PushBack({ 222 ,100, 32, 32 });
-	player_speed.loop = true;
-	player_speed.speed = 0.15f;
-
-	//Jumping
-	player_jump.PushBack({ 31, 162, 32, 32 });
-	player_jump.PushBack({ 63, 161, 32, 32 });
-	player_jump.PushBack({ 63, 161, 32, 32 });
-	player_jump.PushBack({ 95, 161, 32, 32 });
-	player_jump.PushBack({ 95, 161, 32, 32 });
-	player_jump.PushBack({ 126, 162, 32, 32 });
-	player_jump.PushBack({ 126, 162, 32, 32 });
-	player_jump.speed= 0.2f;
-	player_jump.loop = false;
-
-	player_inair.PushBack({ 95, 161, 32, 32 });
-	player_inair.PushBack({ 95, 161, 32, 32 });
-	player_inair.PushBack({ 126, 162, 32, 32 });
-	player_inair.PushBack({ 126, 162, 32, 32 });
-	player_inair.loop = false;
-
-	//Normal atack
-	player_attack.PushBack({ 0,259, 32, 32 });
-	player_attack.PushBack({ 31,259, 32, 32 });
-	player_attack.PushBack({ 63,259, 32, 32 });
-	player_attack.PushBack({ 95,259, 32, 32 });
-	player_attack.PushBack({ 126,259, 32, 32 });
-	player_attack.PushBack({ 163,259, 32, 32 });
-	player_attack.PushBack({ 192,259, 32, 32 });
-	player_attack.loop = false;
-	player_attack.speed = 0.3f;
+	////Normal atack
+	//player_attack.PushBack({ 0,259, 32, 32 });
+	//player_attack.PushBack({ 31,259, 32, 32 });
+	//player_attack.PushBack({ 63,259, 32, 32 });
+	//player_attack.PushBack({ 95,259, 32, 32 });
+	//player_attack.PushBack({ 126,259, 32, 32 });
+	//player_attack.PushBack({ 163,259, 32, 32 });
+	//player_attack.PushBack({ 192,259, 32, 32 });
+	//player_attack.loop = false;
+	//player_attack.speed = 0.3f;
 
 	//Invisible
-	player_inv.PushBack({ 31, 195, 32, 32 });
-	player_inv.PushBack({ 63, 195, 32, 32 });
-	player_inv.PushBack({ 95, 195, 32, 32 });
-	player_inv.PushBack({ 1000, 100, 32, 32 });
-	player_inv.PushBack({ 95, 193, 32, 32 });
-	player_inv.PushBack({ 95, 193, 32, 32 });
-	player_inv.PushBack({ 95, 193, 32, 32 });
-	player_inv.PushBack({ 127, 128, 32, 32 });
-	player_inv.speed = 0.2f;
-	player_inv.loop = false;
+	//player_inv.PushBack({ 31, 195, 32, 32 });
+	//player_inv.PushBack({ 63, 195, 32, 32 });
+	//player_inv.PushBack({ 95, 195, 32, 32 });
+	//player_inv.PushBack({ 1000, 100, 32, 32 });
+	//player_inv.PushBack({ 95, 193, 32, 32 });
+	//player_inv.PushBack({ 95, 193, 32, 32 });
+	//player_inv.PushBack({ 95, 193, 32, 32 });
+	//player_inv.PushBack({ 127, 128, 32, 32 });
+	//player_inv.speed = 0.2f;
+	//player_inv.loop = false;
 
-	//Damage resive
-	player_hurt.PushBack({ 0,227, 32, 32 });
-	player_hurt.PushBack({ 31,227, 32, 32 });
-	player_hurt.PushBack({ 31,227, 32, 32 });
-	player_hurt.speed = 10.0f;
-	player_hurt.loop = false;
-
-	//Player dead
-	player_dead.PushBack({ 0,227, 32, 32 });
-	player_dead.PushBack({ 31,227, 32, 32 });
-	player_dead.PushBack({ 31,227, 32, 32 });                      
-	player_dead.PushBack({ 63, 227, 32, 32 });
-	player_dead.PushBack({ 95, 227, 32, 32 });
-	player_dead.PushBack({ 126, 227, 32, 32 });
-	player_dead.PushBack({ 159, 227, 32, 32 });
-	player_dead.speed = 0.18f;
-	player_dead.loop = false;
+	////Damage resive
+	//player_hurt.PushBack({ 0,227, 32, 32 });
+	//player_hurt.PushBack({ 31,227, 32, 32 });
+	//player_hurt.PushBack({ 31,227, 32, 32 });
+	//player_hurt.speed = 10.0f;
+	//player_hurt.loop = false;
 
 	currentAnimation = &player;
 
@@ -253,11 +203,11 @@ bool Player::Update(float dt)
 			pbody->body->SetTransform({ PIXEL_TO_METERS(4815 + 16), PIXEL_TO_METERS(460) }, 0);
 			app->render->camera.x = -5540;
 		}
-		currentAnimation->Reset();
 		canmove = true;
 		dead = false;
 		rightmode = true;
 		leftmode = false;
+		currentAnimation->Reset();
 		respawn--;
 		currentAnimation = &player;
 	}
@@ -294,7 +244,6 @@ bool Player::Update(float dt)
 
 	if (dead)
 	{
-		canmove = false;
 		currentAnimation = &player_dead;
 		currentAnimation->loopCount = 0;
 	} 
