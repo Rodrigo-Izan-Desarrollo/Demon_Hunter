@@ -189,6 +189,7 @@ bool Player::Update(float dt)
 	}
 	if (app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN && respawn>0 && dead)
 	{
+		currentAnimation->Reset();
 		if (!check_1 && !check_2)
 		{
 			pbody->body->SetTransform({ PIXEL_TO_METERS(-700 + 16), PIXEL_TO_METERS(700) }, 0);
@@ -204,13 +205,12 @@ bool Player::Update(float dt)
 			pbody->body->SetTransform({ PIXEL_TO_METERS(4815 + 16), PIXEL_TO_METERS(460) }, 0);
 			app->render->camera.x = -5540;
 		}
+
 		canmove = true;
 		dead = false;
 		rightmode = true;
 		leftmode = false;
-		currentAnimation->Reset();
 		respawn--;
-		currentAnimation = &player;
 	}
 	if (!jumping && inground && !dead)
 	{
