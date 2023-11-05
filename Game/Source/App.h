@@ -20,6 +20,7 @@ class EntityManager;
 class Map;
 class Physics;
 
+
 class App
 {
 public:
@@ -83,6 +84,7 @@ public:
 	EntityManager* entityManager;
 	Map* map;
 	Physics* physics;
+	bool vsync;
 
 private:
 
