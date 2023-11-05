@@ -16251,7 +16251,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="2" name="colisiones" width="216" height="25" visible="0">
+ <layer id="2" name="colisiones" width="216" height="25">
   <properties>
    <property name="Draw" type="bool" value="false"/>
   </properties>
@@ -20144,10 +20144,10 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="2"/>
+   <tile gid="2"/>
+   <tile gid="2"/>
+   <tile gid="2"/>
    <tile/>
    <tile/>
    <tile/>
