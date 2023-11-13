@@ -23,7 +23,7 @@
 
   <scene>
     <map path="Assets/Maps/" name="Map_final.tmx"/>
-    <player x="66" y="670" texturepath="Assets/Textures/Player/player_1.png"/>
+    <player x="150WWWWW" y="570" texturepath="Assets/Textures/Player/player_1.png"/>
   </scene>
   <animations>
 		<player loop="true" speed="0.075f">
