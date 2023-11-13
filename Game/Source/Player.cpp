@@ -41,6 +41,7 @@ bool Player::Start() {
 	player_jump.LoadAnimations("player_jump");
 	player_dead.LoadAnimations("player_dead");
 
+
 	////Normal atack
 	//player_attack.PushBack({ 0,259, 32, 32 });
 	//player_attack.PushBack({ 31,259, 32, 32 });
@@ -152,6 +153,7 @@ bool Player::Update(float dt)
 			leftmode = false;
 			veljump.x = 3;
 			app->render->camera.x = -(position.x - 157);
+			app->render->camera.y = -(position.y-550);
 			if (inground && !jumping)
 			{
 				currentAnimation = &player_speed;
@@ -173,6 +175,7 @@ bool Player::Update(float dt)
 			speed = -speed;
 			veljump.x = -3;
 			app->render->camera.x = -(position.x - 157);
+			app->render->camera.y = -(position.y-550);
 			if (inground && !jumping)
 			{
 				currentAnimation = &player_speed;
