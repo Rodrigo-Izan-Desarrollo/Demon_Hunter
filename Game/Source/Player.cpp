@@ -42,16 +42,16 @@ bool Player::Start() {
 	player_dead.LoadAnimations("player_dead");
 
 
-	////Normal atack
-	//player_attack.PushBack({ 0,259, 32, 32 });
-	//player_attack.PushBack({ 31,259, 32, 32 });
-	//player_attack.PushBack({ 63,259, 32, 32 });
-	//player_attack.PushBack({ 95,259, 32, 32 });
-	//player_attack.PushBack({ 126,259, 32, 32 });
-	//player_attack.PushBack({ 163,259, 32, 32 });
-	//player_attack.PushBack({ 192,259, 32, 32 });
-	//player_attack.loop = false;
-	//player_attack.speed = 0.3f;
+	//Normal atack
+	player_attack.PushBack({ 0,259, 32, 32 });
+	player_attack.PushBack({ 31,259, 32, 32 });
+	player_attack.PushBack({ 63,259, 32, 32 });
+	player_attack.PushBack({ 95,259, 32, 32 });
+	player_attack.PushBack({ 126,259, 32, 32 });
+	player_attack.PushBack({ 163,259, 32, 32 });
+	player_attack.PushBack({ 192,259, 32, 32 });
+	player_attack.loop = false;
+	player_attack.speed = 0.3f;
 
 	//Invisible
 	//player_inv.PushBack({ 31, 195, 32, 32 });
@@ -65,12 +65,6 @@ bool Player::Start() {
 	//player_inv.speed = 0.2f;
 	//player_inv.loop = false;
 
-	////Damage resive
-	//player_hurt.PushBack({ 0,227, 32, 32 });
-	//player_hurt.PushBack({ 31,227, 32, 32 });
-	//player_hurt.PushBack({ 31,227, 32, 32 });
-	//player_hurt.speed = 10.0f;
-	//player_hurt.loop = false;
 
 	currentAnimation = &player;
 
@@ -232,17 +226,17 @@ bool Player::Update(float dt)
 	}
 
 	//Ability inputs
-	//if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_REPEAT && !dead && !jumping)
-	//{
-	//	atacking = true;
-	//	if (atacking)
-	//	{
-	//		canmove = false;
-	//		currentAnimation->Reset();
-	//		currentAnimation = &player_attack;
-	//		currentAnimation->loopCount = 0;
-	//	}
-	//}
+	if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_REPEAT && !dead && !jumping)
+	{
+		atacking = true;
+		if (atacking)
+		{
+			canmove = false;
+			currentAnimation->Reset();
+			currentAnimation = &player_attack;
+			currentAnimation->loopCount = 0;
+		}
+	}
 
 	//Finished animations
 
@@ -253,10 +247,10 @@ bool Player::Update(float dt)
 	} 
 
 
-	//if (currentAnimation == &player_attack && currentAnimation->HasFinished()) {
-	//	atacking = false;
-	//	canmove = true;
-	//}
+	if (currentAnimation == &player_attack && currentAnimation->HasFinished()) {
+		atacking = false;
+		canmove = true;
+	}
 
 	if (currentAnimation == &player_jump && currentAnimation->HasFinished() && inground) {
 		currentAnimation->Reset();
