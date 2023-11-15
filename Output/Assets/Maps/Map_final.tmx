@@ -30,6 +30,9 @@
  <tileset firstgid="8706" name="cartel" tilewidth="32" tileheight="32" tilecount="8" columns="4">
   <image source="CARTEL.png" width="128" height="64"/>
  </tileset>
+ <tileset firstgid="8714" name="Carro" tilewidth="32" tileheight="32" tilecount="20" columns="5">
+  <image source="Carro.png" width="160" height="128"/>
+ </tileset>
  <layer id="5" name="Copiar desde Map" width="300" height="40">
   <properties>
    <property name="Draw" type="bool" value="true"/>
@@ -8014,7 +8017,7 @@
    <tile/>
    <tile gid="1340"/>
    <tile gid="1340"/>
-   <tile gid="1335"/>
+   <tile gid="1340"/>
    <tile gid="1335"/>
    <tile/>
    <tile/>
@@ -16242,10 +16245,10 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="8706"/>
+   <tile gid="8707"/>
+   <tile gid="8708"/>
+   <tile gid="8709"/>
    <tile/>
    <tile/>
    <tile/>
@@ -16542,10 +16545,10 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="8710"/>
+   <tile gid="8711"/>
+   <tile gid="8712"/>
+   <tile gid="8713"/>
    <tile/>
    <tile/>
    <tile/>
@@ -16842,11 +16845,11 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="8714"/>
+   <tile gid="8715"/>
+   <tile gid="8716"/>
+   <tile gid="8717"/>
+   <tile gid="8718"/>
    <tile/>
    <tile/>
    <tile/>
@@ -17142,11 +17145,11 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="8719"/>
+   <tile gid="8720"/>
+   <tile gid="8721"/>
+   <tile gid="8722"/>
+   <tile gid="8723"/>
    <tile/>
    <tile/>
    <tile/>
@@ -17442,11 +17445,11 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="8724"/>
+   <tile gid="8725"/>
+   <tile gid="8726"/>
+   <tile gid="8727"/>
+   <tile gid="8728"/>
    <tile/>
    <tile/>
    <tile/>
@@ -17742,11 +17745,11 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="8729"/>
+   <tile gid="8730"/>
+   <tile gid="8731"/>
+   <tile gid="8732"/>
+   <tile gid="8733"/>
    <tile/>
    <tile/>
    <tile/>
@@ -19124,7 +19127,7 @@
    <tile gid="1335"/>
    <tile gid="1335"/>
    <tile gid="1335"/>
-   <tile gid="1335"/>
+   <tile gid="1336"/>
    <tile/>
    <tile/>
    <tile/>
@@ -19421,7 +19424,7 @@
    <tile gid="2718"/>
    <tile gid="2718"/>
    <tile gid="1339"/>
-   <tile gid="2673"/>
+   <tile/>
    <tile gid="1340"/>
    <tile gid="1340"/>
    <tile gid="1340"/>
@@ -19721,7 +19724,7 @@
    <tile gid="1335"/>
    <tile gid="1335"/>
    <tile gid="1348"/>
-   <tile gid="2681"/>
+   <tile/>
    <tile gid="1340"/>
    <tile gid="1340"/>
    <tile gid="1340"/>
@@ -20021,7 +20024,7 @@
    <tile gid="1340"/>
    <tile gid="1340"/>
    <tile gid="1340"/>
-   <tile gid="1335"/>
+   <tile/>
    <tile gid="1340"/>
    <tile gid="1340"/>
    <tile gid="1340"/>
@@ -36051,7 +36054,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="2" name="colisiones" width="300" height="40" visible="0">
+ <layer id="2" name="colisiones" width="300" height="40">
   <properties>
    <property name="Draw" type="bool" value="false"/>
   </properties>
@@ -40259,7 +40262,7 @@
    <tile gid="2"/>
    <tile gid="2"/>
    <tile gid="2"/>
-   <tile/>
+   <tile gid="2"/>
    <tile/>
    <tile/>
    <tile/>
@@ -40559,7 +40562,7 @@
    <tile gid="2"/>
    <tile gid="2"/>
    <tile gid="2"/>
-   <tile/>
+   <tile gid="2"/>
    <tile/>
    <tile/>
    <tile/>
@@ -43435,7 +43438,7 @@
    <tile gid="1"/>
    <tile gid="1"/>
    <tile/>
-   <tile gid="5"/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
@@ -43735,7 +43738,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="5"/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
@@ -44035,7 +44038,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="2"/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
@@ -47270,7 +47273,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="3"/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
