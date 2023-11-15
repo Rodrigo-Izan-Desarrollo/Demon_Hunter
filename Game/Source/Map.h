@@ -4,6 +4,7 @@
 #include "Module.h"
 #include "List.h"
 #include "Point.h"
+#include "Pathfinding.h"
 
 #include "PugiXml\src\pugixml.hpp"
 
@@ -124,6 +125,8 @@ public:
     // Load new map
 	bool Load(SString mapFileName);
 
+	void CreateNavigationMap(int& width, int& height, uchar** buffer) const;
+
 	iPoint MapToWorld(int x, int y) const;
 	iPoint Map::WorldToMap(int x, int y);
 
@@ -141,10 +144,13 @@ public:
 	MapData mapData;
 	SString name;
 	SString path;
+	PathFinding* pathfinding;
 
 private:
 
 	bool mapLoaded;
+	MapLayer* navigationLayer;
+	int blockedGid = 49; //!!!! make sure that you assign blockedGid according to your map
 };
 
 #endif // __MAP_H__
