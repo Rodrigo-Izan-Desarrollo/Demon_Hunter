@@ -33,6 +33,9 @@
  <tileset firstgid="8714" name="Carro" tilewidth="32" tileheight="32" tilecount="20" columns="5">
   <image source="Carro.png" width="160" height="128"/>
  </tileset>
+ <tileset firstgid="8734" name="Sombra" tilewidth="32" tileheight="32" tilecount="2" columns="1">
+  <image source="Sombra.png" width="32" height="64"/>
+ </tileset>
  <layer id="5" name="Copiar desde Map" width="300" height="40">
   <properties>
    <property name="Draw" type="bool" value="true"/>
@@ -20904,8 +20907,8 @@
    <tile gid="2671"/>
    <tile gid="2671"/>
    <tile gid="2672"/>
-   <tile/>
-   <tile/>
+   <tile gid="8734"/>
+   <tile gid="8734"/>
    <tile gid="2670"/>
    <tile gid="2671"/>
    <tile gid="2671"/>
@@ -21204,8 +21207,8 @@
    <tile gid="2679"/>
    <tile gid="2679"/>
    <tile gid="2679"/>
-   <tile gid="2679"/>
-   <tile gid="2679"/>
+   <tile gid="8735"/>
+   <tile gid="8735"/>
    <tile gid="2679"/>
    <tile gid="2679"/>
    <tile gid="2679"/>
@@ -36054,7 +36057,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="2" name="colisiones" width="300" height="40">
+ <layer id="2" name="colisiones" width="300" height="40" visible="0">
   <properties>
    <property name="Draw" type="bool" value="false"/>
   </properties>
