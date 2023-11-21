@@ -254,7 +254,7 @@ bool Player::Update(float dt)
 	}
 
 	//Ability inputs
-	if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_REPEAT && !dead && !jumping)
+	if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_REPEAT && !dead && !jumping || app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT && !dead && !jumping)
 	{
 		atacking = true;
 		if (atacking)
