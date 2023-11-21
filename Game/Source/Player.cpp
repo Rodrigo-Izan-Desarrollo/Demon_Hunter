@@ -99,17 +99,17 @@ bool Player::Update(float dt)
 
 	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN && !dead)
 	{
-		pbody->body->SetTransform({ PIXEL_TO_METERS(-620 + 16), PIXEL_TO_METERS(630) }, 0);
+		pbody->body->SetTransform({ PIXEL_TO_METERS(-620 + 16), PIXEL_TO_METERS(950) }, 0);
 		app->render->camera.x = 0;
 	}
 	if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN && !dead)
 	{
-		pbody->body->SetTransform({ PIXEL_TO_METERS(2600 + 16), PIXEL_TO_METERS(755) }, 0);
+		pbody->body->SetTransform({ PIXEL_TO_METERS(2600 + 16), PIXEL_TO_METERS(1080) }, 0);
 		app->render->camera.x = -3225;
 	}
 	if (app->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN && !dead)
 	{
-		pbody->body->SetTransform({ PIXEL_TO_METERS(5990 + 16), PIXEL_TO_METERS(700) }, 0);
+		pbody->body->SetTransform({ PIXEL_TO_METERS(5990 + 16), PIXEL_TO_METERS(1010) }, 0);
 		app->render->camera.x = -6610;
 	}
 	//Movement inputs
@@ -189,17 +189,17 @@ bool Player::Update(float dt)
 		currentAnimation->Reset();
 		if (!check_1 && !check_2)
 		{
-			pbody->body->SetTransform({ PIXEL_TO_METERS(-620 + 16), PIXEL_TO_METERS(630) }, 0);
+			pbody->body->SetTransform({ PIXEL_TO_METERS(-620 + 16), PIXEL_TO_METERS(950) }, 0);
 			app->render->camera.x = 0;
 		}
 		if (check_1)
 		{
-			pbody->body->SetTransform({ PIXEL_TO_METERS(2600 + 16), PIXEL_TO_METERS(755) }, 0);
+			pbody->body->SetTransform({ PIXEL_TO_METERS(2600 + 16), PIXEL_TO_METERS(1080) }, 0);
 			app->render->camera.x = -3225;
 		}
 		if (check_2)
 		{
-			pbody->body->SetTransform({ PIXEL_TO_METERS(5990 + 16), PIXEL_TO_METERS(700) }, 0);
+			pbody->body->SetTransform({ PIXEL_TO_METERS(5990 + 16), PIXEL_TO_METERS(1010) }, 0);
 			app->render->camera.x = -6610;
 		}
 
