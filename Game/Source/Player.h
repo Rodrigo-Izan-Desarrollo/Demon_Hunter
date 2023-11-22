@@ -36,9 +36,8 @@ public:
 	const char* texturePath_3_2;
 	const char* texturePath_4;
 
-	Uint32 tiempoInicial = NULL;
-	Uint32 tiempoactual = NULL;
-	Uint32 diferencia = NULL;
+	Uint32 invtempo = NULL;
+	Uint32 invtempo_2 = NULL;
 
 	SDL_Texture* texture = NULL;
 	SDL_Texture* texture_1 = NULL;
@@ -85,6 +84,7 @@ public:
 	bool atacking = false;
 
 	bool invisible = false;
+	bool caninv = true;
 
 	bool jumping = false;
 

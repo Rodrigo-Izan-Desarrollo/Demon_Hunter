@@ -299,20 +299,23 @@ bool Player::Update(float dt)
 	//Invisible
 	
 
-	if (app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN && caninv)
 	{
-		// Inicializa el tiempo al presionar la tecla R
 		invisible = !invisible;
-		tiempoInicial = SDL_GetTicks();
+		invtempo = SDL_GetTicks(); // Inicializa el tiempo al presionar la tecla R
+		caninv = false;
 	}
 	if (invisible)
 	{
-		tiempoactual = SDL_GetTicks();
-		diferencia = tiempoactual - tiempoInicial;
-		if (diferencia >= 6000)
+		if (SDL_GetTicks() - invtempo >= 6000) // Cuando el timepo es igual o mayor a 6000 ms se desactiva la habilidad
 		{
 			invisible = false;
+			invtempo_2 = SDL_GetTicks();
 		}
+	}
+	if (SDL_GetTicks() - invtempo_2 >= 10000)
+	{
+		caninv = true;
 	}
 
 	//Finished animations
