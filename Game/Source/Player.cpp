@@ -22,7 +22,11 @@ bool Player::Awake() {
 
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
-	texturePath = parameters.attribute("texturepath").as_string();
+	texturePath = parameters.attribute("texturepathnormal").as_string();
+	texturePath_1 = parameters.attribute("texturepathatack").as_string();
+	texturePath_2 = parameters.attribute("texturepathaspeed").as_string();
+	texturePath_3 = parameters.attribute("texturepathainv").as_string();
+	texturePath_4 = parameters.attribute("texturepathgod").as_string();
 
 	return true;
 }
@@ -31,6 +35,10 @@ bool Player::Start() {
 
 	//initilize textures
 	texture = app->tex->Load(texturePath);
+	texture_1 = app->tex->Load(texturePath_1);
+	texture_2 = app->tex->Load(texturePath_2);
+	texture_3 = app->tex->Load(texturePath_3);
+	texture_4 = app->tex->Load(texturePath_4);
 
 	pbody = app->physics->CreateCircle(position.x + 30, position.y + 30, 13, bodyType::DYNAMIC);
 	pbody->listener = this;
@@ -75,11 +83,35 @@ bool Player::Update(float dt)
 {
 	b2Vec2 veljump = pbody->body->GetLinearVelocity();
 
+	app->render->camera.x = -(position.x - 157);
+	app->render->camera.y = -(position.y - 550);
+
+	if (app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
+	{
+		powerup_1 = !powerup_1;
+		powerup_2 = false;
+		powerup_3 = false;
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
+	{
+		powerup_2 = !powerup_2;
+		powerup_1 = false;
+		powerup_3 = false;
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
+	{
+		powerup_3 = !powerup_3;
+		powerup_2 = false;
+		powerup_1 = false;
+	}
 
 	if (!atacking && !jumping && inground && !dead && !Godmode)
 	{
 		currentAnimation = &player;
 	}
+
 	//Check
 	if (app->render->camera.x <= -2900)
 	{
@@ -146,8 +178,6 @@ bool Player::Update(float dt)
 			rightmode = true;
 			leftmode = false;
 			veljump.x = 3;
-			app->render->camera.x = -(position.x - 157);
-			app->render->camera.y = -(position.y-550);
 			if (inground && !jumping)
 			{
 				currentAnimation = &player_speed;
@@ -168,8 +198,6 @@ bool Player::Update(float dt)
 			rightmode = false;
 			speed = -speed;
 			veljump.x = -3;
-			app->render->camera.x = -(position.x - 157);
-			app->render->camera.y = -(position.y-550);
 			if (inground && !jumping)
 			{
 				currentAnimation = &player_speed;
@@ -226,7 +254,7 @@ bool Player::Update(float dt)
 	}
 
 	//Ability inputs
-	if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_REPEAT && !dead && !jumping)
+	if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_REPEAT && !dead && !jumping || app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT && !dead && !jumping)
 	{
 		atacking = true;
 		if (atacking)
@@ -267,16 +295,50 @@ bool Player::Update(float dt)
 
 	currentAnimation->Update();
 
-	if (rightmode == true)
+	if (powerup_1)
 	{
-		app->render->DrawTexture(texture, position.x, position.y, &currentAnimation->GetCurrentFrame());
+		if (rightmode == true)
+		{
+			app->render->DrawTexture(texture_1, position.x, position.y, &currentAnimation->GetCurrentFrame());
+		}
+		if (leftmode == true)
+		{
+			app->render->DrawTexture(texture_1, position.x, position.y, &currentAnimation->GetCurrentFrame(), SDL_FLIP_HORIZONTAL);
+		}
 	}
-	if (leftmode == true)
+	else if (powerup_2)
 	{
-		app->render->DrawTexture(texture, position.x, position.y, &currentAnimation->GetCurrentFrame(), SDL_FLIP_HORIZONTAL);
+		if (rightmode == true)
+		{
+			app->render->DrawTexture(texture_2, position.x, position.y, &currentAnimation->GetCurrentFrame());
+		}
+		if (leftmode == true)
+		{
+			app->render->DrawTexture(texture_2, position.x, position.y, &currentAnimation->GetCurrentFrame(), SDL_FLIP_HORIZONTAL);
+		}
 	}
-
-
+	else if (powerup_3)
+	{
+		if (rightmode == true)
+		{
+			app->render->DrawTexture(texture_3, position.x, position.y, &currentAnimation->GetCurrentFrame());
+		}
+		if (leftmode == true)
+		{
+			app->render->DrawTexture(texture_3, position.x, position.y, &currentAnimation->GetCurrentFrame(), SDL_FLIP_HORIZONTAL);
+		}
+	}
+	else
+	{
+		if (rightmode == true)
+		{
+			app->render->DrawTexture(texture, position.x, position.y, &currentAnimation->GetCurrentFrame());
+		}
+		if (leftmode == true)
+		{
+			app->render->DrawTexture(texture, position.x, position.y, &currentAnimation->GetCurrentFrame(), SDL_FLIP_HORIZONTAL);
+		}
+	}
 	return true;
 }
 

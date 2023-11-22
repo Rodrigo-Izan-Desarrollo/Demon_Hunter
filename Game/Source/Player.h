@@ -30,7 +30,17 @@ public:
 public:
 	float speed = 0.2f;
 	const char* texturePath;
+	const char* texturePath_1;
+	const char* texturePath_2;
+	const char* texturePath_3;
+	const char* texturePath_4;
+
 	SDL_Texture* texture = NULL;
+	SDL_Texture* texture_1 = NULL;
+	SDL_Texture* texture_2 = NULL;
+	SDL_Texture* texture_3 = NULL;
+	SDL_Texture* texture_4 = NULL;
+
 	PhysBody* pbody;
 	int pickCoinFxId;
 
@@ -78,6 +88,11 @@ public:
 
 	bool check_1 = false;
 	bool check_2 = false;
+
+	bool powerup_1 = false;
+	bool powerup_2 = false;
+	bool powerup_3 = false;
+	bool powerup_4 = false;
 
 	uint32 startTime;
 };
