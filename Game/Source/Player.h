@@ -28,7 +28,13 @@ public:
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 
 public:
+	//Player speed
 	float speed = 0.2f;
+
+	//Repawns
+	int respawn = 2;
+
+	//Textures paths
 	const char* texturePath;
 	const char* texturePath_1;
 	const char* texturePath_2;
@@ -36,9 +42,13 @@ public:
 	const char* texturePath_3_2;
 	const char* texturePath_4;
 
+	//Timers
 	Uint32 invtempo = NULL;
 	Uint32 invtempo_2 = NULL;
+	Uint32 deadtempo = NULL;
+	Uint32 powertempo = NULL;
 
+	//Textures
 	SDL_Texture* texture = NULL;
 	SDL_Texture* texture_1 = NULL;
 	SDL_Texture* texture_2 = NULL;
@@ -47,62 +57,67 @@ public:
 	SDL_Texture* texture_4 = NULL;
 
 	PhysBody* pbody;
-	int pickCoinFxId;
+	pugi::xml_node config;
 
-	int respawn = 2;
-
-
+	//Animations
 	Animation* currentAnimation;
 
+	//Idle
 	Animation player;
 	Animation player_sleep;
-	Animation player_walk;
 
+	//Movement
 	Animation player_speed;
-
 	Animation player_jump;
 	Animation player_inair;
 
-	Animation player_inv;
-
-	Animation player_hurt;
-
+	//Dead
 	Animation player_dead;
 
+	//Atack
 	Animation player_attack;
 
-
-	pugi::xml_node config;
-
+	//Ativar modes
+	
+	//Movement
 	bool leftmode = false;
 	bool rightmode = true;
 
-	bool moving = false;
-
+	//Idle
 	bool sleeping = false;
 
+	//Atack
 	bool atacking = false;
 
+	//Get invisible
 	bool invisible = false;
 	bool caninv = true;
 
+	//Jump
 	bool jumping = false;
 
+	//Is inground
 	bool inground = false;
 
+	//Godmode activation
 	bool Godmode=false;
 
+	//Player canmove
 	bool canmove = true;
 
+	//Player is dead
 	bool dead = false;
 
+	//Check points
 	bool check_1 = false;
 	bool check_2 = false;
 
+	//Power-ups
 	bool powerup_1 = false;
 	bool powerup_2 = false;
 	bool powerup_3 = false;
 	bool powerup_4 = false;
+	bool canchange = true; // Bool per poder aplicar temps al cambi de powerup
 
 	uint32 startTime;
 };

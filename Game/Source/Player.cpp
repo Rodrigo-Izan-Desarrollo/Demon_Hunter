@@ -20,6 +20,8 @@ Player::~Player() {
 
 bool Player::Awake() {
 
+	//Conexio de parapetres amb el config.xml
+
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
 	texturePath = parameters.attribute("texturepathnormal").as_string();
@@ -34,7 +36,7 @@ bool Player::Awake() {
 
 bool Player::Start() {
 
-	//initilize textures
+	//Initilize textures
 	texture = app->tex->Load(texturePath);
 	texture_1 = app->tex->Load(texturePath_1);
 	texture_2 = app->tex->Load(texturePath_2);
@@ -42,10 +44,12 @@ bool Player::Start() {
 	texture_3_2 = app->tex->Load(texturePath_3_2);
 	texture_4 = app->tex->Load(texturePath_4);
 
+	//Create de pbody
 	pbody = app->physics->CreateCircle(position.x + 30, position.y + 30, 13, bodyType::DYNAMIC);
 	pbody->listener = this;
 	pbody->ctype = ColliderType::PLAYER;
 
+	//Relacions de les Animations amb el xml
 	player.LoadAnimations("player");
 	player_speed.LoadAnimations("player_speed");
 	player_jump.LoadAnimations("player_jump");
@@ -93,27 +97,37 @@ bool Player::Update(float dt)
 
 	//Power-ups
 
-	if (app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN && canchange)
 	{
 		powerup_1 = !powerup_1;
 		powerup_2 = false;
 		powerup_3 = false;
+		canchange = false;
+		powertempo = SDL_GetTicks();
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN && canchange)
 	{
 		powerup_2 = !powerup_2;
 		powerup_1 = false;
 		powerup_3 = false;
+		canchange = false;
+		powertempo = SDL_GetTicks();
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN && canchange)
 	{
 		powerup_3 = !powerup_3;
 		powerup_2 = false;
 		powerup_1 = false;
+		canchange = false;
+		powertempo = SDL_GetTicks();
 	}
 
+	if (SDL_GetTicks() - powertempo >= 20000)
+	{
+		canchange = true;
+	}
 	//Checkpoints
 
 	if (app->render->camera.x <= -2900)
@@ -126,8 +140,6 @@ bool Player::Update(float dt)
 		check_2 = true;
 		check_1 = false;
 	}
-
-	// Debug inputs
 
 	// Godmode
 
@@ -238,7 +250,7 @@ bool Player::Update(float dt)
 		currentAnimation->loopCount = 0;
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN && respawn>0 && dead) // Boton para repawnear cuando uno muere
+	if (SDL_GetTicks() - deadtempo	>= 3000 && respawn>0 && dead) // Cuando el timer de muerte alcanza los 3000 ms, tienes suficientes vidas y estas muerto
 	{
 		currentAnimation->Reset();// Primero reseteamos la animacion de muerte ya que el loop= false
 		if (!check_1 && !check_2)// Dependiendo del check cambia el repawn
@@ -313,7 +325,7 @@ bool Player::Update(float dt)
 			invtempo_2 = SDL_GetTicks(); // Inicializamos el couldown para poder volver a usar la habilidad
 		}
 	}
-	if (SDL_GetTicks() - invtempo_2 >= 10000) // Habilitamos la habilidad despues de 10000 ms
+	if (SDL_GetTicks() - invtempo_2 >= 20000) // Habilitamos la habilidad despues de 10000 ms
 	{
 		caninv = true;
 	}
@@ -322,17 +334,21 @@ bool Player::Update(float dt)
 
 	//Lo que hacen estos if es reiniciar las aniamciones para que a pesar de que tengan el loop = false se vuelvan a generar des de el principio
 
+	// Atack animation
+
 	if (currentAnimation == &player_attack && currentAnimation->HasFinished()) { // Reiniciar el ataque
 		atacking = false;
 		canmove = true;
 	}
+
+	//Jump animation
 
 	if (currentAnimation == &player_jump && currentAnimation->HasFinished() && inground) { // Reiniciar el salto
 		currentAnimation->Reset();
 		jumping = false;
 	}
 
-	//Reiniciar animación idle
+	//Idle animation
 
 	if (currentAnimation == &player && currentAnimation->HasFinished() && inground) {
 		if (currentAnimation != &player_sleep)
@@ -434,7 +450,6 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	{
 	case ColliderType::ITEM:
 		LOG("Collision ITEM");
-		app->audio->PlayFx(pickCoinFxId);
 		break;
 	case ColliderType::PLATFORM:
 		LOG("Collision PLATFORM");
@@ -450,6 +465,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 			dead = true;
 			canmove = false;
 		}
+		deadtempo = SDL_GetTicks(); // Inicializamos el timer para que puda respawnear
 		break;
 
 	case ColliderType::WALL:
