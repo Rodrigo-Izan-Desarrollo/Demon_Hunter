@@ -50,7 +50,7 @@ public:
 	Animation* currentAnimation;
 
 	Animation player;
-
+	Animation player_sleep;
 	Animation player_walk;
 
 	Animation player_speed;
@@ -59,6 +59,8 @@ public:
 	Animation player_inair;
 
 	Animation player_inv;
+	Animation player_inv_run;
+	Animation player_inv_jump;
 
 	Animation player_hurt;
 
