@@ -33,12 +33,18 @@ public:
 	const char* texturePath_1;
 	const char* texturePath_2;
 	const char* texturePath_3;
+	const char* texturePath_3_2;
 	const char* texturePath_4;
+
+	Uint32 tiempoInicial = NULL;
+	Uint32 tiempoactual = NULL;
+	Uint32 diferencia = NULL;
 
 	SDL_Texture* texture = NULL;
 	SDL_Texture* texture_1 = NULL;
 	SDL_Texture* texture_2 = NULL;
 	SDL_Texture* texture_3 = NULL;
+	SDL_Texture* texture_3_2 = NULL;
 	SDL_Texture* texture_4 = NULL;
 
 	PhysBody* pbody;
@@ -59,9 +65,6 @@ public:
 	Animation player_inair;
 
 	Animation player_inv;
-	Animation player_inv_sleep;
-	Animation player_inv_run;
-	Animation player_inv_jump;
 
 	Animation player_hurt;
 

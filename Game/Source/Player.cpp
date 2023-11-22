@@ -26,6 +26,7 @@ bool Player::Awake() {
 	texturePath_1 = parameters.attribute("texturepathatack").as_string();
 	texturePath_2 = parameters.attribute("texturepathaspeed").as_string();
 	texturePath_3 = parameters.attribute("texturepathainv").as_string();
+	texturePath_3_2 = parameters.attribute("texturepathainv_2").as_string();
 	texturePath_4 = parameters.attribute("texturepathgod").as_string();
 
 	return true;
@@ -38,6 +39,7 @@ bool Player::Start() {
 	texture_1 = app->tex->Load(texturePath_1);
 	texture_2 = app->tex->Load(texturePath_2);
 	texture_3 = app->tex->Load(texturePath_3);
+	texture_3_2 = app->tex->Load(texturePath_3_2);
 	texture_4 = app->tex->Load(texturePath_4);
 
 	pbody = app->physics->CreateCircle(position.x + 30, position.y + 30, 13, bodyType::DYNAMIC);
@@ -62,51 +64,6 @@ bool Player::Start() {
 	player_attack.loop = false;
 	player_attack.speed = 0.3f;
 
-	//Invisible
-	player_inv.PushBack({ 62, 1, 32, 32 });
-	player_inv.PushBack({ 94, 1, 32, 32 });
-	player_inv.PushBack({ 62, 1, 32, 32 });
-	player_inv.PushBack({ 94, 1, 32, 32 });
-	player_inv.PushBack({ 62, 1, 32, 32 });
-	player_inv.PushBack({ 94, 1, 32, 32 });
-	player_inv.PushBack({ 62, 1, 32, 32 });
-	player_inv.PushBack({ 94, 1, 32, 32 });
-	player_inv.PushBack({ 62, 1, 32, 32 });
-	player_inv.PushBack({ 94, 1, 32, 32 });
-	player_inv.PushBack({ 62, 1, 32, 32 });
-	player_inv.PushBack({ 94, 1, 32, 32 });
-	player_inv.speed = 0.075f;
-	player_inv.loop = false;
-
-	player_inv_sleep.PushBack({ 63, 34, 32, 32 });
-	player_inv_sleep.PushBack({ 95, 34, 32, 32 });
-	player_inv_sleep.speed = 0.2f;
-	player_inv_sleep.loop = false;
-
-	player_inv_run.PushBack({ 219, 98, 32, 32 });
-	player_inv_run.PushBack({ 251, 98, 32, 32 });
-	player_inv_run.PushBack({ 283, 98, 32, 32 });
-	player_inv_run.PushBack({ 315, 98, 32, 32 });
-	player_inv_run.PushBack({ 347, 98, 32, 32 });
-	player_inv_run.PushBack({ 379, 98, 32, 32 });
-	player_inv_run.PushBack({ 411, 98, 32, 32 });
-	player_inv_run.PushBack({ 442, 98, 32, 32 });
-	player_inv_run.PushBack({ 474, 98, 32, 32 });
-	player_inv_run.speed = 0.2f;
-	player_inv_run.loop = true;
-
-	player_inv_jump.PushBack({ 219, 163, 32, 32 });
-	player_inv_jump.PushBack({ 251, 163, 32, 32 });
-	player_inv_jump.PushBack({ 283, 163, 32, 32 });
-	player_inv_jump.PushBack({ 315, 163, 32, 32 });
-	player_inv_jump.PushBack({ 347, 163, 32, 32 });
-	player_inv_jump.PushBack({ 379, 163, 32, 32 });
-	player_inv_jump.PushBack({ 411, 163, 32, 32 });
-	player_inv_jump.PushBack({ 442, 163, 32, 32 });
-	player_inv_jump.PushBack({ 474, 163, 32, 32 });
-	player_inv_jump.speed = 0.2f;
-	player_inv_jump.loop = false;
-
 	currentAnimation = &player;
 
 	return true;
@@ -114,6 +71,7 @@ bool Player::Start() {
 
 bool Player::Update(float dt)
 {
+
 	b2Vec2 veljump = pbody->body->GetLinearVelocity();
 
 	//Camara movement
@@ -130,10 +88,6 @@ bool Player::Update(float dt)
 			currentAnimation = &player;
 			currentAnimation->loopCount = 0;
 			currentAnimation->Reset();
-		}
-		if (invisible)
-		{
-			currentAnimation = &player_inv;
 		}
 	}
 
@@ -330,7 +284,7 @@ bool Player::Update(float dt)
 
 	//Atack
 
-	if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_REPEAT && !dead && !jumping || app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT && !dead && !jumping) //If para poder saltar
+	if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_REPEAT && !dead && !jumping && !invisible || app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT && !dead && !jumping && !invisible) //If para poder saltar
 	{
 		atacking = true;
 		if (atacking)
@@ -342,11 +296,23 @@ bool Player::Update(float dt)
 		}
 	}
 
-	//Inv
+	//Invisible
+	
 
-	if (app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN && powerup_3)
+	if (app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
 	{
-		invisible = true;
+		// Inicializa el tiempo al presionar la tecla R
+		invisible = !invisible;
+		tiempoInicial = SDL_GetTicks();
+	}
+	if (invisible)
+	{
+		tiempoactual = SDL_GetTicks();
+		diferencia = tiempoactual - tiempoInicial;
+		if (diferencia >= 6000)
+		{
+			invisible = false;
+		}
 	}
 
 	//Finished animations
@@ -416,13 +382,27 @@ bool Player::Update(float dt)
 	}
 	else if (powerup_3)
 	{
-		if (rightmode == true)
+		if (invisible)
 		{
-			app->render->DrawTexture(texture_3, position.x, position.y, &currentAnimation->GetCurrentFrame());
+			if (rightmode == true)
+			{
+				app->render->DrawTexture(texture_3_2, position.x, position.y, &currentAnimation->GetCurrentFrame());
+			}
+			if (leftmode == true)
+			{
+				app->render->DrawTexture(texture_3_2, position.x, position.y, &currentAnimation->GetCurrentFrame(), SDL_FLIP_HORIZONTAL);
+			}
 		}
-		if (leftmode == true)
+		else
 		{
-			app->render->DrawTexture(texture_3, position.x, position.y, &currentAnimation->GetCurrentFrame(), SDL_FLIP_HORIZONTAL);
+			if (rightmode == true)
+			{
+				app->render->DrawTexture(texture_3, position.x, position.y, &currentAnimation->GetCurrentFrame());
+			}
+			if (leftmode == true)
+			{
+				app->render->DrawTexture(texture_3, position.x, position.y, &currentAnimation->GetCurrentFrame(), SDL_FLIP_HORIZONTAL);
+			}
 		}
 	}
 	else
