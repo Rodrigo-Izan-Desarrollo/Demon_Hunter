@@ -310,10 +310,10 @@ bool Player::Update(float dt)
 		if (SDL_GetTicks() - invtempo >= 6000) // Cuando el timepo es igual o mayor a 6000 ms se desactiva la habilidad
 		{
 			invisible = false;
-			invtempo_2 = SDL_GetTicks();
+			invtempo_2 = SDL_GetTicks(); // Inicializamos el couldown para poder volver a usar la habilidad
 		}
 	}
-	if (SDL_GetTicks() - invtempo_2 >= 10000)
+	if (SDL_GetTicks() - invtempo_2 >= 10000) // Habilitamos la habilidad despues de 10000 ms
 	{
 		caninv = true;
 	}
