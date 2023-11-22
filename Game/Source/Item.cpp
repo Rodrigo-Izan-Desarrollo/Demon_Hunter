@@ -22,7 +22,7 @@ bool Item::Awake() {
 
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
-	texturePath = parameters.attribute("texturepath").as_string();
+	texturePath = parameters.attribute("texturepathenemy").as_string();
 
 	return true;
 }
@@ -32,8 +32,12 @@ bool Item::Start() {
 	//initilize textures
 	texture = app->tex->Load(texturePath);
 	pbody = app->physics->CreateCircle(position.x + 16, position.y + 16, 16, bodyType::DYNAMIC);
-	pbody->ctype = ColliderType::ITEM;
+	pbody->ctype = ColliderType::ENEMY;
 
+	enemy.LoadAnimations("enemy");
+	enemy_dead.LoadAnimations("enemy_dead");
+
+	currentAnimation = &enemy;
 	return true;
 }
 

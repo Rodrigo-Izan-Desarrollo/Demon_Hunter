@@ -4,6 +4,8 @@
 #include "Entity.h"
 #include "Point.h"
 #include "SDL/include/SDL.h"
+#include "Animation.h"
+#include "Timer.h"
 
 struct SDL_Texture;
 
@@ -25,6 +27,16 @@ public:
 public:
 
 	bool isPicked = false;
+
+	Animation* currentAnimation;
+
+	Animation enemy;
+	
+	Animation enemy_hurt;
+
+	Animation enemy_dead;
+
+	Animation enemy_attack;
 
 private:
 
