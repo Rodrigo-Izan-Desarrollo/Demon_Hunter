@@ -12,6 +12,8 @@
 Item::Item() : Entity(EntityType::ITEM)
 {
 	name.Create("item");
+	name.Create("Enemy");
+
 }
 
 Item::~Item() {}
