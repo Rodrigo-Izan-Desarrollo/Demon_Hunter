@@ -52,6 +52,9 @@
     <ClCompile Include="Source\Log.cpp">
       <Filter>.cpp files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Pathfinding.cpp">
+      <Filter>.cpp files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -130,6 +133,9 @@
       <Filter>Headers files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Window.h">
+      <Filter>Headers files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Pathfinding.h">
       <Filter>Headers files</Filter>
     </ClInclude>
   </ItemGroup>
