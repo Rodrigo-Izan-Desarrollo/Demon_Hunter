@@ -59,6 +59,7 @@ public:
 	Animation player_inair;
 
 	Animation player_inv;
+	Animation player_inv_sleep;
 	Animation player_inv_run;
 	Animation player_inv_jump;
 
@@ -77,7 +78,10 @@ public:
 	bool moving = false;
 
 	bool sleeping = false;
+
 	bool atacking = false;
+
+	bool invisible = false;
 
 	bool jumping = false;
 

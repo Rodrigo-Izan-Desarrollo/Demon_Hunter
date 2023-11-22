@@ -63,17 +63,49 @@ bool Player::Start() {
 	player_attack.speed = 0.3f;
 
 	//Invisible
-	player_inv.PushBack({ 31, 195, 32, 32 });
-	player_inv.PushBack({ 63, 195, 32, 32 });
-	player_inv.PushBack({ 95, 195, 32, 32 });
-	player_inv.PushBack({ 1000, 100, 32, 32 });
-	player_inv.PushBack({ 95, 193, 32, 32 });
-	player_inv.PushBack({ 95, 193, 32, 32 });
-	player_inv.PushBack({ 95, 193, 32, 32 });
-	player_inv.PushBack({ 127, 128, 32, 32 });
-	player_inv.speed = 0.2f;
+	player_inv.PushBack({ 62, 1, 32, 32 });
+	player_inv.PushBack({ 94, 1, 32, 32 });
+	player_inv.PushBack({ 62, 1, 32, 32 });
+	player_inv.PushBack({ 94, 1, 32, 32 });
+	player_inv.PushBack({ 62, 1, 32, 32 });
+	player_inv.PushBack({ 94, 1, 32, 32 });
+	player_inv.PushBack({ 62, 1, 32, 32 });
+	player_inv.PushBack({ 94, 1, 32, 32 });
+	player_inv.PushBack({ 62, 1, 32, 32 });
+	player_inv.PushBack({ 94, 1, 32, 32 });
+	player_inv.PushBack({ 62, 1, 32, 32 });
+	player_inv.PushBack({ 94, 1, 32, 32 });
+	player_inv.speed = 0.075f;
 	player_inv.loop = false;
 
+	player_inv_sleep.PushBack({ 63, 34, 32, 32 });
+	player_inv_sleep.PushBack({ 95, 34, 32, 32 });
+	player_inv_sleep.speed = 0.2f;
+	player_inv_sleep.loop = false;
+
+	player_inv_run.PushBack({ 219, 98, 32, 32 });
+	player_inv_run.PushBack({ 251, 98, 32, 32 });
+	player_inv_run.PushBack({ 283, 98, 32, 32 });
+	player_inv_run.PushBack({ 315, 98, 32, 32 });
+	player_inv_run.PushBack({ 347, 98, 32, 32 });
+	player_inv_run.PushBack({ 379, 98, 32, 32 });
+	player_inv_run.PushBack({ 411, 98, 32, 32 });
+	player_inv_run.PushBack({ 442, 98, 32, 32 });
+	player_inv_run.PushBack({ 474, 98, 32, 32 });
+	player_inv_run.speed = 0.2f;
+	player_inv_run.loop = true;
+
+	player_inv_jump.PushBack({ 219, 163, 32, 32 });
+	player_inv_jump.PushBack({ 251, 163, 32, 32 });
+	player_inv_jump.PushBack({ 283, 163, 32, 32 });
+	player_inv_jump.PushBack({ 315, 163, 32, 32 });
+	player_inv_jump.PushBack({ 347, 163, 32, 32 });
+	player_inv_jump.PushBack({ 379, 163, 32, 32 });
+	player_inv_jump.PushBack({ 411, 163, 32, 32 });
+	player_inv_jump.PushBack({ 442, 163, 32, 32 });
+	player_inv_jump.PushBack({ 474, 163, 32, 32 });
+	player_inv_jump.speed = 0.2f;
+	player_inv_jump.loop = false;
 
 	currentAnimation = &player;
 
@@ -98,6 +130,10 @@ bool Player::Update(float dt)
 			currentAnimation = &player;
 			currentAnimation->loopCount = 0;
 			currentAnimation->Reset();
+		}
+		if (invisible)
+		{
+			currentAnimation = &player_inv;
 		}
 	}
 
@@ -306,6 +342,13 @@ bool Player::Update(float dt)
 		}
 	}
 
+	//Inv
+
+	if (app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN && powerup_3)
+	{
+		invisible = true;
+	}
+
 	//Finished animations
 
 	//Lo que hacen estos if es reiniciar las aniamciones para que a pesar de que tengan el loop = false se vuelvan a generar des de el principio
@@ -331,12 +374,6 @@ bool Player::Update(float dt)
 			currentAnimation->Reset();
 		}
 	}
-
-	//if (currentAnimation == &player_sleep && currentAnimation->HasFinished() && inground) {
-	//	currentAnimation->Reset();
-	//	currentAnimation = &player;
-	//	currentAnimation->loopCount = 0;
-	//}
 
 
 	//Set the velocity of the pbody of the player
