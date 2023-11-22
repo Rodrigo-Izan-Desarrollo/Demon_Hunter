@@ -91,9 +91,14 @@ bool Player::Update(float dt)
 
 	//Default animation
 
-	if (!atacking && !jumping && inground && !dead && !Godmode)
+	if (!atacking && !jumping && inground && !dead && !Godmode && !sleeping)
 	{
-		currentAnimation = &player;
+		if (currentAnimation != &player)
+		{
+			currentAnimation = &player;
+			currentAnimation->loopCount = 0;
+			currentAnimation->Reset();
+		}
 	}
 
 	//Power-ups
@@ -197,6 +202,7 @@ bool Player::Update(float dt)
 		{
 			rightmode = true;// El rightmode y el leftmode es para hacer flip a la imagen
 			leftmode = false;
+			sleeping = false;
 			veljump.x = 3;
 			if (inground && !jumping)// Esta condicion es para que la animcion de salto y correr no se solapen
 			{
@@ -216,6 +222,7 @@ bool Player::Update(float dt)
 		{
 			leftmode = true;
 			rightmode = false;
+			sleeping = false;
 			speed = -speed;
 			veljump.x = -3;
 			if (inground && !jumping)
@@ -316,16 +323,20 @@ bool Player::Update(float dt)
 	//Reiniciar animación idle
 
 	if (currentAnimation == &player && currentAnimation->HasFinished() && inground) {
-		currentAnimation->Reset();
-		currentAnimation = &player_sleep;
-		currentAnimation->loopCount = 0;
+		if (currentAnimation != &player_sleep)
+		{
+			sleeping = true;
+			currentAnimation = &player_sleep;
+			currentAnimation->loopCount = 0;
+			currentAnimation->Reset();
+		}
 	}
 
-	if (currentAnimation == &player_sleep && currentAnimation->HasFinished() && inground) {
-		currentAnimation->Reset();
-		currentAnimation = &player;
-		currentAnimation->loopCount = 0;
-	}
+	//if (currentAnimation == &player_sleep && currentAnimation->HasFinished() && inground) {
+	//	currentAnimation->Reset();
+	//	currentAnimation = &player;
+	//	currentAnimation->loopCount = 0;
+	//}
 
 
 	//Set the velocity of the pbody of the player

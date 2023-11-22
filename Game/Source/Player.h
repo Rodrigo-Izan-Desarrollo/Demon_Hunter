@@ -76,6 +76,7 @@ public:
 
 	bool moving = false;
 
+	bool sleeping = false;
 	bool atacking = false;
 
 	bool jumping = false;
