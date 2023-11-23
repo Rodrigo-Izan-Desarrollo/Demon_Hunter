@@ -24,7 +24,7 @@
   <scene>
     <map path="Assets/Maps/" name="Map_final.tmx"/>
 		<player x="150" y="900" texturepathnormal="Assets/Textures/Player/player_1.png" texturepathatack="Assets/Textures/Player/player_2.png" texturepathaspeed="Assets/Textures/Player/player_3.png"  texturepathainv="Assets/Textures/Player/player_4.png" texturepathgod="Assets/Textures/Player/player_5.png" />
-	    <item x="250" y="900" texturepathenemy="Assets/Textures/Enemies/Slime_1.png"/>
+	    <item x="1200" y="900" texturepathenemy="Assets/Textures/Enemies/Slime_1.png"/>
   </scene>
   <animations>
 		<player loop="true" speed="0.075f">
