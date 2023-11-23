@@ -11,9 +11,7 @@
 
 Item::Item() : Entity(EntityType::ITEM)
 {
-	name.Create("item");
 	name.Create("Enemy");
-
 }
 
 Item::~Item() {}
@@ -31,11 +29,12 @@ bool Item::Start() {
 
 	//initilize textures
 	texture = app->tex->Load(texturePath);
-	pbody = app->physics->CreateCircle(position.x + 16, position.y + 16, 16, bodyType::DYNAMIC);
+	pbody = app->physics->CreateCircle(position.x + 16, position.y + 16, 13, bodyType::DYNAMIC);
 	pbody->ctype = ColliderType::ENEMY;
 
 	enemy.LoadAnimations("enemy");
 	enemy_dead.LoadAnimations("enemy_dead");
+	enemy_attack.LoadAnimations("enemy_attack");
 
 	currentAnimation = &enemy;
 	return true;
@@ -47,7 +46,8 @@ bool Item::Update(float dt)
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
 
-	app->render->DrawTexture(texture, position.x, position.y);
+	currentAnimation->Update();
+	app->render->DrawTexture(texture, position.x, position.y+13, &currentAnimation->GetCurrentFrame());
 
 	return true;
 }

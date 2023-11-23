@@ -59,26 +59,36 @@
 		  <animation x="126" y="227" w="32" h="32" />
 		  <animation x="159" y="227" w="32" h="32" />
 	  </player_dead>
-  </animations>
-		<enemy loop="true" speed="0.075f" />
-			<animation x="2" y="23" w="28" h="24" />
-			<animation x="34" y="23" w="28" h="24" />
-			<animation x="66" y="23" w="28" h="24" />
-			<animation x="98" y="23" w="28" h="24" />
-			<animation x="132" y="23" w="28" h="24" />
-			<animation x="164" y="23" w="28" h="24" />
-			<animation x="196" y="23" w="28" h="24" />
-			<animation x="228" y="23" w="28" h="24" />
-	<item>
-		<enemy_dead loop="false" speed="0.2f">
-			<animation x="1" y="73" w="28" h="24" />
-			<animation x="34" y="73" w="28" h="24" />
-			<animation x="66" y="73" w="28" h="24" />
-			<animation x="96" y="73" w="28" h="24" />
-			<animation x="128" y="73" w="28" h="24" />
+	  
+	  <enemy loop="true" speed="0.075f" >
+			<animation x="2" y="10" w="28" h="13" />
+			<animation x="34" y="10" w="28" h="13" />
+			<animation x="66" y="10" w="28" h="13" />
+			<animation x="98" y="10" w="28" h="13" />
+			<animation x="132" y="10" w="28" h="13" />
+			<animation x="164" y="10" w="28" h="13" />
+			<animation x="196" y="10" w="28" h="13" />
+			<animation x="228" y="10" w="28" h="13" />
+		  </enemy>
+	  
+	  <enemy_attack loop="false=" speed="0.2">
+		  <animation x="2" y="38" w="28" h="13" />
+		  <animation x="34" y="38" w="28" h="13" />
+		  <animation x="66" y="38" w="28" h="13" />
+		  <animation x="98" y="38" w="28" h="13" />
+		  <animation x="132" y="38" w="28" h="13" />
+	  </enemy_attack>
+		
+	  <enemy_dead loop="false" speed="0.2f">
+			<animation x="2" y="60" w="28" h="13" />
+			<animation x="34" y="60" w="28" h="13" />
+			<animation x="66" y="60" w="28" h="13" />
+			<animation x="98" y="60" w="28" h="13" />
+			<animation x="132" y="60" w="28" h="13" />
 
 		</enemy_dead>
 		
-	</item>
+  </animations>
+		
 	
 </config>

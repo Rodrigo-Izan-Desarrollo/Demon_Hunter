@@ -24,6 +24,7 @@ public:
 
 	bool CleanUp();
 
+
 public:
 
 	bool isPicked = false;
@@ -38,10 +39,10 @@ public:
 
 	Animation enemy_attack;
 
-private:
-
 	SDL_Texture* texture;
+
 	const char* texturePath;
+
 	PhysBody* pbody;
 };
 
