@@ -212,7 +212,7 @@ bool Player::Update(float dt)
 			}
 			if (powerup_2 && !jumping)//Cuando tenga activo el power-up 2 corre mas rapido
 			{
-				veljump.x = 4;
+				veljump.x = 5;
 			}
 			else // Sino corre normal
 			{
@@ -233,7 +233,7 @@ bool Player::Update(float dt)
 			}
 			if (powerup_2 && !jumping)
 			{
-				veljump.x = -4;
+				veljump.x = -5;
 			}
 			else
 			{
@@ -325,7 +325,7 @@ bool Player::Update(float dt)
 			invtempo_2 = SDL_GetTicks(); // Inicializamos el couldown para poder volver a usar la habilidad
 		}
 	}
-	if (SDL_GetTicks() - invtempo_2 >= 20000) // Habilitamos la habilidad despues de 10000 ms
+	if (SDL_GetTicks() - invtempo_2 >= 50000) // Habilitamos la habilidad despues de 10000 ms
 	{
 		caninv = true;
 	}
