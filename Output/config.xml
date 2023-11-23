@@ -1,36 +1,47 @@
 <config>
-  <app>
-    <title>Game Development template</title>
-    <maxFrameDuration value="16"/>
-  </app>
+	<app>
+		<title>Game Development template</title>
+		<maxFrameDuration value="16"/>
+	</app>
 
-  <renderer>
-    <vsync value="false"/>
-  </renderer>
+	<renderer>
+		<vsync value="false"/>
+	</renderer>
 
-  <window>
-    <resolution width="1024" height="735" scale="1"/>
-    <fullscreen value="false "/>
-    <borderless value="false"/>
-    <resizable value="false"/>
-    <fullscreen_window value="false"/>
-  </window>
+	<window>
+		<resolution width="1024" height="735" scale="1"/>
+		<fullscreen value="false "/>
+		<borderless value="false"/>
+		<resizable value="false"/>
+		<fullscreen_window value="false"/>
+	</window>
 
-  <audio>
-    <music volume="128"/>
-    <fx volume="128"/>
-  </audio>
+	<audio>
+		<music volume="128"/>
+		<fx volume="128"/>
+	</audio>
 
-  <scene>
-    <map path="Assets/Maps/" name="Map_final.tmx"/>
+	<scene>
+		<map path="Assets/Maps/" name="Map_final.tmx"/>
 		<player x="140" y="925" texturepathnormal="Assets/Textures/Player/player_1.png" texturepathatack="Assets/Textures/Player/player_2.png" texturepathaspeed="Assets/Textures/Player/player_3.png"  texturepathainv="Assets/Textures/Player/player_4.png" texturepathainv_2="Assets/Textures/Player/player_4_2.png" texturepathgod="Assets/Textures/Player/player_5.png" />
-  </scene>
-  <animations>
-		<player loop="true" speed="0.075f">
+	</scene>
+	<animations>
+		<player loop="false" speed="0.075f">
 			<animation x="0" y="2" w="32" h="32" />
 			<animation x="31" y="2" w="32" h="32" />
+			<animation x="0" y="2" w="32" h="32" />
+			<animation x="31" y="2" w="32" h="32" />
+			<animation x="0" y="2" w="32" h="32" />
+			<animation x="31" y="2" w="32" h="32" />
+			<animation x="0" y="2" w="32" h="32" />
+			<animation x="31" y="2" w="32" h="32" />
+			<animation x="0" y="2" w="32" h="32" />
+			<animation x="31" y="2" w="32" h="32" />
+			<animation x="0" y="2" w="32" h="32" />
+			<animation x="31" y="2" w="32" h="32" />
+
 		</player>
-		<player_speed loop="ture" speed="0.15">
+		<player_speed loop="true" speed="0.15">
 			<animation x="0" y="100" w="32" h="32" />
 			<animation x="31" y="100" w="32" h="32" />
 			<animation x="63" y="100" w="32" h="32" />
@@ -40,6 +51,10 @@
 			<animation x="191" y="100" w="32" h="32" />
 			<animation x="222" y="100" w="32" h="32" />
 		</player_speed>
+		<player_sleep loop="false" speed="0.15">
+			<animation x="0" y="33" w="32" h="32" />
+			<animation x="31" y="33" w="32" h="32" />
+		</player_sleep>
 		<player_jump loop="false" speed="0.2f">
 			<animation x="31" y="162" w="32" h="32" />
 			<animation x="63" y="161" w="32" h="32" />
@@ -49,45 +64,14 @@
 			<animation x="126" y="162" w="32" h="32" />
 			<animation x="126" y="162" w="32" h="32" />
 		</player_jump>
-	  <player_dead loop="false" speed="0.2f">
-		  <animation x="0" y="227" w="32" h="32" />
-		  <animation x="31" y="227" w="32" h="32" />
-		  <animation x="31" y="227" w="32" h="32" />
-		  <animation x="63" y="227" w="32" h="32" />
-		  <animation x="95" y="227" w="32" h="32" />
-		  <animation x="126" y="227" w="32" h="32" />
-		  <animation x="159" y="227" w="32" h="32" />
-	  </player_dead>
-	  
-	  <enemy loop="true" speed="0.075f" >
-			<animation x="2" y="10" w="28" h="13" />
-			<animation x="34" y="10" w="28" h="13" />
-			<animation x="66" y="10" w="28" h="13" />
-			<animation x="98" y="10" w="28" h="13" />
-			<animation x="132" y="10" w="28" h="13" />
-			<animation x="164" y="10" w="28" h="13" />
-			<animation x="196" y="10" w="28" h="13" />
-			<animation x="228" y="10" w="28" h="13" />
-		  </enemy>
-	  
-	  <enemy_attack loop="false=" speed="0.2">
-		  <animation x="2" y="38" w="28" h="13" />
-		  <animation x="34" y="38" w="28" h="13" />
-		  <animation x="66" y="38" w="28" h="13" />
-		  <animation x="98" y="38" w="28" h="13" />
-		  <animation x="132" y="38" w="28" h="13" />
-	  </enemy_attack>
-		
-	  <enemy_dead loop="false" speed="0.2f">
-			<animation x="2" y="60" w="28" h="13" />
-			<animation x="34" y="60" w="28" h="13" />
-			<animation x="66" y="60" w="28" h="13" />
-			<animation x="98" y="60" w="28" h="13" />
-			<animation x="132" y="60" w="28" h="13" />
-
-		</enemy_dead>
-		
-  </animations>
-		
-	
+		<player_dead loop="false" speed="0.2f">
+			<animation x="0" y="227" w="32" h="32" />
+			<animation x="31" y="227" w="32" h="32" />
+			<animation x="31" y="227" w="32" h="32" />
+			<animation x="63" y="227" w="32" h="32" />
+			<animation x="95" y="227" w="32" h="32" />
+			<animation x="126" y="227" w="32" h="32" />
+			<animation x="159" y="227" w="32" h="32" />
+		</player_dead>
+	</animations>
 </config>
