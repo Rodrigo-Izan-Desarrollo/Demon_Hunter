@@ -84,8 +84,8 @@ Entity* EntityManager::CreateEntity(EntityType type)
 	case EntityType::PLAYER:
 		entity = new Player();
 		break;
-	case EntityType::ITEM:
-		entity = new Item();
+	case EntityType::SLIME:
+		entity = new Slime();
 		break;
 	default:
 		break;

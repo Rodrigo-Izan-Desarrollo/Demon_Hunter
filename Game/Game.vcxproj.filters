@@ -16,7 +16,7 @@
     <ClCompile Include="Source\Input.cpp">
       <Filter>.cpp files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Item.cpp">
+    <ClCompile Include="Source\Slime.cpp">
       <Filter>.cpp files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Timer.cpp">
@@ -102,8 +102,10 @@
     <ClInclude Include="Source\Input.h">
       <Filter>.h files</Filter>
     </ClInclude>
+    
     <ClInclude Include="Source\Item.h">
       <Filter>.h files</Filter>
+
     </ClInclude>
     <ClInclude Include="Source\Map.h">
       <Filter>.h files</Filter>
