@@ -1,5 +1,5 @@
-#ifndef __ITEM_H__
-#define __ITEM_H__
+#ifndef __SLIME_H__
+#define __SLIME_H__
 
 #include "Entity.h"
 #include "Point.h"
@@ -9,12 +9,12 @@
 
 struct SDL_Texture;
 
-class Item : public Entity
+class Slime : public Entity
 {
 public:
 
-	Item();
-	virtual ~Item();
+	Slime();
+	virtual ~Slime();
 
 	bool Awake();
 
@@ -46,4 +46,4 @@ public:
 	PhysBody* pbody;
 };
 
-#endif // __ITEM_H__
+#endif // __SLIME_H__

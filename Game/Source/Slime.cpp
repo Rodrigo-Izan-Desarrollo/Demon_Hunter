@@ -1,4 +1,4 @@
-#include "Item.h"
+#include "Slime.h"
 #include "App.h"
 #include "Textures.h"
 #include "Audio.h"
@@ -9,14 +9,14 @@
 #include "Point.h"
 #include "Physics.h"
 
-Item::Item() : Entity(EntityType::ITEM)
+Slime::Slime() : Entity(EntityType::SLIME)
 {
 	name.Create("Enemy");
 }
 
-Item::~Item() {}
+Slime::~Slime() {}
 
-bool Item::Awake() {
+bool Slime::Awake() {
 
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
@@ -25,7 +25,7 @@ bool Item::Awake() {
 	return true;
 }
 
-bool Item::Start() {
+bool Slime::Start() {
 
 	//initilize textures
 	texture = app->tex->Load(texturePath);
@@ -40,19 +40,19 @@ bool Item::Start() {
 	return true;
 }
 
-bool Item::Update(float dt)
+bool Slime::Update(float dt)
 {
 	// L07 DONE 4: Add a physics to an item - update the position of the object from the physics.  
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
 
 	currentAnimation->Update();
-	app->render->DrawTexture(texture, position.x, position.y+13, &currentAnimation->GetCurrentFrame());
+	app->render->DrawTexture(texture, position.x, position.y+17, &currentAnimation->GetCurrentFrame());
 
 	return true;
 }
 
-bool Item::CleanUp()
+bool Slime::CleanUp()
 {
 	return true;
 }

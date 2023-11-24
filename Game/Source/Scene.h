@@ -3,7 +3,7 @@
 
 #include "Module.h"
 #include "Player.h"
-#include "Item.h"
+#include "Slime.h"
 
 struct SDL_Texture;
 
