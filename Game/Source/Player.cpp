@@ -80,7 +80,7 @@ bool Player::Update(float dt)
 
 	//Camara movement
 
-	app->render->camera.x = -(position.x - 157);
+	app->render->camera.x = -(position.x - 125);
 	app->render->camera.y = -(position.y - 550);
 
 	//Default animation
