@@ -25,11 +25,14 @@
     <map path="Assets/Maps/" name="Map_final.tmx"/>
 
 		<player x="140" y="925" texturepathnormal="Assets/Textures/Player/player_1.png" texturepathatack="Assets/Textures/Player/player_2.png" texturepathaspeed="Assets/Textures/Player/player_3.png"  texturepathainv="Assets/Textures/Player/player_4.png" texturepathainv_2="Assets/Textures/Player/player_4_2.png" texturepathgod="Assets/Textures/Player/player_5.png" />
+   
+	  <slime x="1200" y="925" texturepathenemy="Assets/Textures/Enemies/Slime_1.png"/>
+	  <skeleton x="1100" y="925 " texturepathenemy="Assets/Textures/Enemies/Skeleton_1.png"/>
+	  <bomber x="500" y="900 " texturepathenemy="Assets/Textures/Enemies/Dragon_bomba.png"/>
 		<slime x="1200" y="925" texturepathenemy="Assets/Textures/Enemies/Slime_1.png"/>
 		<powerup_1 x="3520" y="1424" texturepathpower_1="Assets/Textures/Player/power_2.png"/>
 		<powerup_2 x="4672" y="1328" texturepathpower_2="Assets/Textures/Player/power_1.png"/>
 		<powerup_3 x="8576" y="112" texturepathpower_3="Assets/Textures/Player/power_3.png"/>
-
   </scene>
   <animations>
 		<player loop="false" speed="0.075f">
@@ -57,10 +60,12 @@
 			<animation x="191" y="100" w="32" h="32" />
 			<animation x="222" y="100" w="32" h="32" />
 		</player_speed>
+	  
 	    <player_sleep loop="false" speed="0.15">
 			<animation x="0" y="33" w="32" h="32" />
 			<animation x="31" y="33" w="32" h="32" />
 	    </player_sleep>
+	  
 		<player_jump loop="false" speed="0.2f">
 			<animation x="31" y="162" w="32" h="32" />
 			<animation x="63" y="161" w="32" h="32" />
@@ -70,6 +75,7 @@
 			<animation x="126" y="162" w="32" h="32" />
 			<animation x="126" y="162" w="32" h="32" />
 		</player_jump>
+	  
 	  <player_dead loop="false" speed="0.2f">
 		  <animation x="0" y="227" w="32" h="32" />
 		  <animation x="31" y="227" w="32" h="32" />
@@ -80,33 +86,60 @@
 		  <animation x="159" y="227" w="32" h="32" />
 	  </player_dead>
 	  
-	  <enemy loop="true" speed="0.075f" >
+	  <slime loop="true" speed="0.075f" >
 			<animation x="2" y="10" w="28" h="13" />
 			<animation x="34" y="10" w="28" h="13" />
 			<animation x="66" y="10" w="28" h="13" />
-			<animation x="98" y="10" w="28" h="13" />
-			<animation x="132" y="10" w="28" h="13" />
-			<animation x="164" y="10" w="28" h="13" />
-			<animation x="196" y="10" w="28" h="13" />
-			<animation x="228" y="10" w="28" h="13" />
-		  </enemy>
+			
+		  </slime>
+
+	  <slime_walking loop="true" speed="0.090">
+		  
+		  <animation x="98" y="10" w="28" h="13" />
+		  <animation x="132" y="10" w="28" h="13" />
+		  <animation x="164" y="10" w="28" h="13" />
+		  <animation x="196" y="10" w="28" h="13" />
+		  <animation x="228" y="10" w="28" h="13" />
+		  
+	  </slime_walking>
+
 	  
-	  <enemy_attack loop="false=" speed="0.2">
+	  
+	  <slime_attack loop="false=" speed="0.2">
 		  <animation x="2" y="38" w="28" h="13" />
 		  <animation x="34" y="38" w="28" h="13" />
 		  <animation x="66" y="38" w="28" h="13" />
 		  <animation x="98" y="38" w="28" h="13" />
 		  <animation x="132" y="38" w="28" h="13" />
-	  </enemy_attack>
+	  </slime_attack>
 		
-	  <enemy_dead loop="false" speed="0.2f">
+	  <slime_dead loop="false" speed="0.2f">
 			<animation x="2" y="60" w="28" h="13" />
 			<animation x="34" y="60" w="28" h="13" />
 			<animation x="66" y="60" w="28" h="13" />
 			<animation x="98" y="60" w="28" h="13" />
 			<animation x="132" y="60" w="28" h="13" />
 
-		</enemy_dead>
+		</slime_dead>
+	  
+	  <skeleton loop="true" speed="0.075f" >
+		  <animation x="1" y="286" w="40" h="36" />
+		  <animation x="42" y="286" w="40" h="36" />
+		  <animation x="83" y="286" w="40" h="36" />
+		  <animation x="124" y="286" w="40" h="36" />
+		 
+	  </skeleton>
+
+	  <bomber loop="true" speed="0.130f" >
+		  <animation x="1" y="1" w="57" h="49" />
+		  <animation x="59" y="1" w="57" h="49" />
+		  <animation x="117" y="1" w="57" h="49" />
+		  <animation x="175" y="1" w="57" h="49" />
+		  <animation x="233" y="1" w="57" h="49" />
+		  <animation x="291" y="1" w="57" h="49" />
+		  <animation x="349" y="1" w="57" h="49" />
+
+	  </bomber>
 		
   </animations>
 		

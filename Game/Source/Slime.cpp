@@ -11,7 +11,7 @@
 
 Slime::Slime() : Entity(EntityType::SLIME)
 {
-	name.Create("Enemy");
+	name.Create("Slime");
 }
 
 Slime::~Slime() {}
@@ -32,11 +32,12 @@ bool Slime::Start() {
 	pbody = app->physics->CreateCircle(position.x + 16, position.y + 16, 13, bodyType::DYNAMIC);
 	pbody->ctype = ColliderType::ENEMY;
 
-	enemy.LoadAnimations("enemy");
-	enemy_dead.LoadAnimations("enemy_dead");
-	enemy_attack.LoadAnimations("enemy_attack");
+	slime.LoadAnimations("slime");
+	slime_dead.LoadAnimations("slime_dead");
+	slime_attack.LoadAnimations("slime_attack");
+	slime_walking.LoadAnimations("slime_walking");
 
-	currentAnimation = &enemy;
+	currentAnimation = &slime;
 	return true;
 }
 
