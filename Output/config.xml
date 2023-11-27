@@ -25,7 +25,7 @@
     <map path="Assets/Maps/" name="Map_final.tmx"/>
 
 		<player x="140" y="925" texturepathnormal="Assets/Textures/Player/player_1.png" texturepathatack="Assets/Textures/Player/player_2.png" texturepathaspeed="Assets/Textures/Player/player_3.png"  texturepathainv="Assets/Textures/Player/player_4.png" texturepathainv_2="Assets/Textures/Player/player_4_2.png" texturepathgod="Assets/Textures/Player/player_5.png" />
-	  <slime x="1200" y="925" texturepathenemy="Assets/Textures/Enemies/Slime_1.png"/>
+		<slime x="1200" y="925" texturepathenemy="Assets/Textures/Enemies/Slime_1.png"/>
 
   </scene>
   <animations>
