@@ -11447,8 +11447,8 @@
    <tile gid="8628"/>
    <tile gid="8628"/>
    <tile gid="8628"/>
-   <tile gid="8735"/>
-   <tile gid="8735"/>
+   <tile gid="5593"/>
+   <tile gid="5593"/>
    <tile gid="8735"/>
    <tile gid="8643"/>
    <tile gid="8643"/>
@@ -44461,8 +44461,8 @@
    <tile gid="1345"/>
    <tile gid="1345"/>
    <tile gid="1346"/>
-   <tile gid="8736"/>
-   <tile gid="8736"/>
+   <tile/>
+   <tile/>
    <tile gid="1334"/>
    <tile gid="1348"/>
    <tile gid="1341"/>
