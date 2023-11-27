@@ -210,7 +210,7 @@ bool Player::Update(float dt)
 			{
 				currentAnimation = &player_speed;
 			}
-			if (powerup_2 && !jumping)//Cuando tenga activo el power-up 2 corre mas rapido
+			if (powerup_1 && !jumping)//Cuando tenga activo el power-up 2 corre mas rapido
 			{
 				veljump.x = 5;
 			}
@@ -231,7 +231,7 @@ bool Player::Update(float dt)
 			{
 				currentAnimation = &player_speed;
 			}
-			if (powerup_2 && !jumping)
+			if (powerup_1 && !jumping)
 			{
 				veljump.x = -5;
 			}
