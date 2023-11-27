@@ -117,6 +117,12 @@ public:
 	bool powerup_2 = false;
 	bool powerup_3 = false;
 	bool powerup_4 = false;
+
+	//Habilitar powerup
+	bool canpower_1 = false;
+	bool canpower_2 = false;
+	bool canpower_3 = false;
+
 	bool canchange = true; // Bool per poder aplicar temps al cambi de powerup
 
 	uint32 startTime;

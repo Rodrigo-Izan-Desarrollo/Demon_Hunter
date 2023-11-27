@@ -92,6 +92,14 @@ Entity* EntityManager::CreateEntity(EntityType type)
 		break;
 	case EntityType::BOMBER:
 		entity = new Bomber();
+	case EntityType::POWERUP_1:
+		entity = new Powerup_1();
+		break;
+	case EntityType::POWERUP_2:
+		entity = new Powerup_2();
+		break;
+	case EntityType::POWERUP_3:
+		entity = new Powerup_3();
 		break;
 	default:
 		break;

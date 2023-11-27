@@ -29,6 +29,9 @@ enum class ColliderType {
 	PLATFORM,
 	WALL,
 	ENEMY,
+	POWERUP_1,
+	POWERUP_2,
+	POWERUP_3,
 	UNKNOWN
 	// ..
 };
@@ -78,11 +81,11 @@ public:
 	// b2ContactListener ---
 	void BeginContact(b2Contact* contact);
 
+	// Box2D World
+	b2World* world;
+
 private:
 
 	// Debug mode
 	bool debug = false;
-
-	// Box2D World
-	b2World* world;
 };

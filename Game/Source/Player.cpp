@@ -80,7 +80,7 @@ bool Player::Update(float dt)
 
 	//Camara movement
 
-	app->render->camera.x = -(position.x - 157);
+	app->render->camera.x = -(position.x - 125);
 	app->render->camera.y = -(position.y - 550);
 
 	//Default animation
@@ -97,7 +97,7 @@ bool Player::Update(float dt)
 
 	//Power-ups
 
-	if (app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN && canchange)
+	if (app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN && canchange && canpower_1)
 	{
 		powerup_1 = !powerup_1;
 		powerup_2 = false;
@@ -106,7 +106,7 @@ bool Player::Update(float dt)
 		powertempo = SDL_GetTicks();
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN && canchange)
+	if (app->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN && canchange && canpower_2)
 	{
 		powerup_2 = !powerup_2;
 		powerup_1 = false;
@@ -115,7 +115,7 @@ bool Player::Update(float dt)
 		powertempo = SDL_GetTicks();
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN && canchange)
+	if (app->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN && canchange && canpower_3)
 	{
 		powerup_3 = !powerup_3;
 		powerup_2 = false;
@@ -124,7 +124,7 @@ bool Player::Update(float dt)
 		powertempo = SDL_GetTicks();
 	}
 
-	if (SDL_GetTicks() - powertempo >= 20000)
+	if (SDL_GetTicks() - powertempo >= 15000)
 	{
 		canchange = true;
 	}
@@ -210,7 +210,7 @@ bool Player::Update(float dt)
 			{
 				currentAnimation = &player_speed;
 			}
-			if (powerup_2 && !jumping)//Cuando tenga activo el power-up 2 corre mas rapido
+			if (powerup_1 && !jumping)//Cuando tenga activo el power-up 2 corre mas rapido
 			{
 				veljump.x = 5;
 			}
@@ -231,7 +231,7 @@ bool Player::Update(float dt)
 			{
 				currentAnimation = &player_speed;
 			}
-			if (powerup_2 && !jumping)
+			if (powerup_1 && !jumping)
 			{
 				veljump.x = -5;
 			}
@@ -381,22 +381,22 @@ bool Player::Update(float dt)
 	{
 		if (rightmode == true) 
 		{
-			app->render->DrawTexture(texture_1, position.x, position.y, &currentAnimation->GetCurrentFrame());
+			app->render->DrawTexture(texture_2, position.x, position.y, &currentAnimation->GetCurrentFrame());
 		}
 		if (leftmode == true)
 		{
-			app->render->DrawTexture(texture_1, position.x, position.y, &currentAnimation->GetCurrentFrame(), SDL_FLIP_HORIZONTAL);
+			app->render->DrawTexture(texture_2, position.x, position.y, &currentAnimation->GetCurrentFrame(), SDL_FLIP_HORIZONTAL);
 		}
 	}
 	else if (powerup_2)
 	{
 		if (rightmode == true)
 		{
-			app->render->DrawTexture(texture_2, position.x, position.y, &currentAnimation->GetCurrentFrame());
+			app->render->DrawTexture(texture_1, position.x, position.y, &currentAnimation->GetCurrentFrame());
 		}
 		if (leftmode == true)
 		{
-			app->render->DrawTexture(texture_2, position.x, position.y, &currentAnimation->GetCurrentFrame(), SDL_FLIP_HORIZONTAL);
+			app->render->DrawTexture(texture_1, position.x, position.y, &currentAnimation->GetCurrentFrame(), SDL_FLIP_HORIZONTAL);
 		}
 	}
 	else if (powerup_3)
@@ -448,17 +448,19 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 
 	switch (physB->ctype)
 	{
-	case ColliderType::ITEM:
-		LOG("Collision ITEM");
+	case ColliderType::POWERUP_1:
+		canpower_1 = true;
+		break;
+	case ColliderType::POWERUP_2:
+		canpower_2 = true;
+		break;
+	case ColliderType::POWERUP_3:
+		canpower_3 = true;
 		break;
 	case ColliderType::PLATFORM:
 		LOG("Collision PLATFORM");
 		inground = true; // Su esta en la colision de plataform activa que esta en el suelo
 		break;
-	case ColliderType::UNKNOWN:
-		LOG("Collision UNKNOWN");
-		break;
-
 	case ColliderType::ENEMY:
 		if (!Godmode) // Si colisona con colision de enemigo activa dead y desactiva canmove
 		{
