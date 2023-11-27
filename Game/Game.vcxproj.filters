@@ -58,6 +58,12 @@
     <ClCompile Include="Source\Powerup_1.cpp">
       <Filter>.cpp files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Powerup_2.cpp">
+      <Filter>.cpp files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Powerup_3.cpp">
+      <Filter>.cpp files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -138,6 +144,12 @@
     <ClInclude Include="Source\Slime.h" />
     <ClInclude Include="Source\Pathfinding.h" />
     <ClInclude Include="Source\Powerup_1.h">
+      <Filter>.h files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Powerup_2.h">
+      <Filter>.h files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Powerup_3.h">
       <Filter>.h files</Filter>
     </ClInclude>
   </ItemGroup>

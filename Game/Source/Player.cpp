@@ -124,7 +124,7 @@ bool Player::Update(float dt)
 		powertempo = SDL_GetTicks();
 	}
 
-	if (SDL_GetTicks() - powertempo >= 20000)
+	if (SDL_GetTicks() - powertempo >= 15000)
 	{
 		canchange = true;
 	}
@@ -449,8 +449,13 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	switch (physB->ctype)
 	{
 	case ColliderType::POWERUP_1:
-		LOG("Collision ITEM");
 		canpower_1 = true;
+		break;
+	case ColliderType::POWERUP_2:
+		canpower_2 = true;
+		break;
+	case ColliderType::POWERUP_3:
+		canpower_3 = true;
 		break;
 	case ColliderType::PLATFORM:
 		LOG("Collision PLATFORM");

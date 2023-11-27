@@ -5,6 +5,8 @@
 #include "Player.h"
 #include "Slime.h"
 #include "Powerup_1.h"
+#include "Powerup_2.h"
+#include "Powerup_3.h"
 
 struct SDL_Texture;
 

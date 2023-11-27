@@ -27,8 +27,8 @@
 		<player x="140" y="925" texturepathnormal="Assets/Textures/Player/player_1.png" texturepathatack="Assets/Textures/Player/player_2.png" texturepathaspeed="Assets/Textures/Player/player_3.png"  texturepathainv="Assets/Textures/Player/player_4.png" texturepathainv_2="Assets/Textures/Player/player_4_2.png" texturepathgod="Assets/Textures/Player/player_5.png" />
 		<slime x="1200" y="925" texturepathenemy="Assets/Textures/Enemies/Slime_1.png"/>
 		<powerup_1 x="220" y="945" texturepathpower_1="Assets/Textures/Player/power_1.png"/>
-		<powerup_1 x="240" y="945" texturepathpower_2="Assets/Textures/Player/power_2.png"/>
-		<powerup_1 x="260" y="945" texturepathpower_2="Assets/Textures/Player/power_3.png"/>
+		<powerup_2 x="240" y="945" texturepathpower_2="Assets/Textures/Player/power_2.png"/>
+		<powerup_3 x="260" y="945" texturepathpower_3="Assets/Textures/Player/power_3.png"/>
 
   </scene>
   <animations>

@@ -97,6 +97,8 @@
   <ItemGroup>
     <ClCompile Include="Source\EntityManager.cpp" />
     <ClCompile Include="Source\Powerup_1.cpp" />
+    <ClCompile Include="Source\Powerup_2.cpp" />
+    <ClCompile Include="Source\Powerup_3.cpp" />
     <ClCompile Include="Source\Slime.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\App.cpp" />
@@ -116,6 +118,8 @@
     <ClInclude Include="Source\Entity.h" />
     <ClInclude Include="Source\EntityManager.h" />
     <ClInclude Include="Source\Powerup_1.h" />
+    <ClInclude Include="Source\Powerup_2.h" />
+    <ClInclude Include="Source\Powerup_3.h" />
     <ClInclude Include="Source\Slime.h" />
     <ClInclude Include="Source\Map.h" />
     <ClInclude Include="Source\Pathfinding.h" />

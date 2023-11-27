@@ -39,6 +39,18 @@ bool Scene::Awake(pugi::xml_node& config)
 		powerup_1->parameters = itemNode;
 	}
 
+	for (pugi::xml_node itemNode = config.child("powerup_2"); itemNode; itemNode = itemNode.next_sibling("powerup_2"))
+	{
+		Powerup_2* powerup_2 = (Powerup_2*)app->entityManager->CreateEntity(EntityType::POWERUP_2);
+		powerup_2->parameters = itemNode;
+	}
+
+	for (pugi::xml_node itemNode = config.child("powerup_3"); itemNode; itemNode = itemNode.next_sibling("powerup_3"))
+	{
+		Powerup_3* powerup_3 = (Powerup_3*)app->entityManager->CreateEntity(EntityType::POWERUP_3);
+		powerup_3->parameters = itemNode;
+	}
+
 	if (config.child("player")) {
 		player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
 		player->parameters = config.child("player");
