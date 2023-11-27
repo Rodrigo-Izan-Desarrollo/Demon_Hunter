@@ -87,6 +87,9 @@ Entity* EntityManager::CreateEntity(EntityType type)
 	case EntityType::SLIME:
 		entity = new Slime();
 		break;
+	case EntityType::POWERUP_1:
+		entity = new Powerup_1();
+		break;
 	default:
 		break;
 	}

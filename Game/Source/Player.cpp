@@ -97,7 +97,7 @@ bool Player::Update(float dt)
 
 	//Power-ups
 
-	if (app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN && canchange)
+	if (app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN && canchange && canpower_1)
 	{
 		powerup_1 = !powerup_1;
 		powerup_2 = false;
@@ -106,7 +106,7 @@ bool Player::Update(float dt)
 		powertempo = SDL_GetTicks();
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN && canchange)
+	if (app->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN && canchange && canpower_2)
 	{
 		powerup_2 = !powerup_2;
 		powerup_1 = false;
@@ -115,7 +115,7 @@ bool Player::Update(float dt)
 		powertempo = SDL_GetTicks();
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN && canchange)
+	if (app->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN && canchange && canpower_3)
 	{
 		powerup_3 = !powerup_3;
 		powerup_2 = false;
@@ -448,17 +448,14 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 
 	switch (physB->ctype)
 	{
-	case ColliderType::ITEM:
+	case ColliderType::POWERUP_1:
 		LOG("Collision ITEM");
+		canpower_1 = true;
 		break;
 	case ColliderType::PLATFORM:
 		LOG("Collision PLATFORM");
 		inground = true; // Su esta en la colision de plataform activa que esta en el suelo
 		break;
-	case ColliderType::UNKNOWN:
-		LOG("Collision UNKNOWN");
-		break;
-
 	case ColliderType::ENEMY:
 		if (!Godmode) // Si colisona con colision de enemigo activa dead y desactiva canmove
 		{

@@ -33,6 +33,12 @@ bool Scene::Awake(pugi::xml_node& config)
 		slime->parameters = itemNode;
 	}
 
+	for (pugi::xml_node itemNode = config.child("powerup_1"); itemNode; itemNode = itemNode.next_sibling("powerup_1"))
+	{
+		Powerup_1* powerup_1 = (Powerup_1*)app->entityManager->CreateEntity(EntityType::POWERUP_1);
+		powerup_1->parameters = itemNode;
+	}
+
 	if (config.child("player")) {
 		player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
 		player->parameters = config.child("player");

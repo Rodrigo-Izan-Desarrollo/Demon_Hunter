@@ -16,6 +16,7 @@ enum class EntityType
 	SLIME,
 	SKELETON,
 	BOMBER,
+	POWERUP_1,
 	UNKNOWN
 };
 

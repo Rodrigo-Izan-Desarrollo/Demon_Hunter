@@ -4,6 +4,7 @@
 #include "Module.h"
 #include "Player.h"
 #include "Slime.h"
+#include "Powerup_1.h"
 
 struct SDL_Texture;
 
