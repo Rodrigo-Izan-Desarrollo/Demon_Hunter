@@ -20,7 +20,7 @@ bool Bomber::Awake() {
 
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
-	texturePathBomber = parameters.attribute("texturepathenemy").as_string();
+	texturePathBomber = parameters.attribute("texturepathenemy_3").as_string();
 
 	return true;
 }

@@ -20,7 +20,7 @@ bool Skeleton::Awake() {
 
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
-	texturePathSkeleton = parameters.attribute("texturepathenemy").as_string();
+	texturePathSkeleton = parameters.attribute("texturepathenemy_2").as_string();
 
 	return true;
 }

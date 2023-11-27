@@ -42,7 +42,7 @@ bool Scene::Awake(pugi::xml_node& config)
 	{
 		Bomber* bomber = (Bomber*)app->entityManager->CreateEntity(EntityType::BOMBER);
 		bomber->parameters = itemNode;
-  }
+	 }
   
 	for (pugi::xml_node itemNode = config.child("powerup_1"); itemNode; itemNode = itemNode.next_sibling("powerup_1"))
 	{
