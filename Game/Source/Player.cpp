@@ -381,22 +381,22 @@ bool Player::Update(float dt)
 	{
 		if (rightmode == true) 
 		{
-			app->render->DrawTexture(texture_1, position.x, position.y, &currentAnimation->GetCurrentFrame());
+			app->render->DrawTexture(texture_2, position.x, position.y, &currentAnimation->GetCurrentFrame());
 		}
 		if (leftmode == true)
 		{
-			app->render->DrawTexture(texture_1, position.x, position.y, &currentAnimation->GetCurrentFrame(), SDL_FLIP_HORIZONTAL);
+			app->render->DrawTexture(texture_2, position.x, position.y, &currentAnimation->GetCurrentFrame(), SDL_FLIP_HORIZONTAL);
 		}
 	}
 	else if (powerup_2)
 	{
 		if (rightmode == true)
 		{
-			app->render->DrawTexture(texture_2, position.x, position.y, &currentAnimation->GetCurrentFrame());
+			app->render->DrawTexture(texture_1, position.x, position.y, &currentAnimation->GetCurrentFrame());
 		}
 		if (leftmode == true)
 		{
-			app->render->DrawTexture(texture_2, position.x, position.y, &currentAnimation->GetCurrentFrame(), SDL_FLIP_HORIZONTAL);
+			app->render->DrawTexture(texture_1, position.x, position.y, &currentAnimation->GetCurrentFrame(), SDL_FLIP_HORIZONTAL);
 		}
 	}
 	else if (powerup_3)
