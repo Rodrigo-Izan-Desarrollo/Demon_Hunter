@@ -55,6 +55,12 @@
     <ClCompile Include="Source\Pathfinding.cpp">
       <Filter>.cpp files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Skeleton.cpp">
+      <Filter>.cpp files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Bomber.cpp">
+      <Filter>.cpp files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -102,11 +108,6 @@
     <ClInclude Include="Source\Input.h">
       <Filter>.h files</Filter>
     </ClInclude>
-    
-    <ClInclude Include="Source\Item.h">
-      <Filter>.h files</Filter>
-
-    </ClInclude>
     <ClInclude Include="Source\Map.h">
       <Filter>.h files</Filter>
     </ClInclude>
@@ -138,7 +139,16 @@
       <Filter>.h files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Pathfinding.h">
-      <Filter>Headers files</Filter>
+      <Filter>.h files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Slime.h">
+      <Filter>.h files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Skeleton.h">
+      <Filter>.h files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Bomber.h">
+      <Filter>.h files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

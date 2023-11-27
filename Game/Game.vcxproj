@@ -95,7 +95,9 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Bomber.cpp" />
     <ClCompile Include="Source\EntityManager.cpp" />
+    <ClCompile Include="Source\Skeleton.cpp" />
     <ClCompile Include="Source\Slime.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\App.cpp" />
@@ -112,8 +114,10 @@
     <ClCompile Include="Source\Timer.cpp" />
     <ClCompile Include="Source\Window.cpp" />
     <ClInclude Include="Source\Animation.h" />
+    <ClInclude Include="Source\Bomber.h" />
     <ClInclude Include="Source\Entity.h" />
     <ClInclude Include="Source\EntityManager.h" />
+    <ClInclude Include="Source\Skeleton.h" />
     <ClInclude Include="Source\Slime.h" />
     <ClInclude Include="Source\Map.h" />
     <ClInclude Include="Source\Pathfinding.h" />

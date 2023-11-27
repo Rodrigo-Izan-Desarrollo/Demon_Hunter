@@ -35,6 +35,8 @@ public:
 	
 	Animation slime_hurt;
 
+	Animation slime_walking;
+
 	Animation slime_dead;
 
 	Animation slime_attack;

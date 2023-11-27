@@ -1,5 +1,5 @@
-#ifndef __SKELETON_H__
-#define __SKELETON_H__
+#ifndef __BOMBER_H__
+#define __BOMBER_H__
 
 #include "Entity.h"
 #include "Point.h"
@@ -9,12 +9,12 @@
 
 struct SDL_Texture;
 
-class Skeleton : public Entity
+class Bomber : public Entity
 {
 public:
 
-	Skeleton();
-	virtual ~Skeleton();
+	Bomber();
+	virtual ~Bomber();
 
 	bool Awake();
 
@@ -31,17 +31,17 @@ public:
 
 	Animation* currentAnimation;
 
-	Animation skeleton;
+	Animation bomber;
 	
-	Animation skeleton_hurt;
+	Animation bomber_hurt;
 
-	Animation skeleton_dead;
+	Animation bomber_dead;
 
-	Animation skeleton_attack;
+	Animation bomber_attack;
 
 	SDL_Texture* texture;
 
-	const char* texturePathSkeleton;
+	const char* texturePathBomber;
 
 	PhysBody* pbody;
 };

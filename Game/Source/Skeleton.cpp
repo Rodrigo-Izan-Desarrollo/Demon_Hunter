@@ -1,4 +1,4 @@
-#include "Slime.h"
+#include "Skeleton.h"
 #include "App.h"
 #include "Textures.h"
 #include "Audio.h"
@@ -9,50 +9,50 @@
 #include "Point.h"
 #include "Physics.h"
 
-Slime::Slime() : Entity(EntityType::SLIME)
+Skeleton::Skeleton() : Entity(EntityType::SKELETON)
 {
-	name.Create("Slime");
+	name.Create("Skeleton");
 }
 
-Slime::~Slime() {}
+Skeleton::~Skeleton() {}
 
-bool Slime::Awake() {
+bool Skeleton::Awake() {
 
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
-	texturePath = parameters.attribute("texturepathenemy").as_string();
+	texturePathSkeleton = parameters.attribute("texturepathenemy").as_string();
 
 	return true;
 }
 
-bool Slime::Start() {
+bool Skeleton::Start() {
 
 	//initilize textures
-	texture = app->tex->Load(texturePath);
-	pbody = app->physics->CreateCircle(position.x + 16, position.y + 16, 13, bodyType::DYNAMIC);
+	texture = app->tex->Load(texturePathSkeleton);
+	pbody = app->physics->CreateCircle(position.x + 16, position.y + 16  , 16, bodyType::DYNAMIC);
 	pbody->ctype = ColliderType::ENEMY;
 
-	slime.LoadAnimations("slime");
-	slime_dead.LoadAnimations("slime_dead");
-	slime_attack.LoadAnimations("slime_attack");
+	skeleton.LoadAnimations("skeleton");
+	skeleton_dead.LoadAnimations("skeleton_dead");
+	skeleton_attack.LoadAnimations("skeleton_attack");
 
-	currentAnimation = &slime;
+	currentAnimation = &skeleton;
 	return true;
 }
 
-bool Slime::Update(float dt)
+bool Skeleton::Update(float dt)
 {
 	// L07 DONE 4: Add a physics to an item - update the position of the object from the physics.  
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
 
 	currentAnimation->Update();
-	app->render->DrawTexture(texture, position.x, position.y+17, &currentAnimation->GetCurrentFrame());
+	app->render->DrawTexture(texture, position.x, position.y-3, &currentAnimation->GetCurrentFrame());
 
 	return true;
 }
 
-bool Slime::CleanUp()
+bool Skeleton::CleanUp()
 {
 	return true;
 }

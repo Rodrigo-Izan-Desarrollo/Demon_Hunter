@@ -33,6 +33,18 @@ bool Scene::Awake(pugi::xml_node& config)
 		slime->parameters = itemNode;
 	}
 
+	for (pugi::xml_node itemNode = config.child("skeleton"); itemNode; itemNode = itemNode.next_sibling("skeleton"))
+	{
+		Skeleton* skeleton = (Skeleton*)app->entityManager->CreateEntity(EntityType::SKELETON);
+		skeleton->parameters = itemNode;
+	}
+
+	for (pugi::xml_node itemNode = config.child("bomber"); itemNode; itemNode = itemNode.next_sibling("bomber"))
+	{
+		Bomber* bomber = (Bomber*)app->entityManager->CreateEntity(EntityType::BOMBER);
+		bomber->parameters = itemNode;
+	}
+
 	if (config.child("player")) {
 		player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
 		player->parameters = config.child("player");

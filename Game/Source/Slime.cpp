@@ -35,6 +35,7 @@ bool Slime::Start() {
 	slime.LoadAnimations("slime");
 	slime_dead.LoadAnimations("slime_dead");
 	slime_attack.LoadAnimations("slime_attack");
+	slime_walking.LoadAnimations("slime_walking");
 
 	currentAnimation = &slime;
 	return true;

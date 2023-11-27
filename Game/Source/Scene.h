@@ -4,6 +4,8 @@
 #include "Module.h"
 #include "Player.h"
 #include "Slime.h"
+#include "Skeleton.h"
+#include "Bomber.h"
 
 struct SDL_Texture;
 
