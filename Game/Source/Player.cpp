@@ -96,6 +96,12 @@ bool Player::Update(float dt)
 	}
 
 	//Power-ups
+	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN)
+	{
+		canpower_1 = true;
+		canpower_2 = true;
+		canpower_3 = true;
+	}
 
 	if (app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN && canchange && canpower_1)
 	{
@@ -151,23 +157,25 @@ bool Player::Update(float dt)
 	// Godmode movement
 	if (Godmode && !dead) // Si el godmode esta activado 
 	{
-		speed = 0.5f;
+		/*speed = 0.5f;*/
 		veljump = b2Vec2(0.0, -0.1675);//desabilitamos la gravedad
 		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {//Agregamos la posibilidad de moverse en todas las direcciones
 			veljump.y = -5;
 		}
 		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
-			veljump.y = 5 * dt;
+			veljump.y = 5;
 		}
 		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
-			veljump.x = -speed * dt;
-			app->render->camera.x = -(position.x - 157);
+			veljump.x = -8;
+			leftmode = true;
+			rightmode = false;
 		}
 		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
-			veljump.x = speed * dt;
-			app->render->camera.x = -(position.x - 157);
+			veljump.x = 8;
+			leftmode = false;
+			rightmode = true;
 		}
-		currentAnimation = &player; // Hacemos que la animación no cambie
+		currentAnimation = &player;
 	}
 
 	// TPs
@@ -350,7 +358,7 @@ bool Player::Update(float dt)
 
 	//Idle animation
 
-	if (currentAnimation == &player && currentAnimation->HasFinished() && inground) {
+	if (currentAnimation == &player && currentAnimation->HasFinished() && inground && !Godmode) {
 		if (currentAnimation != &player_sleep)
 		{
 			sleeping = true;
