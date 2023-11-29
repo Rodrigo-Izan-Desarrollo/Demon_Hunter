@@ -37,6 +37,15 @@ bool Map::Start() {
     mapPath += name;
     bool ret = Load(mapPath);
 
+    //Initialize pathfinding 
+    pathfinding = new PathFinding();
+
+    //Initialize the navigation map
+    uchar* navigationMap = NULL;
+    CreateNavigationMap(mapData.width, mapData.height, &navigationMap);
+    pathfinding->SetNavigationMap((uint)mapData.width, (uint)mapData.height, navigationMap);
+    RELEASE_ARRAY(navigationMap);
+
     return ret;
 }
 

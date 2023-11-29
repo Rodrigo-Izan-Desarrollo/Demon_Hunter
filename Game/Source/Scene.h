@@ -38,6 +38,10 @@ public:
 
 	// Called before quitting
 	bool CleanUp();
+	
+	Player* player;
+
+	iPoint GetPLayerPosition();
 
 	Player* player;
 

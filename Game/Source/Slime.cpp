@@ -8,6 +8,8 @@
 #include "Log.h"
 #include "Point.h"
 #include "Physics.h"
+#include "Pathfinding.h"
+#include "Map.h"
 
 Slime::Slime() : Entity(EntityType::SLIME)
 {
@@ -49,6 +51,9 @@ bool Slime::Update(float dt)
 
 	currentAnimation->Update();
 	app->render->DrawTexture(texture, position.x, position.y+17, &currentAnimation->GetCurrentFrame());
+
+	app->map->pathfinding->CreatePath(position, app->map->pathfinding);
+
 
 	return true;
 }

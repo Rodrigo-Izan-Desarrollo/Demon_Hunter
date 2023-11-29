@@ -153,7 +153,7 @@ public:
 private:
 	bool mapLoaded;
 	MapLayer* navigationLayer;
-	int blockedGid = 4;
+	int blockedGid = 4; 
 };
 
 #endif // __MAP_H__
