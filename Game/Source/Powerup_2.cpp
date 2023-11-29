@@ -27,18 +27,29 @@ bool Powerup_2::Awake() {
 
 bool Powerup_2::Start() {
 
-	//initilize textures
+	//Initilize textures
 	texture = app->tex->Load(texturePath);
-	pbody = app->physics->CreateCircle(position.x+16, position.y, 13, bodyType::STATIC);
+
+	//Create pbody
+	pbody = app->physics->CreateCircle(position.x + 16, position.y, 13, bodyType::STATIC);
 	pbody->ctype = ColliderType::POWERUP_2;
 	pbody->listener = this;
 
+	//Animation
+	idle.PushBack({ 0, 0, 32, 32 });
+	idle.PushBack({ 32, 0, 32, 32 });
+	idle.PushBack({ 64, 0, 32, 32 });
+	idle.loop = true;
+	idle.speed = 0.1f;
 
+	currentAnimation = &idle;
 	return true;
 }
 
 bool Powerup_2::Update(float dt)
 { 
+	currentAnimation->Update();
+
 	if (isPicked)
 	{
 		SDL_DestroyTexture(texture);
@@ -46,10 +57,11 @@ bool Powerup_2::Update(float dt)
 		app->entityManager->DestroyEntity(this);
 		app->physics->world->DestroyBody(pbody->body);
 	}
+
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
 
-	app->render->DrawTexture(texture, position.x, position.y);
+	app->render->DrawTexture(texture, position.x, position.y, &currentAnimation->GetCurrentFrame());
 
 	return true;
 }
