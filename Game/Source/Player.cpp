@@ -85,7 +85,7 @@ bool Player::Update(float dt)
 	}
 	else
 	{
-		app->render->camera.y = -(position.y - 550);
+		app->render->camera.y = -(position.y - 500);
 	}
 	if (position.x > 9660)
 	{
@@ -232,7 +232,7 @@ bool Player::Update(float dt)
 			}
 			if (powerup_1 && !jumping)//Cuando tenga activo el power-up 2 corre mas rapido
 			{
-				veljump.x = 5;
+				veljump.x = 4;
 			}
 			else // Sino corre normal
 			{
@@ -253,7 +253,7 @@ bool Player::Update(float dt)
 			}
 			if (powerup_1 && !jumping)
 			{
-				veljump.x = -5;
+				veljump.x = -4;
 			}
 			else
 			{
@@ -304,7 +304,14 @@ bool Player::Update(float dt)
 		{
 			jumping = true;
 			inground = false;
-			veljump.y = -6;
+			if (powerup_1)
+			{
+				veljump.y = -7;
+			}
+			else
+			{
+				veljump.y = -6;
+			}
 			pbody->body->SetLinearVelocity(veljump);
 			if (jumping)
 			{
