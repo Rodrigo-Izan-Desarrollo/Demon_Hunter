@@ -28,6 +28,10 @@ public:
 
 public:
 
+	Animation* currentAnimation;
+
+	Animation idle;
+
 	bool isPicked = false;
 
 	SDL_Texture* texture;

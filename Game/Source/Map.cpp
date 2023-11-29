@@ -4,6 +4,7 @@
 #include "Textures.h"
 #include "Map.h"
 #include "Physics.h"
+#include "Scene.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -60,7 +61,10 @@ bool Map::Update(float dt)
 
         if (mapLayerItem->data->properties.GetProperty("Draw") != NULL && mapLayerItem->data->properties.GetProperty("Draw")->value) {
 
-            for (int x = 0; x < mapLayerItem->data->width; x++)
+            iPoint posMapin = WorldToMap(app->scene->player->position.x - 1000, 0);
+            iPoint posMapfi = WorldToMap(app->scene->player->position.x + 1250, 0);
+
+            for (int x = posMapin.x; x < posMapfi.x; x++)
             {
                 for (int y = 0; y < mapLayerItem->data->height; y++)
                 {
@@ -151,8 +155,8 @@ iPoint Map::MapToWorld(int x, int y) const
 iPoint Map::WorldToMap(int x, int y) 
 {
     iPoint ret(0, 0);
-
-    //
+    ret.x = x / mapData.tileWidth;
+    ret.y = y / mapData.tileHeight;
 
     return ret;
 }

@@ -95,6 +95,7 @@ struct MapData
 	List<TileSet*> tilesets;
 	MapTypes type;
 
+
 	List<MapLayer*> maplayers;
 };
 
@@ -144,14 +145,12 @@ private:
 	bool LoadProperties(pugi::xml_node& node, Properties& properties);
 
 public: 
-
 	MapData mapData;
 	SString name;
 	SString path;
 	PathFinding* pathfinding;
 
 private:
-
 	bool mapLoaded;
 	MapLayer* navigationLayer;
 	int blockedGid = 4; 

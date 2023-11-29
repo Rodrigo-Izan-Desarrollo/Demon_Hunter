@@ -43,12 +43,13 @@ public:
 
 	iPoint GetPLayerPosition();
 
+	Player* player;
+
 private:
 	SDL_Texture* img;
 	float textPosX, textPosY = 0;
 	uint texW, texH;
 	uint windowW, windowH;
-	
 
 };
 

@@ -79,10 +79,22 @@ bool Player::Update(float dt)
 	b2Vec2 veljump = pbody->body->GetLinearVelocity();
 
 	//Camara movement
-
-	app->render->camera.x = -(position.x - 125);
-	app->render->camera.y = -(position.y - 550);
-
+	if (position.y < 550)
+	{
+		app->render->camera.y += 0;
+	}
+	else
+	{
+		app->render->camera.y = -(position.y - 550);
+	}
+	if (position.x > 9660)
+	{
+		app->render->camera.y += 0;
+	}
+	else
+	{
+		app->render->camera.x = -(position.x - 125);
+	}
 	//Default animation
 
 	if (!atacking && !jumping && inground && !dead && !Godmode && !sleeping)
