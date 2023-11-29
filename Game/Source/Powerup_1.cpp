@@ -40,7 +40,7 @@ bool Powerup_1::Start() {
 	idle.PushBack({ 32, 0, 32, 32 });
 	idle.PushBack({ 64, 0, 32, 32 });
 	idle.loop = true;
-	idle.speed = 0.1f;
+	idle.speed = 0.125f;
 
 	currentAnimation = &idle;
 
