@@ -52,8 +52,8 @@ bool Map::Update(float dt)
 
         if (mapLayerItem->data->properties.GetProperty("Draw") != NULL && mapLayerItem->data->properties.GetProperty("Draw")->value) {
 
-            iPoint posMapin = WorldToMap(app->scene->player->position.x - 250, 0);
-            iPoint posMapfi = WorldToMap(app->scene->player->position.x + 1100, 0);
+            iPoint posMapin = WorldToMap(app->scene->player->position.x - 1000, 0);
+            iPoint posMapfi = WorldToMap(app->scene->player->position.x + 1250, 0);
 
             for (int x = posMapin.x; x < posMapfi.x; x++)
             {
