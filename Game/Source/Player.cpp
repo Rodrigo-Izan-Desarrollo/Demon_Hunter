@@ -115,7 +115,7 @@ bool Player::Update(float dt)
 		canpower_3 = true;
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN && canchange && canpower_1)
+	if (app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN && canchange && canpower_1 && !dead)
 	{
 		powerup_1 = !powerup_1;
 		powerup_2 = false;
@@ -124,7 +124,7 @@ bool Player::Update(float dt)
 		powertempo = SDL_GetTicks();
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN && canchange && canpower_2)
+	if (app->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN && canchange && canpower_2 && !dead)
 	{
 		powerup_2 = !powerup_2;
 		powerup_1 = false;
@@ -133,7 +133,7 @@ bool Player::Update(float dt)
 		powertempo = SDL_GetTicks();
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN && canchange && canpower_3)
+	if (app->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN && canchange && canpower_3 && !dead)
 	{
 		powerup_3 = !powerup_3;
 		powerup_2 = false;
@@ -148,12 +148,12 @@ bool Player::Update(float dt)
 	}
 	//Checkpoints
 
-	if (app->render->camera.x <= -2900)
+	if (app->render->camera.x <= -3225)
 	{
 		check_1 = true;
 		check_2 = false;
 	}
-	if (app->render->camera.x <= -5540)
+	if (app->render->camera.x <= -6610)
 	{
 		check_2 = true;
 		check_1 = false;
@@ -278,7 +278,7 @@ bool Player::Update(float dt)
 			pbody->body->SetTransform({ PIXEL_TO_METERS(-620 + 16), PIXEL_TO_METERS(950) }, 0);
 			app->render->camera.x = 0;
 		}
-		if (check_1)
+		else if (check_1)
 		{
 			pbody->body->SetTransform({ PIXEL_TO_METERS(2600 + 16), PIXEL_TO_METERS(1080) }, 0);
 			app->render->camera.x = -3225;
