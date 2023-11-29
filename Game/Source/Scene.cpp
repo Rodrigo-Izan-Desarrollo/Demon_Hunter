@@ -131,6 +131,13 @@ bool Scene::Update(float dt)
 
 	//// Renders the image in the center of the screen 
 	////app->render->DrawTexture(img, (int)textPosX, (int)textPosY);
+	/*iPoint mousePos;
+	app->input->GetMousePosition(mousePos.x, mousePos.y);
+
+	iPoint mouseTile = app->map->WorldToMap(mousePos.x - app->render->camera.x,
+		mousePos.y - app->render->camera.y);
+
+	app->map->pathfinding->CreatePath(mouseTile, app->map->WorldToMap(player->position.x, player->position.y));*/
 
 	return true;
 }
@@ -144,6 +151,10 @@ bool Scene::PostUpdate()
 		ret = false;
 
 	return ret;
+}
+
+iPoint Scene::GetPLayerPosition() {
+	return player->position;
 }
 
 // Called before quitting
