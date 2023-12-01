@@ -43,7 +43,6 @@ public:
 
 	iPoint GetPLayerPosition();
 
-	Player* player;
 
 private:
 	SDL_Texture* img;

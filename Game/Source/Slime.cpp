@@ -52,9 +52,6 @@ bool Slime::Update(float dt)
 	currentAnimation->Update();
 	app->render->DrawTexture(texture, position.x, position.y+17, &currentAnimation->GetCurrentFrame());
 
-	app->map->pathfinding->CreatePath(position, app->map->pathfinding);
-
-
 	return true;
 }
 
