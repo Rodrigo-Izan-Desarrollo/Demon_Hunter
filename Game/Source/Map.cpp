@@ -38,12 +38,15 @@ bool Map::Start() {
     bool ret = Load(mapPath);
 
     //Initialize pathfinding 
-    pathfinding = new PathFinding();
+    pathfindingSuelo = new PathFinding();
+    pathfindingVuelo = new PathFinding();
 
     //Initialize the navigation map
     uchar* navigationMap = NULL;
-    CreateNavigationMap(mapData.width, mapData.height, &navigationMap);
-    pathfinding->SetNavigationMap((uint)mapData.width, (uint)mapData.height, navigationMap);
+    CreateNavigationMap(mapData.width, mapData.height, &navigationMap, navigationLayerSuelo);
+    pathfindingSuelo->SetNavigationMap((uint)mapData.width, (uint)mapData.height, navigationMap);
+    CreateNavigationMap(mapData.width, mapData.height, &navigationMap, navigationLayerVuelo);
+    pathfindingVuelo->SetNavigationMap((uint)mapData.width, (uint)mapData.height, navigationMap);
     RELEASE_ARRAY(navigationMap);
 
     return ret;
@@ -391,6 +394,30 @@ bool Map::LoadAllLayers(pugi::xml_node mapNode) {
         mapData.maplayers.Add(mapLayer);
     }
 
+
+    ListItem<MapLayer*>* mapLayerItem;
+    mapLayerItem = mapData.maplayers.start;
+    navigationLayerSuelo = mapLayerItem->data;
+    navigationLayerVuelo = mapLayerItem->data;
+
+    //Search the layer in the map that contains information for navigation
+    while (mapLayerItem != NULL) {
+        if (mapLayerItem->data->properties.GetProperty("NavigationSuelo") != NULL && mapLayerItem->data->properties.GetProperty("NavigationSuelo")->value) {
+            navigationLayerSuelo = mapLayerItem->data;
+            break;
+        }
+        mapLayerItem = mapLayerItem->next;
+    }
+
+    mapLayerItem = mapData.maplayers.start;
+    while (mapLayerItem != NULL) {
+        if (mapLayerItem->data->properties.GetProperty("NavigationVuelo") != NULL && mapLayerItem->data->properties.GetProperty("NavigationVuelo")->value) {
+            navigationLayerVuelo = mapLayerItem->data;
+            break;
+        }
+        mapLayerItem = mapLayerItem->next;
+    }
+
     return ret;
 }
 
@@ -427,7 +454,7 @@ Properties::Property* Properties::GetProperty(const char* name)
     return p;
 }
 
-void Map::CreateNavigationMap(int& width, int& height, uchar** buffer) const
+void Map::CreateNavigationMap(int& width, int& height, uchar** buffer, MapLayer* navigationLayer) const
 {
     bool ret = false;
 

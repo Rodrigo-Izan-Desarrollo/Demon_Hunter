@@ -10,6 +10,7 @@
 #include "Physics.h"
 #include "Pathfinding.h"
 #include "Map.h"
+#include "DynArray.h"
 
 Slime::Slime() : Entity(EntityType::SLIME)
 {
@@ -45,12 +46,59 @@ bool Slime::Start() {
 
 bool Slime::Update(float dt)
 {
+	currentAnimation = &slime;
+
+	if (dist(app->scene->player->position, position) < app->map->mapData.tileWidth * tilesview)
+	{
+		onView = true;
+		currentAnimation = &slime_walking;
+
+		app->map->pathfindingSuelo->CreatePath(origPos, targPos);
+		lastPath = *app->map->pathfindingSuelo->GetLastPath();
+
+
+		if (dist(app->scene->player->position, position) < app->map->mapData.tileWidth * tilesattack)
+		{
+			if (!isAttacking)
+			{
+			isAttacking = true;
+
+			}
+		}
+	}
+
+
+	if (isAttacking)
+	{
+		currentAnimation = &slime_attack;
+	}
+
+	if (currentAnimation == &slime_attack && currentAnimation->HasFinished()) { // Reiniciar el ataque
+		isAttacking = false;
+		slime_attack.Reset();
+		currentAnimation->loopCount = 0;
+	}
+	// Cuando el slime esta a tilesattack que persiga al player
+	// 
+	// Que el slime se mueva y haga flip
+	if (lastPath.Count())
+	{
+
+	}
 	// L07 DONE 4: Add a physics to an item - update the position of the object from the physics.  
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
 
 	currentAnimation->Update();
-	app->render->DrawTexture(texture, position.x, position.y+17, &currentAnimation->GetCurrentFrame());
+	if (leftmode)
+	{
+		app->render->DrawTexture(texture, position.x, position.y + 7, &currentAnimation->GetCurrentFrame());
+	}
+	if (rightmode)
+	{
+		app->render->DrawTexture(texture, position.x, position.y + 7, &currentAnimation->GetCurrentFrame(), SDL_FLIP_HORIZONTAL);
+	}
+
 
 	return true;
 }

@@ -46,6 +46,22 @@ public:
 	const char* texturePath;
 
 	PhysBody* pbody;
+
+	int tilesview = 7;
+
+	bool onView = false;
+
+	int tilesattack = 3;
+
+	bool isAttacking = false;
+
+	bool leftmode = true;
+	bool rightmode = false;
+
+	const iPoint origPos;
+	const iPoint targPos;
+	DynArray<iPoint> lastPath;
+	
 };
 
 #endif // __SLIME_H__

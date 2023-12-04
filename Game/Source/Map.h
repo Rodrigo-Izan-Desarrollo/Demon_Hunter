@@ -5,6 +5,7 @@
 #include "List.h"
 #include "Point.h"
 #include "Pathfinding.h"
+#include "missutils.cpp"
 
 #include "PugiXml\src\pugixml.hpp"
 
@@ -131,7 +132,7 @@ public:
 	iPoint Map::WorldToMap(int x, int y);
 
 	// L13: Create navigation map for pathfinding
-	void CreateNavigationMap(int& width, int& height, uchar** buffer) const;
+	void CreateNavigationMap(int& width, int& height, uchar** buffer, MapLayer* NavigationLayer) const;
 
 	
 
@@ -148,11 +149,13 @@ public:
 	MapData mapData;
 	SString name;
 	SString path;
-	PathFinding* pathfinding;
+	PathFinding* pathfindingSuelo;
+	PathFinding* pathfindingVuelo;
 
 private:
 	bool mapLoaded;
-	MapLayer* navigationLayer;
+	MapLayer* navigationLayerSuelo;
+	MapLayer* navigationLayerVuelo;
 	int blockedGid = 4; 
 };
 
