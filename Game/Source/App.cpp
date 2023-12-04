@@ -345,4 +345,72 @@ const char* App::GetOrganization() const
 	return organization.GetString();
 }
 
+// L14: TODO 1: Implement the methods LoadRequest() and SaveRequest() to request and call the Load / Save the game state at the end of the frame
+// The real execution of load / save will be implemented in TODO 5 and 7
+bool App::LoadRequest() {
+	bool ret = true;
+	loadRequest = true;
+	return ret;
+}
+
+bool App::SaveRequest() {
+	bool ret = true;
+	saveRequest = true;
+	return ret;
+
+}
+
+bool App::Load() {
+	//Abrir save_xml
+	pugi::xml_document saveGameDoc;
+	pugi::xml_parse_result result = saveGameDoc.load_file("save_game.xml");
+	//LALALALA
+	if (result)
+	{
+		ListItem<Module*>* moduleItem;
+		moduleItem = modules.start;
+
+		while (moduleItem != NULL)
+		{
+			//Call Boteticius
+			moduleItem->data->LoadState(saveGameDoc.child("game_state").child(moduleItem->data->name.GetString()));
+			moduleItem = moduleItem->next;
+		}
+	}
+	else
+	{
+		LOG("TURMOOO");
+	}
+	return true;
+}
+
+bool App::Save() {
+	//Create a new XML document
+	pugi::xml_document saveGameDoc;
+	//Append the root node <game_state>
+	pugi::xml_node gameSateNode = saveGameDoc.append_child("game_state");
+	//iterate over the modules, and call Save State() of each module
+	ListItem<Module*>* moduleItem;
+	moduleItem = modules.start;
+
+	while (moduleItem != NULL)
+	{
+		//append of a child with the name of the module
+		pugi::xml_node moduleNode = gameSateNode.append_child(moduleItem->data->name.GetString());
+
+		//call to Load() of the module
+		moduleItem->data->SaveState(moduleNode);
+		moduleItem = moduleItem->next;
+	}
+
+	saveGameDoc.save_file("save_game_xml");
+
+	return true;
+}
+// L14:   TODO 5: Implement the method LoadFromFile() to actually load a xml file
+// then call all the modules to load themselves
+
+// L14:   TODO 7: Implement the xml save method SaveToFile() for current state
+// check https://pugixml.org/docs/quickstart.html#modify
+
 

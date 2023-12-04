@@ -52,6 +52,12 @@ public:
 	const char* GetTitle() const;
 	const char* GetOrganization() const;
 
+	// L14: TODO 1: Declare the methods LoadRequest() and SaveRequest() to request and call the Load / Save the game state at the end of the frame
+	bool LoadRequest();
+	bool SaveRequest();
+	bool Load();
+	bool Save();
+
 private:
 
 	// Load config file
@@ -117,6 +123,11 @@ private:
 	uint32 secondsSinceStartup = 0;
 
 	uint32 maxFrameDuration = 16;
+
+	//variables to handle request at the end of the frame 
+
+	bool saveRequest = false;
+	bool loadRequest = false;
 
 };
 

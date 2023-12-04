@@ -42,6 +42,10 @@ public:
 	// Set background color
 	void SetBackgroundColor(SDL_Color color);
 
+	// L14: TODO 2: Create new virtual methods to LoadState / SaveState
+	virtual bool LoadState(pugi::xml_node node);
+	virtual bool SaveState(pugi::xml_node node);
+
 public:
 
 	SDL_Renderer* renderer;

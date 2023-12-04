@@ -139,6 +139,15 @@ bool Scene::Update(float dt)
 
 	app->map->pathfinding->CreatePath(mouseTile, app->map->WorldToMap(player->position.x, player->position.y));*/
 
+	// L14: TODO 3: Request App to Load / Save when pressing the keys F5 (save) / F6 (load)
+	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
+	{
+		app->LoadRequest();
+	}
+	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
+	{
+		app->SaveRequest();
+	}
 	return true;
 }
 
