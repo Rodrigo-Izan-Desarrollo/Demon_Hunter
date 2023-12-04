@@ -1,66 +1,191 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Source\Bomber.cpp" />
-    <ClCompile Include="Source\EntityManager.cpp" />
-    <ClCompile Include="Source\Skeleton.cpp" />
-    <ClCompile Include="Source\Powerup_1.cpp" />
-    <ClCompile Include="Source\Powerup_2.cpp" />
-    <ClCompile Include="Source\Powerup_3.cpp" />
-    <ClCompile Include="Source\Slime.cpp" />
-    <ClCompile Include="Source\Main.cpp" />
-    <ClCompile Include="Source\App.cpp" />
-    <ClCompile Include="Source\Audio.cpp" />
-    <ClCompile Include="Source\Input.cpp" />
-    <ClCompile Include="Source\Map.cpp" />
-    <ClCompile Include="Source\Pathfinding.cpp" />
-    <ClCompile Include="Source\PerfTimer.cpp" />
-    <ClCompile Include="Source\Physics.cpp" />
-    <ClCompile Include="Source\Player.cpp" />
-    <ClCompile Include="Source\Scene.cpp" />
-    <ClCompile Include="Source\Render.cpp" />
-    <ClCompile Include="Source\Textures.cpp" />
-    <ClCompile Include="Source\Timer.cpp" />
-    <ClCompile Include="Source\Window.cpp" />
-    <ClCompile Include="Source\Log.cpp" />
-    <ClCompile Include="Source\External\PugiXml\src\pugixml.cpp" />
+    <ClCompile Include="Source\App.cpp">
+      <Filter>cpp.files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Audio.cpp">
+      <Filter>cpp.files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Bomber.cpp">
+      <Filter>cpp.files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EntityManager.cpp">
+      <Filter>cpp.files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Input.cpp">
+      <Filter>cpp.files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Log.cpp">
+      <Filter>cpp.files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Main.cpp">
+      <Filter>cpp.files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Map.cpp">
+      <Filter>cpp.files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Pathfinding.cpp">
+      <Filter>cpp.files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\PerfTimer.cpp">
+      <Filter>cpp.files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Physics.cpp">
+      <Filter>cpp.files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Player.cpp">
+      <Filter>cpp.files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Powerup_1.cpp">
+      <Filter>cpp.files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Powerup_2.cpp">
+      <Filter>cpp.files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Powerup_3.cpp">
+      <Filter>cpp.files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\External\PugiXml\src\pugixml.cpp">
+      <Filter>cpp.files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Render.cpp">
+      <Filter>cpp.files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene.cpp">
+      <Filter>cpp.files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Skeleton.cpp">
+      <Filter>cpp.files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Slime.cpp">
+      <Filter>cpp.files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Textures.cpp">
+      <Filter>cpp.files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Timer.cpp">
+      <Filter>cpp.files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Window.cpp">
+      <Filter>cpp.files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\Animation.h" />
-    <ClInclude Include="Source\Bomber.h" />
-    <ClInclude Include="Source\Entity.h" />
-    <ClInclude Include="Source\EntityManager.h" />
-    <ClInclude Include="Source\Skeleton.h" />
-    <ClInclude Include="Source\Powerup_1.h" />
-    <ClInclude Include="Source\Powerup_2.h" />
-    <ClInclude Include="Source\Powerup_3.h" />
-    <ClInclude Include="Source\Slime.h" />
-    <ClInclude Include="Source\Map.h" />
-    <ClInclude Include="Source\Pathfinding.h" />
-    <ClInclude Include="Source\PerfTimer.h" />
-    <ClInclude Include="Source\Physics.h" />
-    <ClInclude Include="Source\Player.h" />
-    <ClInclude Include="Source\Queue.h" />
-    <ClInclude Include="Source\Scene.h" />
-    <ClInclude Include="Source\Audio.h" />
-    <ClInclude Include="Source\Input.h" />
-    <ClInclude Include="Source\App.h" />
-    <ClInclude Include="Source\Module.h" />
-    <ClInclude Include="Source\Render.h" />
-    <ClInclude Include="Source\Textures.h" />
-    <ClInclude Include="Source\Timer.h" />
-    <ClInclude Include="Source\Window.h" />
-    <ClInclude Include="Source\Defs.h" />
-    <ClInclude Include="Source\List.h" />
-    <ClInclude Include="Source\Log.h" />
-    <ClInclude Include="Source\Point.h" />
-    <ClInclude Include="Source\SString.h" />
-    <ClInclude Include="Source\DynArray.h" />
-    <ClInclude Include="Source\External\PugiXml\src\pugiconfig.hpp" />
-    <ClInclude Include="Source\External\PugiXml\src\pugixml.hpp" />
+    <ClInclude Include="Source\Animation.h">
+      <Filter>h.files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\App.h">
+      <Filter>h.files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Audio.h">
+      <Filter>h.files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Bomber.h">
+      <Filter>h.files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Defs.h">
+      <Filter>h.files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DynArray.h">
+      <Filter>h.files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Entity.h">
+      <Filter>h.files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EntityManager.h">
+      <Filter>h.files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Input.h">
+      <Filter>h.files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\List.h">
+      <Filter>h.files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Log.h">
+      <Filter>h.files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Map.h">
+      <Filter>h.files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Module.h">
+      <Filter>h.files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Pathfinding.h">
+      <Filter>h.files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PerfTimer.h">
+      <Filter>h.files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Physics.h">
+      <Filter>h.files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Player.h">
+      <Filter>h.files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Point.h">
+      <Filter>h.files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Powerup_1.h">
+      <Filter>h.files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Powerup_2.h">
+      <Filter>h.files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Powerup_3.h">
+      <Filter>h.files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\External\PugiXml\src\pugiconfig.hpp">
+      <Filter>h.files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\External\PugiXml\src\pugixml.hpp">
+      <Filter>h.files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Queue.h">
+      <Filter>h.files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Render.h">
+      <Filter>h.files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene.h">
+      <Filter>h.files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Skeleton.h">
+      <Filter>h.files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Slime.h">
+      <Filter>h.files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SString.h">
+      <Filter>h.files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Textures.h">
+      <Filter>h.files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Timer.h">
+      <Filter>h.files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Window.h">
+      <Filter>h.files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="..\Output\config.xml" />
-    <Xml Include="..\Output\save_game.xml" />
+    <Xml Include="..\Output\config.xml">
+      <Filter>h.files\xml.files</Filter>
+    </Xml>
+    <Xml Include="..\Output\save_game.xml">
+      <Filter>h.files\xml.files</Filter>
+    </Xml>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="h.files">
+      <UniqueIdentifier>{84e60899-fece-464f-9ec4-e9c2711bba27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cpp.files">
+      <UniqueIdentifier>{3d85fe0f-5dca-4a68-bd68-51ddfd039660}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="h.files\xml.files">
+      <UniqueIdentifier>{f30054ef-f5cb-4ef4-b9e1-50387754a4c4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

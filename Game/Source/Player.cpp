@@ -85,7 +85,7 @@ bool Player::Update(float dt)
 	}
 	else
 	{
-		app->render->camera.y = -(position.y - 500);
+		app->render->camera.y = -(position.y - 550);
 	}
 	if (position.x > 9660)
 	{
