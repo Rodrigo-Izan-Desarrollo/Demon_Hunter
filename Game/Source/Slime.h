@@ -6,6 +6,7 @@
 #include "SDL/include/SDL.h"
 #include "Animation.h"
 #include "Timer.h"
+#include "DynArray.h"
 
 struct SDL_Texture;
 
@@ -46,7 +47,7 @@ public:
 	const char* texturePath;
 
 	PhysBody* pbody;
-
+	 
 	int tilesview = 7;
 
 	bool onView = false;
