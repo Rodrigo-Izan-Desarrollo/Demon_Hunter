@@ -148,14 +148,22 @@ bool Player::Update(float dt)
 	}
 	//Checkpoints
 
-	if (app->render->camera.x <= -3225)
+	if (position.x == 3396 && position.y == 1058)
 	{
 		check_1 = true;
 		check_2 = false;
+		check_3 = false;
 	}
-	if (app->render->camera.x <= -6610)
+	if (position.x == 6781 && position.y == 994)
 	{
 		check_2 = true;
+		check_1 = false;
+		check_3 = false;
+	}
+	if (position.x == 10430 && position.y == 802)
+	{
+		check_3 = true;
+		check_2 = false;
 		check_1 = false;
 	}
 
@@ -206,6 +214,12 @@ bool Player::Update(float dt)
 	{
 		pbody->body->SetTransform({ PIXEL_TO_METERS(5990 + 16), PIXEL_TO_METERS(1010) }, 0);
 		app->render->camera.x = -6610;
+	}
+	if (app->input->GetKey(SDL_SCANCODE_F4) == KEY_DOWN && !dead)
+	{
+		pbody->body->SetTransform({ PIXEL_TO_METERS(10436), PIXEL_TO_METERS(802) }, 0);
+		app->render->camera.x = -9535;
+		app->render->camera.y = -252;
 	}
 
 	//Movement inputs
@@ -273,7 +287,7 @@ bool Player::Update(float dt)
 	if (SDL_GetTicks() - deadtempo	>= 3000 && respawn>0 && dead) // Cuando el timer de muerte alcanza los 3000 ms, tienes suficientes vidas y estas muerto
 	{
 		currentAnimation->Reset();// Primero reseteamos la animacion de muerte ya que el loop= false
-		if (!check_1 && !check_2)// Dependiendo del check cambia el repawn
+		if (!check_1 && !check_2 && !check_3)// Dependiendo del check cambia el repawn
 		{
 			pbody->body->SetTransform({ PIXEL_TO_METERS(-620 + 16), PIXEL_TO_METERS(950) }, 0);
 			app->render->camera.x = 0;
@@ -283,10 +297,15 @@ bool Player::Update(float dt)
 			pbody->body->SetTransform({ PIXEL_TO_METERS(2600 + 16), PIXEL_TO_METERS(1080) }, 0);
 			app->render->camera.x = -3225;
 		}
-		if (check_2)
+		else if (check_2)
 		{
 			pbody->body->SetTransform({ PIXEL_TO_METERS(5990 + 16), PIXEL_TO_METERS(1010) }, 0);
 			app->render->camera.x = -6610;
+		}
+		else if (check_3)
+		{
+			pbody->body->SetTransform({ PIXEL_TO_METERS(10436), PIXEL_TO_METERS(802) }, 0);
+			app->render->camera.x = -9535;
 		}
 
 		canmove = true;// Una vez repawneado te puedes mover

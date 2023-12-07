@@ -111,6 +111,7 @@ public:
 	//Check points
 	bool check_1 = false;
 	bool check_2 = false;
+	bool check_3 = false;
 
 	//Power-ups
 	bool powerup_1 = false;
