@@ -6,7 +6,7 @@
 	<audio />
 	<:anonymous />
 	<scene>
-		<playerposition x="3433" y="1474" />
+		<playerposition x="741" y="930" />
 		<modes sleeping="false" dead="false" canmove="true" inground="true" rightmode="true" leftmode="false" caninv="true" God-mode="false" />
 		<canpower canpower-1="true" canpower-2="true" canpower-3="true" />
 		<power power-1="true" power-2="false" power-3="false" canchange="true" />
@@ -15,6 +15,6 @@
 	<:anonymous />
 	<entitymanager />
 	<renderer>
-		<camera x="-3308" y="-924" />
+		<camera x="-616" y="-380" />
 	</renderer>
 </game_state>

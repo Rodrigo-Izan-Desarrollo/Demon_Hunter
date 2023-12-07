@@ -6,6 +6,7 @@
 #include "Window.h"
 #include "Scene.h"
 #include "Map.h"
+#include "Physics.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -181,6 +182,7 @@ bool Scene::LoadState(pugi::xml_node node) {
 		//Player pos
 	player->position.x= node.child("playerposition").attribute("x").as_int();
 	player->position.y = node.child("playerposition").attribute("y").as_int();
+	player->pbody->body->SetTransform({ PIXEL_TO_METERS(player->position.x), PIXEL_TO_METERS(player->position.y) }, 0);
 
 		//Player-modes
 	player->sleeping = node.child("modes").attribute("sleeping").as_bool();
