@@ -29,37 +29,37 @@ bool Scene::Awake(pugi::xml_node& config)
 	// Check https://pugixml.org/docs/quickstart.html#access
 	for (pugi::xml_node itemNode = config.child("slime"); itemNode; itemNode = itemNode.next_sibling("slime"))
 	{
-		Slime* slime = (Slime*)app->entityManager->CreateEntity(EntityType::SLIME);
+		slime = (Slime*)app->entityManager->CreateEntity(EntityType::SLIME);
 		slime->parameters = itemNode;
 	}
 	for (pugi::xml_node itemNode = config.child("skeleton"); itemNode; itemNode = itemNode.next_sibling("skeleton"))
 	{
-		Skeleton* skeleton = (Skeleton*)app->entityManager->CreateEntity(EntityType::SKELETON);
+		skeleton = (Skeleton*)app->entityManager->CreateEntity(EntityType::SKELETON);
 		skeleton->parameters = itemNode;
 	}
 
 	for (pugi::xml_node itemNode = config.child("bomber"); itemNode; itemNode = itemNode.next_sibling("bomber"))
 	{
-		Bomber* bomber = (Bomber*)app->entityManager->CreateEntity(EntityType::BOMBER);
+		bomber = (Bomber*)app->entityManager->CreateEntity(EntityType::BOMBER);
 		bomber->parameters = itemNode;
 	 }
   
 	for (pugi::xml_node itemNode = config.child("powerup_1"); itemNode; itemNode = itemNode.next_sibling("powerup_1"))
 	{
-		Powerup_1* powerup_1 = (Powerup_1*)app->entityManager->CreateEntity(EntityType::POWERUP_1);
+		powerup_1 = (Powerup_1*)app->entityManager->CreateEntity(EntityType::POWERUP_1);
 		powerup_1->parameters = itemNode;
 	}
   
 	for (pugi::xml_node itemNode = config.child("powerup_2"); itemNode; itemNode = itemNode.next_sibling("powerup_2"))
 	{
-		Powerup_2* powerup_2 = (Powerup_2*)app->entityManager->CreateEntity(EntityType::POWERUP_2);
+		powerup_2 = (Powerup_2*)app->entityManager->CreateEntity(EntityType::POWERUP_2);
 		powerup_2->parameters = itemNode;
 	}
   
 
 	for (pugi::xml_node itemNode = config.child("powerup_3"); itemNode; itemNode = itemNode.next_sibling("powerup_3"))
 	{
-		Powerup_3* powerup_3 = (Powerup_3*)app->entityManager->CreateEntity(EntityType::POWERUP_3);
+		powerup_3 = (Powerup_3*)app->entityManager->CreateEntity(EntityType::POWERUP_3);
 		powerup_3->parameters = itemNode;
     
 	}
@@ -176,8 +176,39 @@ bool Scene::CleanUp()
 
 bool Scene::LoadState(pugi::xml_node node) {
 
+	//Player 
+
+		//Player pos
 	player->position.x= node.child("playerposition").attribute("x").as_int();
 	player->position.y = node.child("playerposition").attribute("y").as_int();
+
+		//Player-modes
+	player->sleeping = node.child("modes").attribute("sleeping").as_bool();
+	player->dead = node.child("modes").attribute("dead").as_bool();
+	player->canmove = node.child("modes").attribute("canmove").as_bool();
+	player->inground = node.child("modes").attribute("inground").as_bool();
+	player->rightmode = node.child("modes").attribute("rightmode").as_bool();
+	player->leftmode = node.child("modes").attribute("leftmode").as_bool();
+	player->caninv = node.child("modes").attribute("caninv").as_bool();
+	player->Godmode = node.child("modes").attribute("God-mode").as_bool();
+
+		//Player canpower-ups
+	player->canpower_1 = node.child("canpower").attribute("canpower-1").as_bool();
+	player->canpower_2 = node.child("canpower").attribute("canpower-2").as_bool();
+	player->canpower_3 = node.child("canpower").attribute("canpower-3").as_bool();
+
+		//Player power-ups
+	player->powerup_1 = node.child("power").attribute("power-1").as_bool();
+	player->powerup_2 = node.child("power").attribute("power-2").as_bool();
+	player->powerup_3 = node.child("power").attribute("power-3").as_bool();
+	player->canchange = node.child("power").attribute("canchange").as_bool();
+
+	//Items
+
+		//Power-ups
+	powerup_1->isPicked = node.child("poweritem").attribute("poweritem-1").as_bool();
+	powerup_2->isPicked = node.child("poweritem").attribute("poweritem-2").as_bool();
+	powerup_3->isPicked = node.child("poweritem").attribute("poweritem-3").as_bool();
 
 	return true;
 }
@@ -189,12 +220,12 @@ bool Scene::SaveState(pugi::xml_node node) {
 	
 	//Player
 
-	//Player pos
+		//Player pos
 	pugi::xml_node posnode = node.append_child("playerposition");
 	posnode.append_attribute("x").set_value(player->position.x);
 	posnode.append_attribute("y").set_value(player->position.y);
 
-	//Player-modes
+		//Player-modes
 	pugi::xml_node modesnode = node.append_child("modes");
 	modesnode.append_attribute("sleeping").set_value(player->sleeping);
 	modesnode.append_attribute("dead").set_value(player->dead);
@@ -205,18 +236,26 @@ bool Scene::SaveState(pugi::xml_node node) {
 	modesnode.append_attribute("caninv").set_value(player->caninv);
 	modesnode.append_attribute("God-mode").set_value(player->Godmode);
 
-	//Player canpower-ups
+		//Player canpower-ups
 	pugi::xml_node canpowernode = node.append_child("canpower");
 	canpowernode.append_attribute("canpower-1").set_value(player->canpower_1);
 	canpowernode.append_attribute("canpower-2").set_value(player->canpower_2);
 	canpowernode.append_attribute("canpower-3").set_value(player->canpower_3);
 
-	//Player powerups
+		//Player powerups
 	pugi::xml_node powernode = node.append_child("power");
 	powernode.append_attribute("power-1").set_value(player->powerup_1);
 	powernode.append_attribute("power-2").set_value(player->powerup_2);
 	powernode.append_attribute("power-3").set_value(player->powerup_3);
 	powernode.append_attribute("canchange").set_value(player->canchange);
+
+	//Items 
+
+		//Powerups
+	pugi::xml_node itempowernode = node.append_child("poweritem");
+	itempowernode.append_attribute("poweritem-1").set_value(powerup_1->isPicked);
+	itempowernode.append_attribute("poweritem-2").set_value(powerup_2->isPicked);
+	itempowernode.append_attribute("poweritem-3").set_value(powerup_3->isPicked);
 
 	return true;
 }

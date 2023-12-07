@@ -6,14 +6,15 @@
 	<audio />
 	<:anonymous />
 	<scene>
-		<playerposition x="154" y="862" />
-		<modes sleeping="true" dead="false" canmove="true" inground="true" rightmode="true" leftmode="false" caninv="true" God-mode="true" />
-		<canpower canpower-1="false" canpower-2="false" canpower-3="false" />
-		<power power-1="false" power-2="false" power-3="false" canchange="true" />
+		<playerposition x="3433" y="1474" />
+		<modes sleeping="false" dead="false" canmove="true" inground="true" rightmode="true" leftmode="false" caninv="true" God-mode="false" />
+		<canpower canpower-1="true" canpower-2="true" canpower-3="true" />
+		<power power-1="true" power-2="false" power-3="false" canchange="true" />
+		<poweritem poweritem-1="true" poweritem-2="false" poweritem-3="false" />
 	</scene>
 	<:anonymous />
 	<entitymanager />
 	<renderer>
-		<camera x="-29" y="-312" />
+		<camera x="-3308" y="-924" />
 	</renderer>
 </game_state>
