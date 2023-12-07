@@ -173,3 +173,45 @@ bool Scene::CleanUp()
 
 	return true;
 }
+
+bool Scene::LoadState(pugi::xml_node node) {
+
+	player->position.x= node.child("playerposition").attribute("x").as_int();
+	player->position.y = node.child("playerposition").attribute("y").as_int();
+
+	return true;
+}
+// L14: TODO 8: Create a method to save the state of the renderer
+// using append_child and append_attribute
+bool Scene::SaveState(pugi::xml_node node) {
+
+	//Append on nodes para todo lo que tiene que ver que las entidades del mapa
+	
+	//Player
+
+	//Player pos
+	pugi::xml_node posnode = node.append_child("playerposition");
+	posnode.append_attribute("x").set_value(player->position.x);
+	posnode.append_attribute("y").set_value(player->position.y);
+
+	//Player-modes
+	pugi::xml_node modesnode = node.append_child("modes");
+	modesnode.append_attribute("sleeping").set_value(player->sleeping);
+	modesnode.append_attribute("dead").set_value(player->dead);
+
+	//Player canpower-ups
+	pugi::xml_node canpowernode = node.append_child("canpower");
+	canpowernode.append_attribute("canpower-1").set_value(player->canpower_1);
+	canpowernode.append_attribute("canpower-2").set_value(player->canpower_2);
+	canpowernode.append_attribute("canpower-3").set_value(player->canpower_3);
+
+	//Player powerups
+	pugi::xml_node powernode = node.append_child("power");
+	powernode.append_attribute("power-1").set_value(player->powerup_1);
+	powernode.append_attribute("power-2").set_value(player->powerup_2);
+	powernode.append_attribute("power-3").set_value(player->powerup_3);
+	powernode.append_attribute("canchange").set_value(player->canchange);
+
+	return true;
+}
+

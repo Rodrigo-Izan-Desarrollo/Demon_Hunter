@@ -55,8 +55,8 @@ public:
 	// L14: TODO 1: Declare the methods LoadRequest() and SaveRequest() to request and call the Load / Save the game state at the end of the frame
 	bool LoadRequest();
 	bool SaveRequest();
-	bool Load();
-	bool Save();
+	bool LoadFromFile();
+	bool SaveFromFile();
 
 private:
 
