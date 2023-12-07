@@ -198,6 +198,12 @@ bool Scene::SaveState(pugi::xml_node node) {
 	pugi::xml_node modesnode = node.append_child("modes");
 	modesnode.append_attribute("sleeping").set_value(player->sleeping);
 	modesnode.append_attribute("dead").set_value(player->dead);
+	modesnode.append_attribute("canmove").set_value(player->canmove);
+	modesnode.append_attribute("inground").set_value(player->inground);
+	modesnode.append_attribute("rightmode").set_value(player->rightmode);
+	modesnode.append_attribute("leftmode").set_value(player->leftmode);
+	modesnode.append_attribute("caninv").set_value(player->caninv);
+	modesnode.append_attribute("God-mode").set_value(player->Godmode);
 
 	//Player canpower-ups
 	pugi::xml_node canpowernode = node.append_child("canpower");
