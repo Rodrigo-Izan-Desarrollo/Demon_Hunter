@@ -32,12 +32,12 @@ bool PathFinding::CleanUp()
 // Sets up the navigation map
 void PathFinding::SetNavigationMap(uint w, uint h, uchar* data)
 {
-	width = w;
-	height = h;
+	//width = w;
+	//height = h;
 
-	RELEASE_ARRAY(map);
-	map = new uchar[width*height];
-	memcpy(map, data, width*height);
+	//RELEASE_ARRAY(map);
+	//map = new uchar[width*height];
+	//memcpy(map, data, width*height);
 }
 
 // Utility: return true if pos is inside the map boundaries

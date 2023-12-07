@@ -39,11 +39,25 @@ public:
 	// Called before quitting
 	bool CleanUp();
 	
+	//Entities
+	
+	//PLayer
 	Player* player;
+
+	//Enemies
+	Slime* slime;
+	Skeleton* skeleton;
+	Bomber* bomber;
+
+	//Items
+	Powerup_1* powerup_1;
+	Powerup_2* powerup_2;
+	Powerup_3* powerup_3;
 
 	iPoint GetPLayerPosition();
 
-	Player* player;
+	virtual bool LoadState(pugi::xml_node node);
+	virtual bool SaveState(pugi::xml_node node);
 
 private:
 	SDL_Texture* img;
