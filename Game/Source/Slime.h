@@ -7,6 +7,7 @@
 #include "Animation.h"
 #include "Timer.h"
 #include "DynArray.h"
+#include "Physics.h"
 
 struct SDL_Texture;
 
@@ -58,6 +59,8 @@ public:
 
 	bool leftmode = true;
 	bool rightmode = false;
+
+	b2Vec2 velocity;
 
 	const iPoint origPos;
 	const iPoint targPos;

@@ -39,6 +39,8 @@ bool Slime::Start() {
 	slime_attack.LoadAnimations("slime_attack");
 	slime_walking.LoadAnimations("slime_walking");
 
+	velocity = { 0,0 };
+
 	currentAnimation = &slime;
 	return true;
 }
@@ -61,9 +63,26 @@ bool Slime::Update(float dt)
 			if (!isAttacking)
 			{
 			isAttacking = true;
-
 			}
 		}
+
+		if (app->scene->player->position.x - position.x < 0)
+		{
+			rightmode = false;
+			// move left
+			velocity.x = -1;
+
+		}
+		else
+		{
+			rightmode = true;
+			//move right
+			velocity.x = 1;
+		
+
+		}
+
+
 	}
 
 
@@ -80,16 +99,35 @@ bool Slime::Update(float dt)
 	// Cuando el slime esta a tilesattack que persiga al player
 	// 
 	// Que el slime se mueva y haga flip
-	if (lastPath.Count())
-	{
+	//if (lastPath.Count()>0)
+	//{
+	//	iPoint* nextPathTile;
+	//	nextPathTile = lastPath.At(lastPath.Count() - 1);
+	//	LOG("LAST PATH X: %d enemy x: %d", nextPathTile->x, origPos.x);
+	//	if (nextPathTile->x < origPos.x)
+	//	{
+	//		rightmode = false;
+	//		
+	//	}
+	//	else
+	//	{
+	//		rightmode = true;
 
-	}
+	//	}
+	//	if (nextPathTile->x == origPos.x) {
+	//		/*lastPath.Pop(*nextPathTile);*/
+	//	}
+
+
+	//}
 	// L07 DONE 4: Add a physics to an item - update the position of the object from the physics.  
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
+	pbody->body->SetLinearVelocity(velocity);
+
 
 	currentAnimation->Update();
-	if (leftmode)
+	if (leftmode && !rightmode)
 	{
 		app->render->DrawTexture(texture, position.x, position.y + 7, &currentAnimation->GetCurrentFrame());
 	}
