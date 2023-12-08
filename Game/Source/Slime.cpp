@@ -79,7 +79,6 @@ bool Slime::Update(float dt)
 			//move right
 			velocity.x = 1;
 		
-
 		}
 
 
