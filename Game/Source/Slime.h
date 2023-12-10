@@ -48,6 +48,7 @@ public:
 	const char* texturePath;
 
 	PhysBody* pbody;
+	PhysBody* damage;
 	 
 	int tilesview = 7;
 

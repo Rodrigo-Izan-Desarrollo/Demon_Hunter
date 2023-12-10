@@ -32,7 +32,9 @@ bool Slime::Start() {
 	//initilize textures
 	texture = app->tex->Load(texturePath);
 	pbody = app->physics->CreateCircle(position.x + 16, position.y + 16, 13, bodyType::DYNAMIC);
+	damage = app->physics->CreateCircle(position.x + 20, position.y + 15, 6.5, bodyType::STATIC);
 	pbody->ctype = ColliderType::ENEMY;
+	damage->ctype = ColliderType::ENEMY;
 
 	slime.LoadAnimations("slime");
 	slime_dead.LoadAnimations("slime_dead");
@@ -123,6 +125,9 @@ bool Slime::Update(float dt)
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
 	pbody->body->SetLinearVelocity(velocity);
+	//position.x = METERS_TO_PIXELS(damage->body->GetTransform().p.x) - 16;
+	//position.y = METERS_TO_PIXELS(damage->body->GetTransform().p.y) - 16;
+	//damage->body->SetLinearVelocity(velocity);
 
 
 	currentAnimation->Update();
