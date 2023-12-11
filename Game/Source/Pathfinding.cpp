@@ -53,8 +53,6 @@ bool PathFinding::IsWalkable(const iPoint& pos) const
 	uchar walkId = GetTileAt(pos);
 	bool isWalkable = walkId != INVALID_WALK_CODE && walkId > 0;
 	return  isWalkable;
-
-	
 }
 
 // Utility: return the walkability value of a tile
@@ -85,71 +83,88 @@ void PathFinding::ClearLastPath()
 int PathFinding::CreatePath(const iPoint& origin, const iPoint& destination)
 {
 	int ret = -1;
+	int iterations = 0;
 
-	// L13: TODO 1: if origin or destination are not walkable, return -1
-
-	if (IsWalkable(origin) && IsWalkable(destination)) {
-
-		// L13: TODO 2: Create two lists: frontier, visited
-		// Create a PathNode with the origin position and add it to frontier list
-		// Iterate while we have node in the frontier list
-
+	// L13: DONE 1: if origin or destination are not walkable, return -1
+	if (IsWalkable(origin) && IsWalkable(destination))
+	{
+		// L13: DONE 2: Create two lists: frontier, visited
 		PathList frontier;
 		PathList visited;
 
-		frontier.list.Add(PathNode(0, 0, origin, NULL));
+		// Create a PathNode with the origin position and add it to frontier list
+		frontier.list.Add(PathNode(0, 0, origin, nullptr));
 
-		while (frontier.list.Count() > 0) {
-			
-			// L13: TODO 3: Get the lowest score cell from frontier list and delete it from the frontier list
+		// Iterate while we have node in the frontier list
+		while (frontier.list.Count() > 0)
+		{
+			// L13: DONE 3: Get the lowest score cell from frontier list and delete it from the frontier list
 			// Keep a reference to the node before deleting the node from the list
 			ListItem<PathNode>* lowest = frontier.GetNodeLowestScore();
 			ListItem<PathNode>* node = new ListItem<PathNode>(*lowest);
 			frontier.list.Del(lowest);
 
-			// L13: TODO 6: If we just added the destination, we are done!
-			// Backtrack to create the final path
-			// Use the Pathnode::parent and Flip() the path when you are finish
-			if (node->data.pos == destination) {
+
+			// L13: DONE 6: If we just added the destination, we are done!
+			if (node->data.pos == destination)
+			{
 				lastPath.Clear();
 
+				// Backtrack to create the final path
+				// Use the Pathnode::parent and Flip() the path when you are finish
 				const PathNode* pathNode = &node->data;
-				while (pathNode != NULL)
+
+				while (pathNode)
 				{
 					lastPath.PushBack(pathNode->pos);
 					pathNode = pathNode->parent;
 				}
+
 				lastPath.Flip();
+				ret = lastPath.Count();
+				LOG("Created path of %d steps in %d iterations", ret, iterations);
+				break;
 			}
 
-
-			// L13: TODO 4: Fill a list of all adjancent nodes. 
+			// L13: DONE 4: Fill a list of all adjancent nodes. 
 			// use the FindWalkableAdjacents function
 			PathList adjacent;
 			node->data.FindWalkableAdjacents(adjacent);
 
-			// L13: TODO 5: Iterate adjancent nodes:
+			// L13: DONE 5: Iterate adjancent nodes:
+			// If it is a better path, Update the parent
 			ListItem<PathNode>* neighbourg = adjacent.list.start;
 			while (neighbourg != NULL)
 			{
-				// ignore the nodes already in the visited list
+				// ignore nodes in the visited list
 				if (visited.Find(neighbourg->data.pos) == NULL) {
 
-					// if is not in the visited lits
-					// add the neighbourg to the visited list
-					neighbourg->data.CalculateF(destination);
+					//add the neighbourg to the visited list
 					visited.list.Add(neighbourg->data);
-					frontier.list.Add(neighbourg->data);
 
 					// If the neighbourgh is NOT found in the frontier list, calculate its F and add it to the frontier list
-					// If it is already in the frontier list, check if it is a better path (compare G)
+					ListItem<PathNode>* neighbourgInFrontier = frontier.Find(neighbourg->data.pos);
+					if (neighbourgInFrontier == NULL)
+					{
+						neighbourg->data.CalculateF(destination);
+						frontier.list.Add(neighbourg->data);
+					}
+					else
+					{
+						// If it is already in the frontier list, check if it is a better path (compare G)
+						if (neighbourgInFrontier->data.g > neighbourg->data.g + 1)
+						{
+							neighbourgInFrontier->data.parent = neighbourg->data.parent;
+							neighbourgInFrontier->data.CalculateF(destination);
+						}
+					}
 				}
+
 				neighbourg = neighbourg->next;
 			}
+			++iterations;
 		}
-		ret = 1;
 	}
-
 
 	return ret;
 }
@@ -226,22 +241,6 @@ uint PathNode::FindWalkableAdjacents(PathList& listToFill) const
 	// right
 	tile.Create(pos.x - 1, pos.y);
 	if(app->map->pathfindingSuelo->IsWalkable(tile)) listToFill.list.Add(PathNode(-1, -1, tile, this));
-	
-	// top
-	tile.Create(pos.x, pos.y + 1);
-	if(app->map->pathfindingVuelo->IsWalkable(tile)) listToFill.list.Add(PathNode(-1, -1, tile, this));
-
-	// bottom
-	tile.Create(pos.x, pos.y - 1);
-	if(app->map->pathfindingVuelo->IsWalkable(tile)) listToFill.list.Add(PathNode(-1, -1, tile, this));
-
-	// left
-	tile.Create(pos.x + 1, pos.y);
-	if(app->map->pathfindingVuelo->IsWalkable(tile)) listToFill.list.Add(PathNode(-1, -1, tile, this));
-
-	// right
-	tile.Create(pos.x - 1, pos.y);
-	if(app->map->pathfindingVuelo->IsWalkable(tile)) listToFill.list.Add(PathNode(-1, -1, tile, this));
 
 	return listToFill.list.Count();
 }

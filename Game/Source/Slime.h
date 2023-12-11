@@ -63,8 +63,8 @@ public:
 
 	b2Vec2 velocity;
 
-	const iPoint origPos;
-	const iPoint targPos;
+	iPoint origPos;
+	iPoint targPos;
 	DynArray<iPoint> lastPath;
 	
 };

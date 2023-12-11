@@ -82574,13 +82574,13 @@
    <tile gid="1"/>
   </data>
  </layer>
- <layer id="14" name="NavigationSuelo" width="330" height="50" visible="0">
+ <layer id="14" name="NavigationSuelo" width="330" height="50">
   <properties>
    <property name="Draw" type="bool" value="false"/>
    <property name="NavigationSuelo" type="bool" value="true"/>
   </properties>
   <data>
-   <tile/>
+   <tile gid="4"/>
    <tile/>
    <tile/>
    <tile/>

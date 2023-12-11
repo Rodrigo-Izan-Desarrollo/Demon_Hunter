@@ -10,7 +10,7 @@
 #include "Physics.h"
 #include "Pathfinding.h"
 #include "Map.h"
-#include "missutils.cpp"
+
 
 Slime::Slime() : Entity(EntityType::SLIME)
 {
@@ -52,6 +52,11 @@ bool Slime::Update(float dt)
 {
 	currentAnimation = &slime;
 
+	origPos = app->map->WorldToMap(position.x, position.y);
+	targPos = app->map->WorldToMap(app->scene->player->position.x, app->scene->player->position.y);
+
+	LOG("LAST PATH X: %d enemy x: %d", targPos.x, origPos.x);
+
 	if (dist(app->scene->player->position, position) < app->map->mapData.tileWidth * tilesview)
 	{
 		onView = true;
@@ -65,27 +70,11 @@ bool Slime::Update(float dt)
 		{
 			if (!isAttacking)
 			{
-			isAttacking = true;
+				isAttacking = true;
 			}
 		}
-
-		if (app->scene->player->position.x - position.x < 0)
-		{
-			rightmode = false;
-			// move left
-			velocity.x = -1;
-
-		}
-		else
-		{
-			rightmode = true;
-			//move right
-			velocity.x = 1;
-		
-		}
-
-
 	}
+
 
 
 	if (isAttacking)
@@ -101,34 +90,35 @@ bool Slime::Update(float dt)
 	// Cuando el slime esta a tilesattack que persiga al player
 	// 
 	// Que el slime se mueva y haga flip
-	//if (lastPath.Count()>0)
-	//{
-	//	iPoint* nextPathTile;
-	//	nextPathTile = lastPath.At(lastPath.Count() - 1);
-	//	LOG("LAST PATH X: %d enemy x: %d", nextPathTile->x, origPos.x);
-	//	if (nextPathTile->x < origPos.x)
-	//	{
-	//		rightmode = false;
-	//		
-	//	}
-	//	else
-	//	{
-	//		rightmode = true;
 
-	//	}
-	//	if (nextPathTile->x == origPos.x) {
-	//		/*lastPath.Pop(*nextPathTile);*/
-	//	}
+	LOG("COUNTTTTTTTTTTT: %d", lastPath.Count());
+
+	if (lastPath.Count()>0)
+	{
+		iPoint* nextPathTile;
+		nextPathTile = lastPath.At(lastPath.Count() - 1);
+		
+		if (nextPathTile->x < origPos.x)
+		{
+			rightmode = true;
+			velocity.x = +1;
+		}
+		else
+		{
+			rightmode = false;
+			velocity.x = -1;
+		}
+		if (nextPathTile->x == origPos.x) {
+			lastPath.Pop(*nextPathTile);
+		}
 
 
-	//}
+	}
 	// L07 DONE 4: Add a physics to an item - update the position of the object from the physics.  
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
 	pbody->body->SetLinearVelocity(velocity);
-	//position.x = METERS_TO_PIXELS(damage->body->GetTransform().p.x) - 16;
-	//position.y = METERS_TO_PIXELS(damage->body->GetTransform().p.y) - 16;
-	//damage->body->SetLinearVelocity(velocity);
+
 
 
 	currentAnimation->Update();

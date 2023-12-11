@@ -98,6 +98,7 @@
     <ClCompile Include="Source\Bomber.cpp" />
     <ClCompile Include="Source\EntityManager.cpp" />
     <ClCompile Include="Source\missutils.cpp" />
+    <ClCompile Include="Source\Pathfinding.cpp" />
     <ClCompile Include="Source\Skeleton.cpp" />
     <ClCompile Include="Source\Powerup_1.cpp" />
     <ClCompile Include="Source\Powerup_2.cpp" />
@@ -108,7 +109,6 @@
     <ClCompile Include="Source\Audio.cpp" />
     <ClCompile Include="Source\Input.cpp" />
     <ClCompile Include="Source\Map.cpp" />
-    <ClCompile Include="Source\Pathfinding.cpp" />
     <ClCompile Include="Source\PerfTimer.cpp" />
     <ClCompile Include="Source\Physics.cpp" />
     <ClCompile Include="Source\Player.cpp" />
@@ -121,13 +121,13 @@
     <ClInclude Include="Source\Bomber.h" />
     <ClInclude Include="Source\Entity.h" />
     <ClInclude Include="Source\EntityManager.h" />
+    <ClInclude Include="Source\Pathfinding.h" />
     <ClInclude Include="Source\Skeleton.h" />
     <ClInclude Include="Source\Powerup_1.h" />
     <ClInclude Include="Source\Powerup_2.h" />
     <ClInclude Include="Source\Powerup_3.h" />
     <ClInclude Include="Source\Slime.h" />
     <ClInclude Include="Source\Map.h" />
-    <ClInclude Include="Source\Pathfinding.h" />
     <ClInclude Include="Source\PerfTimer.h" />
     <ClInclude Include="Source\Physics.h" />
     <ClInclude Include="Source\Player.h" />
