@@ -173,6 +173,13 @@ bool Player::Update(float dt)
 		check_1 = false;
 	}
 
+	//Portals 
+	if (portal)
+	{
+		// 182 32		
+		pbody->body->SetTransform({ PIXEL_TO_METERS(2600 + 16), PIXEL_TO_METERS(1080) }, 0);
+		portal = false;
+	}
 	// Godmode
 
 	//Activate Godmode
@@ -211,17 +218,14 @@ bool Player::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN && !dead)
 	{
 		pbody->body->SetTransform({ PIXEL_TO_METERS(-620 + 16), PIXEL_TO_METERS(950) }, 0);
-		app->render->camera.x = 0;
 	}
 	if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN && !dead)
 	{
 		pbody->body->SetTransform({ PIXEL_TO_METERS(2600 + 16), PIXEL_TO_METERS(1080) }, 0);
-		app->render->camera.x = -3225;
 	}
 	if (app->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN && !dead)
 	{
 		pbody->body->SetTransform({ PIXEL_TO_METERS(5990 + 16), PIXEL_TO_METERS(1010) }, 0);
-		app->render->camera.x = -6610;
 	}
 	if (app->input->GetKey(SDL_SCANCODE_F4) == KEY_DOWN && !dead)
 	{
@@ -543,8 +547,10 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		canpower_3 = true;
 		break;
 	case ColliderType::PLATFORM:
-		LOG("Collision PLATFORM");
 		inground = true;
+		break;	
+	case ColliderType::PORTAL:
+		portal = true;
 		break;
 	case ColliderType::ENEMY:
 		if (!Godmode && !dead && !pbodyatack) {
@@ -554,7 +560,6 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		deadtempo = SDL_GetTicks();
 		break;
 	case ColliderType::WALL:
-		LOG("Colission WALL");
 		inground = false;
 		break;
 	case ColliderType::PATACK:
