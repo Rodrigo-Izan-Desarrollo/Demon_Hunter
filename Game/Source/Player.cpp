@@ -20,7 +20,7 @@ Player::~Player() {
 
 bool Player::Awake() {
 
-	//Conexio de parapetres amb el config.xml
+	//Conexion of parameters with config.xml
 
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
@@ -49,7 +49,7 @@ bool Player::Start() {
 	pbody->listener = this;
 	pbody->ctype = ColliderType::PLAYER;
 
-	//Relacions de les Animations amb el xml
+	//Conexion of Animations with config.xml
 	player.LoadAnimations("player");
 	player_speed.LoadAnimations("player_speed");
 	player_jump.LoadAnimations("player_jump");
@@ -95,6 +95,7 @@ bool Player::Update(float dt)
 	{
 		app->render->camera.x = -(position.x - 125);
 	}
+
 	//Default animation
 
 	if (!atacking && !jumping && inground && !dead && !Godmode && !sleeping)
@@ -108,6 +109,8 @@ bool Player::Update(float dt)
 	}
 
 	//Power-ups
+
+	//Activate all Power-ups
 	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN)
 	{
 		canpower_1 = true;
@@ -115,13 +118,14 @@ bool Player::Update(float dt)
 		canpower_3 = true;
 	}
 
+	//Activate individual powerup
 	if (app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN && canchange && canpower_1 && !dead)
 	{
 		powerup_1 = !powerup_1;
 		powerup_2 = false;
 		powerup_3 = false;
 		canchange = false;
-		powertempo = SDL_GetTicks();
+		powertempo = SDL_GetTicks();//Start power-up cooldown for changing powerups
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN && canchange && canpower_2 && !dead)
@@ -142,10 +146,12 @@ bool Player::Update(float dt)
 		powertempo = SDL_GetTicks();
 	}
 
+	//Activate the possibility of changing power-ups
 	if (SDL_GetTicks() - powertempo >= 15000)
 	{
 		canchange = true;
 	}
+
 	//Checkpoints
 
 	if (position.x == 3396 && position.y == 1058)
@@ -169,17 +175,18 @@ bool Player::Update(float dt)
 
 	// Godmode
 
+	//Activate Godmode
 	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN && !dead)
 	{
 		Godmode = !Godmode;
 	}
 
 	// Godmode movement
-	if (Godmode && !dead) // Si el godmode esta activado 
+	if (Godmode && !dead)//Allways tha Godmode is true and the player is not Dead
 	{
 		/*speed = 0.5f;*/
-		veljump = b2Vec2(0.0, -0.1675);//desabilitamos la gravedad
-		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {//Agregamos la posibilidad de moverse en todas las direcciones
+		veljump = b2Vec2(0.0, -0.1675);//Desabilited the GRAVITY_Y in player
+		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {//Now you can move in any direction
 			veljump.y = -5;
 		}
 		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
@@ -200,6 +207,7 @@ bool Player::Update(float dt)
 
 	// TPs
 
+	//You can be teleported to all checkpoints
 	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN && !dead)
 	{
 		pbody->body->SetTransform({ PIXEL_TO_METERS(-620 + 16), PIXEL_TO_METERS(950) }, 0);
