@@ -32,7 +32,7 @@ public:
 	float speed = 0.2f;
 
 	//Repawns
-	int respawn = 2;
+	int respawn = 100000000;
 
 	//Textures paths
 	const char* texturePath;
@@ -47,6 +47,7 @@ public:
 	Uint32 invtempo_2 = NULL;
 	Uint32 deadtempo = NULL;
 	Uint32 powertempo = NULL;
+	Uint32 atacktempo = NULL;
 
 	//Textures
 	SDL_Texture* texture = NULL;
@@ -57,6 +58,7 @@ public:
 	SDL_Texture* texture_4 = NULL;
 
 	PhysBody* pbody;
+	PhysBody* pbodyatack = nullptr;
 	pugi::xml_node config;
 
 	//Animations
@@ -88,6 +90,8 @@ public:
 
 	//Atack
 	bool atacking = false;
+	bool canatack = true;
+
 
 	//Get invisible
 	bool invisible = false;
