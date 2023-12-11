@@ -284,10 +284,16 @@ bool Player::Update(float dt)
 		currentAnimation->loopCount = 0;
 	}
 
-	if (SDL_GetTicks() - deadtempo	>= 3000 && respawn>0 && dead) // Cuando el timer de muerte alcanza los 3000 ms, tienes suficientes vidas y estas muerto
+	if (SDL_GetTicks() - deadtempo >= 3000 && respawn > 0 && dead)
 	{
-		currentAnimation->Reset();// Primero reseteamos la animacion de muerte ya que el loop= false
-		if (!check_1 && !check_2 && !check_3)// Dependiendo del check cambia el repawn
+		currentAnimation->Reset(); // Reinicia la animación de muerte aquí
+		canmove = true;
+		dead = false;
+		rightmode = true;
+		leftmode = false;
+		respawn--;
+
+		if (!check_1 && !check_2 && !check_3)
 		{
 			pbody->body->SetTransform({ PIXEL_TO_METERS(-620 + 16), PIXEL_TO_METERS(950) }, 0);
 			app->render->camera.x = 0;
@@ -307,12 +313,6 @@ bool Player::Update(float dt)
 			pbody->body->SetTransform({ PIXEL_TO_METERS(10436), PIXEL_TO_METERS(802) }, 0);
 			app->render->camera.x = -9535;
 		}
-
-		canmove = true;// Una vez repawneado te puedes mover
-		dead = false;
-		rightmode = true;
-		leftmode = false;
-		respawn--;// Le restamos una vida
 	}
 
 	//Jump
@@ -342,9 +342,23 @@ bool Player::Update(float dt)
 
 	//Atack
 
-	if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_REPEAT && !dead && !jumping && !invisible || app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT && !dead && !jumping && !invisible) //If para poder saltar
+	if (!pbodyatack && (app->input->GetKey(SDL_SCANCODE_Q) == KEY_REPEAT || app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT) && !dead && !jumping && !invisible && canatack)
 	{
+		atacktempo = SDL_GetTicks();  // Obtener el tiempo actual
+		canatack = false;
 		atacking = true;
+		if (rightmode)
+		{
+			pbodyatack = app->physics->CreateRectangle(position.x + 33, position.y + 15, 10, 20, bodyType::STATIC);
+			pbodyatack->listener = this;
+			pbodyatack->ctype = ColliderType::PATACK;
+		}
+		if (leftmode)
+		{
+			pbodyatack = app->physics->CreateRectangle(position.x-2, position.y + 15, 10, 20, bodyType::STATIC);
+			pbodyatack->listener = this;
+			pbodyatack->ctype = ColliderType::PATACK;
+		}
 		if (atacking)
 		{
 			canmove = false;
@@ -382,10 +396,28 @@ bool Player::Update(float dt)
 
 	// Atack animation
 
-	if (currentAnimation == &player_attack && currentAnimation->HasFinished()) { // Reiniciar el ataque
+
+	if (currentAnimation == &player_attack && currentAnimation->HasFinished()) {
+		if (pbodyatack) {
+			pbodyatack->body->SetActive(false);
+			app->physics->world->DestroyBody(pbodyatack->body);
+			pbodyatack = nullptr;  // Establecer pbodyatack a nullptr después de destruir el cuerpo
+		}
+
+		// Verificar el cooldown antes de habilitar un nuevo ataque
+		if (SDL_GetTicks() - atacktempo >= 300)
+		{
+			canatack = true;
+		}
+
 		atacking = false;
 		canmove = true;
+
+		// Restablecer la animación de ataque a su estado inicial
+		currentAnimation->Reset();
+		currentAnimation->loopCount = 0;
 	}
+
 
 	//Jump animation
 
@@ -492,8 +524,7 @@ bool Player::CleanUp()
 
 void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 
-	switch (physB->ctype)
-	{
+	switch (physB->ctype) {
 	case ColliderType::POWERUP_1:
 		canpower_1 = true;
 		break;
@@ -505,21 +536,22 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::PLATFORM:
 		LOG("Collision PLATFORM");
-		inground = true; // Su esta en la colision de plataform activa que esta en el suelo
+		inground = true;
 		break;
 	case ColliderType::ENEMY:
-		if (!Godmode) // Si colisona con colision de enemigo activa dead y desactiva canmove
-		{
+		if (!Godmode && !dead && !pbodyatack) {
 			dead = true;
 			canmove = false;
 		}
-		deadtempo = SDL_GetTicks(); // Inicializamos el timer para que puda respawnear
+		deadtempo = SDL_GetTicks();
 		break;
-
 	case ColliderType::WALL:
 		LOG("Colission WALL");
-		inground = false; // Si esta en la colision con wall desactiva que esta en el suelo
+		inground = false;
+		break;
+	case ColliderType::PATACK:
+		break;
+	default:
 		break;
 	}
-
 }
