@@ -117,6 +117,8 @@ public:
 	bool check_2 = false;
 	bool check_3 = false;
 
+	bool portal = false;
+
 	//Power-ups
 	bool powerup_1 = false;
 	bool powerup_2 = false;
