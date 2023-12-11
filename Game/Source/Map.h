@@ -156,7 +156,7 @@ private:
 	bool mapLoaded;
 	MapLayer* navigationLayerSuelo;
 	MapLayer* navigationLayerVuelo;
-	int blockedGid = 4; 
+	int blockedGid = 3; 
 };
 
 #endif // __MAP_H__

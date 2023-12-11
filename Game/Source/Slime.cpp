@@ -100,13 +100,13 @@ bool Slime::Update(float dt)
 		
 		if (nextPathTile->x < origPos.x)
 		{
-			rightmode = true;
-			velocity.x = +1;
+			rightmode = false;
+			velocity.x = -1;
 		}
 		else
 		{
-			rightmode = false;
-			velocity.x = -1;
+			rightmode = true;
+			velocity.x = +1;
 		}
 		if (nextPathTile->x == origPos.x) {
 			lastPath.Pop(*nextPathTile);
