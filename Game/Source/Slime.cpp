@@ -10,6 +10,7 @@
 #include "Physics.h"
 #include "Pathfinding.h"
 #include "Map.h"
+#include "missutils.cpp"
 
 Slime::Slime() : Entity(EntityType::SLIME)
 {
