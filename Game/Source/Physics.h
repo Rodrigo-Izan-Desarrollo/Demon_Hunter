@@ -28,6 +28,7 @@ enum class ColliderType {
 	PATACK,
 	ITEM,
 	PLATFORM,
+	PORTAL,
 	WALL,
 	ENEMY,
 	POWERUP_1,
