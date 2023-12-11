@@ -128,14 +128,14 @@
 		 
 	  </skeleton>
 
-	  <bomber loop="true" speed="0.130f" >
-		  <animation x="1" y="1" w="57" h="49" />
-		  <animation x="59" y="1" w="57" h="49" />
-		  <animation x="117" y="1" w="57" h="49" />
-		  <animation x="175" y="1" w="57" h="49" />
-		  <animation x="233" y="1" w="57" h="49" />
-		  <animation x="291" y="1" w="57" h="49" />
-		  <animation x="349" y="1" w="57" h="49" />
+	  <bomber loop="true" speed="0.150f" >
+		  <animation x="0" y="0" w="50" h="51" />
+		  <animation x="50" y="0" w="50" h="51" />
+		  <animation x="100" y="0" w="50" h="51" />
+		  <animation x="150" y="0" w="50" h="51" />
+		  <animation x="200" y="0" w="50" h="51" />
+		  <animation x="250" y="0" w="50" h="51" />
+
 	  </bomber>
 		
   </animations>
