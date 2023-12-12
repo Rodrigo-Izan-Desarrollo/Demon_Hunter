@@ -33,29 +33,36 @@ bool Slime::Start() {
 	//initilize textures
 	texture = app->tex->Load(texturePath);
 	pbody = app->physics->CreateCircle(position.x + 16, position.y + 16, 13, bodyType::DYNAMIC);
-	/*damage = app->physics->CreateCircle(position.x + 20, position.y + 15, 6.5, bodyType::STATIC);*/
 	pbody->ctype = ColliderType::ENEMY;
-	//damage->ctype = ColliderType::ENEMY;
+	pbody->listener = this;
 
 	slime.LoadAnimations("slime");
 	slime_dead.LoadAnimations("slime_dead");
 	slime_attack.LoadAnimations("slime_attack");
 	slime_walking.LoadAnimations("slime_walking");
 
-	//velocity = { 0,0 };
+	velocity = { -0.5,0 };
 
 	currentAnimation = &slime;
-	lastPoition = position;
 	return true;
 }
 
 bool Slime::Update(float dt)
 {
-	currentAnimation = &slime;
 	
+	if (reverse && leftmodeslime && !onView)
+	{
+		leftmodeslime = false;
+		rightmodeslime = true;
+		reverse = false;
+	}	
+	if (reverse && rightmodeslime && !onView)
+	{
+		leftmodeslime = true;
+		rightmodeslime = false;
+		reverse = false;
+	}
 
-	float timeSinceLastChange = 0.0f;
-	float changeDirectionInterval = 2.0f; 
 
 	origPos = app->map->WorldToMap(position.x, position.y);
 	targPos = app->map->WorldToMap(app->scene->player->position.x, app->scene->player->position.y);
@@ -65,7 +72,7 @@ bool Slime::Update(float dt)
 	if (dist(app->scene->player->position, position) < app->map->mapData.tileWidth * tilesview)
 	{
 		onView = true;
-		currentAnimation = &slime_walking;
+		currentAnimation = &slime;
 
 		app->map->pathfindingSuelo->CreatePath(origPos, targPos);
 		lastPath = *app->map->pathfindingSuelo->GetLastPath();
@@ -77,7 +84,6 @@ bool Slime::Update(float dt)
 			{
 				isAttacking = true;
 			}
-
 		}
 
 
@@ -85,33 +91,13 @@ bool Slime::Update(float dt)
 	else {
 		onView = false; // Asegurarse de que onView sea falso cuando el jugador no está a la vista
 
-		timeSinceLastChange += dt; // dt es el tiempo transcurrido desde el último frame
-
-		if (timeSinceLastChange >= changeDirectionInterval) {
-			if(llegadaPosicion){
-				randomDir = rand() % 5 -2; // Genera un número aleatorio entre 0 y 1 para cambiar la dirección
-				llegadaPosicion = false;
-				lastPoition = position;
-			}
-
-			if (randomDir <= 0) {
-				velocity.x = -1; // Mueve hacia la izquierda
-				leftmode = true;
-				rightmode = false;
-				if (reverse	==true && leftmode == true) {
-					llegadaPosicion = true;
-				}
-			}
-			else {
-				velocity.x = +1; // Mueve hacia la izquierda
-				leftmode = false;
-				rightmode = true;
-				if (lastPoition.x - randomDir >= position.x) {
-					llegadaPosicion = true;
-				}
-			}
-
-			timeSinceLastChange = 0.0f; // Reinicia el temporizador
+		if (rightmodeslime)
+		{
+			velocity.x = 0.5f;
+		}
+		if (leftmodeslime)
+		{
+			velocity.x = -0.5f;
 		}
 	}
 
@@ -121,9 +107,10 @@ bool Slime::Update(float dt)
 
 
 
-	if (isAttacking)
+	if (isAttacking && !damage)
 	{
 		currentAnimation = &slime_attack;
+
 	}
 
 	if (currentAnimation == &slime_attack && currentAnimation->HasFinished()) { // Reiniciar el ataque
@@ -145,12 +132,14 @@ bool Slime::Update(float dt)
 
 		if (nextPathTile->x < origPos.x)
 		{
-			rightmode = false;
+			rightmodeslime = false;
+			leftmodeslime = true;
 			velocity.x = -1;
 		}
 		else
 		{
-			rightmode = true;
+			rightmodeslime = true;
+			leftmodeslime = false;
 			velocity.x = +1;
 		}
 		if (nextPathTile->x == origPos.x) {
@@ -163,8 +152,13 @@ bool Slime::Update(float dt)
 	if (death)
 	{
 		currentAnimation = &slime_dead;
-		currentAnimation->loopCount = 0;
 
+	}
+
+	if (currentAnimation == &slime_dead && currentAnimation->HasFinished() ) { // Reiniciar el salto
+		pbody->body->SetActive(false);
+		app->entityManager->DestroyEntity(this);
+		app->physics->world->DestroyBody(pbody->body);
 	}
 	// L07 DONE 4: Add a physics to an item - update the position of the object from the physics.  
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
@@ -174,11 +168,11 @@ bool Slime::Update(float dt)
 
 
 	currentAnimation->Update();
-	if (leftmode && !rightmode)
+	if (leftmodeslime )
 	{
 		app->render->DrawTexture(texture, position.x, position.y + 7, &currentAnimation->GetCurrentFrame());
 	}
-	if (rightmode)
+	if (rightmodeslime)
 	{
 		app->render->DrawTexture(texture, position.x, position.y + 7, &currentAnimation->GetCurrentFrame(), SDL_FLIP_HORIZONTAL);
 	}
@@ -198,8 +192,10 @@ void Slime::OnCollision(PhysBody* physA, PhysBody* physB) {
 	
 	case ColliderType::PLATFORM:
 		break;
-	case ColliderType::WALL:
+	case ColliderType::WALLE:
+		LOG("PATOTURMO");
 		reverse=true;
+
 		break;
 	case ColliderType::PATACK:
 		death = true;

@@ -60,16 +60,12 @@ public:
 
 	bool isAttacking = false;
 
-	bool leftmode = true;
-	bool rightmode = false;
+	bool leftmodeslime = true;
+	bool rightmodeslime = false;
 	bool reverse = false;
 	bool death = false;
 
 	b2Vec2 velocity;
-
-	iPoint lastPoition;
-	int randomDir = 0;
-	bool llegadaPosicion = false;
 
 	iPoint origPos;
 	iPoint targPos;
