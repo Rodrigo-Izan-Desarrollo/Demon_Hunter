@@ -76,17 +76,15 @@ bool Scene::Awake(pugi::xml_node& config)
 		app->map->path = config.child("map").attribute("path").as_string();
 	}
 
+	configNode = config;
+
 	return ret;
 }
 
 // Called before the first frame
 bool Scene::Start()
 {
-	// NOTE: We have to avoid the use of paths in the code, we will move it later to a config file
-	//img = app->tex->Load("Assets/Textures/test.png");
-	
-	//Music is commented so that you can add your own music
-	/*app->audio->PlayMusic("Assets/Audio/Music/musicamapa.ogg");*/
+	/*app->audio->PlayMusic(configNode.child("music").attribute("musicpathambient").as_string());*/
 
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);

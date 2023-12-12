@@ -60,10 +60,17 @@ public:
 	virtual bool SaveState(pugi::xml_node node);
 
 private:
+
 	SDL_Texture* img;
 	float textPosX, textPosY = 0;
 	uint texW, texH;
 	uint windowW, windowH;
+
+	const char* musicpathambient;
+	uint ambient_Fx;
+
+	pugi::xml_node configNode;
+
 
 };
 
