@@ -26,6 +26,8 @@ public:
 
 	bool CleanUp();
 
+	void OnCollision(PhysBody* physA, PhysBody* physB);
+
 
 public:
 
@@ -58,8 +60,10 @@ public:
 
 	bool isAttacking = false;
 
-	bool leftmode = true;
-	bool rightmode = false;
+	bool leftmodeslime = true;
+	bool rightmodeslime = false;
+	bool reverse = false;
+	bool death = false;
 
 	b2Vec2 velocity;
 

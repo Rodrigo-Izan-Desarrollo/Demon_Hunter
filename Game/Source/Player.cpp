@@ -553,7 +553,10 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::PLATFORM:
 		inground = true;
-		break;	
+		break;
+	case ColliderType::WALLE:
+		inground = true;
+		break;
 	case ColliderType::PORTAL:
 		portal = true;
 		break;
