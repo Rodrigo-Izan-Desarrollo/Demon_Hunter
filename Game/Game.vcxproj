@@ -97,6 +97,7 @@
   <ItemGroup>
     <ClCompile Include="Source\Bomber.cpp" />
     <ClCompile Include="Source\EntityManager.cpp" />
+    <ClCompile Include="Source\missutils.cpp" />
     <ClCompile Include="Source\Skeleton.cpp" />
     <ClCompile Include="Source\Powerup_1.cpp" />
     <ClCompile Include="Source\Powerup_2.cpp" />

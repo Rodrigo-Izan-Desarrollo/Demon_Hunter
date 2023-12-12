@@ -6,6 +6,8 @@
 #include "SDL/include/SDL.h"
 #include "Animation.h"
 #include "Timer.h"
+#include "DynArray.h"
+#include "Physics.h"
 
 struct SDL_Texture;
 
@@ -32,7 +34,7 @@ public:
 	Animation* currentAnimation;
 
 	Animation slime;
-	
+
 	Animation slime_hurt;
 
 	Animation slime_walking;
@@ -46,6 +48,25 @@ public:
 	const char* texturePath;
 
 	PhysBody* pbody;
+	PhysBody* damage;
+
+	int tilesview = 7;
+
+	bool onView = false;
+
+	int tilesattack = 3;
+
+	bool isAttacking = false;
+
+	bool leftmode = true;
+	bool rightmode = false;
+
+	b2Vec2 velocity;
+
+	iPoint origPos;
+	iPoint targPos;
+	DynArray<iPoint> lastPath;
+
 };
 
 #endif // __SLIME_H__
