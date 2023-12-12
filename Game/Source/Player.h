@@ -41,6 +41,7 @@ public:
 	const char* texturePath_3;
 	const char* texturePath_3_2;
 	const char* texturePath_4;
+	const char* musicpathatack;
 
 	//Timers
 	Uint32 invtempo = NULL;
@@ -56,6 +57,8 @@ public:
 	SDL_Texture* texture_3 = NULL;
 	SDL_Texture* texture_3_2 = NULL;
 	SDL_Texture* texture_4 = NULL;
+
+	uint atack_Fx;
 
 	PhysBody* pbody;
 	PhysBody* pbodyatack = nullptr;
@@ -130,9 +133,8 @@ public:
 	bool canpower_2 = false;
 	bool canpower_3 = false;
 
-	bool canchange = true; // Bool per poder aplicar temps al cambi de powerup
-
-	uint32 startTime;
+	// Bool per poder aplicar temps al cambi de powerup
+	bool canchange = true; 
 };
 
 #endif // __PLAYER_H__
