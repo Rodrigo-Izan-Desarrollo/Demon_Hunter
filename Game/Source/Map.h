@@ -5,6 +5,7 @@
 #include "List.h"
 #include "Point.h"
 #include "Pathfinding.h"
+#include "missutils.cpp"
 
 #include "PugiXml\src\pugixml.hpp"
 
@@ -65,7 +66,7 @@ struct Properties
 struct MapLayer
 {
 	SString	name;
-	int id; 
+	int id;
 	int width;
 	int height;
 	uint* data;
@@ -103,13 +104,13 @@ class Map : public Module
 {
 public:
 
-    Map();
+	Map();
 
-    // Destructor
-    virtual ~Map();
+	// Destructor
+	virtual ~Map();
 
-    // Called before render is available
-    bool Awake(pugi::xml_node& conf);
+	// Called before render is available
+	bool Awake(pugi::xml_node& conf);
 
 	// Called before the first frame
 	bool Start();
@@ -118,22 +119,22 @@ public:
 	bool Update(float dt);
 
 	bool LoadColission();
-		
 
-    // Called before quitting
-    bool CleanUp();
 
-    // Load new map
+	// Called before quitting
+	bool CleanUp();
+
+	// Load new map
 	bool Load(SString mapFileName);
-	
+
 	iPoint MapToWorld(int x, int y) const;
-	
+
 	iPoint Map::WorldToMap(int x, int y);
 
 	// L13: Create navigation map for pathfinding
-	void CreateNavigationMap(int& width, int& height, uchar** buffer) const;
+	void CreateNavigationMap(int& width, int& height, uchar** buffer, MapLayer* NavigationLayer) const;
 
-	
+
 
 private:
 
@@ -144,16 +145,18 @@ private:
 	TileSet* GetTilesetFromTileId(int gid) const;
 	bool LoadProperties(pugi::xml_node& node, Properties& properties);
 
-public: 
+public:
 	MapData mapData;
 	SString name;
 	SString path;
-	PathFinding* pathfinding;
+	PathFinding* pathfindingSuelo;
+	PathFinding* pathfindingVuelo;
 
 private:
 	bool mapLoaded;
-	MapLayer* navigationLayer;
-	int blockedGid = 4; 
+	MapLayer* navigationLayerSuelo;
+	MapLayer* navigationLayerVuelo;
+	int blockedGid = 3;
 };
 
 #endif // __MAP_H__
