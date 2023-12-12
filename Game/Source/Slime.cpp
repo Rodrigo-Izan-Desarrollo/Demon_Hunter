@@ -24,6 +24,8 @@ bool Slime::Awake() {
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
 	texturePath = parameters.attribute("texturepathenemy_1").as_string();
+	musicpathslime = parameters.attribute("musicpathslime").as_string();
+
 
 	return true;
 }
@@ -40,6 +42,8 @@ bool Slime::Start() {
 	slime_dead.LoadAnimations("slime_dead");
 	slime_attack.LoadAnimations("slime_attack");
 	slime_walking.LoadAnimations("slime_walking");
+	slime_Fx = app->audio->LoadFx(musicpathslime);
+
 
 	velocity = { -0.5,0 };
 
@@ -49,6 +53,7 @@ bool Slime::Start() {
 
 bool Slime::Update(float dt)
 {
+
 	
 	if (reverse && leftmodeslime && !onView)
 	{
@@ -152,6 +157,7 @@ bool Slime::Update(float dt)
 	if (death)
 	{
 		currentAnimation = &slime_dead;
+		app->audio->PlayFx(slime_Fx);
 
 	}
 

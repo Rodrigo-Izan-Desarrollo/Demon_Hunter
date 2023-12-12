@@ -48,6 +48,7 @@ public:
 	SDL_Texture* texture;
 
 	const char* texturePath;
+	const char* musicpathslime;
 
 	PhysBody* pbody;
 	PhysBody* damage;
@@ -70,6 +71,8 @@ public:
 	iPoint origPos;
 	iPoint targPos;
 	DynArray<iPoint> lastPath;
+
+	uint slime_Fx;
 
 };
 
