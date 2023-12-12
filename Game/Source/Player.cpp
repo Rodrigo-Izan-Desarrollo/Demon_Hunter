@@ -11,7 +11,7 @@
 
 Player::Player() : Entity(EntityType::PLAYER)
 {
-	name.Create("Player");
+	name.Create("player");
 }
 
 Player::~Player() {
@@ -30,6 +30,8 @@ bool Player::Awake() {
 	texturePath_3 = parameters.attribute("texturepathainv").as_string();
 	texturePath_3_2 = parameters.attribute("texturepathainv_2").as_string();
 	texturePath_4 = parameters.attribute("texturepathgod").as_string();
+	musicpathatack = parameters.attribute("musicpathatack").as_string();
+
 
 	return true;
 }
@@ -43,6 +45,8 @@ bool Player::Start() {
 	texture_3 = app->tex->Load(texturePath_3);
 	texture_3_2 = app->tex->Load(texturePath_3_2);
 	texture_4 = app->tex->Load(texturePath_4);
+	atack_Fx = app->audio->LoadFx(musicpathatack);
+
 
 	//Create de pbody
 	pbody = app->physics->CreateCircle(position.x + 30, position.y + 30, 13, bodyType::DYNAMIC);
@@ -356,12 +360,13 @@ bool Player::Update(float dt)
 
 	if (!pbodyatack && (app->input->GetKey(SDL_SCANCODE_Q) == KEY_REPEAT || app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT) && !dead && !jumping && !invisible && canatack)
 	{
+		app->audio->PlayFx(atack_Fx);
 		atacktempo = SDL_GetTicks();  // Obtener el tiempo actual
 		canatack = false;
 		atacking = true;
 		if (rightmode)
 		{
-			pbodyatack = app->physics->CreateRectangle(position.x + 33, position.y + 15, 10, 20, bodyType::STATIC);
+			pbodyatack = app->physics->CreateRectangle(position.x + 35, position.y + 15, 10, 20, bodyType::STATIC);
 			pbodyatack->listener = this;
 			pbodyatack->ctype = ColliderType::PATACK;
 		}
