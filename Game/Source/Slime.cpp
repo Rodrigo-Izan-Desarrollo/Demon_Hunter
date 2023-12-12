@@ -42,15 +42,20 @@ bool Slime::Start() {
 	slime_attack.LoadAnimations("slime_attack");
 	slime_walking.LoadAnimations("slime_walking");
 
-	velocity = { 0,0 };
+	//velocity = { 0,0 };
 
 	currentAnimation = &slime;
+	lastPoition = position;
 	return true;
 }
 
 bool Slime::Update(float dt)
 {
 	currentAnimation = &slime;
+	
+
+	float timeSinceLastChange = 0.0f;
+	float changeDirectionInterval = 2.0f; 
 
 	origPos = app->map->WorldToMap(position.x, position.y);
 	targPos = app->map->WorldToMap(app->scene->player->position.x, app->scene->player->position.y);
@@ -72,8 +77,47 @@ bool Slime::Update(float dt)
 			{
 				isAttacking = true;
 			}
+
+		}
+
+
+	}
+	else {
+		onView = false; // Asegurarse de que onView sea falso cuando el jugador no está a la vista
+
+		timeSinceLastChange += dt; // dt es el tiempo transcurrido desde el último frame
+
+		if (timeSinceLastChange >= changeDirectionInterval) {
+			if(llegadaPosicion){
+				randomDir = rand() % 5 -2; // Genera un número aleatorio entre 0 y 1 para cambiar la dirección
+				llegadaPosicion = false;
+				lastPoition = position;
+			}
+
+			if (randomDir <= 0) {
+				velocity.x = -1; // Mueve hacia la izquierda
+				leftmode = true;
+				rightmode = false;
+				if (reverse	==true && leftmode == true) {
+					llegadaPosicion = true;
+				}
+			}
+			else {
+				velocity.x = +1; // Mueve hacia la izquierda
+				leftmode = false;
+				rightmode = true;
+				if (lastPoition.x - randomDir >= position.x) {
+					llegadaPosicion = true;
+				}
+			}
+
+			timeSinceLastChange = 0.0f; // Reinicia el temporizador
 		}
 	}
+
+	
+
+
 
 
 
@@ -98,6 +142,7 @@ bool Slime::Update(float dt)
 		iPoint* nextPathTile;
 		nextPathTile = lastPath.At(lastPath.Count() - 1);
 
+
 		if (nextPathTile->x < origPos.x)
 		{
 			rightmode = false;
@@ -112,6 +157,13 @@ bool Slime::Update(float dt)
 			lastPath.Pop(*nextPathTile);
 		}
 
+
+	}
+
+	if (death)
+	{
+		currentAnimation = &slime_dead;
+		currentAnimation->loopCount = 0;
 
 	}
 	// L07 DONE 4: Add a physics to an item - update the position of the object from the physics.  
@@ -138,4 +190,21 @@ bool Slime::Update(float dt)
 bool Slime::CleanUp()
 {
 	return true;
+}
+
+void Slime::OnCollision(PhysBody* physA, PhysBody* physB) {
+
+	switch (physB->ctype) {
+	
+	case ColliderType::PLATFORM:
+		break;
+	case ColliderType::WALL:
+		reverse=true;
+		break;
+	case ColliderType::PATACK:
+		death = true;
+		break;
+	default:
+		break;
+	}
 }

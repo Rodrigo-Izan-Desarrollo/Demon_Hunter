@@ -26,6 +26,8 @@ public:
 
 	bool CleanUp();
 
+	void OnCollision(PhysBody* physA, PhysBody* physB);
+
 
 public:
 
@@ -60,8 +62,14 @@ public:
 
 	bool leftmode = true;
 	bool rightmode = false;
+	bool reverse = false;
+	bool death = false;
 
 	b2Vec2 velocity;
+
+	iPoint lastPoition;
+	int randomDir = 0;
+	bool llegadaPosicion = false;
 
 	iPoint origPos;
 	iPoint targPos;
