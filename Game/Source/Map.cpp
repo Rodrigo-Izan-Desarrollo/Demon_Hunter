@@ -38,12 +38,15 @@ bool Map::Start() {
     bool ret = Load(mapPath);
 
     //Initialize pathfinding 
-    pathfinding = new PathFinding();
+    pathfindingSuelo = new PathFinding();
+    pathfindingVuelo = new PathFinding();
 
     //Initialize the navigation map
     uchar* navigationMap = NULL;
-    CreateNavigationMap(mapData.width, mapData.height, &navigationMap);
-    pathfinding->SetNavigationMap((uint)mapData.width, (uint)mapData.height, navigationMap);
+    CreateNavigationMap(mapData.width, mapData.height, &navigationMap, navigationLayerSuelo);
+    pathfindingSuelo->SetNavigationMap((uint)mapData.width, (uint)mapData.height, navigationMap);
+    CreateNavigationMap(mapData.width, mapData.height, &navigationMap, navigationLayerVuelo);
+    pathfindingVuelo->SetNavigationMap((uint)mapData.width, (uint)mapData.height, navigationMap);
     RELEASE_ARRAY(navigationMap);
 
     return ret;
@@ -51,7 +54,7 @@ bool Map::Start() {
 
 bool Map::Update(float dt)
 {
-    if(mapLoaded == false)
+    if (mapLoaded == false)
         return false;
 
     ListItem<MapLayer*>* mapLayerItem;
@@ -96,11 +99,11 @@ bool Map::LoadColission() {
 
     while (mapLayerItem != NULL) {
 
-       
+
         std::string capanombre = "colisiones";
         if (mapLayerItem->data->name.GetString() == capanombre) {
-           
-            
+
+
             for (int x = 0; x < mapLayerItem->data->width; x++)
             {
                 for (int y = 0; y < mapLayerItem->data->height; y++)
@@ -117,7 +120,7 @@ bool Map::LoadColission() {
                     //    &r);
                     if (gid == tileset->firstgid + 0)
                     {
-                        PhysBody* c1 = app->physics->CreateRectangle(pos.x+16, pos.y+22, 32, 20, STATIC);
+                        PhysBody* c1 = app->physics->CreateRectangle(pos.x + 16, pos.y + 22, 32, 20, STATIC);
                         c1->ctype = ColliderType::ENEMY;
                     }
                     if (gid == tileset->firstgid + 1)
@@ -129,14 +132,9 @@ bool Map::LoadColission() {
                     {
                         PhysBody* c1 = app->physics->CreateRectangle(pos.x + 16, pos.y + 16, 32, 32, STATIC);
                         c1->ctype = ColliderType::WALL;
-                    }                    
-                    if (gid == tileset->firstgid + 4)
-                    {
-                        PhysBody* c1 = app->physics->CreateRectangle(pos.x + 16, pos.y + 16, 32, 32, STATIC);
-                        c1->ctype = ColliderType::PORTAL;
                     }
 
-                   
+
                 }
             }
         }
@@ -157,7 +155,7 @@ iPoint Map::MapToWorld(int x, int y) const
     return ret;
 }
 
-iPoint Map::WorldToMap(int x, int y) 
+iPoint Map::WorldToMap(int x, int y)
 {
     iPoint ret(0, 0);
     ret.x = x / mapData.tileWidth;
@@ -203,15 +201,15 @@ bool Map::CleanUp()
 {
     LOG("Unloading map");
 
-	ListItem<TileSet*>* item;
-	item = mapData.tilesets.start;
+    ListItem<TileSet*>* item;
+    item = mapData.tilesets.start;
 
-	while (item != NULL)
-	{
-		RELEASE(item->data);
-		item = item->next;
-	}
-	mapData.tilesets.Clear();
+    while (item != NULL)
+    {
+        RELEASE(item->data);
+        item = item->next;
+    }
+    mapData.tilesets.Clear();
 
     // Remove all layers
     ListItem<MapLayer*>* layerItem;
@@ -234,13 +232,13 @@ bool Map::Load(SString mapFileName)
     pugi::xml_document mapFileXML;
     pugi::xml_parse_result result = mapFileXML.load_file(mapFileName.GetString());
 
-    if(result == NULL)
+    if (result == NULL)
     {
         LOG("Could not load map xml file %s. pugi error: %s", mapFileName.GetString(), result.description());
         ret = false;
     }
 
-    if(ret == true)
+    if (ret == true)
     {
         ret = LoadMap(mapFileXML);
     }
@@ -255,31 +253,31 @@ bool Map::Load(SString mapFileName)
         ret = LoadAllLayers(mapFileXML.child("map"));
     }
     LoadColission();
-    
+
     // NOTE: Later you have to create a function here to load and create the colliders from the map
 
     /*PhysBody* c1 = app->physics->CreateRectangle(224 + 128, 543 + 32, 256, 64, STATIC);
     c1->ctype = ColliderType::PLATFORM;*/
 
-   /* PhysBody* c2 = app->physics->CreateRectangle(352 + 64, 384 + 32, 128, 64, STATIC);
-    c2->ctype = ColliderType::PLATFORM;
+    /* PhysBody* c2 = app->physics->CreateRectangle(352 + 64, 384 + 32, 128, 64, STATIC);
+     c2->ctype = ColliderType::PLATFORM;
 
-    PhysBody* c3 = app->physics->CreateRectangle(256, 704 + 32, 576, 64, STATIC);
-    c3->ctype = ColliderType::PLATFORM;*/
-    
-    if(ret == true)
+     PhysBody* c3 = app->physics->CreateRectangle(256, 704 + 32, 576, 64, STATIC);
+     c3->ctype = ColliderType::PLATFORM;*/
+
+    if (ret == true)
     {
         LOG("Successfully parsed map XML file :%s", mapFileName.GetString());
-        LOG("width : %d height : %d",mapData.width,mapData.height);
-        LOG("tile_width : %d tile_height : %d",mapData.tileWidth, mapData.tileHeight);
-        
+        LOG("width : %d height : %d", mapData.width, mapData.height);
+        LOG("tile_width : %d tile_height : %d", mapData.tileWidth, mapData.tileHeight);
+
         LOG("Tilesets----");
 
         ListItem<TileSet*>* tileset;
         tileset = mapData.tilesets.start;
 
         while (tileset != NULL) {
-            LOG("name : %s firstgid : %d",tileset->data->name.GetString(), tileset->data->firstgid);
+            LOG("name : %s firstgid : %d", tileset->data->name.GetString(), tileset->data->firstgid);
             LOG("tile width : %d tile height : %d", tileset->data->tileWidth, tileset->data->tileHeight);
             LOG("spacing : %d margin : %d", tileset->data->spacing, tileset->data->margin);
             tileset = tileset->next;
@@ -297,7 +295,7 @@ bool Map::Load(SString mapFileName)
         }
     }
 
-    if(mapFileXML) mapFileXML.reset();
+    if (mapFileXML) mapFileXML.reset();
 
     mapLoaded = ret;
 
@@ -327,9 +325,9 @@ bool Map::LoadMap(pugi::xml_node mapFile)
     return ret;
 }
 
-bool Map::LoadTileSet(pugi::xml_node mapFile){
+bool Map::LoadTileSet(pugi::xml_node mapFile) {
 
-    bool ret = true; 
+    bool ret = true;
 
     pugi::xml_node tileset;
     for (tileset = mapFile.child("map").child("tileset"); tileset && ret; tileset = tileset.next_sibling("tileset"))
@@ -345,7 +343,7 @@ bool Map::LoadTileSet(pugi::xml_node mapFile){
         set->columns = tileset.attribute("columns").as_int();
         set->tilecount = tileset.attribute("tilecount").as_int();
 
-        SString texPath = path; 
+        SString texPath = path;
         texPath += tileset.child("image").attribute("source").as_string();
         set->texture = app->tex->Load(texPath.GetString());
 
@@ -396,6 +394,30 @@ bool Map::LoadAllLayers(pugi::xml_node mapNode) {
         mapData.maplayers.Add(mapLayer);
     }
 
+
+    ListItem<MapLayer*>* mapLayerItem;
+    mapLayerItem = mapData.maplayers.start;
+    navigationLayerSuelo = mapLayerItem->data;
+    navigationLayerVuelo = mapLayerItem->data;
+
+    //Search the layer in the map that contains information for navigation
+    while (mapLayerItem != NULL) {
+        if (mapLayerItem->data->properties.GetProperty("NavigationSuelo") != NULL && mapLayerItem->data->properties.GetProperty("NavigationSuelo")->value) {
+            navigationLayerSuelo = mapLayerItem->data;
+            break;
+        }
+        mapLayerItem = mapLayerItem->next;
+    }
+
+    mapLayerItem = mapData.maplayers.start;
+    while (mapLayerItem != NULL) {
+        if (mapLayerItem->data->properties.GetProperty("NavigationVuelo") != NULL && mapLayerItem->data->properties.GetProperty("NavigationVuelo")->value) {
+            navigationLayerVuelo = mapLayerItem->data;
+            break;
+        }
+        mapLayerItem = mapLayerItem->next;
+    }
+
     return ret;
 }
 
@@ -432,35 +454,35 @@ Properties::Property* Properties::GetProperty(const char* name)
     return p;
 }
 
-void Map::CreateNavigationMap(int& width, int& height, uchar** buffer) const
+void Map::CreateNavigationMap(int& width, int& height, uchar** buffer, MapLayer* navigationLayer) const
 {
-    //bool ret = false;
+    bool ret = false;
 
-    ////Sets the size of the map. The navigation map is a unidimensional array 
-    //uchar* navigationMap = new uchar[navigationLayer->width * navigationLayer->height];
-    ////reserves the memory for the navigation map
-    //memset(navigationMap, 1, navigationLayer->width * navigationLayer->height);
+    //Sets the size of the map. The navigation map is a unidimensional array 
+    uchar* navigationMap = new uchar[navigationLayer->width * navigationLayer->height];
+    //reserves the memory for the navigation map
+    memset(navigationMap, 1, navigationLayer->width * navigationLayer->height);
 
-    //for (int x = 0; x < mapData.width; x++)
-    //{
-    //    for (int y = 0; y < mapData.height; y++)
-    //    {
-    //        //i is the index of x,y coordinate in a unidimensional array that represents the navigation map
-    //        int i = (y * navigationLayer->width) + x;
+    for (int x = 0; x < mapData.width; x++)
+    {
+        for (int y = 0; y < mapData.height; y++)
+        {
+            //i is the index of x,y coordinate in a unidimensional array that represents the navigation map
+            int i = (y * navigationLayer->width) + x;
 
-    //        //Gets the gid of the map in the navigation layer
-    //        int gid = navigationLayer->Get(x, y);
+            //Gets the gid of the map in the navigation layer
+            int gid = navigationLayer->Get(x, y);
 
-    //        //If the gid is a blockedGid is an area that I cannot navigate, so is set in the navigation map as 0, all the other areas can be navigated
-    //        //!!!! make sure that you assign blockedGid according to your map
-    //        if (gid == blockedGid) navigationMap[i] = 0;
-    //        else navigationMap[i] = 1;
-    //    }
-    //}
+            //If the gid is a blockedGid is an area that I cannot navigate, so is set in the navigation map as 0, all the other areas can be navigated
+            //!!!! make sure that you assign blockedGid according to your map
+            if (gid == blockedGid) navigationMap[i] = 0;
+            else navigationMap[i] = 1;
+        }
+    }
 
-    //*buffer = navigationMap;
-    //width = mapData.width;
-    //height = mapData.height;
+    *buffer = navigationMap;
+    width = mapData.width;
+    height = mapData.height;
 
 }
 
