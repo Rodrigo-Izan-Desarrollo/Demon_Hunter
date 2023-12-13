@@ -32,6 +32,7 @@ bool Scene::Awake(pugi::xml_node& config)
 	{
 		slime = (Slime*)app->entityManager->CreateEntity(EntityType::SLIME);
 		slime->parameters = itemNode;
+		//app->entityManager->GetSlimes();
 	}
 	for (pugi::xml_node itemNode = config.child("skeleton"); itemNode; itemNode = itemNode.next_sibling("skeleton"))
 	{
@@ -210,6 +211,18 @@ bool Scene::LoadState(pugi::xml_node node) {
 	powerup_2->isPicked = node.child("poweritem").attribute("poweritem-2").as_bool();
 	powerup_3->isPicked = node.child("poweritem").attribute("poweritem-3").as_bool();
 
+	//Slime
+
+		//Slime pos
+	slime->position.x = node.child("slimepos").attribute("x").as_int();
+	slime->position.y = node.child("slimepos").attribute("y").as_int();
+	slime->pbody->body->SetTransform({ PIXEL_TO_METERS(player->position.x), PIXEL_TO_METERS(player->position.y) }, 0);
+
+		//Slime modes
+	slime->death = node.child("modess").attribute("dead").as_bool();
+	slime->leftmodeslime = node.child("modess").attribute("leftmode").as_bool();
+	slime->rightmodeslime = node.child("modess").attribute("rightmode").as_bool();
+
 	return true;
 }
 // L14: TODO 8: Create a method to save the state of the renderer
@@ -256,6 +269,20 @@ bool Scene::SaveState(pugi::xml_node node) {
 	itempowernode.append_attribute("poweritem-1").set_value(powerup_1->isPicked);
 	itempowernode.append_attribute("poweritem-2").set_value(powerup_2->isPicked);
 	itempowernode.append_attribute("poweritem-3").set_value(powerup_3->isPicked);
+
+
+	//Slime
+	
+		//Slime pos
+	pugi::xml_node posslimenode = node.append_child("slimepos");
+	posslimenode.append_attribute("x").set_value(slime->position.x);
+	posslimenode.append_attribute("y").set_value(slime->position.y);
+
+		//Slime modes
+	pugi::xml_node modesnodes = node.append_child("modess");
+	modesnodes.append_attribute("dead").set_value(slime->death);
+	modesnodes.append_attribute("leftmode").set_value(slime->leftmodeslime);
+	modesnodes.append_attribute("rightmode").set_value(slime->rightmodeslime);
 
 	return true;
 }

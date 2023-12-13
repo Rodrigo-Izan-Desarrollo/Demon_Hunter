@@ -6,15 +6,19 @@
 	<audio />
 	<:anonymous />
 	<scene>
-		<playerposition x="3384" y="1058" />
-		<modes sleeping="false" dead="false" canmove="true" inground="true" rightmode="true" leftmode="false" caninv="true" God-mode="false" />
+		<playerposition x="390" y="990" />
+		<modes sleeping="false" dead="true" canmove="false" inground="true" rightmode="true" leftmode="false" caninv="true" God-mode="false" />
 		<canpower canpower-1="false" canpower-2="false" canpower-3="false" />
 		<power power-1="false" power-2="false" power-3="false" canchange="true" />
 		<poweritem poweritem-1="false" poweritem-2="false" poweritem-3="false" />
+		
+		<slimepos x="416" y="994" />
+		<modess dead="false" leftmode="false" rightmode="true" />
+		
 	</scene>
 	<:anonymous />
 	<entitymanager />
 	<renderer>
-		<camera x="-3259" y="-508" />
+		<camera x="-265" y="-439" />
 	</renderer>
 </game_state>

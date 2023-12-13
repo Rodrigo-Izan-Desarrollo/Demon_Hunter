@@ -104,13 +104,14 @@ bool Player::Update(float dt)
 
 	if (!atacking && !jumping && inground && !dead && !Godmode && !sleeping)
 	{
-		if (currentAnimation != &player)
+		if (currentAnimation != &player && !respawning)  // Asegúrate de que no estás cambiando la animación durante el respawn
 		{
 			currentAnimation = &player;
 			currentAnimation->loopCount = 0;
 			currentAnimation->Reset();
 		}
 	}
+
 
 	//Power-ups
 
@@ -300,15 +301,12 @@ bool Player::Update(float dt)
 		currentAnimation->loopCount = 0;
 	}
 
-	if (SDL_GetTicks() - deadtempo >= 3000 && respawn > 0 && dead)
+	if (SDL_GetTicks() - deadtempo >= 2500 && lifes > 0 && dead && !respawning)
 	{
+		respawning = true;  // Antes de realizar el respawn, establece respawning en true
 		currentAnimation->Reset(); // Reinicia la animación de muerte aquí
-		canmove = true;
-		dead = false;
-		rightmode = true;
-		leftmode = false;
-		respawn--;
 
+		//Hace el respawn 
 		if (!check_1 && !check_2 && !check_3)
 		{
 			pbody->body->SetTransform({ PIXEL_TO_METERS(-620 + 16), PIXEL_TO_METERS(950) }, 0);
@@ -329,11 +327,20 @@ bool Player::Update(float dt)
 			pbody->body->SetTransform({ PIXEL_TO_METERS(10436), PIXEL_TO_METERS(802) }, 0);
 			app->render->camera.x = -9535;
 		}
+
+		// Asegúrate de que el jugador esté vivo después del respawn
+		dead = false;
+		rightmode = true;
+		leftmode = false;
+		lifes--;
+
+		canmove = true;
+		respawning = false;
 	}
 
 	//Jump
 
-	if (!jumping && inground && !dead) // If para pemitir saltar
+	if (!jumping && inground && !dead && !atacking) // If para pemitir saltar
 	{
 		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN )
 		{
@@ -561,7 +568,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		portal = true;
 		break;
 	case ColliderType::ENEMY:
-		if (!Godmode && !dead && !pbodyatack) {
+		if (!Godmode && !dead && !pbodyatack && !respawning) {
 			dead = true;
 			canmove = false;
 		}

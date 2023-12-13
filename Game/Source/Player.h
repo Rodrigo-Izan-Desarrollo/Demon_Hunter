@@ -32,7 +32,7 @@ public:
 	float speed = 0.2f;
 
 	//Repawns
-	int respawn = 100000000;
+	int lifes = 3;
 
 	//Textures paths
 	const char* texturePath;
@@ -114,6 +114,7 @@ public:
 
 	//Player is dead
 	bool dead = false;
+	bool respawning = false;
 
 	//Check points
 	bool check_1 = false;

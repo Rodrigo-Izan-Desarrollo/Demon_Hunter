@@ -33,7 +33,7 @@ public:
 
 	void AddEntity(Entity* entity);
 
-
+	List<Entity*> GetSlimes() const;
 public:
 
 	List<Entity*> entities;
