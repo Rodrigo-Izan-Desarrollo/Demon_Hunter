@@ -47,7 +47,7 @@ public:
 	//Enemies
 	Slime* slime;
 	Skeleton* skeleton;
-	Bomber* bomber;
+	SlimeVolador* slimevolador;
 
 	//Items
 	Powerup_1* powerup_1;

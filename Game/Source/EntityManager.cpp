@@ -90,8 +90,8 @@ Entity* EntityManager::CreateEntity(EntityType type)
 	case EntityType::SKELETON:
 		entity = new Skeleton();
 		break;
-	case EntityType::BOMBER:
-		entity = new Bomber();
+	case EntityType::SLIMEVOLADOR:
+		entity = new SlimeVolador();
 		break;
 	case EntityType::POWERUP_1:
 		entity = new Powerup_1();

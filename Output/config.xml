@@ -27,7 +27,7 @@
 		<player x="140" y="925" texturepathnormal="Assets/Textures/Player/player_1.png" texturepathatack="Assets/Textures/Player/player_2.png" texturepathaspeed="Assets/Textures/Player/player_3.png"  texturepathainv="Assets/Textures/Player/player_4.png" texturepathainv_2="Assets/Textures/Player/player_4_2.png" texturepathgod="Assets/Textures/Player/player_5.png" musicpathatack= "Assets/Audio/Fx/Atack.ogg" />
 		<slime x="1200" y="994" texturepathenemy_1="Assets/Textures/Enemies/Slime_1.png" musicpathslime= "Assets/Audio/Fx/Slimedeath.wav"/>
 		<skeleton x="11000" y="925 " texturepathenemy_2="Assets/Textures/Enemies/Skeleton_1.png"/>
-		<bomber x="50000" y="900 " texturepathenemy_3="Assets/Textures/Enemies/Dragon_bomba.png"/>
+		<slimevolador x="2560" y="672 " texturepathenemy_3="Assets/Textures/Enemies/Dragon_bomba.png"/>
 		<powerup_1 x="3520" y="1424" texturepathpower_1="Assets/Textures/Player/power_2.png"/>
 		<powerup_2 x="4672" y="1328" texturepathpower_2="Assets/Textures/Player/power_1.png"/>
 		<powerup_3 x="8576" y="112" texturepathpower_3="Assets/Textures/Player/power_3.png"/>
@@ -130,7 +130,7 @@
 		 
 	  </skeleton>
 
-	  <bomber loop="true" speed="0.150f" >
+	  <slimevolador loop="true" speed="0.150f" >
 		  <animation x="0" y="0" w="50" h="51" />
 		  <animation x="50" y="0" w="50" h="51" />
 		  <animation x="100" y="0" w="50" h="51" />
@@ -138,7 +138,15 @@
 		  <animation x="200" y="0" w="50" h="51" />
 		  <animation x="250" y="0" w="50" h="51" />
 
-	  </bomber>
+	  </slimevolador>
+
+	  <slimevolador_attack loop="true" speed="0.075f" >
+		  <animation x="300" y="0" w="50" h="51" />
+		  <animation x="350" y="0" w="50" h="51" />
+
+	  </slimevolador_attack>
+	  
+	  
 		
   </animations>
 		

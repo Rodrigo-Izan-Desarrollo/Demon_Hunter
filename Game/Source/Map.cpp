@@ -143,6 +143,11 @@ bool Map::LoadColission() {
                         PhysBody* c1 = app->physics->CreateRectangle(pos.x + 16, pos.y + 16, 32, 32, STATIC);
                         c1->ctype = ColliderType::WALLE;
                     }
+                    if (gid == tileset->firstgid + 7)
+                    {
+                        PhysBody* c1 = app->physics->CreateRectangle(pos.x + 16, pos.y + 16, 32, 32, STATIC);
+                        c1->ctype = ColliderType::WALLE;
+                    }
 
 
                 }
@@ -485,8 +490,20 @@ void Map::CreateNavigationMap(int& width, int& height, uchar** buffer, MapLayer*
 
             //If the gid is a blockedGid is an area that I cannot navigate, so is set in the navigation map as 0, all the other areas can be navigated
             //!!!! make sure that you assign blockedGid according to your map
-            if (gid == blockedGid) navigationMap[i] = 0;
-            else navigationMap[i] = 1;
+            //! 
+            //! 
+            
+            if (navigationLayer == navigationLayerSuelo) {
+                if (gid == blockedGid) navigationMap[i] = 0;
+                else navigationMap[i] = 1;
+            }
+            else {
+
+                if (gid == blockedGidVuelo) navigationMap[i] = 0;
+                else navigationMap[i] = 1;
+            }
+            
+           
         }
     }
 
