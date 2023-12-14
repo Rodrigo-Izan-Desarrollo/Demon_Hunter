@@ -144,23 +144,20 @@ bool SlimeVolador::Update(float dt)
 		iPoint* nextPathTile;
 		nextPathTile = lastPath.At(lastPath.Count() - 1);
 
-
-
 		if (playerDetectedPosition.x != INT_MAX) {
-			// Verificar si el enemigo está en la misma coordenada X que el jugador detectado
+			
 			if (position.x == playerDetectedPosition.x) {
-				// Mover verticalmente hacia la posición del jugador
+				
 				if (position.y < playerDetectedPosition.y) {
-					velocity.y = 5.0f; // Mover hacia abajo
+					velocity.y = 5.0f; 
+					velocity.x = 0.0f;
 				}
 				else if (position.y > playerDetectedPosition.y) {
-					velocity.y = -1.0f; // Mover hacia arriba
+					velocity.y = -1.0f; 
 				}
 				else {
-					velocity.y = 0.0f; // Detener el movimiento en Y
+					velocity.y = 0.0f; 
 				}
-
-				// Detener el movimiento horizontal
 				velocity.x = 0.0f;
 			}
 		}
@@ -206,18 +203,14 @@ bool SlimeVolador::Update(float dt)
 	if (rightmodeslimevolador)
 	{
 		app->render->DrawTexture(texture, position.x-5, position.y - 10, &currentAnimation->GetCurrentFrame());
-		if (isAttacking)
-		{
-			app->render->DrawTexture(texture, position.x-5, position.y - 10, &currentAnimation->GetCurrentFrame(), SDL_FLIP_NONE, NULL, 90.0);
-		}
 	}
 	if (leftmodeslimevolador)
 	{
 		app->render->DrawTexture(texture, position.x, position.y - 10 , &currentAnimation->GetCurrentFrame(), SDL_FLIP_HORIZONTAL);
-		if (isAttacking)
-		{
-			app->render->DrawTexture(texture, position.x, position.y - 10, &currentAnimation->GetCurrentFrame(), SDL_FLIP_HORIZONTAL, NULL, 90.0);
-		}
+	}
+	if (downmodeslimevolador)
+	{
+		app->render->DrawTexture(texture, position.x - 5, position.y - 10, &currentAnimation->GetCurrentFrame(), SDL_FLIP_NONE, 90.0);
 	}
 
 	

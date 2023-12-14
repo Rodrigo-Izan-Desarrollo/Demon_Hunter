@@ -59,6 +59,7 @@ public:
 
 	bool leftmodeslimevolador = true;
 	bool rightmodeslimevolador = false;
+	bool downmodeslimevolador = false;
 	bool reverse = false;
 	bool death = false;
 
