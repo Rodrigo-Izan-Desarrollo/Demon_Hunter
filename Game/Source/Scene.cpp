@@ -32,7 +32,11 @@ bool Scene::Awake(pugi::xml_node& config)
 	{
 		slime = (Slime*)app->entityManager->CreateEntity(EntityType::SLIME);
 		slime->parameters = itemNode;
-		//app->entityManager->GetSlimes();
+
+		// Call GetSlimes to get the list of Slimes
+		slimesList;
+
+		app->entityManager->GetSlimes(slimesList);
 	}
 	for (pugi::xml_node itemNode = config.child("skeleton"); itemNode; itemNode = itemNode.next_sibling("skeleton"))
 	{
@@ -212,11 +216,22 @@ bool Scene::LoadState(pugi::xml_node node) {
 	powerup_3->isPicked = node.child("poweritem").attribute("poweritem-3").as_bool();
 
 	//Slime
+		// Slimes
+	
+	pugi::xml_node slimesNode = node.child("slimes");
 
-		//Slime pos
-	slime->position.x = node.child("slimepos").attribute("x").as_int();
-	slime->position.y = node.child("slimepos").attribute("y").as_int();
-	slime->pbody->body->SetTransform({ PIXEL_TO_METERS(player->position.x), PIXEL_TO_METERS(player->position.y) }, 0);
+	for (pugi::xml_node slimeNode = slimesNode.child("slime"); slimeNode; slimeNode = slimeNode.next_sibling("slime")) {
+		Slime* slime = (Slime*)app->entityManager->CreateEntity(EntityType::SLIME);
+
+		// Carga la información específica del Slime desde los atributos de los nodos
+		slime->position.x = slimeNode.attribute("position_x").as_int();
+		slime->position.y = slimeNode.attribute("position_y").as_int();
+		// ... (carga más información según tus necesidades)
+
+		// Agrega el Slime a la lista
+		slimesList.Add(slime);
+	}
+
 
 		//Slime modes
 	slime->death = node.child("modess").attribute("dead").as_bool();
@@ -273,10 +288,20 @@ bool Scene::SaveState(pugi::xml_node node) {
 
 	//Slime
 	
-		//Slime pos
-	pugi::xml_node posslimenode = node.append_child("slimepos");
-	posslimenode.append_attribute("x").set_value(slime->position.x);
-	posslimenode.append_attribute("y").set_value(slime->position.y);
+	// Cargar slimes
+	pugi::xml_node slimesNode = node.child("slimes");
+
+	for (pugi::xml_node slimeNode = slimesNode.child("slime"); slimeNode; slimeNode = slimeNode.next_sibling("slime")) {
+		Slime* slime = (Slime*)app->entityManager->CreateEntity(EntityType::SLIME);
+
+		// Carga la información específica del Slime desde los atributos de los nodos
+		slime->position.x = slimeNode.attribute("position_x").as_int();
+		slime->position.y = slimeNode.attribute("position_y").as_int();
+		// ... (carga más información según tus necesidades)
+
+		// Agrega el Slime a la lista
+		slimesList.Add(slime);
+	}
 
 		//Slime modes
 	pugi::xml_node modesnodes = node.append_child("modess");

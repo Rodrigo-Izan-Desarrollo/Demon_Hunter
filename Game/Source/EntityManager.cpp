@@ -143,9 +143,9 @@ bool EntityManager::Update(float dt)
 	return ret;
 }
 
-List<Entity*> EntityManager::GetSlimes() const
+void EntityManager::GetSlimes(List<Entity*>& slimesList) const
 {
-	List<Entity*> slimesList;
+	slimesList.Clear();
 
 	ListItem<Entity*>* entity;
 
@@ -156,6 +156,4 @@ List<Entity*> EntityManager::GetSlimes() const
 			slimesList.Add(entity->data);
 		}
 	}
-
-	return slimesList;
 }
