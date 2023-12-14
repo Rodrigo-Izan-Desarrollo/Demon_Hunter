@@ -7,6 +7,11 @@
 #include "Scene.h"
 #include "Map.h"
 #include "Physics.h"
+#include "Slime.h"
+#include <string.h>
+#include <string>
+#include <iostream>
+#include <sstream>
 
 #include "Defs.h"
 #include "Log.h"
@@ -215,20 +220,22 @@ bool Scene::LoadState(pugi::xml_node node) {
 
 	//Slime
 		// Slimes
-	
-
-	for (int slimecount = 0; slimesList.Count(); slimecount++) {
+	for (int slimecount = 0; slimecount <  slimesList.Count(); slimecount++) {
 
 		Entity* slime = slimesList.At(slimecount)->data;
-
 		// Carga la información específica del Slime desde los atributos de los nodos
-		slime->position.x = node.attribute("position_x").as_int();
-		slime->position.y = node.attribute("position_y").as_int();
-		slime->leftmode = node.attribute("leftmode").as_int();
-		slime->rightmode = node.attribute("rightmode").as_int();
-		slime->death = node.attribute("death").as_int();
+		
+		
+		
+		std::string hola = std::to_string(slimecount + 1);
+		slime->position.x = node.child(("enemy" + hola).c_str()).attribute("x").as_int();
+		slime->position.y = node.child(("enemy" + hola).c_str()).attribute("y").as_int();
+		slime->tp = true;
 
-		slimesList.Add(slime);
+		//slime->leftmode = node.attribute("leftmode").as_bool();
+		//slime->rightmode = node.attribute("rightmode").as_bool();
+		//slime->death = node.attribute("death").as_bool();
+
 	}
 
 
@@ -289,20 +296,17 @@ bool Scene::SaveState(pugi::xml_node node) {
 	
 	// Cargar slimes
 	for (int slimecount = 0; slimecount < slimesList.Count(); slimecount++) {
-		pugi::xml_node enemyNode = node.append_child("enemy");
+		std::string hola = std::to_string(slimecount + 1);
+		pugi::xml_node enemyNode = node.append_child(("enemy" + hola).c_str());
 		Entity* slime = slimesList.At(slimecount)->data;
 
 		// Carga la información específica del Slime desde los atributos de los nodos
 		enemyNode.append_attribute("x").set_value(slime->position.x);
 		enemyNode.append_attribute("y").set_value(slime->position.y);
-		enemyNode.append_attribute("leftmode").set_value(slime->leftmode);
-		enemyNode.append_attribute("rightmode").set_value(slime->rightmode);
-		enemyNode.append_attribute("death").set_value(slime->death);
+		//enemyNode.append_attribute("leftmode").set_value(slime->leftmode);
+		//enemyNode.append_attribute("rightmode").set_value(slime->rightmode);
+		//enemyNode.append_attribute("death").set_value(slime->death);
 
-		// ... (carga más información según tus necesidades)
-
-		// Agrega el Slime a la lista
-		//slimesList.Add(slime);
 	}
 
 

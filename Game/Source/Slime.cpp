@@ -53,6 +53,11 @@ bool Slime::Start() {
 
 bool Slime::Update(float dt)
 {
+	if (tp)
+	{
+		tp = false;
+		pbody->body->SetTransform({ PIXEL_TO_METERS(position.x), PIXEL_TO_METERS(position.y) }, 0);
+	}
 	if (iskilled)
 	{
 		currentAnimation = &slime;
@@ -176,12 +181,15 @@ bool Slime::Update(float dt)
 		app->entityManager->DestroyEntity(this);
 		app->physics->world->DestroyBody(pbody->body);
 	}
-	// L07 DONE 4: Add a physics to an item - update the position of the object from the physics.  
-	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
-	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
+	// L07 DONE 4: Add a physics to an item - update the position of the object from the physics. 
+	if (!tp)
+	{
+		position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
+		position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
+		
+	}
+
 	pbody->body->SetLinearVelocity(velocity);
-
-
 
 	currentAnimation->Update();
 	if (leftmode )
