@@ -141,10 +141,23 @@
 	  </slimevolador>
 
 	  <slimevolador_attack loop="true" speed="0.075f" >
-		  <animation x="300" y="0" w="50" h="51" />
+		  
 		  <animation x="350" y="0" w="50" h="51" />
+		  <animation x="400" y="0" w="50" h="51" />
+		  
 
 	  </slimevolador_attack>
+
+	  <slimevolador_dead loop="true" speed="0.1f">
+
+		  <animation x="450" y="0" w="50" h="51" />
+		  <animation x="500" y="0" w="50" h="51" />
+		  <animation x="550" y="0" w="50" h="51" />
+		  <animation x="600" y="0" w="50" h="51" />
+		
+
+
+	  </slimevolador_dead>
 	  
 	  
 		

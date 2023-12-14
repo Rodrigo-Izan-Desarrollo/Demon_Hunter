@@ -37,9 +37,12 @@ bool SlimeVolador::Start() {
 	pbody->listener = this;
 
 	slimevolador.LoadAnimations("slimevolador");
+	slimevolador_attack.LoadAnimations("slimevolador_attack");
 	slimevolador_dead.LoadAnimations("slimevoladorr_dead");
 
 	velocity = { -0.5,-0.165 };
+
+
 
 	currentAnimation = &slimevolador;
 	return true;
@@ -73,6 +76,8 @@ bool SlimeVolador::Update(float dt)
 		onView = true;
 		currentAnimation = &slimevolador;
 
+		playerDetectedPosition = app->scene->player->position;
+
 		app->map->pathfindingVuelo->CreatePath(origPos, targPos);
 		lastPath = *app->map->pathfindingVuelo->GetLastPath();
 
@@ -82,6 +87,15 @@ bool SlimeVolador::Update(float dt)
 			if (!isAttacking)
 			{
 				isAttacking = true;
+			}
+		}
+
+
+		if (dist(app->scene->player->position, position) < app->map->mapData.tileWidth * tilesdeath)
+		{
+			if (!death)
+			{
+				death = true;
 			}
 		}
 
@@ -106,12 +120,12 @@ bool SlimeVolador::Update(float dt)
 		if (rightmodeslimevolador)
 		{
 			velocity.x = 0.0f;
-			velocity.y = -1.0f;
+			velocity.y = 1.0f;
 		}
 		if (leftmodeslimevolador)
 		{
 			velocity.x = 0.0f;
-			velocity.y = -1.0f;
+			velocity.y = 1.0f;
 		}
 
 	}
@@ -121,9 +135,7 @@ bool SlimeVolador::Update(float dt)
 		slimevolador_attack.Reset();
 		currentAnimation->loopCount = 0;
 	}
-	// Cuando el slime esta a tilesattack que persiga al player
-	// 
-	// Que el slime se mueva y haga flip
+
 
 	LOG("COUNTTTTTTTTTTT: %d", lastPath.Count());
 
@@ -132,6 +144,26 @@ bool SlimeVolador::Update(float dt)
 		iPoint* nextPathTile;
 		nextPathTile = lastPath.At(lastPath.Count() - 1);
 
+
+
+		if (playerDetectedPosition.x != INT_MAX) {
+			// Verificar si el enemigo está en la misma coordenada X que el jugador detectado
+			if (position.x == playerDetectedPosition.x) {
+				// Mover verticalmente hacia la posición del jugador
+				if (position.y < playerDetectedPosition.y) {
+					velocity.y = 5.0f; // Mover hacia abajo
+				}
+				else if (position.y > playerDetectedPosition.y) {
+					velocity.y = -1.0f; // Mover hacia arriba
+				}
+				else {
+					velocity.y = 0.0f; // Detener el movimiento en Y
+				}
+
+				// Detener el movimiento horizontal
+				velocity.x = 0.0f;
+			}
+		}
 
 		if (nextPathTile->x < origPos.x)
 		{
@@ -155,9 +187,10 @@ bool SlimeVolador::Update(float dt)
 	if (death)
 	{
 		currentAnimation = &slimevolador_dead;
+
 	}
 
-	if (currentAnimation == &slimevolador_dead && currentAnimation->HasFinished()) { // Reiniciar el salto
+	if (currentAnimation == &slimevolador_dead && currentAnimation->HasFinished()) { 
 		pbody->body->SetActive(false);
 		app->entityManager->DestroyEntity(this);
 		app->physics->world->DestroyBody(pbody->body);
@@ -172,18 +205,18 @@ bool SlimeVolador::Update(float dt)
 	currentAnimation->Update();
 	if (rightmodeslimevolador)
 	{
-		app->render->DrawTexture(texture, position.x, position.y + 7, &currentAnimation->GetCurrentFrame());
+		app->render->DrawTexture(texture, position.x-5, position.y - 10, &currentAnimation->GetCurrentFrame());
 		if (isAttacking)
 		{
-			app->render->DrawTexture(texture, position.x, position.y + 7, &currentAnimation->GetCurrentFrame(), SDL_FLIP_NONE, NULL, 90);
+			app->render->DrawTexture(texture, position.x-5, position.y - 10, &currentAnimation->GetCurrentFrame(), SDL_FLIP_NONE, NULL, 90.0);
 		}
 	}
 	if (leftmodeslimevolador)
 	{
-		app->render->DrawTexture(texture, position.x, position.y + 7, &currentAnimation->GetCurrentFrame(), SDL_FLIP_HORIZONTAL);
+		app->render->DrawTexture(texture, position.x, position.y - 10 , &currentAnimation->GetCurrentFrame(), SDL_FLIP_HORIZONTAL);
 		if (isAttacking)
 		{
-			app->render->DrawTexture(texture, position.x, position.y + 7, &currentAnimation->GetCurrentFrame(), SDL_FLIP_HORIZONTAL, NULL, 90);
+			app->render->DrawTexture(texture, position.x, position.y - 10, &currentAnimation->GetCurrentFrame(), SDL_FLIP_HORIZONTAL, NULL, 90.0);
 		}
 	}
 

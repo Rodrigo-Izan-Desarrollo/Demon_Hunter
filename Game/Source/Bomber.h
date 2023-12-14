@@ -47,11 +47,13 @@ public:
 	PhysBody* pbody;
 	PhysBody* damage;
 
-	int tilesview = 7;
+	int tilesview = 10;
 
 	bool onView = false;
 
-	int tilesattack = 3;
+	int tilesattack =9;
+
+	int tilesdeath = 1;
 
 	bool isAttacking = false;
 
@@ -65,6 +67,7 @@ public:
 	iPoint origPos;
 	iPoint targPos;
 	DynArray<iPoint> lastPath;
+	iPoint playerDetectedPosition;
 
 	const char* texturePathBomber;
 
