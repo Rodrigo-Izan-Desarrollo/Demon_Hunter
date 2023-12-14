@@ -64,6 +64,7 @@ public:
 	bool leftmodeslime = true;
 	bool rightmodeslime = false;
 	bool reverse = false;
+	bool iskilled = false;
 	bool death = false;
 
 	b2Vec2 velocity;

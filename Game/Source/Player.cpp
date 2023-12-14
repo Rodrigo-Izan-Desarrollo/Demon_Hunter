@@ -303,10 +303,24 @@ bool Player::Update(float dt)
 
 	if (SDL_GetTicks() - deadtempo >= 2500 && lifes > 0 && dead && !respawning)
 	{
-		respawning = true;  // Antes de realizar el respawn, establece respawning en true
+
+		pbody->body->SetActive(false);
+		app->physics->world->DestroyBody(pbody->body);
+
 		currentAnimation->Reset(); // Reinicia la animación de muerte aquí
 
-		//Hace el respawn 
+		respawning = true;  // Antes de realizar el respawn, establece respawning en true
+
+		dead = false;
+	}
+
+	if (respawning)
+	{
+		pbody = app->physics->CreateCircle(position.x + 30, position.y + 30, 13, bodyType::DYNAMIC);
+		pbody->listener = this;
+		pbody->ctype = ColliderType::PLAYER;
+
+		////Hace el respawn 
 		if (!check_1 && !check_2 && !check_3)
 		{
 			pbody->body->SetTransform({ PIXEL_TO_METERS(-620 + 16), PIXEL_TO_METERS(950) }, 0);
@@ -329,7 +343,6 @@ bool Player::Update(float dt)
 		}
 
 		// Asegúrate de que el jugador esté vivo después del respawn
-		dead = false;
 		rightmode = true;
 		leftmode = false;
 		lifes--;

@@ -53,19 +53,24 @@ bool Slime::Start() {
 
 bool Slime::Update(float dt)
 {
-
+	if (iskilled)
+	{
+		currentAnimation = &slime;
+	}
 	
 	if (reverse && leftmodeslime && !onView)
 	{
 		leftmodeslime = false;
 		rightmodeslime = true;
 		reverse = false;
+		currentAnimation = &slime;
 	}	
 	if (reverse && rightmodeslime && !onView)
 	{
 		leftmodeslime = true;
 		rightmodeslime = false;
 		reverse = false;
+		currentAnimation = &slime;
 	}
 
 
@@ -76,16 +81,16 @@ bool Slime::Update(float dt)
 
 	if (dist(app->scene->player->position, position) < app->map->mapData.tileWidth * tilesview)
 	{
-		if (!app->scene->player->dead || !app->scene->player->invisible)
+		if (!(app->scene->player->dead || app->scene->player->invisible))
 		{
 			onView = true;
+			iskilled = false;
 			currentAnimation = &slime;
 
 			app->map->pathfindingSuelo->CreatePath(origPos, targPos);
 			lastPath = *app->map->pathfindingSuelo->GetLastPath();
 
-
-			if (dist(app->scene->player->position, position) < app->map->mapData.tileWidth * tilesattack && onView)
+			if (dist(app->scene->player->position, position) < app->map->mapData.tileWidth * tilesattack)
 			{
 				if (!isAttacking)
 				{
@@ -93,9 +98,14 @@ bool Slime::Update(float dt)
 				}
 			}
 		}
+		else
+		{
+			onView = false;
+		}
 	}
-	else {
-		onView = false; // Asegurarse de que onView sea falso cuando el jugador no está a la vista
+	else
+	{
+		onView = false;
 
 		if (rightmodeslime)
 		{
@@ -106,14 +116,13 @@ bool Slime::Update(float dt)
 			velocity.x = -0.5f;
 		}
 	}
-
 	
 
 
 
 
 
-	if (isAttacking && !damage)
+	if (isAttacking && !iskilled)
 	{
 		currentAnimation = &slime_attack;
 
@@ -203,10 +212,17 @@ void Slime::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::WALLE:
 		LOG("PATOTURMO");
 		reverse=true;
-
 		break;
 	case ColliderType::PATACK:
 		death = true;
+		break;	
+	case ColliderType::PLAYER:
+		if (app->scene->player->dead)
+		{
+			iskilled = true;
+			reverse = true;
+			isAttacking = false;
+		}
 		break;
 	default:
 		break;
