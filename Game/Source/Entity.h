@@ -89,7 +89,10 @@ public:
 
 	// Possible properties, it depends on how generic we
 	// want our Entity class, maybe it's not renderable...
-	iPoint position;       
+	iPoint position; 
+	bool leftmode;
+	bool rightmode;
+	bool death;
 	bool renderable = true;
 };
 

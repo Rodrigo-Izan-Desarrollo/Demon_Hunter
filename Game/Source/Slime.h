@@ -61,8 +61,8 @@ public:
 
 	bool isAttacking = false;
 
-	bool leftmodeslime = true;
-	bool rightmodeslime = false;
+	bool leftmode = true;
+	bool rightmode = false;
 	bool reverse = false;
 	bool iskilled = false;
 	bool death = false;

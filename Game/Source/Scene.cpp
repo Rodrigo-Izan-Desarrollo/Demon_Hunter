@@ -32,8 +32,6 @@ bool Scene::Awake(pugi::xml_node& config)
 	{
 		slime = (Slime*)app->entityManager->CreateEntity(EntityType::SLIME);
 		slime->parameters = itemNode;
-
-		// Call GetSlimes to get the list of Slimes
 	}
 	slimesList;
 
@@ -226,9 +224,10 @@ bool Scene::LoadState(pugi::xml_node node) {
 		// Carga la información específica del Slime desde los atributos de los nodos
 		slime->position.x = node.attribute("position_x").as_int();
 		slime->position.y = node.attribute("position_y").as_int();
-		// ... (carga más información según tus necesidades)
+		slime->leftmode = node.attribute("leftmode").as_int();
+		slime->rightmode = node.attribute("rightmode").as_int();
+		slime->death = node.attribute("death").as_int();
 
-		// Agrega el Slime a la lista
 		slimesList.Add(slime);
 	}
 
@@ -296,17 +295,16 @@ bool Scene::SaveState(pugi::xml_node node) {
 		// Carga la información específica del Slime desde los atributos de los nodos
 		enemyNode.append_attribute("x").set_value(slime->position.x);
 		enemyNode.append_attribute("y").set_value(slime->position.y);
+		enemyNode.append_attribute("leftmode").set_value(slime->leftmode);
+		enemyNode.append_attribute("rightmode").set_value(slime->rightmode);
+		enemyNode.append_attribute("death").set_value(slime->death);
+
 		// ... (carga más información según tus necesidades)
 
 		// Agrega el Slime a la lista
 		//slimesList.Add(slime);
 	}
 
-		//Slime modes
-	/*pugi::xml_node modesnodes = node.append_child("modess");
-	modesnodes.append_attribute("dead").set_value(slime->death);
-	modesnodes.append_attribute("leftmode").set_value(slime->leftmodeslime);
-	modesnodes.append_attribute("rightmode").set_value(slime->rightmodeslime);*/
 
 	return true;
 }

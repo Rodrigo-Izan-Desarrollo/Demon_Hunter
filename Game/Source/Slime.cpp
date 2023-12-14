@@ -58,17 +58,17 @@ bool Slime::Update(float dt)
 		currentAnimation = &slime;
 	}
 	
-	if (reverse && leftmodeslime && !onView)
+	if (reverse && leftmode && !onView)
 	{
-		leftmodeslime = false;
-		rightmodeslime = true;
+		leftmode = false;
+		rightmode = true;
 		reverse = false;
 		currentAnimation = &slime;
 	}	
-	if (reverse && rightmodeslime && !onView)
+	if (reverse && rightmode && !onView)
 	{
-		leftmodeslime = true;
-		rightmodeslime = false;
+		leftmode = true;
+		rightmode = false;
 		reverse = false;
 		currentAnimation = &slime;
 	}
@@ -107,11 +107,11 @@ bool Slime::Update(float dt)
 	{
 		onView = false;
 
-		if (rightmodeslime)
+		if (rightmode)
 		{
 			velocity.x = 0.5f;
 		}
-		if (leftmodeslime)
+		if (leftmode)
 		{
 			velocity.x = -0.5f;
 		}
@@ -147,14 +147,14 @@ bool Slime::Update(float dt)
 
 		if (nextPathTile->x < origPos.x)
 		{
-			rightmodeslime = false;
-			leftmodeslime = true;
+			rightmode = false;
+			leftmode = true;
 			velocity.x = -1;
 		}
 		else
 		{
-			rightmodeslime = true;
-			leftmodeslime = false;
+			rightmode = true;
+			leftmode = false;
 			velocity.x = +1;
 		}
 		if (nextPathTile->x == origPos.x) {
@@ -184,11 +184,11 @@ bool Slime::Update(float dt)
 
 
 	currentAnimation->Update();
-	if (leftmodeslime )
+	if (leftmode )
 	{
 		app->render->DrawTexture(texture, position.x, position.y + 7, &currentAnimation->GetCurrentFrame());
 	}
-	if (rightmodeslime)
+	if (rightmode)
 	{
 		app->render->DrawTexture(texture, position.x, position.y + 7, &currentAnimation->GetCurrentFrame(), SDL_FLIP_HORIZONTAL);
 	}
