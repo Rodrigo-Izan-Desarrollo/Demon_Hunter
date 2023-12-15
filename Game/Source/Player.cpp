@@ -24,13 +24,18 @@ bool Player::Awake() {
 
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
+
 	texturePath = parameters.attribute("texturepathnormal").as_string();
 	texturePath_1 = parameters.attribute("texturepathatack").as_string();
 	texturePath_2 = parameters.attribute("texturepathaspeed").as_string();
 	texturePath_3 = parameters.attribute("texturepathainv").as_string();
 	texturePath_3_2 = parameters.attribute("texturepathainv_2").as_string();
 	texturePath_4 = parameters.attribute("texturepathgod").as_string();
+
 	musicpathatack = parameters.attribute("musicpathatack").as_string();
+	musicpathjump = parameters.attribute("musicpathjump").as_string();
+	musicpathpickup = parameters.attribute("musicpathpickup").as_string();
+	musicpathpowerup = parameters.attribute("musicpathpowerup").as_string();
 
 
 	return true;
@@ -45,7 +50,12 @@ bool Player::Start() {
 	texture_3 = app->tex->Load(texturePath_3);
 	texture_3_2 = app->tex->Load(texturePath_3_2);
 	texture_4 = app->tex->Load(texturePath_4);
+
+	//Initialize sound efects
 	atack_Fx = app->audio->LoadFx(musicpathatack);
+	jump_Fx = app->audio->LoadFx(musicpathjump);
+	pick_up_Fx = app->audio->LoadFx(musicpathpickup);
+	powerup_Fx = app->audio->LoadFx(musicpathpowerup);
 
 
 	//Create de pbody
@@ -126,6 +136,7 @@ bool Player::Update(float dt)
 	//Activate individual powerup
 	if (app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN && canchange && canpower_1 && !dead)
 	{
+		app->audio->PlayFx(powerup_Fx);
 		powerup_1 = !powerup_1;
 		powerup_2 = false;
 		powerup_3 = false;
@@ -135,6 +146,7 @@ bool Player::Update(float dt)
 
 	if (app->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN && canchange && canpower_2 && !dead)
 	{
+		app->audio->PlayFx(powerup_Fx);
 		powerup_2 = !powerup_2;
 		powerup_1 = false;
 		powerup_3 = false;
@@ -144,6 +156,7 @@ bool Player::Update(float dt)
 
 	if (app->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN && canchange && canpower_3 && !dead)
 	{
+		app->audio->PlayFx(powerup_Fx);
 		powerup_3 = !powerup_3;
 		powerup_2 = false;
 		powerup_1 = false;
@@ -159,19 +172,19 @@ bool Player::Update(float dt)
 
 	//Checkpoints
 
-	if (position.x == 3396 && position.y == 1058)
+	if (position.x >= 3396 && position.y == 1058)
 	{
 		check_1 = true;
 		check_2 = false;
 		check_3 = false;
 	}
-	if (position.x == 6781 && position.y == 994)
+	if (position.x >= 6781 && position.y == 994)
 	{
 		check_2 = true;
 		check_1 = false;
 		check_3 = false;
 	}
-	if (position.x == 10430 && position.y == 802)
+	if (position.x >= 10430 && position.y == 802)
 	{
 		check_3 = true;
 		check_2 = false;
@@ -357,6 +370,7 @@ bool Player::Update(float dt)
 	{
 		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN )
 		{
+			app->audio->PlayFx(jump_Fx);
 			jumping = true;
 			inground = false;
 			if (powerup_1)
@@ -564,12 +578,15 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	switch (physB->ctype) {
 	case ColliderType::POWERUP_1:
 		canpower_1 = true;
+		app->audio->PlayFx(pick_up_Fx);
 		break;
 	case ColliderType::POWERUP_2:
 		canpower_2 = true;
+		app->audio->PlayFx(pick_up_Fx);
 		break;
 	case ColliderType::POWERUP_3:
 		canpower_3 = true;
+		app->audio->PlayFx(pick_up_Fx);
 		break;
 	case ColliderType::PLATFORM:
 		inground = true;

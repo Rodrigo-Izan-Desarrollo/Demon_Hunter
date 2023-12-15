@@ -172,7 +172,6 @@ bool Slime::Update(float dt)
 	if (death)
 	{
 		currentAnimation = &slime_dead;
-		app->audio->PlayFx(slime_Fx);
 
 	}
 
@@ -223,6 +222,7 @@ void Slime::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::PATACK:
 		death = true;
+		app->audio->PlayFx(slime_Fx);
 		break;	
 	case ColliderType::PLAYER:
 		if (app->scene->player->dead)
