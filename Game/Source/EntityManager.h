@@ -33,6 +33,8 @@ public:
 
 	void AddEntity(Entity* entity);
 
+	//Funcion para crear una Lista de slimes
+	void GetSlimes(List<Entity*>& slimesList) const;
 
 public:
 

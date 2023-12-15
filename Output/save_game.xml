@@ -6,15 +6,20 @@
 	<audio />
 	<:anonymous />
 	<scene>
-		<playerposition x="3384" y="1058" />
-		<modes sleeping="false" dead="false" canmove="true" inground="true" rightmode="true" leftmode="false" caninv="true" God-mode="false" />
+		<playerposition x="426" y="994" />
+		<modes sleeping="true" dead="false" canmove="true" inground="true" rightmode="true" leftmode="false" caninv="true" God-mode="false" />
 		<canpower canpower-1="false" canpower-2="false" canpower-3="false" />
 		<power power-1="false" power-2="false" power-3="false" canchange="true" />
 		<poweritem poweritem-1="false" poweritem-2="false" poweritem-3="false" />
+		<enemy1 x="1270" y="994" />
+		<enemy2 x="2936" y="1186" />
+		<enemy3 x="2986" y="1186" />
+		<enemy4 x="7320" y="1186" />
+		<enemy5 x="7613" y="1250" />
 	</scene>
 	<:anonymous />
 	<entitymanager />
 	<renderer>
-		<camera x="-3259" y="-508" />
+		<camera x="-301" y="-444" />
 	</renderer>
 </game_state>

@@ -53,19 +53,29 @@ bool Slime::Start() {
 
 bool Slime::Update(float dt)
 {
-
+	if (tp)
+	{
+		tp = false;
+		pbody->body->SetTransform({ PIXEL_TO_METERS(position.x), PIXEL_TO_METERS(position.y) }, 0);
+	}
+	if (iskilled)
+	{
+		currentAnimation = &slime;
+	}
 	
-	if (reverse && leftmodeslime && !onView)
+	if (reverse && leftmode && !onView)
 	{
-		leftmodeslime = false;
-		rightmodeslime = true;
+		leftmode = false;
+		rightmode = true;
 		reverse = false;
+		currentAnimation = &slime;
 	}	
-	if (reverse && rightmodeslime && !onView)
+	if (reverse && rightmode && !onView)
 	{
-		leftmodeslime = true;
-		rightmodeslime = false;
+		leftmode = true;
+		rightmode = false;
 		reverse = false;
+		currentAnimation = &slime;
 	}
 
 
@@ -76,43 +86,48 @@ bool Slime::Update(float dt)
 
 	if (dist(app->scene->player->position, position) < app->map->mapData.tileWidth * tilesview)
 	{
-		onView = true;
-		currentAnimation = &slime;
-
-		app->map->pathfindingSuelo->CreatePath(origPos, targPos);
-		lastPath = *app->map->pathfindingSuelo->GetLastPath();
-
-
-		if (dist(app->scene->player->position, position) < app->map->mapData.tileWidth * tilesattack)
+		if (!(app->scene->player->dead || app->scene->player->invisible))
 		{
-			if (!isAttacking)
+			onView = true;
+			iskilled = false;
+			currentAnimation = &slime;
+
+			app->map->pathfindingSuelo->CreatePath(origPos, targPos);
+			lastPath = *app->map->pathfindingSuelo->GetLastPath();
+
+			if (dist(app->scene->player->position, position) < app->map->mapData.tileWidth * tilesattack)
 			{
-				isAttacking = true;
+				if (!isAttacking)
+				{
+					isAttacking = true;
+				}
 			}
 		}
-
-
+		else
+		{
+			onView = false;
+		}
 	}
-	else {
-		onView = false; // Asegurarse de que onView sea falso cuando el jugador no está a la vista
+	else
+	{
+		onView = false;
 
-		if (rightmodeslime)
+		if (rightmode)
 		{
 			velocity.x = 0.5f;
 		}
-		if (leftmodeslime)
+		if (leftmode)
 		{
 			velocity.x = -0.5f;
 		}
 	}
-
 	
 
 
 
 
 
-	if (isAttacking && !damage)
+	if (isAttacking && !iskilled)
 	{
 		currentAnimation = &slime_attack;
 
@@ -137,14 +152,14 @@ bool Slime::Update(float dt)
 
 		if (nextPathTile->x < origPos.x)
 		{
-			rightmodeslime = false;
-			leftmodeslime = true;
+			rightmode = false;
+			leftmode = true;
 			velocity.x = -1;
 		}
 		else
 		{
-			rightmodeslime = true;
-			leftmodeslime = false;
+			rightmode = true;
+			leftmode = false;
 			velocity.x = +1;
 		}
 		if (nextPathTile->x == origPos.x) {
@@ -157,7 +172,6 @@ bool Slime::Update(float dt)
 	if (death)
 	{
 		currentAnimation = &slime_dead;
-		app->audio->PlayFx(slime_Fx);
 
 	}
 
@@ -166,19 +180,22 @@ bool Slime::Update(float dt)
 		app->entityManager->DestroyEntity(this);
 		app->physics->world->DestroyBody(pbody->body);
 	}
-	// L07 DONE 4: Add a physics to an item - update the position of the object from the physics.  
-	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
-	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
+	// L07 DONE 4: Add a physics to an item - update the position of the object from the physics. 
+	if (!tp)
+	{
+		position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
+		position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
+		
+	}
+
 	pbody->body->SetLinearVelocity(velocity);
 
-
-
 	currentAnimation->Update();
-	if (leftmodeslime )
+	if (leftmode )
 	{
 		app->render->DrawTexture(texture, position.x, position.y + 7, &currentAnimation->GetCurrentFrame());
 	}
-	if (rightmodeslime)
+	if (rightmode)
 	{
 		app->render->DrawTexture(texture, position.x, position.y + 7, &currentAnimation->GetCurrentFrame(), SDL_FLIP_HORIZONTAL);
 	}
@@ -196,15 +213,24 @@ void Slime::OnCollision(PhysBody* physA, PhysBody* physB) {
 
 	switch (physB->ctype) {
 	
-	case ColliderType::PLATFORM:
+	case ColliderType::ENEMY:
+		reverse = true;
 		break;
 	case ColliderType::WALLE:
 		LOG("PATOTURMO");
 		reverse=true;
-
 		break;
 	case ColliderType::PATACK:
 		death = true;
+		app->audio->PlayFx(slime_Fx);
+		break;	
+	case ColliderType::PLAYER:
+		if (app->scene->player->dead)
+		{
+			iskilled = true;
+			reverse = true;
+			isAttacking = false;
+		}
 		break;
 	default:
 		break;

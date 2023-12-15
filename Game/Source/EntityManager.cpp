@@ -142,3 +142,18 @@ bool EntityManager::Update(float dt)
 
 	return ret;
 }
+
+void EntityManager::GetSlimes(List<Entity*>& slimesList) const
+{
+	slimesList.Clear();
+
+	ListItem<Entity*>* entity;
+
+	for (entity = entities.start; entity != NULL; entity = entity->next)
+	{
+		if (entity->data->type == EntityType::SLIME)
+		{
+			slimesList.Add(entity->data);
+		}
+	}
+}

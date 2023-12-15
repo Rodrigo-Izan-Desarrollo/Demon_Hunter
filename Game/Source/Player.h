@@ -32,7 +32,7 @@ public:
 	float speed = 0.2f;
 
 	//Repawns
-	int respawn = 100000000;
+	int lifes = 3;
 
 	//Textures paths
 	const char* texturePath;
@@ -41,7 +41,11 @@ public:
 	const char* texturePath_3;
 	const char* texturePath_3_2;
 	const char* texturePath_4;
+	//Sound efects path
 	const char* musicpathatack;
+	const char* musicpathjump;
+	const char* musicpathpickup;
+	const char* musicpathpowerup;
 
 	//Timers
 	Uint32 invtempo = NULL;
@@ -59,6 +63,9 @@ public:
 	SDL_Texture* texture_4 = NULL;
 
 	uint atack_Fx;
+	uint jump_Fx;
+	uint pick_up_Fx;
+	uint powerup_Fx;
 
 	PhysBody* pbody;
 	PhysBody* pbodyatack = nullptr;
@@ -114,6 +121,7 @@ public:
 
 	//Player is dead
 	bool dead = false;
+	bool respawning = false;
 
 	//Check points
 	bool check_1 = false;
