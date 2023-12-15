@@ -92,7 +92,7 @@ bool Scene::Awake(pugi::xml_node& config)
 // Called before the first frame
 bool Scene::Start()
 {
-	/*app->audio->PlayMusic(configNode.child("music").attribute("musicpathambient").as_string());*/
+	app->audio->PlayMusic(configNode.child("music").attribute("musicpathambient").as_string());
 
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);
@@ -122,29 +122,6 @@ bool Scene::PreUpdate()
 // Called each loop iteration
 bool Scene::Update(float dt)
 {
-	float camSpeed = 1; 
-
-	//if(app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
-	//	app->render->camera.y -= (int)ceil(camSpeed * dt);
-
-	//if(app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
-	//	app->render->camera.y += (int)ceil(camSpeed * dt);
-
-	if(app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
-		app->render->camera.x -= (int)ceil(camSpeed * dt);
-
-	if(app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
-		app->render->camera.x += (int)ceil(camSpeed * dt);
-
-	//// Renders the image in the center of the screen 
-	////app->render->DrawTexture(img, (int)textPosX, (int)textPosY);
-	/*iPoint mousePos;
-	app->input->GetMousePosition(mousePos.x, mousePos.y);
-
-	iPoint mouseTile = app->map->WorldToMap(mousePos.x - app->render->camera.x,
-		mousePos.y - app->render->camera.y);
-
-	app->map->pathfinding->CreatePath(mouseTile, app->map->WorldToMap(player->position.x, player->position.y));*/
 
 	// L14: TODO 3: Request App to Load / Save when pressing the keys F5 (save) / F6 (load)
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
@@ -231,18 +208,8 @@ bool Scene::LoadState(pugi::xml_node node) {
 		slime->position.x = node.child(("enemy" + hola).c_str()).attribute("x").as_int();
 		slime->position.y = node.child(("enemy" + hola).c_str()).attribute("y").as_int();
 		slime->tp = true;
-
-		//slime->leftmode = node.attribute("leftmode").as_bool();
-		//slime->rightmode = node.attribute("rightmode").as_bool();
-		//slime->death = node.attribute("death").as_bool();
-
 	}
 
-
-		//Slime modes
-	/*slime->death = node.child("modess").attribute("dead").as_bool();
-	slime->leftmodeslime = node.child("modess").attribute("leftmode").as_bool();
-	slime->rightmodeslime = node.child("modess").attribute("rightmode").as_bool();*/
 
 	return true;
 }
@@ -303,9 +270,6 @@ bool Scene::SaveState(pugi::xml_node node) {
 		// Carga la información específica del Slime desde los atributos de los nodos
 		enemyNode.append_attribute("x").set_value(slime->position.x);
 		enemyNode.append_attribute("y").set_value(slime->position.y);
-		//enemyNode.append_attribute("leftmode").set_value(slime->leftmode);
-		//enemyNode.append_attribute("rightmode").set_value(slime->rightmode);
-		//enemyNode.append_attribute("death").set_value(slime->death);
 
 	}
 
