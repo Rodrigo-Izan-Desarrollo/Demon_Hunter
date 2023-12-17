@@ -9,6 +9,7 @@
 #include "Powerup_1.h"
 #include "Powerup_2.h"
 #include "Powerup_3.h"
+#include <list>
 
 struct SDL_Texture;
 
@@ -70,6 +71,8 @@ private:
 	uint ambient_Fx;
 
 	pugi::xml_node configNode;
+
+	List<Entity*> slimesList;
 
 
 };
