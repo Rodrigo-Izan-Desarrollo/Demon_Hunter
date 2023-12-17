@@ -50,18 +50,23 @@ bool SlimeVolador::Start() {
 
 bool SlimeVolador::Update(float dt)
 {
-
+	if (downmodeslimevolador)
+	{
+		LOG("downmode");
+	}
 
 	if (reverse && leftmodeslimevolador && !onView)
 	{
 		leftmodeslimevolador = false;
 		rightmodeslimevolador = true;
+		downmodeslimevolador = false;
 		reverse = false;
 	}
 	if (reverse && rightmodeslimevolador && !onView)
 	{
 		leftmodeslimevolador = true;
 		rightmodeslimevolador = false;
+		downmodeslimevolador = false;
 		reverse = false;
 	}
 
@@ -114,18 +119,29 @@ bool SlimeVolador::Update(float dt)
 		}
 	}
 
-	if (isAttacking && !damage)
+	if (isAttacking )
 	{
 		currentAnimation = &slimevolador_attack;
-		if (rightmodeslimevolador)
+	
+	
+		if (app->scene->player->position.x < position.x && !downmodeslimevolador )
 		{
-			velocity.x = 0.0f;
-			velocity.y = 1.0f;
+			velocity.x = -2.0f;
+				
 		}
-		if (leftmodeslimevolador)
+		else if ( app->scene->player->position.x > position.x && !downmodeslimevolador)
 		{
-			velocity.x = 0.0f;
-			velocity.y = 1.0f;
+			velocity.x = +2.0f;
+		}
+		if (abs(app->scene->player->position.x - position.x) <= 5)
+		{
+			rightmodeslimevolador = false;
+			leftmodeslimevolador = false;
+			downmodeslimevolador = true;
+		}
+		if (downmodeslimevolador)
+		{
+			velocity.y = 2.0f;
 		}
 
 	}
@@ -164,14 +180,20 @@ bool SlimeVolador::Update(float dt)
 
 		if (nextPathTile->x < origPos.x)
 		{
-			rightmodeslimevolador = false;
-			leftmodeslimevolador = true;
+			if (!isAttacking)
+			{
+				rightmodeslimevolador = false;
+				leftmodeslimevolador = true;
+			}
 			velocity.x = -1;
 		}
 		else
 		{
-			rightmodeslimevolador = true;
-			leftmodeslimevolador = false;
+			if (!isAttacking)
+			{
+				rightmodeslimevolador = true;
+				leftmodeslimevolador = false;
+			}
 			velocity.x = +1;
 		}
 		if (nextPathTile->x == origPos.x) {
@@ -202,15 +224,18 @@ bool SlimeVolador::Update(float dt)
 	currentAnimation->Update();
 	if (rightmodeslimevolador)
 	{
-		app->render->DrawTexture(texture, position.x-5, position.y - 10, &currentAnimation->GetCurrentFrame());
+		LOG("ESTA ENTRANDO rigth");
+		app->render->DrawTexture(texture, position.x-10, position.y - 10, &currentAnimation->GetCurrentFrame());
 	}
 	if (leftmodeslimevolador)
 	{
+		LOG("ESTA ENTRANDO left");
 		app->render->DrawTexture(texture, position.x, position.y - 10 , &currentAnimation->GetCurrentFrame(), SDL_FLIP_HORIZONTAL);
 	}
 	if (downmodeslimevolador)
 	{
-		app->render->DrawTexture(texture, position.x - 5, position.y - 10, &currentAnimation->GetCurrentFrame(), SDL_FLIP_NONE, 90.0);
+		LOG("ESTA ENTRANDO down");
+		app->render->DrawTexture(texture, position.x - 5, position.y - 10, &currentAnimation->GetCurrentFrame(), SDL_FLIP_NONE, 1.0f, 90.0);
 	}
 
 	
