@@ -175,7 +175,7 @@ bool Slime::Update(float dt)
 
 	}
 
-	if (currentAnimation == &slime_dead && currentAnimation->HasFinished() ) { // Reiniciar el salto
+	if (currentAnimation == &slime_dead && currentAnimation->HasFinished() ) { 
 		pbody->body->SetActive(false);
 		app->entityManager->DestroyEntity(this);
 		app->physics->world->DestroyBody(pbody->body);

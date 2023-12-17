@@ -31,6 +31,7 @@ enum class ColliderType {
 	PORTAL,
 	WALL,
 	WALLE,
+	WALLE2,
 	ENEMY,
 	POWERUP_1,
 	POWERUP_2,

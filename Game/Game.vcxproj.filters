@@ -70,6 +70,9 @@
     <ClCompile Include="Source\Window.cpp">
       <Filter>cpp.files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\missutils.cpp">
+      <Filter>cpp.files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Animation.h">
