@@ -130,6 +130,14 @@ bool Slime::Update(float dt)
 	if (isAttacking && !iskilled)
 	{
 		currentAnimation = &slime_attack;
+  		if (rightmode && !leftmode)
+		{
+			velocity.x = 5.0f;
+		}
+		if (leftmode && !rightmode)
+		{
+			velocity.x = -5.0;
+		}
 
 	}
 
