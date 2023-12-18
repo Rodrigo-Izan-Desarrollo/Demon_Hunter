@@ -58,11 +58,37 @@
 			   musicpathslime= "Assets/Audio/Fx/Slimedeath.wav"
 		/>	
 
-		<slimevolador x="2560" y="672 " texturepathenemy_3="Assets/Textures/Enemies/Dragon_bomba.png"/>
+		<slimevolador x="2560" y="672" 
+					  leftmode="true" rightmode="false"
+					  texturepathenemy_3="Assets/Textures/Enemies/Dragon_bomba.png"/>
+		<slimevolador x="2760" y="672"
+					  leftmode="false" rightmode="true"
+					  texturepathenemy_3="Assets/Textures/Enemies/Dragon_bomba.png"/>
+		<slimevolador x="4750" y="576"
+					  leftmode="true" rightmode="false"
+					  texturepathenemy_3="Assets/Textures/Enemies/Dragon_bomba.png"/>
+		<slimevolador x="4900" y="576"
+					  leftmode="false" rightmode="true"
+					  texturepathenemy_3="Assets/Textures/Enemies/Dragon_bomba.png"/>
+		<slimevolador x="5000" y="576"
+					  leftmode="true" rightmode="false"
+					  texturepathenemy_3="Assets/Textures/Enemies/Dragon_bomba.png"/>
+		<slimevolador x="7264" y="608"
+					  leftmode="false" rightmode="true"
+					  texturepathenemy_3="Assets/Textures/Enemies/Dragon_bomba.png"/>
+		<slimevolador x="7584" y="416"
+					  leftmode="false" rightmode="true"
+					  texturepathenemy_3="Assets/Textures/Enemies/Dragon_bomba.png"/>
+		<slimevolador x="7968" y="224"
+					  leftmode="false" rightmode="true"
+					  texturepathenemy_3="Assets/Textures/Enemies/Dragon_bomba.png"/>
+		<slimevolador x="8256" y="32"
+					  leftmode="false" rightmode="true"
+					  texturepathenemy_3="Assets/Textures/Enemies/Dragon_bomba.png"/>
 
 		<powerup_1 x="3520" y="1424" texturepathpower_1="Assets/Textures/Player/power_2.png"/>
 	  
-		<powerup_2 x="4672" y="1328" texturepathpower_2="Assets/Textures/Player/power_1.png"/>
+		<powerup_2 x="4700" y="1328" texturepathpower_2="Assets/Textures/Player/power_1.png"/>
 	  
 		<powerup_3 x="8576" y="112" texturepathpower_3="Assets/Textures/Player/power_3.png"/>
 	  

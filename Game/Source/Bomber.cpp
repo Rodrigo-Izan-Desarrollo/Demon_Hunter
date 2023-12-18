@@ -23,8 +23,11 @@ bool SlimeVolador::Awake() {
 
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
+	leftmodeslimevolador = parameters.attribute("leftmode").as_bool();
+	rightmodeslimevolador = parameters.attribute("rightmode").as_bool();
 	texturePath = parameters.attribute("texturepathenemy_3").as_string();
-	//musicpathslime = parameters.attribute("musicpathslime").as_string();
+	musicpathslime = parameters.attribute("musicpathslime").as_string();
+
 	return true;
 }
 
@@ -39,6 +42,7 @@ bool SlimeVolador::Start() {
 	slimevolador.LoadAnimations("slimevolador");
 	slimevolador_attack.LoadAnimations("slimevolador_attack");
 	slimevolador_dead.LoadAnimations("slimevolador_dead");
+	slime_Fx = app->audio->LoadFx(musicpathslime);
 
 	velocity = { -0.5,-0.165 };
 	
@@ -141,7 +145,7 @@ bool SlimeVolador::Update(float dt)
 		if (downmodeslimevolador)
 		{
 			velocity.x = 0.0f;
-			velocity.y = 7.5f;
+			velocity.y = 17.50f;
 		}
 
 	}
@@ -203,10 +207,10 @@ bool SlimeVolador::Update(float dt)
 
 	}
 
-	if (death == true)
+	if (death)
 	{
 		currentAnimation = &slimevolador_dead;
-
+		app->audio->PlayFx(slime_Fx);
 	}
 
 	if (currentAnimation == &slimevolador_dead && currentAnimation->HasFinished()) { 
@@ -267,7 +271,14 @@ void SlimeVolador::OnCollision(PhysBody* physA, PhysBody* physB) {
 		death=true;
 		break;
 	case ColliderType::ENEMY:
-		death = true;
+		if (isAttacking)
+		{
+			death = true;
+		}
+		if (!isAttacking)
+		{
+			reverse = true;
+		}
 		break;
 	case ColliderType::PLAYER:
 		death = true;
