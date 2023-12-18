@@ -73,6 +73,7 @@ private:
 	pugi::xml_node configNode;
 
 	List<Entity*> slimesList;
+	List<Entity*> vslimesList;
 
 
 };

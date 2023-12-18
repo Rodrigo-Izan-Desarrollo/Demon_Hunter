@@ -157,3 +157,17 @@ void EntityManager::GetSlimes(List<Entity*>& slimesList) const
 		}
 	}
 }
+void EntityManager::GetBomber(List<Entity*>& slimesList) const
+{
+	slimesList.Clear();
+
+	ListItem<Entity*>* entity;
+
+	for (entity = entities.start; entity != NULL; entity = entity->next)
+	{
+		if (entity->data->type == EntityType::SLIMEVOLADOR)
+		{
+			slimesList.Add(entity->data);
+		}
+	}
+}

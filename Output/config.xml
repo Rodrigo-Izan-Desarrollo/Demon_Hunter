@@ -57,7 +57,6 @@
 			   texturepathenemy_1="Assets/Textures/Enemies/Slime_1.png" 
 			   musicpathslime= "Assets/Audio/Fx/Slimedeath.wav"
 		/>	
-		<skeleton x="11000" y="925 " texturepathenemy_2="Assets/Textures/Enemies/Skeleton_1.png"/>
 
 		<slimevolador x="2560" y="672 " texturepathenemy_3="Assets/Textures/Enemies/Dragon_bomba.png"/>
 

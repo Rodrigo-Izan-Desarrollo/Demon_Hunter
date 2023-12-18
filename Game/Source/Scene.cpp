@@ -52,7 +52,9 @@ bool Scene::Awake(pugi::xml_node& config)
 		slimevolador = (SlimeVolador*)app->entityManager->CreateEntity(EntityType::SLIMEVOLADOR);
 		slimevolador->parameters = itemNode;
 	 }
-  
+	vslimesList;
+
+	app->entityManager->GetBomber(vslimesList);
 	for (pugi::xml_node itemNode = config.child("powerup_1"); itemNode; itemNode = itemNode.next_sibling("powerup_1"))
 	{
 		powerup_1 = (Powerup_1*)app->entityManager->CreateEntity(EntityType::POWERUP_1);
@@ -196,25 +198,30 @@ bool Scene::LoadState(pugi::xml_node node) {
 	powerup_3->isPicked = node.child("poweritem").attribute("poweritem-3").as_bool();
 
 	//Slime
-		// Slimes
 	for (int slimecount = 0; slimecount <  slimesList.Count(); slimecount++) {
 
 		Entity* slime = slimesList.At(slimecount)->data;
-		// Carga la información específica del Slime desde los atributos de los nodos
-		
-		
-		
-		std::string hola = std::to_string(slimecount + 1);
-		slime->position.x = node.child(("enemy" + hola).c_str()).attribute("x").as_int();
-		slime->position.y = node.child(("enemy" + hola).c_str()).attribute("y").as_int();
+
+		std::string count = std::to_string(slimecount + 1);
+		slime->position.x = node.child(("enemy" + count).c_str()).attribute("x").as_int();
+		slime->position.y = node.child(("enemy" + count).c_str()).attribute("y").as_int();
 		slime->tp = true;
 	}
 
+	//Bomber
+	for (int vslimecount = 0; vslimecount < vslimesList.Count(); vslimecount++) {
+
+		Entity* slimevolador = vslimesList.At(vslimecount)->data;
+
+		std::string count = std::to_string(vslimecount + 1);
+		slimevolador->position.x = node.child(("venemy" + count).c_str()).attribute("x").as_int();
+		slimevolador->position.y = node.child(("venemy" + count).c_str()).attribute("y").as_int();
+		slimevolador->tp = true;
+	}
 
 	return true;
 }
-// L14: TODO 8: Create a method to save the state of the renderer
-// using append_child and append_attribute
+
 bool Scene::SaveState(pugi::xml_node node) {
 
 	//Append on nodes para todo lo que tiene que ver que las entidades del mapa
@@ -270,9 +277,19 @@ bool Scene::SaveState(pugi::xml_node node) {
 		// Carga la información específica del Slime desde los atributos de los nodos
 		enemyNode.append_attribute("x").set_value(slime->position.x);
 		enemyNode.append_attribute("y").set_value(slime->position.y);
-
 	}
 
+	for (int vslimecount = 0; vslimecount < vslimesList.Count(); vslimecount++) {
+
+		std::string count = std::to_string(vslimecount + 1);
+		pugi::xml_node enemyNode = node.append_child(("venemy" + count).c_str());
+
+		Entity* slimevolador = vslimesList.At(vslimecount)->data;
+
+		// Carga la información específica del Slime desde los atributos de los nodos
+		enemyNode.append_attribute("x").set_value(slimevolador->position.x);
+		enemyNode.append_attribute("y").set_value(slimevolador->position.y);
+	}
 
 	return true;
 }

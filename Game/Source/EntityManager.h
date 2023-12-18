@@ -35,6 +35,7 @@ public:
 
 	//Funcion para crear una Lista de slimes
 	void GetSlimes(List<Entity*>& slimesList) const;
+	void GetBomber(List<Entity*>& slimesList) const;
 
 public:
 
