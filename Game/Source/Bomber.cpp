@@ -38,7 +38,7 @@ bool SlimeVolador::Start() {
 
 	slimevolador.LoadAnimations("slimevolador");
 	slimevolador_attack.LoadAnimations("slimevolador_attack");
-	slimevolador_dead.LoadAnimations("slimevoladorr_dead");
+	slimevolador_dead.LoadAnimations("slimevolador_dead");
 
 	velocity = { -0.5,-0.165 };
 	
@@ -51,59 +51,65 @@ bool SlimeVolador::Start() {
 bool SlimeVolador::Update(float dt)
 {
 
-	if (reverse && leftmodeslimevolador && !onView)
-	{
-		leftmodeslimevolador = false;
-		rightmodeslimevolador = true;
-		downmodeslimevolador = false;
-		reverse = false;
-	}
-	if (reverse && rightmodeslimevolador && !onView)
-	{
-		leftmodeslimevolador = true;
-		rightmodeslimevolador = false;
-		downmodeslimevolador = false;
-		reverse = false;
-	}
-
-
 	origPos = app->map->WorldToMap(position.x, position.y);
 	targPos = app->map->WorldToMap(app->scene->player->position.x, app->scene->player->position.y);
 
-	LOG("LAST PATH X: %d enemy x: %d", targPos.x, origPos.x);
-
-	if (dist(app->scene->player->position, position) < app->map->mapData.tileWidth * tilesview)
+	if (!isAttacking)
 	{
-		onView = true;
-		currentAnimation = &slimevolador;
-
-		playerDetectedPosition = app->scene->player->position;
-
-		app->map->pathfindingVuelo->CreatePath(origPos, targPos);
-		lastPath = *app->map->pathfindingVuelo->GetLastPath();
-
-
-		if (dist(app->scene->player->position, position) < app->map->mapData.tileWidth * tilesattack)
-		{
-			if (!isAttacking)
+		if (reverse && leftmodeslimevolador && !onView)
 			{
-				isAttacking = true;
+				leftmodeslimevolador = false;
+				rightmodeslimevolador = true;
+				downmodeslimevolador = false;
+				reverse = false;
+			}
+			if (reverse && rightmodeslimevolador && !onView)
+			{
+				leftmodeslimevolador = true;
+				rightmodeslimevolador = false;
+				downmodeslimevolador = false;
+				reverse = false;
+			}
+		
+		LOG("LAST PATH X: %d enemy x: %d", targPos.x, origPos.x);
+
+		if (dist(app->scene->player->position, position) < app->map->mapData.tileWidth * tilesview)
+		{
+			onView = true;
+			currentAnimation = &slimevolador;
+
+			playerDetectedPosition = app->scene->player->position;
+
+			app->map->pathfindingVuelo->CreatePath(origPos, targPos);
+			lastPath = *app->map->pathfindingVuelo->GetLastPath();
+
+
+			if (dist(app->scene->player->position, position) < app->map->mapData.tileWidth * tilesattack)
+			{
+				if (!isAttacking)
+				{
+					isAttacking = true;
+				}
+			}
+
+		}
+		else {
+			onView = false; // Asegurarse de que onView sea falso cuando el jugador no está a la vista
+
+			if (rightmodeslimevolador)
+			{
+				velocity.x = 1.0f;
+			}
+			if (leftmodeslimevolador)
+			{
+				velocity.x = -1.0f;
 			}
 		}
-
 	}
-	else {
-		onView = false; // Asegurarse de que onView sea falso cuando el jugador no está a la vista
 
-		if (rightmodeslimevolador)
-		{
-			velocity.x = 1.0f;
-		}
-		if (leftmodeslimevolador)
-		{
-			velocity.x = -1.0f;
-		}
-	}
+
+	
+	
 
 	if (isAttacking )
 	{

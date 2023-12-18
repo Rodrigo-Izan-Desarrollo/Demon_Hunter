@@ -180,7 +180,7 @@
 
 	  </slimevolador_attack>
 
-	  <slimevolador_dead loop="true" speed="0.075f">
+	  <slimevolador_dead loop="false" speed="0.15f">
 
 		  <animation x="450" y="0" w="50" h="51" />
 		  <animation x="500" y="0" w="50" h="51" />
