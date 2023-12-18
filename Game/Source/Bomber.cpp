@@ -41,7 +41,7 @@ bool SlimeVolador::Start() {
 	slimevolador_dead.LoadAnimations("slimevoladorr_dead");
 
 	velocity = { -0.5,-0.165 };
-
+	
 
 
 	currentAnimation = &slimevolador;
@@ -50,10 +50,6 @@ bool SlimeVolador::Start() {
 
 bool SlimeVolador::Update(float dt)
 {
-	if (downmodeslimevolador)
-	{
-		LOG("downmode");
-	}
 
 	if (reverse && leftmodeslimevolador && !onView)
 	{
@@ -95,16 +91,6 @@ bool SlimeVolador::Update(float dt)
 			}
 		}
 
-
-		if (dist(app->scene->player->position, position) < app->map->mapData.tileWidth * tilesdeath)
-		{
-			if (!death)
-			{
-				death = true;
-			}
-		}
-
-
 	}
 	else {
 		onView = false; // Asegurarse de que onView sea falso cuando el jugador no está a la vista
@@ -126,14 +112,21 @@ bool SlimeVolador::Update(float dt)
 	
 		if (app->scene->player->position.x < position.x && !downmodeslimevolador )
 		{
+			rightmodeslimevolador = false;
+			leftmodeslimevolador = true;
+			downmodeslimevolador = false;
+			
 			velocity.x = -2.0f;
 				
 		}
 		else if ( app->scene->player->position.x > position.x && !downmodeslimevolador)
 		{
+			rightmodeslimevolador = true;
+			leftmodeslimevolador = false;
+			downmodeslimevolador = false;
 			velocity.x = +2.0f;
 		}
-		if (abs(app->scene->player->position.x - position.x) <= 5)
+		if (app->scene->player->position.x >= position.x - 10 && app->scene->player->position.x <= position.x + 10)
 		{
 			rightmodeslimevolador = false;
 			leftmodeslimevolador = false;
@@ -141,7 +134,8 @@ bool SlimeVolador::Update(float dt)
 		}
 		if (downmodeslimevolador)
 		{
-			velocity.y = 2.0f;
+			velocity.x = 0.0f;
+			velocity.y = 7.5f;
 		}
 
 	}
@@ -203,7 +197,7 @@ bool SlimeVolador::Update(float dt)
 
 	}
 
-	if (death)
+	if (death == true)
 	{
 		currentAnimation = &slimevolador_dead;
 
@@ -226,6 +220,7 @@ bool SlimeVolador::Update(float dt)
 	{
 		LOG("ESTA ENTRANDO rigth");
 		app->render->DrawTexture(texture, position.x-10, position.y - 10, &currentAnimation->GetCurrentFrame());
+		
 	}
 	if (leftmodeslimevolador)
 	{
@@ -234,8 +229,17 @@ bool SlimeVolador::Update(float dt)
 	}
 	if (downmodeslimevolador)
 	{
-		LOG("ESTA ENTRANDO down");
-		app->render->DrawTexture(texture, position.x - 5, position.y - 10, &currentAnimation->GetCurrentFrame(), SDL_FLIP_NONE, 1.0f, 90.0);
+		if (app->scene->player->position.x < position.x  )
+		{
+			LOG("ESTA ENTRANDO down");
+			app->render->DrawTexture(texture, position.x - 5, position.y - 10, &currentAnimation->GetCurrentFrame(), SDL_FLIP_HORIZONTAL, 1.0f, 270.0);
+
+		}
+		else if (app->scene->player->position.x > position.x)
+		{
+			app->render->DrawTexture(texture, position.x - 5, position.y - 10, &currentAnimation->GetCurrentFrame(), SDL_FLIP_NONE, 1.0f, 90.0);
+		}
+		
 	}
 
 	
@@ -254,6 +258,13 @@ void SlimeVolador::OnCollision(PhysBody* physA, PhysBody* physB) {
 	switch (physB->ctype) {
 
 	case ColliderType::PLATFORM:
+		death=true;
+		break;
+	case ColliderType::ENEMY:
+		death = true;
+		break;
+	case ColliderType::PLAYER:
+		death = true;
 		break;
 	case ColliderType::WALLE2:
 		LOG("PATOTURMO");
