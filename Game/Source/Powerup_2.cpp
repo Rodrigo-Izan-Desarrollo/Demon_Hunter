@@ -50,6 +50,7 @@ bool Powerup_2::Update(float dt)
 { 
 	currentAnimation->Update();
 
+	//When collision with player destroy the itslef
 	if (isPicked)
 	{
 		SDL_DestroyTexture(texture);

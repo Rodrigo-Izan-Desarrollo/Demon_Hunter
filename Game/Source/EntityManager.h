@@ -33,7 +33,7 @@ public:
 
 	void AddEntity(Entity* entity);
 
-	//Funcion para crear una Lista de slimes
+	//Create new funtions for getting agruping the entities
 	void GetSlimes(List<Entity*>& slimesList) const;
 	void GetBomber(List<Entity*>& slimesList) const;
 

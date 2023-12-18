@@ -145,7 +145,7 @@ bool SlimeVolador::Update(float dt)
 		if (downmodeslimevolador)
 		{
 			velocity.x = 0.0f;
-			velocity.y = 17.50f;
+			velocity.y = 20.0f;
 		}
 
 	}

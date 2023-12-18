@@ -145,18 +145,23 @@ bool EntityManager::Update(float dt)
 
 void EntityManager::GetSlimes(List<Entity*>& slimesList) const
 {
+	// Clear the provided list to ensure it's empty before populating it.
 	slimesList.Clear();
 
+	// Iterate through the list of entities.
 	ListItem<Entity*>* entity;
 
 	for (entity = entities.start; entity != NULL; entity = entity->next)
 	{
+		// Check if the current entity is of type "SLIME".
 		if (entity->data->type == EntityType::SLIME)
 		{
+			// If it is a slime, add it to the provided list.
 			slimesList.Add(entity->data);
 		}
 	}
 }
+//Same with slimevolador
 void EntityManager::GetBomber(List<Entity*>& slimesList) const
 {
 	slimesList.Clear();
