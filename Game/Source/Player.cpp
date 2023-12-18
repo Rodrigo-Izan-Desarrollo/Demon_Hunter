@@ -316,6 +316,7 @@ bool Player::Update(float dt)
 
 	if (SDL_GetTicks() - deadtempo >= 2500 && lifes > 0 && dead && !respawning)
 	{
+		dead = false;
 
 		pbody->body->SetActive(false);
 		app->physics->world->DestroyBody(pbody->body);
@@ -324,11 +325,12 @@ bool Player::Update(float dt)
 
 		respawning = true;  // Antes de realizar el respawn, establece respawning en true
 
-		dead = false;
 	}
 
 	if (respawning)
 	{
+		dead = false;
+
 		pbody = app->physics->CreateCircle(position.x + 30, position.y + 30, 13, bodyType::DYNAMIC);
 		pbody->listener = this;
 		pbody->ctype = ColliderType::PLAYER;
