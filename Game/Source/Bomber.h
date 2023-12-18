@@ -51,9 +51,8 @@ public:
 
 	bool onView = false;
 
-	int tilesattack =9;
+	int tilesattack =10;
 
-	int tilesdeath = 1;
 
 	bool isAttacking = false;
 
@@ -64,7 +63,6 @@ public:
 	bool death = false;
 
 	b2Vec2 velocity;
-
 	iPoint origPos;
 	iPoint targPos;
 	DynArray<iPoint> lastPath;
