@@ -66859,6 +66859,7 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="8"/>
    <tile/>
    <tile/>
    <tile/>
@@ -66867,8 +66868,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="8"/>
    <tile/>
    <tile/>
    <tile/>

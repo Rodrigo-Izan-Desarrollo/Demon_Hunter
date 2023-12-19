@@ -39,7 +39,7 @@ bool Scene::Awake(pugi::xml_node& config)
 		slime->parameters = itemNode;
 	}
 	slimesList;
-
+	//Use the funtion
 	app->entityManager->GetSlimes(slimesList);
 	for (pugi::xml_node itemNode = config.child("skeleton"); itemNode; itemNode = itemNode.next_sibling("skeleton"))
 	{
@@ -53,7 +53,7 @@ bool Scene::Awake(pugi::xml_node& config)
 		slimevolador->parameters = itemNode;
 	 }
 	vslimesList;
-
+	//Use the funtion
 	app->entityManager->GetBomber(vslimesList);
 	for (pugi::xml_node itemNode = config.child("powerup_1"); itemNode; itemNode = itemNode.next_sibling("powerup_1"))
 	{
@@ -198,17 +198,24 @@ bool Scene::LoadState(pugi::xml_node node) {
 	powerup_3->isPicked = node.child("poweritem").attribute("poweritem-3").as_bool();
 
 	//Slime
-	for (int slimecount = 0; slimecount <  slimesList.Count(); slimecount++) {
+	for (int slimecount = 0; slimecount < slimesList.Count(); slimecount++) {
 
+		// Retrieve the current slime entity from the list.
 		Entity* slime = slimesList.At(slimecount)->data;
 
+		// Convert the current count to a string for constructing XML attribute names.
 		std::string count = std::to_string(slimecount + 1);
+
+		// Update the position of the slime entity based on XML attributes.
 		slime->position.x = node.child(("enemy" + count).c_str()).attribute("x").as_int();
 		slime->position.y = node.child(("enemy" + count).c_str()).attribute("y").as_int();
+
+		// Set the 'tp' (teleport) flag to true for the slime entity.
 		slime->tp = true;
 	}
 
 	//Bomber
+	//Same with bomber
 	for (int vslimecount = 0; vslimecount < vslimesList.Count(); vslimecount++) {
 
 		Entity* slimevolador = vslimesList.At(vslimecount)->data;
@@ -268,17 +275,23 @@ bool Scene::SaveState(pugi::xml_node node) {
 
 	//Slime
 	
-	// Cargar slimes
 	for (int slimecount = 0; slimecount < slimesList.Count(); slimecount++) {
+
+		// Convert the current count to a string for constructing XML attribute names.
 		std::string hola = std::to_string(slimecount + 1);
+
+		// Append a child node for the current slime entity to the XML node.
 		pugi::xml_node enemyNode = node.append_child(("enemy" + hola).c_str());
+
+		// Retrieve the current slime entity from the list.
 		Entity* slime = slimesList.At(slimecount)->data;
 
-		// Carga la información específica del Slime desde los atributos de los nodos
+		// Load specific information of the slime from the attributes of the nodes.
 		enemyNode.append_attribute("x").set_value(slime->position.x);
 		enemyNode.append_attribute("y").set_value(slime->position.y);
 	}
 
+	//Bomber
 	for (int vslimecount = 0; vslimecount < vslimesList.Count(); vslimecount++) {
 
 		std::string count = std::to_string(vslimecount + 1);
@@ -286,7 +299,6 @@ bool Scene::SaveState(pugi::xml_node node) {
 
 		Entity* slimevolador = vslimesList.At(vslimecount)->data;
 
-		// Carga la información específica del Slime desde los atributos de los nodos
 		enemyNode.append_attribute("x").set_value(slimevolador->position.x);
 		enemyNode.append_attribute("y").set_value(slimevolador->position.y);
 	}

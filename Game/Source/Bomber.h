@@ -43,6 +43,8 @@ public:
 	SDL_Texture* texture;
 
 	const char* texturePath;
+	const char* musicpathslime;
+
 
 	PhysBody* pbody;
 	PhysBody* damage;
@@ -69,6 +71,8 @@ public:
 	iPoint playerDetectedPosition;
 
 	const char* texturePathBomber;
+
+	uint slime_Fx;
 
 };
 

@@ -193,11 +193,11 @@ bool Player::Update(float dt)
 
 	//Portals 
 	if (portal)
-	{
-		// 182 32		
+	{	
 		pbody->body->SetTransform({ PIXEL_TO_METERS(2600 + 16), PIXEL_TO_METERS(1080) }, 0);
 		portal = false;
 	}
+
 	// Godmode
 
 	//Activate Godmode
@@ -206,12 +206,19 @@ bool Player::Update(float dt)
 		Godmode = !Godmode;
 	}
 
+	//Allways currentanimation = player
+	if (Godmode && currentAnimation != &player)
+	{
+		currentAnimation = &player;
+	}
+
 	// Godmode movement
-	if (Godmode && !dead)//Allways tha Godmode is true and the player is not Dead
+	if (Godmode && !dead)
 	{
 		/*speed = 0.5f;*/
 		veljump = b2Vec2(0.0, -0.1675);//Desabilited the GRAVITY_Y in player
-		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {//Now you can move in any direction
+		//Permision to move in any direction
+		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
 			veljump.y = -5;
 		}
 		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
@@ -227,7 +234,6 @@ bool Player::Update(float dt)
 			leftmode = false;
 			rightmode = true;
 		}
-		currentAnimation = &player;
 	}
 
 	// TPs
@@ -247,6 +253,7 @@ bool Player::Update(float dt)
 	}
 	if (app->input->GetKey(SDL_SCANCODE_F4) == KEY_DOWN && !dead)
 	{
+		//Is different because we want to stop the camera in a specific position
 		pbody->body->SetTransform({ PIXEL_TO_METERS(10436), PIXEL_TO_METERS(802) }, 0);
 		app->render->camera.x = -9535;
 		app->render->camera.y = -252;
@@ -254,37 +261,37 @@ bool Player::Update(float dt)
 
 	//Movement inputs
 
-	// Si el player no esta pulsando los botones de moviemiento este no avanza
+	// For stop the player when is not moving
 
-	if (app->input->GetKey(SDL_SCANCODE_A)==KEY_IDLE && app->input->GetKey(SDL_SCANCODE_D)==KEY_IDLE) 	{
+	if (app->input->GetKey(SDL_SCANCODE_A)==KEY_IDLE && app->input->GetKey(SDL_SCANCODE_D)==KEY_IDLE || dead) 	{
 		veljump.x = 0;
 	}
 
-	// Movimiento de izquierda a derecha
+	// Movement in x
 
-	if (canmove && !Godmode && !dead)
+	if (canmove && !Godmode && !dead )
 	{
-		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && !atacking /*Para que no se solapen las animaciones */ ) // Moviemiento hacia la derecha 
+		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && !atacking /*Para que no se solapen las animaciones */ )  
 		{
-			rightmode = true;// El rightmode y el leftmode es para hacer flip a la imagen
+			rightmode = true;// El rightmode and leftmode for the fleep
 			leftmode = false;
-			sleeping = false;
+			sleeping = false;//For the sleeping animation
 			veljump.x = 3;
 			if (inground && !jumping)// Esta condicion es para que la animcion de salto y correr no se solapen
 			{
 				currentAnimation = &player_speed;
 			}
-			if (powerup_1 && !jumping)//Cuando tenga activo el power-up 2 corre mas rapido
+			if (powerup_1 && !jumping)//Faster with power-up-1
 			{
 				veljump.x = 4;
 			}
-			else // Sino corre normal
+			else
 			{
 				veljump.x = 3;
 			}
 		}
 
-		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && !atacking) // Lo mismo para la izquierda
+		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && !atacking) 
 		{
 			leftmode = true;
 			rightmode = false;
@@ -310,30 +317,35 @@ bool Player::Update(float dt)
 
 	if (dead)
 	{
+		canmove = false;
 		currentAnimation = &player_dead;
-		currentAnimation->loopCount = 0;
 	}
 
-	if (SDL_GetTicks() - deadtempo >= 2500 && lifes > 0 && dead && !respawning)
+	if (currentAnimation == &player_dead && currentAnimation->HasFinished() && lifes > 0 && dead && !respawning)//Dead tempo for respawning
 	{
 
+		//Destroy pbody
 		pbody->body->SetActive(false);
 		app->physics->world->DestroyBody(pbody->body);
 
-		currentAnimation->Reset(); // Reinicia la animación de muerte aquí
+		currentAnimation->Reset(); // Reset dead animation
+		currentAnimation->loopCount = 0;
 
-		respawning = true;  // Antes de realizar el respawn, establece respawning en true
+		respawning = true;  
 
-		dead = false;
+
 	}
 
 	if (respawning)
 	{
+		dead = false;
+
+		//Create the pbody
 		pbody = app->physics->CreateCircle(position.x + 30, position.y + 30, 13, bodyType::DYNAMIC);
 		pbody->listener = this;
 		pbody->ctype = ColliderType::PLAYER;
 
-		////Hace el respawn 
+		//Depending on the checkpoint you respawn in diferent places
 		if (!check_1 && !check_2 && !check_3)
 		{
 			pbody->body->SetTransform({ PIXEL_TO_METERS(-620 + 16), PIXEL_TO_METERS(950) }, 0);
@@ -355,25 +367,28 @@ bool Player::Update(float dt)
 			app->render->camera.x = -9535;
 		}
 
-		// Asegúrate de que el jugador esté vivo después del respawn
+
+
 		rightmode = true;
 		leftmode = false;
 		lifes--;
 
 		canmove = true;
 		respawning = false;
+
+	
 	}
 
 	//Jump
 
-	if (!jumping && inground && !dead && !atacking) // If para pemitir saltar
+	if (!jumping && inground && !dead && !atacking) 
 	{
 		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN )
 		{
-			app->audio->PlayFx(jump_Fx);
+			app->audio->PlayFx(jump_Fx);//Load sound efect
 			jumping = true;
 			inground = false;
-			if (powerup_1)
+			if (powerup_1)//With power-up-1 you jump higher 
 			{
 				veljump.y = -7;
 			}
@@ -394,10 +409,11 @@ bool Player::Update(float dt)
 
 	if (!pbodyatack && (app->input->GetKey(SDL_SCANCODE_Q) == KEY_REPEAT || app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT) && !dead && !jumping && !invisible && canatack)
 	{
-		app->audio->PlayFx(atack_Fx);
-		atacktempo = SDL_GetTicks();  // Obtener el tiempo actual
+		app->audio->PlayFx(atack_Fx);//Load sound efect
+		atacktempo = SDL_GetTicks();// Start timer
 		canatack = false;
 		atacking = true;
+		//Create de pbody for the atack
 		if (rightmode)
 		{
 			pbodyatack = app->physics->CreateRectangle(position.x + 35, position.y + 15, 10, 20, bodyType::STATIC);
@@ -410,10 +426,11 @@ bool Player::Update(float dt)
 			pbodyatack->listener = this;
 			pbodyatack->ctype = ColliderType::PATACK;
 		}
+
 		if (atacking)
 		{
 			canmove = false;
-			currentAnimation->Reset();
+			currentAnimation->Reset();//reset the animation
 			currentAnimation = &player_attack;
 			currentAnimation->loopCount = 0;
 		}
@@ -425,37 +442,37 @@ bool Player::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN && caninv)
 	{
 		invisible = !invisible;
-		invtempo = SDL_GetTicks(); // Inicializa el tiempo al presionar la tecla R
+		invtempo = SDL_GetTicks(); // Inicialize the timer
 		caninv = false;
 	}
+
 	if (invisible)
 	{
-		if (SDL_GetTicks() - invtempo >= 6000) // Cuando el timepo es igual o mayor a 6000 ms se desactiva la habilidad
+		if (SDL_GetTicks() - invtempo >= 6000) // Desabilitate the hability
 		{
 			invisible = false;
-			invtempo_2 = SDL_GetTicks(); // Inicializamos el couldown para poder volver a usar la habilidad
+			invtempo_2 = SDL_GetTicks(); // Inicialize cooldown
 		}
 	}
-	if (SDL_GetTicks() - invtempo_2 >= 50000) // Habilitamos la habilidad despues de 10000 ms
+	if (SDL_GetTicks() - invtempo_2 >= 50000) // Finished couldown
 	{
 		caninv = true;
 	}
 
 	//Finished animations
 
-	//Lo que hacen estos if es reiniciar las aniamciones para que a pesar de que tengan el loop = false se vuelvan a generar des de el principio
 
 	// Atack animation
 
-
 	if (currentAnimation == &player_attack && currentAnimation->HasFinished()) {
 		if (pbodyatack) {
+			//Destroy pbodyatack
 			pbodyatack->body->SetActive(false);
 			app->physics->world->DestroyBody(pbodyatack->body);
-			pbodyatack = nullptr;  // Establecer pbodyatack a nullptr después de destruir el cuerpo
+			pbodyatack = nullptr;  
 		}
 
-		// Verificar el cooldown antes de habilitar un nuevo ataque
+		//Atacktempo
 		if (SDL_GetTicks() - atacktempo >= 300)
 		{
 			canatack = true;
@@ -464,7 +481,7 @@ bool Player::Update(float dt)
 		atacking = false;
 		canmove = true;
 
-		// Restablecer la animación de ataque a su estado inicial
+		// Reset Animation
 		currentAnimation->Reset();
 		currentAnimation->loopCount = 0;
 	}
@@ -473,7 +490,7 @@ bool Player::Update(float dt)
 	//Jump animation
 
 	if (currentAnimation == &player_jump && currentAnimation->HasFinished() && inground) { // Reiniciar el salto
-		currentAnimation->Reset();
+		currentAnimation->Reset();//Reset Animation
 		jumping = false;
 	}
 
@@ -490,22 +507,12 @@ bool Player::Update(float dt)
 	}
 
 
-	//Set the velocity of the pbody of the player
-
-	pbody->body->SetLinearVelocity(veljump);
-
-	//Update player position in pixels
-
-	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
-	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
-
-
-	currentAnimation->Update();
-
 	// Dependiendo de si el player tiene un power-up o no cambia la textura con la que se trabaja
 
-	// El right mode es para cuando la textura va hacia la derecha y el leftmode para cuando va hacia la izquierda 
-	// Esto es posible gracias a la posibilidad de hacer un flip en el DrawTexture que es una implementación nuestra propia
+
+	// Right mode is for when the texture goes to the right and leftmode is for when it goes to the left
+	// This is possible thanks to the possibility of flipping the DrawTexture, which is our own implementation
+	//The texture change depending on your power-up
 	if (powerup_1)
 	{
 		if (rightmode == true) 
@@ -565,6 +572,18 @@ bool Player::Update(float dt)
 		}
 	}
 
+	//Set the velocity of the pbody of the player
+
+	pbody->body->SetLinearVelocity(veljump);
+
+	//Update player position in pixels
+
+	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
+	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
+
+
+	currentAnimation->Update();
+
 	return true;
 }
 
@@ -600,9 +619,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::ENEMY:
 		if (!Godmode && !dead && !pbodyatack && !respawning) {
 			dead = true;
-			canmove = false;
 		}
-		deadtempo = SDL_GetTicks();
 		break;
 	case ColliderType::WALL:
 		inground = false;
