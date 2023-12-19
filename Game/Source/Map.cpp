@@ -494,14 +494,14 @@ void Map::CreateNavigationMap(int& width, int& height, uchar** buffer, MapLayer*
             //! 
             
             if (navigationLayer == navigationLayerSuelo) {
-                if (gid == blockedGid) navigationMap[i] = 0;
-                else navigationMap[i] = 1;
+                if (gid == walkableGid) navigationMap[i] = 1;
+                else navigationMap[i] = 0;
             }
-            else {
+           /* else {
 
                 if (gid == blockedGidVuelo) navigationMap[i] = 0;
                 else navigationMap[i] = 1;
-            }
+            }*/
             
            
         }

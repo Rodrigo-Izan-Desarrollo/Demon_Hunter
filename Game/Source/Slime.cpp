@@ -91,9 +91,18 @@ bool Slime::Update(float dt)
 			onView = true;
 			iskilled = false;
 			currentAnimation = &slime;
-
+			
 			app->map->pathfindingSuelo->CreatePath(origPos, targPos);
 			lastPath = *app->map->pathfindingSuelo->GetLastPath();
+
+			if (rightmode)
+			{
+				velocity.x = 1.0f;
+			}
+			if (leftmode)
+			{
+				velocity.x = -1.0f;
+			}
 
 			if (dist(app->scene->player->position, position) < app->map->mapData.tileWidth * tilesattack)
 			{
@@ -130,13 +139,13 @@ bool Slime::Update(float dt)
 	if (isAttacking && !iskilled)
 	{
 		currentAnimation = &slime_attack;
-  		if (rightmode && !leftmode)
+  		if (rightmode)
 		{
-			velocity.x = 5.0f;
+			velocity.x = 2.0f;
 		}
 		if (leftmode && !rightmode)
 		{
-			velocity.x = -5.0;
+			velocity.x = -2.0;
 		}
 
 	}

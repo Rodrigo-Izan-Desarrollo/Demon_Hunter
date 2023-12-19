@@ -156,7 +156,7 @@ private:
 	bool mapLoaded;
 	MapLayer* navigationLayerSuelo;
 	MapLayer* navigationLayerVuelo;
-	int blockedGid = 3;
+	int walkableGid = 3;
 	int blockedGidVuelo = 6;
 };
 
