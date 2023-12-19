@@ -44,7 +44,7 @@ bool Slime::Start() {
 	slime_walking.LoadAnimations("slime_walking");
 	slime_Fx = app->audio->LoadFx(musicpathslime);
 
-
+	pathdraw = app->tex->Load("Assets/Maps/azul.png");
 	velocity = { -0.5,0 };
 
 	currentAnimation = &slime;
@@ -92,7 +92,7 @@ bool Slime::Update(float dt)
 			iskilled = false;
 			currentAnimation = &slime;
 			
-			app->map->pathfindingSuelo->CreatePath(origPos, targPos);
+ 			app->map->pathfindingSuelo->CreatePath(origPos, targPos);
 			lastPath = *app->map->pathfindingSuelo->GetLastPath();
 
 			if (rightmode)
@@ -131,11 +131,6 @@ bool Slime::Update(float dt)
 		}
 	}
 	
-
-
-
-
-
 	if (isAttacking && !iskilled)
 	{
 		currentAnimation = &slime_attack;
@@ -160,6 +155,13 @@ bool Slime::Update(float dt)
 	// Que el slime se mueva y haga flip
 
 	LOG("COUNTTTTTTTTTTT: %d", lastPath.Count());
+	
+	const DynArray<iPoint>* path = app->map->pathfindingSuelo->GetLastPath();
+	for (uint i = 0; i < path->Count(); ++i)
+	{
+		iPoint pos = app->map->MapToWorld(path->At(i)->x, path->At(i)->y);
+		app->render->DrawTexture(pathdraw, pos.x, pos.y);
+	}
 
 	if (lastPath.Count() > 0)
 	{
@@ -216,6 +218,7 @@ bool Slime::Update(float dt)
 	{
 		app->render->DrawTexture(texture, position.x, position.y + 7, &currentAnimation->GetCurrentFrame(), SDL_FLIP_HORIZONTAL);
 	}
+
 
 
 	return true;

@@ -132,8 +132,10 @@ public:
 	iPoint Map::WorldToMap(int x, int y);
 
 	// L13: Create navigation map for pathfinding
-	void CreateNavigationMap(int& width, int& height, uchar** buffer, MapLayer* NavigationLayer) const;
+	void CreateNavigationMap(int& width, int& height, uchar** buffer) const;
 
+	int GetTileWidth();
+	int GetTileHeight();
 
 
 private:
@@ -150,14 +152,13 @@ public:
 	SString name;
 	SString path;
 	PathFinding* pathfindingSuelo;
-	PathFinding* pathfindingVuelo;
 
 private:
 	bool mapLoaded;
-	MapLayer* navigationLayerSuelo;
-	MapLayer* navigationLayerVuelo;
-	int walkableGid = 3;
-	int blockedGidVuelo = 6;
+	MapLayer* navigationLayer;
+
+	int walkableGid = 4;
+
 };
 
 #endif // __MAP_H__

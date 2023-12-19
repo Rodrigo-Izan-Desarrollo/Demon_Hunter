@@ -80,8 +80,8 @@ bool SlimeVolador::Update(float dt)
 
 			playerDetectedPosition = app->scene->player->position;
 
-			app->map->pathfindingVuelo->CreatePath(origPos, targPos);
-			lastPath = *app->map->pathfindingVuelo->GetLastPath();
+			app->map->pathfindingSuelo->CreatePath(origPos, targPos);
+			lastPath = *app->map->pathfindingSuelo->GetLastPath();
 
 
 			if (dist(app->scene->player->position, position) < app->map->mapData.tileWidth * tilesattack)
