@@ -39,14 +39,12 @@ bool Map::Start() {
 
     //Initialize pathfinding 
     pathfindingSuelo = new PathFinding();
-    pathfindingVuelo = new PathFinding();
+
 
     //Initialize the navigation map
     uchar* navigationMap = NULL;
-    CreateNavigationMap(mapData.width, mapData.height, &navigationMap, navigationLayerSuelo);
+    CreateNavigationMap(mapData.width, mapData.height, &navigationMap);
     pathfindingSuelo->SetNavigationMap((uint)mapData.width, (uint)mapData.height, navigationMap);
-    CreateNavigationMap(mapData.width, mapData.height, &navigationMap, navigationLayerVuelo);
-    pathfindingVuelo->SetNavigationMap((uint)mapData.width, (uint)mapData.height, navigationMap);
     RELEASE_ARRAY(navigationMap);
 
     return ret;
@@ -77,6 +75,7 @@ bool Map::Update(float dt)
                     SDL_Rect r = tileset->GetTileRect(gid);
                     iPoint pos = MapToWorld(x, y);
 
+                   
                     app->render->DrawTexture(tileset->texture,
                         pos.x,
                         pos.y,
@@ -412,22 +411,13 @@ bool Map::LoadAllLayers(pugi::xml_node mapNode) {
 
     ListItem<MapLayer*>* mapLayerItem;
     mapLayerItem = mapData.maplayers.start;
-    navigationLayerSuelo = mapLayerItem->data;
-    navigationLayerVuelo = mapLayerItem->data;
+    navigationLayer = mapLayerItem->data;
+  
 
     //Search the layer in the map that contains information for navigation
     while (mapLayerItem != NULL) {
-        if (mapLayerItem->data->properties.GetProperty("NavigationSuelo") != NULL && mapLayerItem->data->properties.GetProperty("NavigationSuelo")->value) {
-            navigationLayerSuelo = mapLayerItem->data;
-            break;
-        }
-        mapLayerItem = mapLayerItem->next;
-    }
-
-    mapLayerItem = mapData.maplayers.start;
-    while (mapLayerItem != NULL) {
-        if (mapLayerItem->data->properties.GetProperty("NavigationVuelo") != NULL && mapLayerItem->data->properties.GetProperty("NavigationVuelo")->value) {
-            navigationLayerVuelo = mapLayerItem->data;
+        if (mapLayerItem->data->properties.GetProperty("NavigationSuelo") != NULL && mapLayerItem->data->properties.GetProperty("Navigation")->value) {
+            navigationLayer = mapLayerItem->data;
             break;
         }
         mapLayerItem = mapLayerItem->next;
@@ -469,7 +459,15 @@ Properties::Property* Properties::GetProperty(const char* name)
     return p;
 }
 
-void Map::CreateNavigationMap(int& width, int& height, uchar** buffer, MapLayer* navigationLayer) const
+int Map::GetTileWidth() {
+    return mapData.tileWidth;
+}
+
+int Map::GetTileHeight() {
+    return mapData.tileHeight;
+}
+
+void Map::CreateNavigationMap(int& width, int& height, uchar** buffer) const
 {
     bool ret = false;
 
@@ -490,20 +488,8 @@ void Map::CreateNavigationMap(int& width, int& height, uchar** buffer, MapLayer*
 
             //If the gid is a blockedGid is an area that I cannot navigate, so is set in the navigation map as 0, all the other areas can be navigated
             //!!!! make sure that you assign blockedGid according to your map
-            //! 
-            //! 
-            
-            if (navigationLayer == navigationLayerSuelo) {
-                if (gid == blockedGid) navigationMap[i] = 0;
-                else navigationMap[i] = 1;
-            }
-            else {
-
-                if (gid == blockedGidVuelo) navigationMap[i] = 0;
-                else navigationMap[i] = 1;
-            }
-            
-           
+            if (gid == walkableGid) navigationMap[i] = 0;
+            else navigationMap[i] = 760;
         }
     }
 

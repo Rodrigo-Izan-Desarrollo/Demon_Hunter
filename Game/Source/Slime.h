@@ -40,12 +40,12 @@ public:
 	Animation slime_hurt;
 
 	Animation slime_walking;
-
 	Animation slime_dead;
 
 	Animation slime_attack;
 
 	SDL_Texture* texture;
+	SDL_Texture* pathdraw;
 
 	const char* texturePath;
 	const char* musicpathslime;

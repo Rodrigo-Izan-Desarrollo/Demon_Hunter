@@ -76,7 +76,7 @@ bool Scene::Awake(pugi::xml_node& config)
 	}
 
 	if (config.child("player")) {
-		player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
+		player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER); 
 		player->parameters = config.child("player");
 	}
 
@@ -87,13 +87,14 @@ bool Scene::Awake(pugi::xml_node& config)
 	}
 
 	configNode = config;
-
+	
 	return ret;
 }
 
 // Called before the first frame
 bool Scene::Start()
 {
+	
 	app->audio->PlayMusic(configNode.child("music").attribute("musicpathambient").as_string());
 
 	//Get the size of the window
@@ -134,6 +135,8 @@ bool Scene::Update(float dt)
 	{
 		app->SaveRequest();
 	}
+
+	
 	return true;
 }
 
