@@ -155,13 +155,27 @@ bool Slime::Update(float dt)
 	// Que el slime se mueva y haga flip
 
 	LOG("COUNTTTTTTTTTTT: %d", lastPath.Count());
-	
-	const DynArray<iPoint>* path = app->map->pathfindingSuelo->GetLastPath();
-	for (uint i = 0; i < path->Count(); ++i)
+	//Activate all Power-ups
+	if (app->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN)
 	{
-		iPoint pos = app->map->MapToWorld(path->At(i)->x, path->At(i)->y);
-		app->render->DrawTexture(pathdraw, pos.x, pos.y);
+		paint = !paint;
+	/*	if (!paint)
+		{
+			SDL_DestroyTexture(pathdraw);
+		}*/
+	
 	}
+
+	if (paint)
+	{
+		const DynArray<iPoint>* path = app->map->pathfindingSuelo->GetLastPath();
+			for (uint i = 0; i < path->Count(); ++i)
+			{
+				iPoint pos = app->map->MapToWorld(path->At(i)->x, path->At(i)->y);
+				app->render->DrawTexture(pathdraw, pos.x, pos.y);
+			}
+	}
+	
 
 	if (lastPath.Count() > 0)
 	{

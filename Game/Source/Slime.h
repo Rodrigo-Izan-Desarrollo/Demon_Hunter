@@ -66,6 +66,7 @@ public:
 	bool reverse = false;
 	bool iskilled = false;
 	bool death = false;
+	bool paint = false;
 
 	b2Vec2 velocity;
 
