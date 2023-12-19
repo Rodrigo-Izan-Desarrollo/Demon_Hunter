@@ -82,8 +82,6 @@ bool Player::Start() {
 	player_attack.loop = false;
 	player_attack.speed = 0.3f;
 
-	dead = false;
-
 	currentAnimation = &player;
 
 	return true;
@@ -195,11 +193,11 @@ bool Player::Update(float dt)
 
 	//Portals 
 	if (portal)
-	{
-		// 182 32		
+	{	
 		pbody->body->SetTransform({ PIXEL_TO_METERS(2600 + 16), PIXEL_TO_METERS(1080) }, 0);
 		portal = false;
 	}
+
 	// Godmode
 
 	//Activate Godmode
@@ -265,13 +263,13 @@ bool Player::Update(float dt)
 
 	// For stop the player when is not moving
 
-	if (app->input->GetKey(SDL_SCANCODE_A)==KEY_IDLE && app->input->GetKey(SDL_SCANCODE_D)==KEY_IDLE) 	{
+	if (app->input->GetKey(SDL_SCANCODE_A)==KEY_IDLE && app->input->GetKey(SDL_SCANCODE_D)==KEY_IDLE || dead) 	{
 		veljump.x = 0;
 	}
 
-	// Movimiento de izquierda a derecha
+	// Movement in x
 
-	if (canmove && !Godmode && !dead)
+	if (canmove && !Godmode && !dead )
 	{
 		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && !atacking /*Para que no se solapen las animaciones */ )  
 		{
@@ -321,25 +319,27 @@ bool Player::Update(float dt)
 	{
 		canmove = false;
 		currentAnimation = &player_dead;
-		currentAnimation->loopCount = 0;
 	}
 
-	if (SDL_GetTicks() - deadtempo >= 2500 && lifes > 0 && dead && !respawning)//Dead tempo for respawning
+	if (currentAnimation == &player_dead && currentAnimation->HasFinished() && lifes > 0 && dead && !respawning)//Dead tempo for respawning
 	{
-		dead = false;
 
 		//Destroy pbody
 		pbody->body->SetActive(false);
 		app->physics->world->DestroyBody(pbody->body);
 
 		currentAnimation->Reset(); // Reset dead animation
+		currentAnimation->loopCount = 0;
 
-		respawning = true;  // Respawning = true
+		respawning = true;  
+
 
 	}
 
 	if (respawning)
 	{
+		dead = false;
+
 		//Create the pbody
 		pbody = app->physics->CreateCircle(position.x + 30, position.y + 30, 13, bodyType::DYNAMIC);
 		pbody->listener = this;
@@ -367,12 +367,16 @@ bool Player::Update(float dt)
 			app->render->camera.x = -9535;
 		}
 
+
+
 		rightmode = true;
 		leftmode = false;
 		lifes--;
 
 		canmove = true;
 		respawning = false;
+
+	
 	}
 
 	//Jump
@@ -441,6 +445,7 @@ bool Player::Update(float dt)
 		invtempo = SDL_GetTicks(); // Inicialize the timer
 		caninv = false;
 	}
+
 	if (invisible)
 	{
 		if (SDL_GetTicks() - invtempo >= 6000) // Desabilitate the hability
@@ -615,7 +620,6 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		if (!Godmode && !dead && !pbodyatack && !respawning) {
 			dead = true;
 		}
-		deadtempo = SDL_GetTicks();
 		break;
 	case ColliderType::WALL:
 		inground = false;
