@@ -82,6 +82,8 @@ bool Player::Start() {
 	player_attack.loop = false;
 	player_attack.speed = 0.3f;
 
+	dead = false;
+
 	currentAnimation = &player;
 
 	return true;
@@ -338,7 +340,6 @@ bool Player::Update(float dt)
 
 	if (respawning)
 	{
-		dead = false;
 		//Create the pbody
 		pbody = app->physics->CreateCircle(position.x + 30, position.y + 30, 13, bodyType::DYNAMIC);
 		pbody->listener = this;
