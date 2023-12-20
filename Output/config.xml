@@ -53,12 +53,16 @@
 			   texturepathenemy_1="Assets/Textures/Enemies/Slime_1.png" 
 			   musicpathslime= "Assets/Audio/Fx/Slimedeath.wav"
 		/>
-		<slime x="7648" y="1248" 
+		<slime x="7800" y="1350" 
 			   texturepathenemy_1="Assets/Textures/Enemies/Slime_1.png" 
 			   musicpathslime= "Assets/Audio/Fx/Slimedeath.wav"
-		/>	
+		/>
+		<slime x="7900" y="1350"
+		 texturepathenemy_1="Assets/Textures/Enemies/Slime_1.png"
+		 musicpathslime= "Assets/Audio/Fx/Slimedeath.wav"
+		/>
 
-		<slimevolador x="2560" y="672" 
+	  <slimevolador x="2560" y="672" 
 					  leftmode="true" rightmode="false"
 					  texturepathenemy_3="Assets/Textures/Enemies/Dragon_bomba.png"
 					  musicpathslime= "Assets/Audio/Fx/Slimedeath.wav"
