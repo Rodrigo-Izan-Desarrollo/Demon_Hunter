@@ -24,8 +24,8 @@ Be vigilant, as various types of obstacles await, and appearances can be deceivi
 ### Map
  * New map composition
 *  Added two types of enemies “Each one with their behaviors”
-*  Slime “Walk”
-*  Bomber “Fly”
+   *  Slime “Walk”
+   *  Bomber “Fly”
 *  Added three type of items “They are hidden look,  For them”
    *  Powerup-1
    *  Powerup-2
