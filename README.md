@@ -39,7 +39,7 @@ Be vigilant, as various types of obstacles await, and appearances can be deceivi
    *  Player
    *  Enemies
    *  Items
-   *  Camera
+   *  Camera  
 
 ## How to play 
 * Movement 
@@ -78,7 +78,8 @@ Be vigilant, as various types of obstacles await, and appearances can be deceivi
 * We would like to express our gratitude to our teacher for their guidance and support throughout the development process. 
 * This project is licensed under an unmodified MIT license, which is an OSI-certified license that allows static linking with closed source software. Check [Mozilla Public License] [LICENSE](https://www.mozilla.org/en-US/MPL/) for further details. 
 * Link to the project: [https://github.com/Rodrigo-Izan-Desarrollo/Demon_Hunter](https://github.com/Rodrigo-Izan-Desarrollo/Demon_Hunter)
-
+* "_If you save with an enemy alive and then you kill it when you load the enemy will be dead because we want to be like this for future updates_"
+* "_The bomber does not dodge structures for gameplay propuses"_
 ## Team members
 * Izan Sánchez Lozano([@izansl](https://github.com/izansl)) 
 * Rodrigo Álvarez Moize([@Rodrigomoize](https://github.com/Rodrigomoize))
