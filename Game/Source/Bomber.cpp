@@ -42,7 +42,7 @@ bool SlimeVolador::Start() {
 	slimevolador.LoadAnimations("slimevolador");
 	slimevolador_attack.LoadAnimations("slimevolador_attack");
 	slimevolador_dead.LoadAnimations("slimevolador_dead");
-	slime_Fx = app->audio->LoadFx(musicpathslime);
+	muelto_Fx = app->audio->LoadFx(musicpathslime);
 
 	velocity = { -0.5,-0.165 };
 	
@@ -54,6 +54,11 @@ bool SlimeVolador::Start() {
 
 bool SlimeVolador::Update(float dt)
 {
+	if (tp)
+	{
+		tp = false;
+		pbody->body->SetTransform({ PIXEL_TO_METERS(position.x), PIXEL_TO_METERS(position.y) }, 0);
+	}
 
 	origPos = app->map->WorldToMap(position.x, position.y);
 	targPos = app->map->WorldToMap(app->scene->player->position.x, app->scene->player->position.y);
@@ -210,7 +215,7 @@ bool SlimeVolador::Update(float dt)
 	if (death)
 	{
 		currentAnimation = &slimevolador_dead;
-		app->audio->PlayFx(slime_Fx);
+		app->audio->PlayFx(muelto_Fx);
 	}
 
 	if (currentAnimation == &slimevolador_dead && currentAnimation->HasFinished()) { 
@@ -219,8 +224,12 @@ bool SlimeVolador::Update(float dt)
 		app->physics->world->DestroyBody(pbody->body);
 	}
 	// L07 DONE 4: Add a physics to an item - update the position of the object from the physics.  
-	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
-	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
+	if (!tp)
+	{
+		position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
+		position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
+
+	}
 	pbody->body->SetLinearVelocity(velocity);
 
 

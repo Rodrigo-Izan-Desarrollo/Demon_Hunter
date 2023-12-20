@@ -72,7 +72,7 @@ public:
 
 	const char* texturePathBomber;
 
-	uint slime_Fx;
+	uint muelto_Fx;
 
 };
 
