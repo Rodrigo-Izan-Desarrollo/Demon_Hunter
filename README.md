@@ -81,6 +81,7 @@ Be vigilant, as various types of obstacles await, and appearances can be deceivi
 * Link to the project: [https://github.com/Rodrigo-Izan-Desarrollo/Demon_Hunter](https://github.com/Rodrigo-Izan-Desarrollo/Demon_Hunter)
 * "_If you save with an enemy alive and then you kill it when you load the enemy will be dead because we want to be like this for future updates_"
 * "_The bomber does not dodge structures for gameplay propuses"_
+* _When you start Realize you appear attacking since you attack with the left click of the mouse, it is solved either by clicking it again, sorry for the inconvenience._
 ## Team members
 * Izan Sánchez Lozano([@izansl](https://github.com/izansl)) 
 * Rodrigo Álvarez Moize([@Rodrigomoize](https://github.com/Rodrigomoize))
