@@ -95,7 +95,7 @@ bool Slime::Update(float dt)
 			lastPath2 = app->map->pathfindingSuelo->GetLastPath();
 		}
 
-		if (!(app->scene->player->dead ||!app->scene->player->invisible))
+		if (!(app->scene->player->dead || app->scene->player->invisible))
 		{
 			onView = true;
 			iskilled = false;
