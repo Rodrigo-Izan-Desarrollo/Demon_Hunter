@@ -48173,10 +48173,10 @@
    <tile gid="44"/>
    <tile gid="8739"/>
    <tile gid="8739"/>
+   <tile gid="63"/>
    <tile gid="8739"/>
    <tile gid="8739"/>
-   <tile gid="8739"/>
-   <tile gid="8739"/>
+   <tile gid="63"/>
    <tile gid="8739"/>
    <tile gid="8739"/>
    <tile gid="31"/>
@@ -64728,14 +64728,14 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="2694"/>
    <tile/>
    <tile/>
+   <tile gid="2678"/>
+   <tile gid="2686"/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="2694"/>
    <tile/>
    <tile/>
    <tile/>
@@ -66270,7 +66270,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="2" name="colisiones" width="331" height="50">
+ <layer id="2" name="colisiones" width="331" height="50" visible="0">
   <properties>
    <property name="Draw" type="bool" value="false"/>
   </properties>
@@ -81287,10 +81287,10 @@
    <tile gid="2"/>
    <tile/>
    <tile/>
+   <tile gid="2"/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="2"/>
    <tile/>
    <tile/>
    <tile gid="2"/>
