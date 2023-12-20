@@ -69,18 +69,7 @@ bool Player::Start() {
 	player_jump.LoadAnimations("player_jump");
 	player_dead.LoadAnimations("player_dead");
 	player_sleep.LoadAnimations("player_sleep");
-
-
-	//Normal atack
-	player_attack.PushBack({ 0,259, 32, 32 });
-	player_attack.PushBack({ 31,259, 32, 32 });
-	player_attack.PushBack({ 63,259, 32, 32 });
-	player_attack.PushBack({ 95,259, 32, 32 });
-	player_attack.PushBack({ 126,259, 32, 32 });
-	player_attack.PushBack({ 163,259, 32, 32 });
-	player_attack.PushBack({ 192,259, 32, 32 });
-	player_attack.loop = false;
-	player_attack.speed = 0.3f;
+	player_attack.LoadAnimations("player_atack");
 
 	currentAnimation = &player;
 
