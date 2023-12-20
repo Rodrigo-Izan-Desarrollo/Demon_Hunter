@@ -16599,7 +16599,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="13" name="Copiar desde Copiar desde Map" width="331" height="50" visible="0">
+ <layer id="13" name="Copiar desde Copiar desde Map" width="331" height="50">
   <properties>
    <property name="Draw" type="bool" value="true"/>
   </properties>
@@ -33156,7 +33156,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="1" name="plataformas" width="331" height="50" visible="0">
+ <layer id="1" name="plataformas" width="331" height="50">
   <properties>
    <property name="Draw" type="bool" value="true"/>
   </properties>
@@ -48173,10 +48173,10 @@
    <tile gid="44"/>
    <tile gid="8739"/>
    <tile gid="8739"/>
-   <tile gid="63"/>
    <tile gid="8739"/>
    <tile gid="8739"/>
-   <tile gid="63"/>
+   <tile gid="8739"/>
+   <tile gid="8739"/>
    <tile gid="8739"/>
    <tile gid="8739"/>
    <tile gid="31"/>
@@ -49713,7 +49713,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="12" name="Detallitos" width="331" height="50" visible="0">
+ <layer id="12" name="Detallitos" width="331" height="50">
   <properties>
    <property name="Draw" type="bool" value="true"/>
   </properties>
@@ -64728,14 +64728,14 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="2694"/>
    <tile/>
    <tile/>
-   <tile gid="2678"/>
-   <tile gid="2686"/>
    <tile/>
    <tile/>
-   <tile gid="2694"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
@@ -66270,7 +66270,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="2" name="colisiones" width="331" height="50" visible="0">
+ <layer id="2" name="colisiones" width="331" height="50">
   <properties>
    <property name="Draw" type="bool" value="false"/>
   </properties>
@@ -81287,10 +81287,10 @@
    <tile gid="2"/>
    <tile/>
    <tile/>
-   <tile gid="2"/>
    <tile/>
    <tile/>
-   <tile gid="2"/>
+   <tile/>
+   <tile/>
    <tile/>
    <tile/>
    <tile gid="2"/>
@@ -82827,7 +82827,7 @@
    <tile gid="3"/>
   </data>
  </layer>
- <layer id="14" name="navigationLayer" width="331" height="50" visible="0">
+ <layer id="14" name="navigationLayer" width="331" height="50">
   <properties>
    <property name="Draw" type="bool" value="false"/>
    <property name="Navigation" type="bool" value="true"/>
