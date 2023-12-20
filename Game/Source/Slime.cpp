@@ -80,20 +80,28 @@ bool Slime::Update(float dt)
 
 
 	origPos = app->map->WorldToMap(position.x, position.y);
+;
 	targPos = app->map->WorldToMap(app->scene->player->position.x, app->scene->player->position.y);
 
 	LOG("LAST PATH X: %d enemy x: %d", targPos.x, origPos.x);
-
+	
 	if (dist(app->scene->player->position, position) < app->map->mapData.tileWidth * tilesview)
 	{
-		if (!(app->scene->player->dead || app->scene->player->invisible))
+		app->map->pathfindingSuelo->CreatePath(origPos, targPos);
+
+		if (app->map->pathfindingSuelo->IsWalkable(targPos))
+		{
+			lastPath = *app->map->pathfindingSuelo->GetLastPath();
+			lastPath2 = app->map->pathfindingSuelo->GetLastPath();
+		}
+
+		if (!(app->scene->player->dead ||!app->scene->player->invisible))
 		{
 			onView = true;
 			iskilled = false;
 			currentAnimation = &slime;
 			
- 			app->map->pathfindingSuelo->CreatePath(origPos, targPos);
-			lastPath = *app->map->pathfindingSuelo->GetLastPath();
+ 			
 
 			if (rightmode)
 			{
@@ -101,7 +109,7 @@ bool Slime::Update(float dt)
 			}
 			if (leftmode)
 			{
-				velocity.x = -1.0f;
+				velocity.x = -1.0f; 
 			}
 
 			if (dist(app->scene->player->position, position) < app->map->mapData.tileWidth * tilesattack)
@@ -110,6 +118,19 @@ bool Slime::Update(float dt)
 				{
 					isAttacking = true;
 				}
+			}
+			if (isAttacking && !iskilled)
+			{
+				currentAnimation = &slime_attack;
+  				if (rightmode)
+				{
+					velocity.x = 5.0f;
+				}
+				if (leftmode && !rightmode)
+				{
+					velocity.x = -5.0f;
+				}
+
 			}
 		}
 		else
@@ -120,30 +141,25 @@ bool Slime::Update(float dt)
 	else
 	{
 		onView = false;
-
-		if (rightmode)
+		if (!onView && !isAttacking)
 		{
-			velocity.x = 0.5f;
+			if (rightmode)
+					{
+						velocity.x = 0.5f;
+					}
+					if (leftmode)
+					{
+						velocity.x = -0.5f;
+					}
 		}
-		if (leftmode)
+		if (lastPath2 == app->map->pathfindingSuelo->GetLastPath())
 		{
-			velocity.x = -0.5f;
+			app->map->pathfindingSuelo->ClearLastPath();
 		}
+		
 	}
 	
-	if (isAttacking && !iskilled)
-	{
-		currentAnimation = &slime_attack;
-  		if (rightmode)
-		{
-			velocity.x = 2.0f;
-		}
-		if (leftmode && !rightmode)
-		{
-			velocity.x = -2.0;
-		}
-
-	}
+	
 
 	if (currentAnimation == &slime_attack && currentAnimation->HasFinished()) { // Reiniciar el ataque
 		isAttacking = false;
@@ -188,12 +204,20 @@ bool Slime::Update(float dt)
 			rightmode = false;
 			leftmode = true;
 			velocity.x = -1;
+			if (isAttacking)
+			{
+				velocity.x = -2;
+			}
 		}
 		else
 		{
 			rightmode = true;
 			leftmode = false;
 			velocity.x = +1;
+			if (isAttacking)
+			{
+				velocity.x = 2;
+			}
 		}
 		if (nextPathTile->x == origPos.x) {
 			lastPath.Pop(*nextPathTile);

@@ -73,7 +73,7 @@ public:
 	iPoint origPos;
 	iPoint targPos;
 	DynArray<iPoint> lastPath;
-
+	const DynArray<iPoint>* lastPath2;
 	uint slime_Fx;
 
 };
