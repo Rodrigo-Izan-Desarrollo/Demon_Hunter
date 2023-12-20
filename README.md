@@ -34,6 +34,7 @@ Be vigilant, as various types of obstacles await, and appearances can be deceivi
 *  Adjusted map generation
 *  Adjusted camara movement
 *  Added navigation layer
+*  Added portal system after getting powerups
 ### Code
 *  Save and load implementation for:
    *  Player
