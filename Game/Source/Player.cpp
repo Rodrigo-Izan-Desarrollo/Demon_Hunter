@@ -468,7 +468,7 @@ bool Player::Update(float dt)
 			invtempo_2 = SDL_GetTicks(); // Inicialize cooldown
 		}
 	}
-	if (SDL_GetTicks() - invtempo_2 >= 600) // Finished couldown
+	if (SDL_GetTicks() - invtempo_2 >= 6000) // Finished couldown
 	{
 		caninv = true;
 	}
