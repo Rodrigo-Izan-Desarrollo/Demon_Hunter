@@ -85,8 +85,8 @@ bool Slime::Update(float dt)
 
 	LOG("LAST PATH X: %d enemy x: %d", targPos.x, origPos.x);
 	
-	if (dist(app->scene->player->position, position) < app->map->mapData.tileWidth * tilesview)
-	{
+		if (dist(app->scene->player->position, position) < app->map->mapData.tileWidth * tilesview)// tenemos una funcion que calcula la dist y calcula la del player y el enemigo y si esta en el rango de vision de tiles view que le siga y si esta mas cerca que le ataque
+		{
 		app->map->pathfindingSuelo->CreatePath(origPos, targPos);
 
 		if (app->map->pathfindingSuelo->IsWalkable(targPos))
@@ -95,23 +95,12 @@ bool Slime::Update(float dt)
 			lastPath2 = app->map->pathfindingSuelo->GetLastPath();
 		}
 
-		if (!(app->scene->player->dead || app->scene->player->invisible))
+		if (!(app->scene->player->dead || app->scene->player->invisible)) //que si el player no esta muerto o invisible no le ataque
 		{
 			onView = true;
 			iskilled = false;
 			currentAnimation = &slime;
-			
- 			
-
-			if (rightmode)
-			{
-				velocity.x = 1.0f;
-			}
-			if (leftmode)
-			{
-				velocity.x = -1.0f; 
-			}
-
+	
 			if (dist(app->scene->player->position, position) < app->map->mapData.tileWidth * tilesattack)
 			{
 				if (!isAttacking)
@@ -122,16 +111,7 @@ bool Slime::Update(float dt)
 			if (isAttacking && !iskilled)
 			{
 				currentAnimation = &slime_attack;
-  				if (rightmode)
-				{
-					velocity.x = 5.0f;
-				}
-				if (leftmode && !rightmode)
-				{
-					velocity.x = -5.0f;
-				}
-
-			}
+  			}
 		}
 		else
 		{
@@ -140,7 +120,7 @@ bool Slime::Update(float dt)
 	}
 	else
 	{
-		onView = false;
+		onView = false; //generar un movimiento por las zonas determinadas cuando no este onView
 		if (!onView && !isAttacking)
 		{
 			if (rightmode)
@@ -166,20 +146,13 @@ bool Slime::Update(float dt)
 		slime_attack.Reset();
 		currentAnimation->loopCount = 0;
 	}
-	// Cuando el slime esta a tilesattack que persiga al player
-	// 
-	// Que el slime se mueva y haga flip
+
 
 	LOG("COUNTTTTTTTTTTT: %d", lastPath.Count());
-	//Activate all Power-ups
+	//pinta el pathfinding
 	if (app->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN)
 	{
 		paint = !paint;
-	/*	if (!paint)
-		{
-			SDL_DestroyTexture(pathdraw);
-		}*/
-	
 	}
 
 	if (paint)
@@ -193,7 +166,7 @@ bool Slime::Update(float dt)
 	}
 	
 
-	if (lastPath.Count() > 0)
+	if (lastPath.Count() > 0) //recorre el path
 	{
 		iPoint* nextPathTile;
 		nextPathTile = lastPath.At(lastPath.Count() - 1);
@@ -206,7 +179,7 @@ bool Slime::Update(float dt)
 			velocity.x = -1;
 			if (isAttacking)
 			{
-				velocity.x = -2;
+				velocity.x = -2.0f;
 			}
 		}
 		else
@@ -216,7 +189,7 @@ bool Slime::Update(float dt)
 			velocity.x = +1;
 			if (isAttacking)
 			{
-				velocity.x = 2;
+				velocity.x = 2.0f;
 			}
 		}
 		if (nextPathTile->x == origPos.x) {

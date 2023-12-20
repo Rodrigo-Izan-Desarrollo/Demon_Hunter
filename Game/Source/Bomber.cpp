@@ -63,7 +63,7 @@ bool SlimeVolador::Update(float dt)
 	origPos = app->map->WorldToMap(position.x, position.y);
 	targPos = app->map->WorldToMap(app->scene->player->position.x, app->scene->player->position.y);
 
-	if (!isAttacking)
+	if (!isAttacking) 
 	{
 		if (reverse && leftmodeslimevolador && !onView)
 			{
@@ -82,7 +82,8 @@ bool SlimeVolador::Update(float dt)
 		
 		LOG("LAST PATH X: %d enemy x: %d", targPos.x, origPos.x);
 
-		if (dist(app->scene->player->position, position) < app->map->mapData.tileWidth * tilesview)
+		if (dist(app->scene->player->position, position) < app->map->mapData.tileWidth * tilesview)// tenemos una funcion que calcula la dist y calcula la del player y el enemigo y si esta en el rango de vision de tiles view que le siga y si esta mas cerca que le ataque
+
 		{
 			onView = true;
 			currentAnimation = &slimevolador;
@@ -103,7 +104,7 @@ bool SlimeVolador::Update(float dt)
 
 		}
 		else {
-			onView = false; // Asegurarse de que onView sea falso cuando el jugador no está a la vista
+			onView = false; // Asegurarse de que onView sea falso cuando el jugador no está a la vista y generar un movimiento por las zonas determinadas cuando no este onView
 
 			if (rightmodeslimevolador)
 			{
@@ -120,7 +121,7 @@ bool SlimeVolador::Update(float dt)
 	
 	
 
-	if (isAttacking )
+	if (isAttacking ) // que si esta atacando y esta en lla misma x que vaya directo para abajo
 	{
 		currentAnimation = &slimevolador_attack;
 	
@@ -164,7 +165,7 @@ bool SlimeVolador::Update(float dt)
 
 	LOG("COUNTTTTTTTTTTT: %d", lastPath.Count());
 
-	if (lastPath.Count() > 0)
+	if (lastPath.Count() > 0) //hace el path
 	{
 		iPoint* nextPathTile;
 		nextPathTile = lastPath.At(lastPath.Count() - 1);
