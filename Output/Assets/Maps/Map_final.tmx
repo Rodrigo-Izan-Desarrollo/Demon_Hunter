@@ -14663,7 +14663,7 @@
    <tile gid="8646"/>
    <tile gid="8646"/>
    <tile gid="8646"/>
-   <tile gid="4"/>
+   <tile gid="2242"/>
    <tile gid="8646"/>
    <tile gid="8646"/>
    <tile gid="8646"/>
@@ -16599,7 +16599,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="13" name="Copiar desde Copiar desde Map" width="331" height="50">
+ <layer id="13" name="Copiar desde Copiar desde Map" width="331" height="50" visible="0">
   <properties>
    <property name="Draw" type="bool" value="true"/>
   </properties>
@@ -33156,7 +33156,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="1" name="plataformas" width="331" height="50">
+ <layer id="1" name="plataformas" width="331" height="50" visible="0">
   <properties>
    <property name="Draw" type="bool" value="true"/>
   </properties>
@@ -49713,7 +49713,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="12" name="Detallitos" width="331" height="50">
+ <layer id="12" name="Detallitos" width="331" height="50" visible="0">
   <properties>
    <property name="Draw" type="bool" value="true"/>
   </properties>
@@ -82827,7 +82827,7 @@
    <tile gid="3"/>
   </data>
  </layer>
- <layer id="14" name="navigationLayer" width="331" height="50">
+ <layer id="14" name="navigationLayer" width="331" height="50" visible="0">
   <properties>
    <property name="Draw" type="bool" value="false"/>
    <property name="Navigation" type="bool" value="true"/>

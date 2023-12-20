@@ -416,7 +416,7 @@ bool Map::LoadAllLayers(pugi::xml_node mapNode) {
 
     //Search the layer in the map that contains information for navigation
     while (mapLayerItem != NULL) {
-        if (mapLayerItem->data->properties.GetProperty("NavigationSuelo") != NULL && mapLayerItem->data->properties.GetProperty("Navigation")->value) {
+        if (mapLayerItem->data->properties.GetProperty("Navigation") != NULL && mapLayerItem->data->properties.GetProperty("Navigation")->value) {
             navigationLayer = mapLayerItem->data;
             break;
         }
@@ -486,10 +486,14 @@ void Map::CreateNavigationMap(int& width, int& height, uchar** buffer) const
             //Gets the gid of the map in the navigation layer
             int gid = navigationLayer->Get(x, y);
 
+            if (gid == 4) LOG("4");
             //If the gid is a blockedGid is an area that I cannot navigate, so is set in the navigation map as 0, all the other areas can be navigated
             //!!!! make sure that you assign blockedGid according to your map
-            if (gid == walkableGid) navigationMap[i] = 0;
-            else navigationMap[i] = 760;
+            if (gid == walkableGid)
+            {
+                navigationMap[i] = 1;
+            }
+            else navigationMap[i] = 0;
         }
     }
 
