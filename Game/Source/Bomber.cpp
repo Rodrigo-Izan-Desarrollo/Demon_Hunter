@@ -215,7 +215,6 @@ bool SlimeVolador::Update(float dt)
 	if (death)
 	{
 		currentAnimation = &slimevolador_dead;
-		app->audio->PlayFx(muelto_Fx);
 	}
 
 	if (currentAnimation == &slimevolador_dead && currentAnimation->HasFinished()) { 
@@ -283,6 +282,7 @@ void SlimeVolador::OnCollision(PhysBody* physA, PhysBody* physB) {
 		if (isAttacking)
 		{
 			death = true;
+			app->audio->PlayFx(muelto_Fx);
 		}
 		if (!isAttacking)
 		{
@@ -291,6 +291,7 @@ void SlimeVolador::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::PLAYER:
 		death = true;
+		app->audio->PlayFx(muelto_Fx);
 		break;
 	case ColliderType::WALLE2:
 		LOG("PATOTURMO");
@@ -299,6 +300,7 @@ void SlimeVolador::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::PATACK:
 		death = true;
+		app->audio->PlayFx(muelto_Fx);
 		break;
 	default:
 		break;
