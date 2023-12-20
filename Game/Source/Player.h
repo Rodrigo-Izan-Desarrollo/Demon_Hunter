@@ -32,7 +32,7 @@ public:
 	float speed = 0.2f;
 
 	//Repawns
-	int lifes = 2;
+	int lifes = 1000000;
 
 	//Textures paths
 	const char* texturePath;

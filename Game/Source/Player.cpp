@@ -321,31 +321,52 @@ bool Player::Update(float dt)
 		currentAnimation = &player_dead;
 	}
 
-	if (currentAnimation == &player_dead && currentAnimation->HasFinished() && lifes > 0 && dead && !respawning)//Dead tempo for respawning
+	if (currentAnimation == &player_dead && currentAnimation->HasFinished() && lifes > 0 && dead && !respawning)
 	{
+		// Almacena el cuerpo antiguo antes de destruirlo
+		b2Body* oldBody = pbody->body;
 
-		//Destroy pbody
-		pbody->body->SetActive(false);
-		app->physics->world->DestroyBody(pbody->body);
+		// Desactiva el cuerpo antiguo
+		if (oldBody)
+		{
+			oldBody->SetActive(false);
+		}
+
+		// Destruye el cuerpo antiguo
+		app->physics->world->DestroyBody(oldBody);
+		pbody->body = nullptr;  // Importante: asigna nullptr para evitar acceder a memoria liberada
 
 		currentAnimation->Reset(); // Reset dead animation
 		currentAnimation->loopCount = 0;
 
-		respawning = true;  
-
-
+		respawning = true;
 	}
+
+
 
 	if (respawning)
 	{
 		dead = false;
 
-		//Create the pbody
-		pbody = app->physics->CreateCircle(position.x + 30, position.y + 30, 13, bodyType::DYNAMIC);
-		pbody->listener = this;
-		pbody->ctype = ColliderType::PLAYER;
+		// Elimina el antiguo cuerpo del respawn anterior si existe
+		if (pbody->body)
+		{
+			pbody->body->SetActive(false);
+			app->physics->world->DestroyBody(pbody->body);
+			pbody->body = nullptr;
+		}
 
-		//Depending on the checkpoint you respawn in diferent places
+		// Crea el pbody solo si aún no se ha creado o si el respawn es necesario
+		if (!pbody->body)
+		{
+			// Crea el pbody
+			pbody = app->physics->CreateCircle(position.x + 30, position.y + 30, 13, bodyType::DYNAMIC);
+			pbody->listener = this;
+			pbody->ctype = ColliderType::PLAYER;
+		}
+
+
+		// Configura la posición de respawn según el checkpoint actual
 		if (!check_1 && !check_2 && !check_3)
 		{
 			pbody->body->SetTransform({ PIXEL_TO_METERS(-620 + 16), PIXEL_TO_METERS(950) }, 0);
@@ -367,7 +388,8 @@ bool Player::Update(float dt)
 			app->render->camera.x = -9535;
 		}
 
-
+		jumping = false;
+		inground = true;
 
 		rightmode = true;
 		leftmode = false;
@@ -375,19 +397,20 @@ bool Player::Update(float dt)
 
 		canmove = true;
 		respawning = false;
-
-	
 	}
+
 
 	//Jump
 
-	if (!jumping && inground && !dead && !atacking) 
+	if (!jumping && inground && !atacking && !dead)
 	{
-		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN )
+		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 		{
 			app->audio->PlayFx(jump_Fx);//Load sound efect
 			jumping = true;
 			inground = false;
+
+			// Cambios en la lógica de salto
 			if (powerup_1)//With power-up-1 you jump higher 
 			{
 				veljump.y = -7;
@@ -396,14 +419,16 @@ bool Player::Update(float dt)
 			{
 				veljump.y = -6;
 			}
-			pbody->body->SetLinearVelocity(veljump);
+
+			// Evitar ajustes adicionales a la velocidad después del salto
+			// pbody->body->SetLinearVelocity(veljump); // Comentado para evitar interferencias
 			if (jumping)
 			{
 				currentAnimation = &player_jump;
-				currentAnimation->loopCount = 0;
 			}
 		}
 	}
+
 
 	//Atack
 
@@ -491,6 +516,7 @@ bool Player::Update(float dt)
 
 	if (currentAnimation == &player_jump && currentAnimation->HasFinished() && inground) { // Reiniciar el salto
 		currentAnimation->Reset();//Reset Animation
+		currentAnimation->loopCount = 0;
 		jumping = false;
 	}
 
@@ -617,7 +643,8 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		portal = true;
 		break;
 	case ColliderType::ENEMY:
-		if (!Godmode && !dead && !pbodyatack && !respawning) {
+		inground = true;
+		if (!Godmode && !pbodyatack) {
 			dead = true;
 		}
 		break;
