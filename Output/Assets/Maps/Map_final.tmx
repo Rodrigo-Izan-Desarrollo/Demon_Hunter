@@ -39,6 +39,9 @@
  <tileset firstgid="8737" name="Cambio" tilewidth="32" tileheight="32" tilecount="3" columns="1">
   <image source="Cambio.png" width="32" height="96"/>
  </tileset>
+ <tileset firstgid="8740" name="Carteles" tilewidth="32" tileheight="32" tilecount="24" columns="12">
+  <image source="Carteles.png" width="384" height="64"/>
+ </tileset>
  <layer id="5" name="Copiar desde Map" width="331" height="50">
   <properties>
    <property name="Draw" type="bool" value="true"/>
@@ -34086,13 +34089,13 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="8747"/>
+   <tile gid="8748"/>
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile gid="2861"/>
+   <tile gid="8749"/>
+   <tile gid="8750"/>
    <tile gid="2731"/>
    <tile gid="2732"/>
    <tile gid="2733"/>
@@ -34417,13 +34420,13 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="8759"/>
+   <tile gid="8760"/>
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="8761"/>
+   <tile gid="8762"/>
    <tile gid="2731"/>
    <tile gid="2732"/>
    <tile gid="2733"/>
@@ -42787,9 +42790,9 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="8740"/>
+   <tile gid="8741"/>
+   <tile gid="8742"/>
    <tile/>
    <tile/>
    <tile/>
@@ -43118,9 +43121,9 @@
    <tile gid="44"/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile gid="25"/>
-   <tile/>
+   <tile gid="8752"/>
+   <tile gid="8753"/>
+   <tile gid="8754"/>
    <tile/>
    <tile/>
    <tile/>
@@ -43309,8 +43312,8 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="8749"/>
+   <tile gid="8750"/>
    <tile/>
    <tile/>
    <tile/>
@@ -43640,8 +43643,8 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="8761"/>
+   <tile gid="8762"/>
    <tile/>
    <tile/>
    <tile/>
@@ -43881,8 +43884,8 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="8749"/>
+   <tile gid="8750"/>
    <tile/>
    <tile/>
    <tile/>
@@ -44212,8 +44215,8 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="8761"/>
+   <tile gid="8762"/>
    <tile/>
    <tile/>
    <tile/>
@@ -46545,8 +46548,8 @@
    <tile gid="1343"/>
    <tile gid="23"/>
    <tile gid="8739"/>
-   <tile gid="8739"/>
-   <tile gid="8739"/>
+   <tile gid="8743"/>
+   <tile gid="8744"/>
    <tile gid="8739"/>
    <tile gid="8739"/>
    <tile gid="8739"/>
@@ -46876,8 +46879,8 @@
    <tile gid="1343"/>
    <tile gid="23"/>
    <tile gid="8739"/>
-   <tile gid="8739"/>
-   <tile gid="8739"/>
+   <tile gid="8755"/>
+   <tile gid="8756"/>
    <tile gid="8739"/>
    <tile gid="8739"/>
    <tile gid="14"/>
@@ -47497,8 +47500,8 @@
    <tile gid="1344"/>
    <tile gid="8739"/>
    <tile gid="8739"/>
-   <tile gid="8739"/>
-   <tile gid="8739"/>
+   <tile gid="8745"/>
+   <tile gid="8746"/>
    <tile gid="8739"/>
    <tile gid="8739"/>
    <tile gid="8739"/>
@@ -47828,8 +47831,8 @@
    <tile gid="1344"/>
    <tile gid="8739"/>
    <tile gid="8739"/>
-   <tile gid="8739"/>
-   <tile gid="8739"/>
+   <tile gid="8757"/>
+   <tile gid="8758"/>
    <tile gid="8739"/>
    <tile gid="8739"/>
    <tile gid="8739"/>
