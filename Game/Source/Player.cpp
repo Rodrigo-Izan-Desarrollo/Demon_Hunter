@@ -92,7 +92,15 @@ bool Player::Update(float dt)
 	{
 		app->render->camera.y = -(position.y - 550);
 	}
-	app->render->camera.x = -(position.x - 125);
+	if (position.x >= 14500)
+	{
+		app->render->camera.x += 0;
+	}
+	else
+	{
+		app->render->camera.x = -(position.x - 125);
+
+	}
 
 	//Default animation
 
