@@ -479,14 +479,19 @@ bool Player::Update(float dt)
 
 		b2Vec2 velAttack2 = b2Vec2(attackSpeedX, 0.0f); // Establece la velocidad en Y a cero
 		pbodyatack_2->body->SetLinearVelocity(velAttack2);
+
 	}
 
-
-
+	if (currentAnimation == &player_attack_2 && currentAnimation->HasFinished())
+	{
+		// Reset Animation
+		currentAnimation->Reset();
+		currentAnimation->loopCount = 0;
+		
+	}
 
 	//Invisible
 	
-
 	if (app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN && caninv)
 	{
 		invisible = !invisible;
@@ -600,7 +605,6 @@ bool Player::CleanUp()
 }
 
 void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
-
 	switch (physB->ctype) {
 	case ColliderType::POWERUP_1:
 		canpower_1 = true;
@@ -633,6 +637,12 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		inground = false;
 		break;
 	case ColliderType::PATACK:
+		if (pbodyatack_2 && physA->ctype != ColliderType::PLAYER) {
+			// Solo se destruye si no es una colisión con el propio jugador
+			pbodyatack_2->body->SetActive(false);
+			app->physics->world->DestroyBody(pbodyatack_2->body);
+			pbodyatack_2 = nullptr;
+		}
 		break;
 	default:
 		break;
