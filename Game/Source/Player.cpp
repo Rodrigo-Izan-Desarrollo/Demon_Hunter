@@ -72,6 +72,7 @@ bool Player::Start() {
 	player_dead.LoadAnimations("player_dead");
 	player_sleep.LoadAnimations("player_sleep");
 	player_attack.LoadAnimations("player_atack");
+	player_attack_2.LoadAnimations("player_atack_2");
 
 	currentAnimation = &player;
 
@@ -275,7 +276,7 @@ bool Player::Update(float dt)
 			}
 			if (powerup_1 && !jumping)//Faster with power-up-1
 			{
-				veljump.x = 4;
+				veljump.x = 4.5f;
 			}
 			else
 			{
@@ -296,7 +297,7 @@ bool Player::Update(float dt)
 			}
 			if (powerup_1 && !jumping)
 			{
-				veljump.x = -4;
+				veljump.x = -4.5f;
 			}
 			else
 			{
@@ -452,6 +453,36 @@ bool Player::Update(float dt)
 			currentAnimation->loopCount = 0;
 		}
 	}
+
+	// Atack_2 
+	if (app->input->GetKey(SDL_SCANCODE_E) == KEY_REPEAT && powerup_2)
+	{
+		currentAnimation = &player_attack_2;
+
+		float attackSpeedX = rightmode ? 5.0f : -5.0f; // Ajusta la velocidad según la dirección
+
+		if (rightmode)
+		{
+			pbodyatack_2 = app->physics->CreateRectangle(position.x + 35, position.y + 15, 10, 20, bodyType::DYNAMIC);
+			pbodyatack_2->listener = this;
+			pbodyatack_2->ctype = ColliderType::PATACK;
+		}
+		else if (leftmode)
+		{
+			pbodyatack_2 = app->physics->CreateRectangle(position.x - 2, position.y + 15, 10, 20, bodyType::DYNAMIC);
+			pbodyatack_2->listener = this;
+			pbodyatack_2->ctype = ColliderType::PATACK;
+		}
+
+		// Desactiva la gravedad para el cuerpo pbodyatack_2
+		pbodyatack_2->body->SetGravityScale(0.0f);
+
+		b2Vec2 velAttack2 = b2Vec2(attackSpeedX, 0.0f); // Establece la velocidad en Y a cero
+		pbodyatack_2->body->SetLinearVelocity(velAttack2);
+	}
+
+
+
 
 	//Invisible
 	

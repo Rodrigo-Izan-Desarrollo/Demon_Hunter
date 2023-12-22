@@ -179,6 +179,15 @@
 		  <animation x="163" y="259" w="32" h="32" />
 		  <animation x="192" y="259" w="32" h="32" />
 	  </player_atack>
+	  <player_atack_2 loop="true" speed="0.25f">
+		  <animation x="0" y="291" w="32" h="32" />
+		  <animation x="31" y="291" w="32" h="32" />
+		  <animation x="63" y="291" w="32" h="32" />
+		  <animation x="95" y="291" w="32" h="32" />
+		  <animation x="126" y="291" w="32" h="32" />
+		  <animation x="163" y="291" w="32" h="32" />
+		  <animation x="192" y="291" w="32" h="32" />
+	  </player_atack_2>
 
 	  <slime loop="true" speed="0.075f" >
 		  <animation x="1" y="1" w="30" h="23" />
