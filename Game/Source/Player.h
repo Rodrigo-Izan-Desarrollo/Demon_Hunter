@@ -41,6 +41,7 @@ public:
 	const char* texturePath_3;
 	const char* texturePath_3_2;
 	const char* texturePath_4;
+	const char* texturePath_flash;
 	//Sound efects path
 	const char* musicpathatack;
 	const char* musicpathjump;
@@ -55,12 +56,15 @@ public:
 	Uint32 atacktempo = NULL;
 
 	//Textures
+	SDL_Texture* currentTexture = nullptr;
+
 	SDL_Texture* texture = NULL;
 	SDL_Texture* texture_1 = NULL;
 	SDL_Texture* texture_2 = NULL;
 	SDL_Texture* texture_3 = NULL;
 	SDL_Texture* texture_3_2 = NULL;
 	SDL_Texture* texture_4 = NULL;
+	SDL_Texture* texture_flash = NULL;
 
 	uint atack_Fx;
 	uint jump_Fx;

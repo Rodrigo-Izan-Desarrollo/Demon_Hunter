@@ -31,6 +31,7 @@ bool Player::Awake() {
 	texturePath_3 = parameters.attribute("texturepathainv").as_string();
 	texturePath_3_2 = parameters.attribute("texturepathainv_2").as_string();
 	texturePath_4 = parameters.attribute("texturepathgod").as_string();
+	texturePath_flash = parameters.attribute("texturepathflash").as_string();
 
 	musicpathatack = parameters.attribute("musicpathatack").as_string();
 	musicpathjump = parameters.attribute("musicpathjump").as_string();
@@ -50,6 +51,7 @@ bool Player::Start() {
 	texture_3 = app->tex->Load(texturePath_3);
 	texture_3_2 = app->tex->Load(texturePath_3_2);
 	texture_4 = app->tex->Load(texturePath_4);
+	texture_flash = app->tex->Load(texturePath_flash);
 
 	//Initialize sound efects
 	atack_Fx = app->audio->LoadFx(musicpathatack);
@@ -82,7 +84,7 @@ bool Player::Update(float dt)
 	b2Vec2 veljump = pbody->body->GetLinearVelocity();
 
 	//Camara movement
-	if (position.y < 550)
+	if (position.y <= 550)
 	{
 		app->render->camera.y += 0;
 	}
@@ -90,13 +92,14 @@ bool Player::Update(float dt)
 	{
 		app->render->camera.y = -(position.y - 550);
 	}
-	if (position.x > 9660)
+	if (position.x >= 14500)
 	{
-		app->render->camera.y += 0;
+		app->render->camera.x += 0;
 	}
 	else
 	{
 		app->render->camera.x = -(position.x - 125);
+
 	}
 
 	//Default animation
@@ -521,70 +524,28 @@ bool Player::Update(float dt)
 		}
 	}
 
+	//Depens on the power up change the texture
 
-	// Dependiendo de si el player tiene un power-up o no cambia la textura con la que se trabaja
+	if (powerup_1) {
+		currentTexture = texture_2;
+	}
+	else if (powerup_2) {
+		currentTexture = texture_1;
+	}
+	else if (powerup_3) {
+		currentTexture = invisible ? texture_3_2 : texture_3;
+	}
+	else {
+		currentTexture = texture;
+	}
 
+	// Determina la dirección de dibujo (izquierda o derecha) y ajusta la textura según sea necesario
 
-	// Right mode is for when the texture goes to the right and leftmode is for when it goes to the left
-	// This is possible thanks to the possibility of flipping the DrawTexture, which is our own implementation
-	//The texture change depending on your power-up
-	if (powerup_1)
-	{
-		if (rightmode == true) 
-		{
-			app->render->DrawTexture(texture_2, position.x, position.y, &currentAnimation->GetCurrentFrame());
-		}
-		if (leftmode == true)
-		{
-			app->render->DrawTexture(texture_2, position.x, position.y, &currentAnimation->GetCurrentFrame(), SDL_FLIP_HORIZONTAL);
-		}
+	if (rightmode) {
+		app->render->DrawTexture(currentTexture, position.x, position.y, &currentAnimation->GetCurrentFrame());
 	}
-	else if (powerup_2)
-	{
-		if (rightmode == true)
-		{
-			app->render->DrawTexture(texture_1, position.x, position.y, &currentAnimation->GetCurrentFrame());
-		}
-		if (leftmode == true)
-		{
-			app->render->DrawTexture(texture_1, position.x, position.y, &currentAnimation->GetCurrentFrame(), SDL_FLIP_HORIZONTAL);
-		}
-	}
-	else if (powerup_3)
-	{
-		if (invisible)
-		{
-			if (rightmode == true)
-			{
-				app->render->DrawTexture(texture_3_2, position.x, position.y, &currentAnimation->GetCurrentFrame());
-			}
-			if (leftmode == true)
-			{
-				app->render->DrawTexture(texture_3_2, position.x, position.y, &currentAnimation->GetCurrentFrame(), SDL_FLIP_HORIZONTAL);
-			}
-		}
-		else
-		{
-			if (rightmode == true)
-			{
-				app->render->DrawTexture(texture_3, position.x, position.y, &currentAnimation->GetCurrentFrame());
-			}
-			if (leftmode == true)
-			{
-				app->render->DrawTexture(texture_3, position.x, position.y, &currentAnimation->GetCurrentFrame(), SDL_FLIP_HORIZONTAL);
-			}
-		}
-	}
-	else
-	{
-		if (rightmode == true)
-		{
-			app->render->DrawTexture(texture, position.x, position.y, &currentAnimation->GetCurrentFrame());
-		}
-		if (leftmode == true)
-		{
-			app->render->DrawTexture(texture, position.x, position.y, &currentAnimation->GetCurrentFrame(), SDL_FLIP_HORIZONTAL);
-		}
+	else if (leftmode) {
+		app->render->DrawTexture(currentTexture, position.x, position.y, &currentAnimation->GetCurrentFrame(), SDL_FLIP_HORIZONTAL);
 	}
 
 	//Set the velocity of the pbody of the player
