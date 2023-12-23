@@ -466,8 +466,58 @@ bool Player::Update(float dt)
 		currentAnimation->Reset();
 		currentAnimation->loopCount = 0;
 	}
+	// Atack
+		//Atack input
+	if (!pbodyatack_2 && (app->input->GetKey(SDL_SCANCODE_E) == KEY_REPEAT || app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT) && !dead && !jumping && !invisible && canatack && powerup_2)
+	{
+		app->audio->PlayFx(atack_Fx);//Load sound efect
+		atacktempo_2 = SDL_GetTicks();// Start timer
+		canatack_2 = false;
+		atacking_2 = true;
+		//Create de pbody for the atack
+		if (rightmode)
+		{
+			pbodyatack_2 = app->physics->CreateRectangle(position.x + 35, position.y + 15, 10, 20, bodyType::STATIC);
+			pbodyatack_2->listener = this;
+			pbodyatack_2->ctype = ColliderType::PATACK;
+		}
+		if (leftmode)
+		{
+			pbodyatack_2 = app->physics->CreateRectangle(position.x - 2, position.y + 15, 10, 20, bodyType::STATIC);
+			pbodyatack_2->listener = this;
+			pbodyatack_2->ctype = ColliderType::PATACK;
+		}
 
-	//Atack 2
+		if (atacking_2)
+		{
+			canmove = false;
+			currentAnimation->Reset();//reset the animation
+			currentAnimation = &player_attack_2;
+			currentAnimation->loopCount = 0;
+		}
+	}
+		//Finished animation
+	if (currentAnimation == &player_attack_2 && currentAnimation->HasFinished()) {
+		if (pbodyatack_2) {
+			//Destroy pbodyatack
+			pbodyatack->body->SetActive(false);
+			app->physics->world->DestroyBody(pbodyatack->body);
+			pbodyatack_2 = nullptr;
+		}
+
+		//Atacktempo
+		if (SDL_GetTicks() - atacktempo >= 5000)
+		{
+			canatack_2 = true;
+		}
+
+		atacking_2 = false;
+		canmove = true;
+
+		// Reset Animation
+		currentAnimation->Reset();
+		currentAnimation->loopCount = 0;
+	}
 
 	// Dash 
 		//Hability input
