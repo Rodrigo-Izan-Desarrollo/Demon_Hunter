@@ -31,7 +31,6 @@ bool Player::Awake() {
 	texturePath_3 = parameters.attribute("texturepathainv").as_string();
 	texturePath_3_2 = parameters.attribute("texturepathainv_2").as_string();
 	texturePath_4 = parameters.attribute("texturepathgod").as_string();
-	texturePath_flash = parameters.attribute("texturepathflash").as_string();
 
 	musicpathatack = parameters.attribute("musicpathatack").as_string();
 	musicpathjump = parameters.attribute("musicpathjump").as_string();
@@ -51,7 +50,6 @@ bool Player::Start() {
 	texture_3 = app->tex->Load(texturePath_3);
 	texture_3_2 = app->tex->Load(texturePath_3_2);
 	texture_4 = app->tex->Load(texturePath_4);
-	texture_flash = app->tex->Load(texturePath_flash);
 
 	//Initialize sound efects
 	atack_Fx = app->audio->LoadFx(musicpathatack);
@@ -73,6 +71,7 @@ bool Player::Start() {
 	player_sleep.LoadAnimations("player_sleep");
 	player_attack.LoadAnimations("player_atack");
 	player_attack_2.LoadAnimations("player_atack_2");
+	player_dash.LoadAnimations("player_dash");
 
 	currentAnimation = &player;
 
@@ -105,7 +104,7 @@ bool Player::Update(float dt)
 
 	//Default animation
 
-	if (!atacking && !jumping && inground && !dead && !Godmode && !sleeping)
+	if (!atacking && !jumping && inground && !dead && !Godmode && !sleeping && !dashing)
 	{
 		if (currentAnimation != &player && !respawning)  // Asegúrate de que no estás cambiando la animación durante el respawn
 		{
@@ -262,7 +261,7 @@ bool Player::Update(float dt)
 
 	// Movement in x
 
-	if (canmove && !Godmode && !dead )
+	if (canmove && !Godmode && !dead && !dashing)
 	{
 		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && !atacking /*Para que no se solapen las animaciones */ )  
 		{
@@ -454,40 +453,42 @@ bool Player::Update(float dt)
 		}
 	}
 
-	// Atack_2 
-	if (app->input->GetKey(SDL_SCANCODE_E) == KEY_REPEAT && powerup_2)
+	// Dash 
+
+		//Hability input
+	if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT && canmove && !dead && !jumping && candash && powerup_1)
 	{
-		currentAnimation = &player_attack_2;
-
-		float attackSpeedX = rightmode ? 5.0f : -5.0f; // Ajusta la velocidad según la dirección
-
-		if (rightmode)
+		dashing = true;
+		candash = false;
+		canmove = false;
+		dashtempo = SDL_GetTicks();// Start cooldown
+		if (dashing)
 		{
-			pbodyatack_2 = app->physics->CreateRectangle(position.x + 35, position.y + 15, 10, 20, bodyType::DYNAMIC);
-			pbodyatack_2->listener = this;
-			pbodyatack_2->ctype = ColliderType::PATACK;
+			currentAnimation = &player_dash;
+
+			if (rightmode)//Do the tp
+			{
+				pbody->body->SetTransform({ PIXEL_TO_METERS(position.x + 4), PIXEL_TO_METERS(position.y) }, 0);
+			}			
+			if (leftmode)
+			{
+				pbody->body->SetTransform({ PIXEL_TO_METERS(position.x - 4), PIXEL_TO_METERS(position.y) }, 0);
+			}
 		}
-		else if (leftmode)
-		{
-			pbodyatack_2 = app->physics->CreateRectangle(position.x - 2, position.y + 15, 10, 20, bodyType::DYNAMIC);
-			pbodyatack_2->listener = this;
-			pbodyatack_2->ctype = ColliderType::PATACK;
-		}
-
-		// Desactiva la gravedad para el cuerpo pbodyatack_2
-		pbodyatack_2->body->SetGravityScale(0.0f);
-
-		b2Vec2 velAttack2 = b2Vec2(attackSpeedX, 0.0f); // Establece la velocidad en Y a cero
-		pbodyatack_2->body->SetLinearVelocity(velAttack2);
-
 	}
 
-	if (currentAnimation == &player_attack_2 && currentAnimation->HasFinished())
+		//Reset animation
+	if (currentAnimation==&player_dash && currentAnimation->HasFinished())
 	{
-		// Reset Animation
 		currentAnimation->Reset();
 		currentAnimation->loopCount = 0;
-		
+		canmove = true;
+		dashing = false;
+	}
+		//Reset cooldown
+	if (SDL_GetTicks()-dashtempo >= 6000)
+	{
+		candash = true;
 	}
 
 	//Invisible
@@ -637,12 +638,6 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		inground = false;
 		break;
 	case ColliderType::PATACK:
-		if (pbodyatack_2 && physA->ctype != ColliderType::PLAYER) {
-			// Solo se destruye si no es una colisión con el propio jugador
-			pbodyatack_2->body->SetActive(false);
-			app->physics->world->DestroyBody(pbodyatack_2->body);
-			pbodyatack_2 = nullptr;
-		}
 		break;
 	default:
 		break;

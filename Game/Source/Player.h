@@ -41,7 +41,6 @@ public:
 	const char* texturePath_3;
 	const char* texturePath_3_2;
 	const char* texturePath_4;
-	const char* texturePath_flash;
 
 	//Sound efects path
 	const char* musicpathatack;
@@ -55,6 +54,7 @@ public:
 	Uint32 deadtempo = NULL;
 	Uint32 powertempo = NULL;
 	Uint32 atacktempo = NULL;
+	Uint32 dashtempo = NULL;
 
 	//Textures
 	SDL_Texture* currentTexture = nullptr;
@@ -65,7 +65,6 @@ public:
 	SDL_Texture* texture_3 = NULL;
 	SDL_Texture* texture_3_2 = NULL;
 	SDL_Texture* texture_4 = NULL;
-	SDL_Texture* texture_flash = NULL;
 
 	//Sound efects
 	uint atack_Fx;
@@ -96,6 +95,7 @@ public:
 		//Atack
 	Animation player_attack;
 	Animation player_attack_2;
+	Animation player_dash;
 
 	//Ativar modes
 	
@@ -111,6 +111,9 @@ public:
 	bool canatack = true;	
 	bool canatack_2 = true;
 
+		//Dash
+	bool dashing = false;
+	bool candash = true;
 
 		//Get invisible
 	bool invisible = false;
@@ -152,6 +155,7 @@ public:
 	
 		// Bool to change powerups
 	bool canchange = true; 
+
 
 	pugi::xml_node config;
 
