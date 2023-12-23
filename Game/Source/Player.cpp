@@ -467,6 +467,8 @@ bool Player::Update(float dt)
 		currentAnimation->loopCount = 0;
 	}
 
+	//Atack 2
+
 	// Dash 
 		//Hability input
 	if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT && canmove && !dead && !jumping && candash && powerup_1)

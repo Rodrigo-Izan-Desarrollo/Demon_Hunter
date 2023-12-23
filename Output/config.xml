@@ -170,7 +170,7 @@
 		  <animation x="159" y="227" w="32" h="32" />
 	  </player_dead>
 	  
-	  <player_atack loop="false" speed="0.3f">
+	  <player_atack loop="false" speed="0.25f">
 		  <animation x="0" y="259" w="32" h="32" />
 		  <animation x="31" y="259" w="32" h="32" />
 		  <animation x="63" y="259" w="32" h="32" />
@@ -180,13 +180,17 @@
 		  <animation x="192" y="259" w="32" h="32" />
 	  </player_atack>
 	  <player_atack_2 loop="false" speed="0.25f">
-		  <animation x="0" y="291" w="32" h="32" />
-		  <animation x="31" y="291" w="32" h="32" />
-		  <animation x="63" y="291" w="32" h="32" />
-		  <animation x="95" y="291" w="32" h="32" />
-		  <animation x="126" y="291" w="32" h="32" />
-		  <animation x="163" y="291" w="32" h="32" />
-		  <animation x="192" y="291" w="32" h="32" />
+		  <animation x="0" y="292" w="80" h="32" />
+		  <animation x="81" y="292" w="80" h="32" />
+		  <animation x="162" y="292" w="80" h="32" />
+		  <animation x="243" y="292" w="80" h="32" />
+		  <animation x="324" y="292" w="80" h="32" />
+		  <animation x="405" y="292" w="80" h="32" />
+		  <animation x="0" y="322" w="80" h="32" />
+		  <animation x="81" y="322" w="80" h="32" />
+		  <animation x="162" y="322" w="80" h="32" />
+		  <animation x="243" y="322" w="80" h="32" />
+		  <animation x="0" y="292" w="80" h="32" />
 	  </player_atack_2>
 	  
 	  <player_dash loop="false" speed="0.5f">
