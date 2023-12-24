@@ -114,6 +114,8 @@
 		<powerup_2 x="4700" y="1328" texturepathpower_2="Assets/Textures/Player/power_1.png"/>
 	  
 		<powerup_3 x="8576" y="112" texturepathpower_3="Assets/Textures/Player/power_3.png"/>
+
+		<chepoint texturepathcheck ="Assets/Textures/Player/Checkpoint.png" />
 		  
 		<music musicpathambient ="Assets/Audio/Music/Ambientmusic.ogg"/>
 	  
@@ -179,6 +181,7 @@
 		  <animation x="163" y="259" w="32" h="32" />
 		  <animation x="192" y="259" w="32" h="32" />
 	  </player_atack>
+	  
 	  <player_atack_2 loop="false" speed="0.25f">
 		  <animation x="0" y="292" w="80" h="32" />
 		  <animation x="81" y="292" w="80" h="32" />
@@ -207,17 +210,14 @@
 		  <animation x="1" y="1" w="30" h="23" />
 		  <animation x="32" y="1" w="30" h="23" />
 		  <animation x="63" y="1" w="30" h="23" />
-
 	  </slime>
 
 	  <slime_walking loop="true" speed="0.090">
-
 		  <animation x="94" y="1" w="30" h="23" />
 		  <animation x="125" y="1" w="30" h="23" />
 		  <animation x="156" y="1" w="30" h="23" />
 		  <animation x="187" y="1" w="30" h="23" />
 		  <animation x="218" y="1" w="30" h="23" />
-
 	  </slime_walking>
 
 	  <slime_attack loop="false=" speed="0.2">
@@ -234,7 +234,6 @@
 		  <animation x="63" y="50" w="30" h="23" />
 		  <animation x="94" y="50" w="30" h="23" />
 		  <animation x="125" y="50" w="30" h="23"  />
-
 	  </slime_dead>
 	  
 	  <skeleton loop="true" speed="0.075f" >
@@ -242,7 +241,6 @@
 		  <animation x="42" y="286" w="40" h="36" />
 		  <animation x="83" y="286" w="40" h="36" />
 		  <animation x="124" y="286" w="40" h="36" />
-		 
 	  </skeleton>
 
 	  <slimevolador loop="true" speed="0.150f" >
@@ -252,29 +250,28 @@
 		  <animation x="150" y="0" w="50" h="51" />
 		  <animation x="200" y="0" w="50" h="51" />
 		  <animation x="250" y="0" w="50" h="51" />
-
 	  </slimevolador>
 
 	  <slimevolador_attack loop="true" speed="0.075f" >
-		  
 		  <animation x="350" y="0" w="50" h="51" />
 		  <animation x="400" y="0" w="50" h="51" />
-		  
-
 	  </slimevolador_attack>
 
 	  <slimevolador_dead loop="false" speed="0.15f">
-
 		  <animation x="450" y="0" w="50" h="51" />
 		  <animation x="500" y="0" w="50" h="51" />
 		  <animation x="550" y="0" w="50" h="51" />
 		  <animation x="600" y="0" w="50" h="51" />
 		  <animation x="650" y="0" w="50" h="51" />
-		  
-		
-
-
 	  </slimevolador_dead>
+	  
+	  <checkpoint>
+		  <animation x="0" y="0" w="32" h="32" />
+		  <animation x="32" y="0" w="32" h="32" />
+		  <animation x="64" y="0" w="32" h="32" />
+		  <animation x="96" y="0" w="32" h="32" />
+		  <animation x="128" y="0" w="32" h="32" />  
+	  </checkpoint>
 	  
 	  
 		

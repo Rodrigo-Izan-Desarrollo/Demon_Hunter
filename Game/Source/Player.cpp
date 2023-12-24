@@ -31,6 +31,7 @@ bool Player::Awake() {
 	texturePath_3 = parameters.attribute("texturepathainv").as_string();
 	texturePath_3_2 = parameters.attribute("texturepathainv_2").as_string();
 	texturePath_4 = parameters.attribute("texturepathgod").as_string();
+	texturePathcheck = parameters.attribute("texturepathcheck").as_string();
 
 	musicpathatack = parameters.attribute("musicpathatack").as_string();
 	musicpathjump = parameters.attribute("musicpathjump").as_string();
@@ -50,6 +51,7 @@ bool Player::Start() {
 	texture_3 = app->tex->Load(texturePath_3);
 	texture_3_2 = app->tex->Load(texturePath_3_2);
 	texture_4 = app->tex->Load(texturePath_4);
+	texturecheck = app->tex->Load(texturePathcheck);
 
 	//Initialize sound efects
 	atack_Fx = app->audio->LoadFx(musicpathatack);
@@ -71,6 +73,8 @@ bool Player::Start() {
 	player_attack.LoadAnimations("player_atack");
 	player_attack_2.LoadAnimations("player_atack_2");
 	player_dash.LoadAnimations("player_dash");
+	checkpoint.LoadAnimations("checkpoint");
+
 
 	currentAnimation = &player;
 
@@ -622,7 +626,6 @@ bool Player::Update(float dt)
 	else if (leftmode) {
 		app->render->DrawTexture(currentTexture, position.x, position.y, &currentAnimation->GetCurrentFrame(), SDL_FLIP_HORIZONTAL);
 	}
-
 	//Set the velocity of the pbody of the player
 	pbody->body->SetLinearVelocity(veljump);
 

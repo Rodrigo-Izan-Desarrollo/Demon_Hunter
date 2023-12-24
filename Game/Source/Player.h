@@ -41,6 +41,8 @@ public:
 	const char* texturePath_3;
 	const char* texturePath_3_2;
 	const char* texturePath_4;
+	const char* texturePath_4_2;
+	const char* texturePathcheck;
 
 	//Sound efects path
 	const char* musicpathatack;
@@ -66,6 +68,8 @@ public:
 	SDL_Texture* texture_3 = NULL;
 	SDL_Texture* texture_3_2 = NULL;
 	SDL_Texture* texture_4 = NULL;
+	SDL_Texture* texture_4_2 = NULL;
+	SDL_Texture* texturecheck = NULL;
 
 	//Sound efects
 	uint atack_Fx;
@@ -97,6 +101,9 @@ public:
 	Animation player_attack;
 	Animation player_attack_2;
 	Animation player_dash;
+
+	//Checkpoint
+	Animation checkpoint;
 
 	//Ativar modes
 	
