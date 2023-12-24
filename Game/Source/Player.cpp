@@ -162,21 +162,33 @@ bool Player::Update(float dt)
 	//Checkpoints
 	if (position.x >= 3396 && position.y == 1058)
 	{
-		check_1 = true;
-		check_2 = false;
-		check_3 = false;
+		if (!check_1)
+		{
+			app->SaveRequest();
+			check_1 = true;
+			check_2 = false;
+			check_3 = false;
+		}
 	}
 	if (position.x >= 6781 && position.y == 994)
 	{
-		check_2 = true;
-		check_1 = false;
-		check_3 = false;
+		if (!check_2)
+		{
+			app->SaveRequest();
+			check_1 = false;
+			check_2 = true;
+			check_3 = false;
+		}
 	}
 	if (position.x >= 10430 && position.y == 802)
 	{
-		check_3 = true;
-		check_2 = false;
-		check_1 = false;
+		if (!check_3)
+		{
+			app->SaveRequest();
+			check_1 = false;
+			check_2 = false;
+			check_3 = true;
+		}
 	}
 
 	//Portals 
