@@ -478,7 +478,7 @@ bool Player::Update(float dt)
 		//Create de pbody for the atack
 		if (rightmode)
 		{
-			pbodyatack_2 = app->physics->CreateRectangle(position.x + 50, position.y + 20, 45, 5, bodyType::STATIC);
+			pbodyatack_2 = app->physics->CreateRectangle(position.x + 50, position.y + 20, 37.5f, 5, bodyType::STATIC);
 			pbodyatack_2->listener = this;
 			pbodyatack_2->ctype = ColliderType::PATACK;
 		}
@@ -514,7 +514,7 @@ bool Player::Update(float dt)
 		currentAnimation->loopCount = 0;
 	}
 		//Cooldown atack_2
-	if (SDL_GetTicks()- atacktempo_2 >= 1000)
+	if (SDL_GetTicks()- atacktempo_2 >= 6000)
 	{
 		canatack_2 = true;
 	}
@@ -654,7 +654,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::ENEMY:
 		inground = true;
-		if (!Godmode && !pbodyatack) {
+		if (!Godmode && !pbodyatack && !pbodyatack_2) {
 			dead = true;
 		}
 		break;
