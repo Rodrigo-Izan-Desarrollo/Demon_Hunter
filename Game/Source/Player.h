@@ -110,6 +110,7 @@ public:
 		//Atack
 	bool atacking = false;
 	bool atacking_2 = false;
+
 	bool canatack = true;	
 	bool canatack_2 = true;
 

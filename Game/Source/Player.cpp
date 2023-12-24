@@ -102,7 +102,7 @@ bool Player::Update(float dt)
 	}
 
 	//Default animation
-	if (!atacking && !jumping && inground && !dead && !Godmode && !sleeping && !dashing)
+	if (!atacking && !jumping && inground && !dead && !Godmode && !sleeping && !dashing && !atacking_2)
 	{
 		if (currentAnimation != &player && !respawning)  // Asegúrate de que no estás cambiando la animación durante el respawn
 		{
@@ -453,12 +453,6 @@ bool Player::Update(float dt)
 			pbodyatack = nullptr;
 		}
 
-		//Atacktempo
-		if (SDL_GetTicks() - atacktempo >= 300)
-		{
-			canatack = true;
-		}
-
 		atacking = false;
 		canmove = true;
 
@@ -466,18 +460,25 @@ bool Player::Update(float dt)
 		currentAnimation->Reset();
 		currentAnimation->loopCount = 0;
 	}
-	// Atack
-		//Atack input
-	if (!pbodyatack_2 && (app->input->GetKey(SDL_SCANCODE_E) == KEY_REPEAT || app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT) && !dead && !jumping && !invisible && canatack && powerup_2)
+
+	if (SDL_GetTicks()-atacktempo >= 1000)
+	{
+		canatack = true;
+	}
+
+	// Atack_2
+		//Atack_2 input
+	if (!pbodyatack_2 && app->input->GetKey(SDL_SCANCODE_E) == KEY_REPEAT && !dead && !jumping && !invisible && canatack_2 && powerup_2)
 	{
 		app->audio->PlayFx(atack_Fx);//Load sound efect
 		atacktempo_2 = SDL_GetTicks();// Start timer
 		canatack_2 = false;
 		atacking_2 = true;
+
 		//Create de pbody for the atack
 		if (rightmode)
 		{
-			pbodyatack_2 = app->physics->CreateRectangle(position.x + 35, position.y + 15, 10, 20, bodyType::STATIC);
+			pbodyatack_2 = app->physics->CreateRectangle(position.x + 50, position.y + 20, 45, 5, bodyType::STATIC);
 			pbodyatack_2->listener = this;
 			pbodyatack_2->ctype = ColliderType::PATACK;
 		}
@@ -500,15 +501,9 @@ bool Player::Update(float dt)
 	if (currentAnimation == &player_attack_2 && currentAnimation->HasFinished()) {
 		if (pbodyatack_2) {
 			//Destroy pbodyatack
-			pbodyatack->body->SetActive(false);
-			app->physics->world->DestroyBody(pbodyatack->body);
+			pbodyatack_2->body->SetActive(false);
+			app->physics->world->DestroyBody(pbodyatack_2->body);
 			pbodyatack_2 = nullptr;
-		}
-
-		//Atacktempo
-		if (SDL_GetTicks() - atacktempo >= 5000)
-		{
-			canatack_2 = true;
 		}
 
 		atacking_2 = false;
@@ -517,6 +512,11 @@ bool Player::Update(float dt)
 		// Reset Animation
 		currentAnimation->Reset();
 		currentAnimation->loopCount = 0;
+	}
+		//Cooldown atack_2
+	if (SDL_GetTicks()- atacktempo_2 >= 1000)
+	{
+		canatack_2 = true;
 	}
 
 	// Dash 
