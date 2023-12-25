@@ -42,6 +42,8 @@ public:
 	const char* texturePath_3_2;
 	const char* texturePath_4;
 	const char* texturePath_4_2;
+	const char* texturePath_5;
+	const char* texturePath_5_2;
 	const char* texturePathcheck;
 
 	//Sound efects path
@@ -162,6 +164,7 @@ public:
 	bool canpower_1 = false;
 	bool canpower_2 = false;
 	bool canpower_3 = false;
+	bool canpower_4 = false;
 	
 		// Bool to change powerups
 	bool canchange = true; 

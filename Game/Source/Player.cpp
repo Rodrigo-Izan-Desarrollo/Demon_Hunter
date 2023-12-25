@@ -31,6 +31,7 @@ bool Player::Awake() {
 	texturePath_3 = parameters.attribute("texturepathainv").as_string();
 	texturePath_3_2 = parameters.attribute("texturepathainv_2").as_string();
 	texturePath_4 = parameters.attribute("texturepathgod").as_string();
+	texturePath_4_2 = parameters.attribute("texturepathgod_2").as_string();
 	texturePathcheck = parameters.attribute("texturepathcheck").as_string();
 
 	musicpathatack = parameters.attribute("musicpathatack").as_string();
@@ -51,6 +52,7 @@ bool Player::Start() {
 	texture_3 = app->tex->Load(texturePath_3);
 	texture_3_2 = app->tex->Load(texturePath_3_2);
 	texture_4 = app->tex->Load(texturePath_4);
+	texture_4_2 = app->tex->Load(texturePath_4_2);
 	texturecheck = app->tex->Load(texturePathcheck);
 
 	//Initialize sound efects
@@ -125,14 +127,21 @@ bool Player::Update(float dt)
 		canpower_2 = true;
 		canpower_3 = true;
 	}
-
+	if (canpower_1 && canpower_2 && canpower_3)
+	{
+		canpower_4 = true;
+	}
 		//Activate individual powerup
 	if (app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN && canchange && canpower_1 && !dead)
 	{
 		app->audio->PlayFx(powerup_Fx);
+
 		powerup_1 = !powerup_1;
+
 		powerup_2 = false;
 		powerup_3 = false;
+		powerup_4 = false;
+
 		canchange = false;
 		powertempo = SDL_GetTicks();//Start power-up cooldown for changing powerups
 	}
@@ -140,9 +149,13 @@ bool Player::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN && canchange && canpower_2 && !dead)
 	{
 		app->audio->PlayFx(powerup_Fx);
+
 		powerup_2 = !powerup_2;
+
 		powerup_1 = false;
 		powerup_3 = false;
+		powerup_4 = false;
+
 		canchange = false;
 		powertempo = SDL_GetTicks();
 	}
@@ -150,9 +163,27 @@ bool Player::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN && canchange && canpower_3 && !dead)
 	{
 		app->audio->PlayFx(powerup_Fx);
+
 		powerup_3 = !powerup_3;
+
 		powerup_2 = false;
 		powerup_1 = false;
+		powerup_4 = false;
+
+		canchange = false;
+		powertempo = SDL_GetTicks();
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_4) == KEY_DOWN && canchange && canpower_4 && !dead)
+	{
+		app->audio->PlayFx(powerup_Fx);
+
+		powerup_4 = !powerup_4;
+
+		powerup_3 = false;
+		powerup_2 = false;
+		powerup_1 = false;
+
 		canchange = false;
 		powertempo = SDL_GetTicks();
 	}
@@ -278,7 +309,7 @@ bool Player::Update(float dt)
 			{
 				currentAnimation = &player_speed;
 			}
-			if (powerup_1 && !jumping)//Faster with power-up-1
+			if (powerup_1 || powerup_4 && !jumping)//Faster with power-up-1
 			{
 				veljump.x = 4.5f;
 			}
@@ -299,7 +330,7 @@ bool Player::Update(float dt)
 			{
 				currentAnimation = &player_speed;
 			}
-			if (powerup_1 && !jumping)
+			if (powerup_1 || powerup_4 && !jumping)
 			{
 				veljump.x = -4.5f;
 			}
@@ -406,7 +437,7 @@ bool Player::Update(float dt)
 			inground = false;
 
 			// Cambios en la lógica de salto
-			if (powerup_1)//With power-up-1 you jump higher 
+			if (powerup_1 || powerup_4)//With power-up-1 you jump higher 
 			{
 				veljump.y = -7;
 			}
@@ -484,33 +515,36 @@ bool Player::Update(float dt)
 
 	// Atack_2
 		//Atack_2 input
-	if (!pbodyatack_2 && app->input->GetKey(SDL_SCANCODE_E) == KEY_REPEAT && !dead && !jumping && !invisible && canatack_2 && powerup_2)
+	if (!pbodyatack_2 && app->input->GetKey(SDL_SCANCODE_E) == KEY_REPEAT && !dead && !jumping && !invisible && canatack_2)
 	{
-		app->audio->PlayFx(atack_Fx);//Load sound efect
-		atacktempo_2 = SDL_GetTicks();// Start timer
-		canatack_2 = false;
-		atacking_2 = true;
+		if (powerup_4 || powerup_2)
+		{
+			app->audio->PlayFx(atack_Fx);//Load sound efect
+			atacktempo_2 = SDL_GetTicks();// Start timer
+			canatack_2 = false;
+			atacking_2 = true;
 
-		//Create de pbody for the atack
-		if (rightmode)
-		{
-			pbodyatack_2 = app->physics->CreateRectangle(position.x + 50, position.y + 20, 37.5f, 5, bodyType::STATIC);
-			pbodyatack_2->listener = this;
-			pbodyatack_2->ctype = ColliderType::PATACK;
-		}
-		if (leftmode)
-		{
-			pbodyatack_2 = app->physics->CreateRectangle(position.x - 2, position.y + 15, 10, 20, bodyType::STATIC);
-			pbodyatack_2->listener = this;
-			pbodyatack_2->ctype = ColliderType::PATACK;
-		}
+			//Create de pbody for the atack
+			if (rightmode)
+			{
+				pbodyatack_2 = app->physics->CreateRectangle(position.x + 50, position.y + 20, 37.5f, 5, bodyType::STATIC);
+				pbodyatack_2->listener = this;
+				pbodyatack_2->ctype = ColliderType::PATACK;
+			}
+			if (leftmode)
+			{
+				pbodyatack_2 = app->physics->CreateRectangle(position.x - 2, position.y + 15, 10, 20, bodyType::STATIC);
+				pbodyatack_2->listener = this;
+				pbodyatack_2->ctype = ColliderType::PATACK;
+			}
 
-		if (atacking_2)
-		{
-			canmove = false;
-			currentAnimation->Reset();//reset the animation
-			currentAnimation = &player_attack_2;
-			currentAnimation->loopCount = 0;
+			if (atacking_2)
+			{
+				canmove = false;
+				currentAnimation->Reset();//reset the animation
+				currentAnimation = &player_attack_2;
+				currentAnimation->loopCount = 0;
+			}
 		}
 	}
 		//Finished animation
@@ -537,23 +571,26 @@ bool Player::Update(float dt)
 
 	// Dash 
 		//Hability input
-	if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT && canmove && !dead && !jumping && candash && powerup_1)
+	if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT && canmove && !dead && !jumping && candash)
 	{
-		dashing = true;
-		candash = false;
-		canmove = false;
-		dashtempo = SDL_GetTicks();// Start cooldown
-		if (dashing)
+		if (powerup_4 || powerup_1)
 		{
-			currentAnimation = &player_dash;
+			dashing = true;
+			candash = false;
+			canmove = false;
+			dashtempo = SDL_GetTicks();// Start cooldown
+			if (dashing)
+			{
+				currentAnimation = &player_dash;
 
-			if (rightmode)//Do the tp
-			{
-				pbody->body->SetTransform({ PIXEL_TO_METERS(position.x + 4), PIXEL_TO_METERS(position.y) }, 0);
-			}			
-			if (leftmode)
-			{
-				pbody->body->SetTransform({ PIXEL_TO_METERS(position.x - 4), PIXEL_TO_METERS(position.y) }, 0);
+				if (rightmode)//Do the tp
+				{
+					pbody->body->SetTransform({ PIXEL_TO_METERS(position.x + 4), PIXEL_TO_METERS(position.y+0.5f) }, 0);
+				}
+				if (leftmode)
+				{
+					pbody->body->SetTransform({ PIXEL_TO_METERS(position.x - 4), PIXEL_TO_METERS(position.y+0.5f) }, 0);
+				}
 			}
 		}
 	}
@@ -614,6 +651,10 @@ bool Player::Update(float dt)
 	}
 	else if (powerup_3) {
 		currentTexture = invisible ? texture_3_2 : texture_3;
+	}
+	else if(powerup_4)
+	{
+		currentTexture = invisible ? texture_4_2 : texture_4;
 	}
 	else {
 		currentTexture = texture;

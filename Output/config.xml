@@ -31,6 +31,7 @@
 				texturepathainv="Assets/Textures/Player/player_4.png" 
 				texturepathainv_2="Assets/Textures/Player/player_4_2.png" 
 				texturepathgod="Assets/Textures/Player/player_5.png" 
+				texturepathgod_2 ="Assets/Textures/Player/player_5_2.png" 
 				texturepathflash="Assets/Textures/Player/Flash.png" 
 				musicpathatack= "Assets/Audio/Fx/Player_atack.ogg" 
 				musicpathjump = "Assets/Audio/Fx/Player_jump.ogg" 
