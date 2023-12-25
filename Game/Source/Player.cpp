@@ -31,6 +31,7 @@ bool Player::Awake() {
 	texturePath_3 = parameters.attribute("texturepathainv").as_string();
 	texturePath_3_2 = parameters.attribute("texturepathainv_2").as_string();
 	texturePath_4 = parameters.attribute("texturepathgod").as_string();
+	texturePath_4_2 = parameters.attribute("texturepathgod_2").as_string();
 	texturePathcheck = parameters.attribute("texturepathcheck").as_string();
 
 	musicpathatack = parameters.attribute("musicpathatack").as_string();
@@ -51,6 +52,7 @@ bool Player::Start() {
 	texture_3 = app->tex->Load(texturePath_3);
 	texture_3_2 = app->tex->Load(texturePath_3_2);
 	texture_4 = app->tex->Load(texturePath_4);
+	texture_4_2 = app->tex->Load(texturePath_4_2);
 	texturecheck = app->tex->Load(texturePathcheck);
 
 	//Initialize sound efects
@@ -125,6 +127,10 @@ bool Player::Update(float dt)
 		canpower_2 = true;
 		canpower_3 = true;
 	}
+	if (canpower_1 && canpower_2 && canpower_3)
+	{
+		canpower_4 = true;
+	}
 
 		//Activate individual powerup
 	if (app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN && canchange && canpower_1 && !dead)
@@ -151,6 +157,17 @@ bool Player::Update(float dt)
 	{
 		app->audio->PlayFx(powerup_Fx);
 		powerup_3 = !powerup_3;
+		powerup_2 = false;
+		powerup_1 = false;
+		canchange = false;
+		powertempo = SDL_GetTicks();
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_4) == KEY_DOWN && canchange && canpower_3 && !dead)
+	{
+		app->audio->PlayFx(powerup_Fx);
+		powerup_4 = !powerup_4;
+		canpower_3 = false;
 		powerup_2 = false;
 		powerup_1 = false;
 		canchange = false;
@@ -484,7 +501,7 @@ bool Player::Update(float dt)
 
 	// Atack_2
 		//Atack_2 input
-	if (!pbodyatack_2 && app->input->GetKey(SDL_SCANCODE_E) == KEY_REPEAT && !dead && !jumping && !invisible && canatack_2 && powerup_2)
+	if (!pbodyatack_2 && app->input->GetKey(SDL_SCANCODE_E) == KEY_REPEAT && !dead && !jumping && !invisible && canatack_2 && powerup_2 && powerup_4)
 	{
 		app->audio->PlayFx(atack_Fx);//Load sound efect
 		atacktempo_2 = SDL_GetTicks();// Start timer
@@ -537,7 +554,7 @@ bool Player::Update(float dt)
 
 	// Dash 
 		//Hability input
-	if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT && canmove && !dead && !jumping && candash && powerup_1)
+	if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT && canmove && !dead && !jumping && candash && powerup_1 && powerup_4)
 	{
 		dashing = true;
 		candash = false;
@@ -614,6 +631,10 @@ bool Player::Update(float dt)
 	}
 	else if (powerup_3) {
 		currentTexture = invisible ? texture_3_2 : texture_3;
+	}
+	else if(powerup_4)
+	{
+		currentTexture = invisible ? texture_4_2 : texture_4;
 	}
 	else {
 		currentTexture = texture;
