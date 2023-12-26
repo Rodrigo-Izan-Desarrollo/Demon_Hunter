@@ -14,6 +14,7 @@ enum class EntityType
 	ITEM,
 	ENEMY,
 	SLIME,
+	BIGSLIME,
 	SKELETON,
 	SLIMEVOLADOR,
 	POWERUP_1,

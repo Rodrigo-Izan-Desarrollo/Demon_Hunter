@@ -96461,7 +96461,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="2" name="colisiones" width="482" height="50" visible="0">
+ <layer id="2" name="colisiones" width="482" height="50">
   <properties>
    <property name="Draw" type="bool" value="false"/>
   </properties>
@@ -116301,7 +116301,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="6"/>
    <tile/>
    <tile/>
    <tile/>
@@ -120568,7 +120568,7 @@
    <tile gid="3"/>
   </data>
  </layer>
- <layer id="14" name="navigationLayer" width="482" height="50" visible="0">
+ <layer id="14" name="navigationLayer" width="482" height="50">
   <properties>
    <property name="Draw" type="bool" value="false"/>
    <property name="Navigation" type="bool" value="true"/>

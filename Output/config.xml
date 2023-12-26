@@ -110,6 +110,11 @@
 					  musicpathslime= "Assets/Audio/Fx/Slimedeath.wav"
 					  />
 
+	  <bigslime x="2080" y="1312" 
+			   texturepathenemy_4="Assets/Textures/Enemies/Slime_2.png"
+			   musicpathslime= "Assets/Audio/Fx/Slimedeath.wav"
+		/>
+
 		<powerup_1 x="3520" y="1424" texturepathpower_1="Assets/Textures/Player/power_2.png"/>
 	  
 		<powerup_2 x="4700" y="1328" texturepathpower_2="Assets/Textures/Player/power_1.png"/>
@@ -236,6 +241,69 @@
 		  <animation x="94" y="50" w="30" h="23" />
 		  <animation x="125" y="50" w="30" h="23"  />
 	  </slime_dead>
+
+	
+
+	  <slime_walking loop="true" speed="0.090">
+		  <animation x="94" y="36" w="47" h="31" />
+		  <animation x="125" y="36" w="47" h="31" />
+		  <animation x="156" y="36" w="47" h="31" />
+		  <animation x="187" y="36" w="47" h="31" />
+		  <animation x="218" y="36" w="47" h="31" />
+	  </slime_walking>
+
+	  <slime_attack loop="false=" speed="0.2">
+		  <animation x="1" y="25" w="30" h="23" />
+		  <animation x="32" y="25" w="30" h="23" />
+		  <animation x="63" y="25" w="30" h="23" />
+		  <animation x="94" y="25" w="30" h="23" />
+		  <animation x="125" y="25" w="30" h="23" />
+	  </slime_attack>
+
+	  <slime_dead loop="false" speed="0.3f">
+		  <animation x="1" y="50" w="30" h="23" />
+		  <animation x="32" y="50" w="30" h="23" />
+		  <animation x="63" y="50" w="30" h="23" />
+		  <animation x="94" y="50" w="30" h="23" />
+		  <animation x="125" y="50" w="30" h="23"  />
+	  </slime_dead>
+
+	  <bigslime loop="true" speed="0.075f" >
+		  <animation x="1" y="1" w="45" h="29" />
+		  <animation x="47" y="1"  w="45" h="29" />
+		  <animation x="93" y="1"  w="45" h="29" />
+		  <animation x="139" y="1"  w="45" h="29" />
+		  <animation x="185" y="1" w="45" h="29" />
+		  <animation x="231" y="1" w="45" h="29" />
+		  <animation x="277" y="1" w="45" h="29" />
+		  <animation x="323" y="1" w="45" h="29" />
+	  </bigslime>
+
+	  <bigslime_attack loop="true" speed="0.2f" >
+		  <animation x="1" y="36" w="45" h="29" />
+		  <animation x="47" y="36"  w="45" h="29" />
+		  <animation x="93" y="36"  w="45" h="29" />
+		  <animation x="139" y="36"  w="45" h="29" />
+		  <animation x="185" y="36" w="45" h="29" />
+		  <animation x="231" y="36" w="45" h="29" />
+		  <animation x="277" y="36" w="45" h="29" />
+		  <animation x="323" y="36" w="45" h="29" />
+	  </bigslime_attack>
+
+	  <bigslime_dead loop="true" speed="0.3f" >
+		  <animation x="1" y="73" w="45" h="29" />
+		  <animation x="47" y="73"  w="45" h="29" />
+		  <animation x="93" y="73"  w="45" h="29" />
+		  <animation x="139" y="73"  w="45" h="29" />
+		  <animation x="185" y="73" w="45" h="29" />
+	  </bigslime_dead>
+
+	  <bigslime_hurt loop="true" speed="0.3f" >
+		  <animation x="1" y="110" w="45" h="29" />
+		  <animation x="47" y="110"  w="45" h="29" />
+		  <animation x="93" y="110"  w="45" h="29" />
+		  <animation x="139" y="110"  w="45" h="29" />
+	  </bigslime_hurt>
 	  
 	  <skeleton loop="true" speed="0.075f" >
 		  <animation x="1" y="286" w="40" h="36" />

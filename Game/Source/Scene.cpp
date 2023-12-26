@@ -41,10 +41,10 @@ bool Scene::Awake(pugi::xml_node& config)
 	slimesList;
 	//Use the funtion
 	app->entityManager->GetSlimes(slimesList);
-	for (pugi::xml_node itemNode = config.child("skeleton"); itemNode; itemNode = itemNode.next_sibling("skeleton"))
+	for (pugi::xml_node itemNode = config.child("bigslime"); itemNode; itemNode = itemNode.next_sibling("bigslime"))
 	{
-		skeleton = (Skeleton*)app->entityManager->CreateEntity(EntityType::SKELETON);
-		skeleton->parameters = itemNode;
+		bigslime = (BigSlime*)app->entityManager->CreateEntity(EntityType::BIGSLIME);
+		bigslime->parameters = itemNode;
 	}
 
 	for (pugi::xml_node itemNode = config.child("slimevolador"); itemNode; itemNode = itemNode.next_sibling("slimevolador"))
