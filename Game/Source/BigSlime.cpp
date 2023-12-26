@@ -203,7 +203,11 @@ bool BigSlime::Update(float dt)
 		currentAnimation = &bigslime_hurt;
 		lives--;
 	}
-
+	if (currentAnimation == &bigslime_hurt && currentAnimation->HasFinished()) {
+		isHurt = false;
+		currentAnimation = &bigslime;
+		
+	}
 	if (lives=0)
 	{
 		death = true;
