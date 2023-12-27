@@ -179,7 +179,7 @@ bool BigSlime::Update(float dt)
 			velocity.x = -1;
 			if (isAttacking)
 			{
-				velocity.x = -2.0f;
+				velocity.x = -1.3f;
 			}
 		}
 		else
@@ -189,7 +189,7 @@ bool BigSlime::Update(float dt)
 			velocity.x = +1;
 			if (isAttacking)
 			{
-				velocity.x = 2.0f;
+				velocity.x = 1.3f;
 			}
 		}
 		if (nextPathTile->x == origPos.x) {
@@ -202,13 +202,14 @@ bool BigSlime::Update(float dt)
 	{
 		currentAnimation = &bigslime_hurt;
 		lives--;
+		isHurt = false;
 	}
 	if (currentAnimation == &bigslime_hurt && currentAnimation->HasFinished()) {
-		isHurt = false;
+		
 		currentAnimation = &bigslime;
 		
 	}
-	if (lives=0)
+	if (lives==0)
 	{
 		death = true;
 	}
