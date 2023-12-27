@@ -115,6 +115,11 @@
 			   musicpathslime= "Assets/Audio/Fx/Slimedeath.wav"
 		/>
 
+	  <boss x="15040" y="1216"
+			   texturepathenemy_5="Assets/Textures/Enemies/Boss-2.png"
+			   musicpathslime= "Assets/Audio/Fx/Slimedeath.wav"
+		/>
+
 		<powerup_1 x="3520" y="1424" texturepathpower_1="Assets/Textures/Player/power_2.png"/>
 	  
 		<powerup_2 x="4700" y="1328" texturepathpower_2="Assets/Textures/Player/power_1.png"/>
@@ -333,6 +338,30 @@
 		  <animation x="600" y="0" w="50" h="51" />
 		  <animation x="650" y="0" w="50" h="51" />
 	  </slimevolador_dead>
+
+	  <boss loop="true" speed="0.075f" >
+		  <animation x="1" y="34" w="160" h="128" />
+		  <animation x="162" y="34"  w="160" h="128" />
+		  <animation x="323" y="34"  w="160" h="128" />
+		  <animation x="484" y="34"  w="160" h="128" />
+		  <animation x="645" y="34" w="160" h="128" />
+		  <animation x="806" y="34" w="160" h="128" />
+	  </boss>
+
+	  <boss_walking loop="true" speed="0.075f" >
+		  <animation x="1" y="193" w="160" h="128" />
+		  <animation x="162" y="193"  w="160" h="128" />
+		  <animation x="323" y="193"  w="160" h="128" />
+		  <animation x="484" y="193"  w="160" h="128" />
+		  <animation x="645" y="193" w="160" h="128" />
+		  <animation x="806" y="193" w="160" h="128" />
+		  <animation x="967" y="193" w="160" h="128" />
+		  <animation x="1128" y="193"  w="160" h="128" />
+		  <animation x="1289" y="193"  w="160" h="128" />
+		  <animation x="1450" y="193"  w="160" h="128" />
+		  <animation x="1611" y="193" w="160" h="128" />
+		  <animation x="1772" y="193" w="160" h="128" />
+	  </boss_walking>
 	  
 	  <checkpoint>
 		  <animation x="0" y="0" w="32" h="32" />

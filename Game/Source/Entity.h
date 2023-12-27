@@ -15,6 +15,7 @@ enum class EntityType
 	ENEMY,
 	SLIME,
 	BIGSLIME,
+	BOSS,
 	SKELETON,
 	SLIMEVOLADOR,
 	POWERUP_1,

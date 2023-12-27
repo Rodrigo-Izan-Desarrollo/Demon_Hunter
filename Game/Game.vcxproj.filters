@@ -76,6 +76,9 @@
     <ClCompile Include="Source\BigSlime.cpp">
       <Filter>cpp.files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Boss.cpp">
+      <Filter>cpp.files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Animation.h">
@@ -175,6 +178,9 @@
       <Filter>h.files</Filter>
     </ClInclude>
     <ClInclude Include="Source\BigSlime.h">
+      <Filter>h.files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Boss.h">
       <Filter>h.files</Filter>
     </ClInclude>
   </ItemGroup>
