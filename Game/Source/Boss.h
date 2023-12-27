@@ -55,11 +55,11 @@ public:
 
 	int lives = 7;
 
-	int tilesview = 7;
+	int tilesview = 20;
 
 	bool onView = false;
 
-	int tilesattack = 2;
+	int tilesattack = 3;
 
 	bool isAttacking = false;
 	bool isHurt = false;

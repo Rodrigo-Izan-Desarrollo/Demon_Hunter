@@ -179,7 +179,7 @@ bool Boss::Update(float dt)
 			velocity.x = -1;
 			if (isAttacking)
 			{
-				velocity.x = -1.3f;
+				velocity.x = -1.5f;
 			}
 		}
 		else
@@ -189,7 +189,7 @@ bool Boss::Update(float dt)
 			velocity.x = +1;
 			if (isAttacking)
 			{
-				velocity.x = 1.3f;
+				velocity.x = 1.5f;
 			}
 		}
 		if (nextPathTile->x == origPos.x) {
