@@ -106,6 +106,7 @@ bool Boss::Update(float dt)
 				if (!isAttacking)
 				{
 					isAttacking = true;
+					
 				}
 			}
 			if (isAttacking && !iskilled)

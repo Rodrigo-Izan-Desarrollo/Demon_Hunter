@@ -362,6 +362,57 @@
 		  <animation x="1611" y="193" w="160" h="128" />
 		  <animation x="1772" y="193" w="160" h="128" />
 	  </boss_walking>
+
+	  <boss_attack loop="true" speed="0.175f" >
+		  <animation x="1" y="352" w="160" h="127" />
+		  <animation x="162" y="352"  w="160" h="127" />
+		  <animation x="323" y="352"  w="160" h="127" />
+		  <animation x="484" y="352"  w="160" h="127" />
+		  <animation x="645" y="352" w="160" h="127" />
+		  <animation x="806" y="352" w="160" h="127" />
+		  <animation x="967" y="352" w="160" h="127" />
+		  <animation x="1128" y="352"  w="160" h="127" />
+		  <animation x="1289" y="352"  w="160" h="127" />
+		  <animation x="1450" y="352"  w="160" h="127" />
+		  <animation x="1611" y="352" w="160" h="127" />
+		  <animation x="1772" y="352" w="160" h="127" />
+		  <animation x="1933" y="352"  w="160" h="127" />
+		  <animation x="2094" y="352" w="160" h="127" />
+		  <animation x="2255" y="352" w="160" h="127" />
+	  </boss_attack>
+
+	  <boss_hurt loop="true" speed="0.175f" >
+		  <animation x="1" y="511" w="160" h="127" />
+		  <animation x="162" y="511"  w="160" h="127" />
+		  <animation x="323" y="511"  w="160" h="127" />
+		  <animation x="484" y="511"  w="160" h="127" />
+		  <animation x="645" y="511" w="160" h="128" />
+	  </boss_hurt>
+
+	  <boss_dead loop="true" speed="0.175f" >
+		  <animation x="1" y="669" w="160" h="128" />
+		  <animation x="162" y="669"  w="160" h="128" />
+		  <animation x="323" y="669"  w="160" h="128" />
+		  <animation x="484" y="669"  w="160" h="128" />
+		  <animation x="645" y="669" w="160" h="128" />
+		  <animation x="806" y="669" w="160" h="128" />
+		  <animation x="967" y="669" w="160" h="128" />
+		  <animation x="1128" y="669"  w="160" h="128" />
+		  <animation x="1289" y="669"  w="160" h="128" />
+		  <animation x="1450" y="669"  w="160" h="128" />
+		  <animation x="1611" y="669" w="160" h="128" />
+		  <animation x="1772" y="669" w="160" h="128" />
+		  <animation x="1933" y="669"  w="160" h="128" />
+		  <animation x="2094" y="669" w="160" h="128" />
+		  <animation x="2255" y="669" w="160" h="128" />
+		  <animation x="2416" y="669"  w="160" h="128" />
+		  <animation x="2577" y="669"  w="160" h="128" />
+		  <animation x="2738" y="669" w="160" h="128" />
+		  <animation x="2899" y="669" w="160" h="128" />
+		  <animation x="3060" y="669"  w="160" h="128" />
+		  <animation x="3221" y="669" w="160" h="128" />
+		  <animation x="3382" y="669" w="160" h="128" />
+	  </boss_dead>
 	  
 	  <checkpoint>
 		  <animation x="0" y="0" w="32" h="32" />
