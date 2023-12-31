@@ -202,14 +202,14 @@ bool BigSlime::Update(float dt)
 	{
 		currentAnimation = &bigslime_hurt;
 		lives--;
-		if (leftmode)
+		/*if (leftmode)
 		{
 			velocity.x = 1.5f;
 		}
 		if (rightmode)
 		{
 			velocity.x = -1.5f;
-		}
+		}*/
 		isHurt = false;
 	}
 	if (currentAnimation == &bigslime_hurt && currentAnimation->HasFinished()) {
