@@ -6,6 +6,8 @@
 #include "Slime.h"
 #include "Skeleton.h"
 #include "Bomber.h"
+#include "BigSlime.h"
+#include "Boss.h"
 #include "Powerup_1.h"
 #include "Powerup_2.h"
 #include "Powerup_3.h"
@@ -48,6 +50,8 @@ public:
 	//Enemies
 	Slime* slime;
 	Skeleton* skeleton;
+	BigSlime* bigslime;
+	Boss* boss;
 	SlimeVolador* slimevolador;
 
 	//Items

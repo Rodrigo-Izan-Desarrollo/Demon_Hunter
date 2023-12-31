@@ -87,6 +87,12 @@ Entity* EntityManager::CreateEntity(EntityType type)
 	case EntityType::SLIME:
 		entity = new Slime();
 		break;
+	case EntityType::BIGSLIME:
+		entity = new BigSlime();
+		break;
+	case EntityType::BOSS:
+		entity = new Boss();
+		break;
 	case EntityType::SKELETON:
 		entity = new Skeleton();
 		break;
