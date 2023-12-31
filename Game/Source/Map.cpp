@@ -102,8 +102,10 @@ bool Map::LoadColission() {
         std::string capanombre = "colisiones";
         if (mapLayerItem->data->name.GetString() == capanombre) {
 
+            iPoint posMapin = WorldToMap(app->scene->player->position.x - 1000, 0);
+            iPoint posMapfi = WorldToMap(app->scene->player->position.x + 1250, 0);
 
-            for (int x = 0; x < mapLayerItem->data->width; x++)
+            for (int x = posMapin.x; x < posMapfi.x; x++)
             {
                 for (int y = 0; y < mapLayerItem->data->height; y++)
                 {
