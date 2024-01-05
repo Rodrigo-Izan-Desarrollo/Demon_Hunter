@@ -97,14 +97,14 @@ bool Player::Update(float dt)
 	{
 		app->render->camera.y = -(position.y - 550);
 	}
-	if (position.x >= 14500)
+	if (position.x >= 14500 && cameramove)
 	{
 		app->render->camera.x += 0;
+		cameramove = false;
 	}
-	else
+	if (cameramove)
 	{
 		app->render->camera.x = -(position.x - 125);
-
 	}
 
 	//Default animation
@@ -229,7 +229,35 @@ bool Player::Update(float dt)
 	//Portals 
 	if (portal)
 	{	
-		pbody->body->SetTransform({ PIXEL_TO_METERS(2600 + 16), PIXEL_TO_METERS(1080) }, 0);
+		if (position.x > 3200  && position.x < 4100)
+		{
+			pbody->body->SetTransform({ PIXEL_TO_METERS(4448), PIXEL_TO_METERS(990) }, 0);
+		}
+
+		if (position.x > 4500 && position.x < 4700)
+		{
+			pbody->body->SetTransform({ PIXEL_TO_METERS(5792), PIXEL_TO_METERS(1024) }, 0);
+		}
+
+		if (position.x > 8500 && position.x < 8700)
+		{
+			pbody->body->SetTransform({ PIXEL_TO_METERS(8416), PIXEL_TO_METERS(1346) }, 0);
+		}
+
+		if (position.x > 14300 && position.x < 14500)
+		{
+			pbody->body->SetTransform({ PIXEL_TO_METERS(15328), PIXEL_TO_METERS(1184) }, 0);
+			leftmode = true;
+			rightmode = false;
+		}
+
+		if (position.x > 14700)
+		{
+			pbody->body->SetTransform({ PIXEL_TO_METERS(14450), PIXEL_TO_METERS(1216) }, 0);
+			rightmode = true;
+			leftmode = false;
+		}
+
 		portal = false;
 	}
 
@@ -237,6 +265,10 @@ bool Player::Update(float dt)
 		//Activate Godmode
 	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN && !dead)
 	{
+		if (jumping)
+		{
+			jumping = false;
+		}
 		Godmode = !Godmode;
 	}
 		//Allways currentanimation = player
@@ -285,7 +317,7 @@ bool Player::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_F4) == KEY_DOWN && !dead)
 	{
 		//Is different because we want to stop the camera in a specific position
-		pbody->body->SetTransform({ PIXEL_TO_METERS(10436), PIXEL_TO_METERS(802) }, 0);
+		pbody->body->SetTransform({ PIXEL_TO_METERS(14000), PIXEL_TO_METERS(802) }, 0);
 		app->render->camera.x = -9535;
 		app->render->camera.y = -252;
 	}
@@ -447,7 +479,6 @@ bool Player::Update(float dt)
 			}
 
 			// Evitar ajustes adicionales a la velocidad después del salto
-			// pbody->body->SetLinearVelocity(veljump); // Comentado para evitar interferencias
 			if (jumping)
 			{
 				currentAnimation = &player_jump;
@@ -533,7 +564,7 @@ bool Player::Update(float dt)
 			}
 			if (leftmode)
 			{
-				pbodyatack_2 = app->physics->CreateRectangle(position.x - 2, position.y + 15, 10, 20, bodyType::STATIC);
+				pbodyatack_2 = app->physics->CreateRectangle(position.x - 20, position.y + 20, 37.5f, 5, bodyType::STATIC);
 				pbodyatack_2->listener = this;
 				pbodyatack_2->ctype = ColliderType::PATACK;
 			}
