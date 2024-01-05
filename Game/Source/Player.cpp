@@ -237,6 +237,10 @@ bool Player::Update(float dt)
 		//Activate Godmode
 	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN && !dead)
 	{
+		if (jumping)
+		{
+			jumping = false;
+		}
 		Godmode = !Godmode;
 	}
 		//Allways currentanimation = player
