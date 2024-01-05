@@ -66566,7 +66566,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="2676"/>
    <tile gid="18"/>
    <tile gid="1343"/>
    <tile gid="1343"/>
@@ -67018,7 +67018,7 @@
    <tile/>
    <tile/>
    <tile gid="18"/>
-   <tile/>
+   <tile gid="2676"/>
    <tile/>
    <tile/>
    <tile/>
@@ -104989,6 +104989,7 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="8"/>
    <tile/>
    <tile/>
    <tile/>
@@ -105003,8 +105004,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="8"/>
    <tile/>
    <tile/>
    <tile/>
@@ -114780,7 +114780,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="5"/>
    <tile gid="2"/>
    <tile/>
    <tile/>
@@ -115232,7 +115232,7 @@
    <tile gid="2"/>
    <tile/>
    <tile gid="2"/>
-   <tile/>
+   <tile gid="5"/>
    <tile/>
    <tile/>
    <tile/>
@@ -120568,7 +120568,7 @@
    <tile gid="3"/>
   </data>
  </layer>
- <layer id="14" name="navigationLayer" width="482" height="50">
+ <layer id="14" name="navigationLayer" width="482" height="50" visible="0">
   <properties>
    <property name="Draw" type="bool" value="false"/>
    <property name="Navigation" type="bool" value="true"/>
