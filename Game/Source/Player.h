@@ -169,6 +169,9 @@ public:
 		// Bool to change powerups
 	bool canchange = true; 
 
+		//Camera movement
+	bool cameramove = true;
+
 
 	pugi::xml_node config;
 
