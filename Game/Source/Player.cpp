@@ -479,7 +479,6 @@ bool Player::Update(float dt)
 			}
 
 			// Evitar ajustes adicionales a la velocidad después del salto
-			// pbody->body->SetLinearVelocity(veljump); // Comentado para evitar interferencias
 			if (jumping)
 			{
 				currentAnimation = &player_jump;
@@ -565,7 +564,7 @@ bool Player::Update(float dt)
 			}
 			if (leftmode)
 			{
-				pbodyatack_2 = app->physics->CreateRectangle(position.x - 2, position.y + 15, 10, 20, bodyType::STATIC);
+				pbodyatack_2 = app->physics->CreateRectangle(position.x - 20, position.y + 20, 37.5f, 5, bodyType::STATIC);
 				pbodyatack_2->listener = this;
 				pbodyatack_2->ctype = ColliderType::PATACK;
 			}
