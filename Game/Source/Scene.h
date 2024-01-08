@@ -12,6 +12,8 @@
 #include "Powerup_2.h"
 #include "Powerup_3.h"
 #include <list>
+#include "GuiControl.h"
+#include "GuiControlButton.h"
 
 struct SDL_Texture;
 
@@ -64,6 +66,8 @@ public:
 	virtual bool LoadState(pugi::xml_node node);
 	virtual bool SaveState(pugi::xml_node node);
 
+	bool OnGuiMouseClickEvent(GuiControl* control);
+
 private:
 
 	SDL_Texture* img;
@@ -80,7 +84,7 @@ private:
 	List<Entity*> slimesList;
 	List<Entity*> vslimesList;
 
-
+	GuiControlButton* gcButtom;
 };
 
 #endif // __SCENE_H__

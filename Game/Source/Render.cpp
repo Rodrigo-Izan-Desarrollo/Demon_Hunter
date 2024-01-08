@@ -234,9 +234,25 @@ bool Render::DrawCircle(int x, int y, int radius, Uint8 r, Uint8 g, Uint8 b, Uin
 	return ret;
 }
 
-// L14: TODO 6: Implement a method to load the state
-// for now load camera's x and y
-	// L14: TODO 2: Create new virtual methods to LoadState / SaveState
+bool Render::DrawText(const char* text, int posx, int posy, int w, int h) {
+
+	SDL_Color color = { 255, 255, 255 };
+	SDL_Surface* surface = TTF_RenderText_Solid(font, text, color);
+	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
+
+	int texW = 0;
+	int texH = 0;
+	SDL_QueryTexture(texture, NULL, NULL, &texW, &texH);
+	SDL_Rect dstrect = { posx, posy, w, h };
+
+	SDL_RenderCopy(renderer, texture, NULL, &dstrect);
+
+	SDL_DestroyTexture(texture);
+	SDL_FreeSurface(surface);
+
+	return true;
+}
+
 bool Render::LoadState(pugi::xml_node node) {
 
 	camera.x = node.child("camera").attribute("x").as_int();
@@ -244,8 +260,6 @@ bool Render::LoadState(pugi::xml_node node) {
 
 	return true;
 }
-// L14: TODO 8: Create a method to save the state of the renderer
-// using append_child and append_attribute
 bool Render::SaveState(pugi::xml_node node) {
 
 	//Append on node of a new chil Camera and add attributes x,y of the cmaera position

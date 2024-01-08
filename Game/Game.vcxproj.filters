@@ -79,6 +79,12 @@
     <ClCompile Include="Source\Boss.cpp">
       <Filter>cpp.files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\GuiControlButton.cpp">
+      <Filter>cpp.files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GuiManager.cpp">
+      <Filter>cpp.files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Animation.h">
@@ -181,6 +187,15 @@
       <Filter>h.files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Boss.h">
+      <Filter>h.files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GuiManager.h">
+      <Filter>h.files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GuiControl.h">
+      <Filter>h.files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GuiControlButton.h">
       <Filter>h.files</Filter>
     </ClInclude>
   </ItemGroup>
