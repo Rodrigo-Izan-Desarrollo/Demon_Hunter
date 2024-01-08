@@ -51,6 +51,8 @@ public:
 	const char* musicpathslime;
 
 	PhysBody* pbody;
+	PhysBody* pbodyatack = nullptr;
+
 	PhysBody* damage;
 
 	int lives = 7;
