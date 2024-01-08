@@ -109,10 +109,34 @@
 					  texturepathenemy_3="Assets/Textures/Enemies/Dragon_bomba.png"
 					  musicpathslime= "Assets/Audio/Fx/Slimedeath.wav"
 					  />
-
+	  <slimevolador x="9300" y="736"
+				leftmode="false" rightmode="true"
+				texturepathenemy_3="Assets/Textures/Enemies/Dragon_bomba.png"
+				musicpathslime= "Assets/Audio/Fx/Slimedeath.wav"
+					  />
+	  <slimevolador x="9950" y="544"
+			leftmode="false" rightmode="true"
+			texturepathenemy_3="Assets/Textures/Enemies/Dragon_bomba.png"
+			musicpathslime= "Assets/Audio/Fx/Slimedeath.wav"
+					  />
+	  <slimevolador x="10650" y="544"
+			leftmode="false" rightmode="true"
+			texturepathenemy_3="Assets/Textures/Enemies/Dragon_bomba.png"
+			musicpathslime= "Assets/Audio/Fx/Slimedeath.wav"
+					  />
 	  <bigslime x="2080" y="1312" 
 			   texturepathenemy_4="Assets/Textures/Enemies/Slime_2.png"
 			   musicpathslime= "Assets/Audio/Fx/Slimedeath.wav"
+		/>
+	  
+	  <bigslime x="5000	" y="1312"
+			  texturepathenemy_4="Assets/Textures/Enemies/Slime_2.png"
+			  musicpathslime= "Assets/Audio/Fx/Slimedeath.wav"
+		/>
+	  
+	  <bigslime x="6900	" y="448 "
+		  texturepathenemy_4="Assets/Textures/Enemies/Slime_2.png"
+		  musicpathslime= "Assets/Audio/Fx/Slimedeath.wav"
 		/>
 
 	  <boss x="15040" y="1216"
