@@ -6,38 +6,33 @@
 	<audio />
 	<:anonymous />
 	<scene>
-
-
-		<playerposition x="7320" y="1062" />
-		<modes sleeping="true" dead="false" canmove="true" inground="true" rightmode="true" leftmode="false" caninv="true" God-mode="true" />
+		<playerposition x="3398" y="1058" />
+		<modes sleeping="false" dead="false" canmove="true" inground="true" rightmode="true" leftmode="false" caninv="true" God-mode="false" lifes="2" />
 		<canpower canpower-1="false" canpower-2="false" canpower-3="false" />
 		<power power-1="false" power-2="false" power-3="false" canchange="true" />
 		<poweritem poweritem-1="false" poweritem-2="false" poweritem-3="false" />
-		<enemy1 x="1096" y="994" />
-		<enemy2 x="2941" y="1186" />
-		<enemy3 x="2991" y="1186" />
-		<enemy4 x="7334" y="1186" />
-		<enemy5 x="7861" y="1378" />
-		<enemy6 x="7956" y="1378" />
-		<venemy1 x="2306" y="672" />
-		<venemy2 x="3013" y="672" />
-		<venemy3 x="4520" y="576" />
-		<venemy4 x="4722" y="576" />
-		<venemy5 x="5177" y="576" />
-		<venemy6 x="7464" y="608" />
-		<venemy7 x="7721" y="416" />
-		<venemy8 x="8041" y="224" />
-		<venemy9 x="8393" y="32" />
-		<venemy10 x="9553" y="736" />
-		<venemy11 x="10203" y="544" />
-		<venemy12 x="10903" y="544" />
-
+		<enemy1 x="1173" y="994" />
+		<enemy2 x="2848" y="1186" />
+		<enemy3 x="2891" y="1186" />
+		<enemy4 x="7234" y="1186" />
+		<enemy5 x="7831" y="1358" />
+		<enemy6 x="7873" y="1359" />
+		<venemy1 x="2506" y="672" />
+		<venemy2 x="2813" y="672" />
+		<venemy3 x="4696" y="576" />
+		<venemy4 x="4922" y="576" />
+		<venemy5 x="4977" y="576" />
+		<venemy6 x="7317" y="608" />
+		<venemy7 x="7637" y="416" />
+		<venemy8 x="8021" y="224" />
+		<venemy9 x="8309" y="32" />
+		<venemy10 x="9353" y="736" />
+		<venemy11 x="10003" y="544" />
+		<venemy12 x="10703" y="544" />
 	</scene>
 	<:anonymous />
 	<entitymanager />
 	<renderer>
-
-		<camera x="-7188" y="-508" />
-
+		<camera x="-3271" y="-508" />
 	</renderer>
 </game_state>
