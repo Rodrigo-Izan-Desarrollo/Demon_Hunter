@@ -43,6 +43,7 @@ bool SlimeVolador::Start() {
 	slimevolador_attack.LoadAnimations("slimevolador_attack");
 	slimevolador_dead.LoadAnimations("slimevolador_dead");
 	muelto_Fx = app->audio->LoadFx(musicpathslime);
+	pathdraw = app->tex->Load("Assets/Maps/azul.png");
 
 	velocity = { -0.5,-0.165 };
 	
@@ -60,102 +61,100 @@ bool SlimeVolador::Update(float dt)
 		pbody->body->SetTransform({ PIXEL_TO_METERS(position.x), PIXEL_TO_METERS(position.y) }, 0);
 	}
 
+	
+
+	if (reverse && leftmodeslimevolador && !onView)
+	{
+		leftmodeslimevolador = false;
+		rightmodeslimevolador = true;
+		downmodeslimevolador = false;
+		reverse = false;
+	}
+	if (reverse && rightmodeslimevolador && !onView)
+	{
+		leftmodeslimevolador = true;
+		rightmodeslimevolador = false;
+		downmodeslimevolador = false;
+		reverse = false;
+	}
 	origPos = app->map->WorldToMap(position.x, position.y);
 	targPos = app->map->WorldToMap(app->scene->player->position.x, app->scene->player->position.y);
 
-	if (!isAttacking) 
+	LOG("LAST PATH X: %d enemy x: %d", targPos.x, origPos.x);
+
+	if (dist(app->scene->player->position, position) < app->map->mapData.tileWidth * tilesview)// tenemos una funcion que calcula la dist y calcula la del player y el enemigo y si esta en el rango de vision de tiles view que le siga y si esta mas cerca que le ataque
 	{
-		if (reverse && leftmodeslimevolador && !onView)
-			{
-				leftmodeslimevolador = false;
-				rightmodeslimevolador = true;
-				downmodeslimevolador = false;
-				reverse = false;
-			}
-			if (reverse && rightmodeslimevolador && !onView)
-			{
-				leftmodeslimevolador = true;
-				rightmodeslimevolador = false;
-				downmodeslimevolador = false;
-				reverse = false;
-			}
-		
-		LOG("LAST PATH X: %d enemy x: %d", targPos.x, origPos.x);
+		app->map->pathfindingSuelo->CreatePath(origPos, targPos);
 
-		if (dist(app->scene->player->position, position) < app->map->mapData.tileWidth * tilesview)// tenemos una funcion que calcula la dist y calcula la del player y el enemigo y si esta en el rango de vision de tiles view que le siga y si esta mas cerca que le ataque
+		if (app->map->pathfindingSuelo->IsWalkable(targPos))
+		{
+			lastPath = *app->map->pathfindingSuelo->GetLastPath();
+			lastPath2 = app->map->pathfindingSuelo->GetLastPath();
+		}
 
+		if (!(app->scene->player->dead || app->scene->player->invisible)) //que si el player no esta muerto o invisible no le ataque
 		{
 			onView = true;
 			currentAnimation = &slimevolador;
+			float distanceWithRandomError = dist(app->scene->player->position, position) + rand() % 7 - 3;
 
-			playerDetectedPosition = app->scene->player->position;
-
-			app->map->pathfindingSuelo->CreatePath(origPos, targPos);
-			lastPath = *app->map->pathfindingSuelo->GetLastPath();
-
-
-			if (dist(app->scene->player->position, position) < app->map->mapData.tileWidth * tilesattack)
+			if (distanceWithRandomError < app->map->mapData.tileWidth * tilesattack)
 			{
 				if (!isAttacking)
 				{
 					isAttacking = true;
 				}
 			}
+			if (isAttacking )
+			{
+				currentAnimation = &slimevolador_attack;
+				if (app->scene->player->position.x < position.x && !downmodeslimevolador)
+				{
+					rightmodeslimevolador = false;
+					leftmodeslimevolador = true;
+					downmodeslimevolador = false;
 
+					velocity.x = -2.0f;
+
+				}
+				else if (app->scene->player->position.x > position.x && !downmodeslimevolador)
+				{
+					rightmodeslimevolador = true;
+					leftmodeslimevolador = false;
+					downmodeslimevolador = false;
+					velocity.x = +2.0f;
+				}
+				if (app->scene->player->position.x >= position.x - 10 && app->scene->player->position.x <= position.x + 10)
+				{
+					rightmodeslimevolador = false;
+					leftmodeslimevolador = false;
+					downmodeslimevolador = true;
+				}
+				if (downmodeslimevolador)
+				{
+					velocity.x = 0.0f;
+					velocity.y = 20.0f;
+				}
+			}
 		}
-		else {
-			onView = false; // Asegurarse de que onView sea falso cuando el jugador no está a la vista y generar un movimiento por las zonas determinadas cuando no este onView
-
-			if (rightmodeslimevolador)
-			{
-				velocity.x = 1.0f;
-			}
-			if (leftmodeslimevolador)
-			{
-				velocity.x = -1.0f;
-			}
+		else
+		{
+			onView = false;
 		}
 	}
+	else {
+		onView = false; // Asegurarse de que onView sea falso cuando el jugador no está a la vista y generar un movimiento por las zonas determinadas cuando no este onView
 
-
-	
-	
-
-	if (isAttacking ) // que si esta atacando y esta en lla misma x que vaya directo para abajo
-	{
-		currentAnimation = &slimevolador_attack;
-	
-	
-		if (app->scene->player->position.x < position.x && !downmodeslimevolador )
+		if (rightmodeslimevolador)
 		{
-			rightmodeslimevolador = false;
-			leftmodeslimevolador = true;
-			downmodeslimevolador = false;
-			
-			velocity.x = -2.0f;
-				
+			velocity.x = 1.0f;
 		}
-		else if ( app->scene->player->position.x > position.x && !downmodeslimevolador)
+		if (leftmodeslimevolador)
 		{
-			rightmodeslimevolador = true;
-			leftmodeslimevolador = false;
-			downmodeslimevolador = false;
-			velocity.x = +2.0f;
+			velocity.x = -1.0f;
 		}
-		if (app->scene->player->position.x >= position.x - 10 && app->scene->player->position.x <= position.x + 10)
-		{
-			rightmodeslimevolador = false;
-			leftmodeslimevolador = false;
-			downmodeslimevolador = true;
-		}
-		if (downmodeslimevolador)
-		{
-			velocity.x = 0.0f;
-			velocity.y = 20.0f;
-		}
-
 	}
-
+	
 	if (currentAnimation == &slimevolador_attack && currentAnimation->HasFinished()) { // Reiniciar el ataque
 		isAttacking = false;
 		slimevolador_attack.Reset();
@@ -164,6 +163,23 @@ bool SlimeVolador::Update(float dt)
 
 
 	LOG("COUNTTTTTTTTTTT: %d", lastPath.Count());
+
+
+	//pinta el pathfinding
+	if (app->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN)
+	{
+		paint = !paint;
+	}
+
+	if (paint)
+	{
+		const DynArray<iPoint>* path = app->map->pathfindingSuelo->GetLastPath();
+		for (uint i = 0; i < path->Count(); ++i)
+		{
+			iPoint pos = app->map->MapToWorld(path->At(i)->x, path->At(i)->y);
+			app->render->DrawTexture(pathdraw, pos.x, pos.y);
+		}
+	}
 
 	if (lastPath.Count() > 0) //hace el path
 	{

@@ -6,6 +6,8 @@
 	<audio />
 	<:anonymous />
 	<scene>
+
+
 		<playerposition x="7320" y="1062" />
 		<modes sleeping="true" dead="false" canmove="true" inground="true" rightmode="true" leftmode="false" caninv="true" God-mode="true" />
 		<canpower canpower-1="false" canpower-2="false" canpower-3="false" />
@@ -29,10 +31,13 @@
 		<venemy10 x="9553" y="736" />
 		<venemy11 x="10203" y="544" />
 		<venemy12 x="10903" y="544" />
+
 	</scene>
 	<:anonymous />
 	<entitymanager />
 	<renderer>
+
 		<camera x="-7188" y="-508" />
+
 	</renderer>
 </game_state>

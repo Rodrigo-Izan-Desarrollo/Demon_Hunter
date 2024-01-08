@@ -80,13 +80,12 @@ bool BigSlime::Update(float dt)
 
 
 	origPos = app->map->WorldToMap(position.x, position.y);
-;
 	targPos = app->map->WorldToMap(app->scene->player->position.x, app->scene->player->position.y);
 
 	LOG("LAST PATH X: %d enemy x: %d", targPos.x, origPos.x);
 	
-		if (dist(app->scene->player->position, position) < app->map->mapData.tileWidth * tilesview)// tenemos una funcion que calcula la dist y calcula la del player y el enemigo y si esta en el rango de vision de tiles view que le siga y si esta mas cerca que le ataque
-		{
+	if (dist(app->scene->player->position, position) < app->map->mapData.tileWidth * tilesview)// tenemos una funcion que calcula la dist y calcula la del player y el enemigo y si esta en el rango de vision de tiles view que le siga y si esta mas cerca que le ataque
+	{
 		app->map->pathfindingSuelo->CreatePath(origPos, targPos);
 
 		if (app->map->pathfindingSuelo->IsWalkable(targPos))
@@ -204,12 +203,12 @@ bool BigSlime::Update(float dt)
 		lives--;
 		if (leftmode)
 		{
-			pbody->body->SetTransform({ PIXEL_TO_METERS(position.x + 1), PIXEL_TO_METERS(position.y + 0.5f) }, 0);
+			pbody->body->SetTransform({ PIXEL_TO_METERS(position.x + 0.5f), PIXEL_TO_METERS(position.y + 0.5f) }, 0);
 			
 		}
 		if (rightmode)
 		{
-			pbody->body->SetTransform({ PIXEL_TO_METERS(position.x - 1), PIXEL_TO_METERS(position.y + 0.5f) }, 0);
+			pbody->body->SetTransform({ PIXEL_TO_METERS(position.x - 0.5f), PIXEL_TO_METERS(position.y + 0.5f) }, 0);
 		}
 		isHurt = false;
 	}

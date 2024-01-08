@@ -112,6 +112,19 @@ bool Boss::Update(float dt)
 			if (isAttacking && !iskilled)
 			{
 				currentAnimation = &boss_attack;
+
+				/*if (rightmode)
+				{
+					pbodyatack = app->physics->CreateRectangle(position.x + 35, position.y + 15, 10, 20, bodyType::STATIC);
+					pbodyatack->listener = this;
+					pbodyatack->ctype = ColliderType::ENEMY;
+				}
+				if (leftmode)
+				{
+					pbodyatack = app->physics->CreateRectangle(position.x - 2, position.y + 15, 10, 20, bodyType::STATIC);
+					pbodyatack->listener = this;
+					pbodyatack->ctype = ColliderType::ENEMY;
+				}*/
   			}
 		}
 		else
@@ -205,12 +218,12 @@ bool Boss::Update(float dt)
 		lives--;
 		if (leftmode)
 		{
-			pbody->body->SetTransform({ PIXEL_TO_METERS(position.x + 1), PIXEL_TO_METERS(position.y + 0.5f) }, 0);
+			pbody->body->SetTransform({ PIXEL_TO_METERS(position.x + 0.5f), PIXEL_TO_METERS(position.y + 0.5f) }, 0);
 
 		}
 		if (rightmode)
 		{
-			pbody->body->SetTransform({ PIXEL_TO_METERS(position.x - 1), PIXEL_TO_METERS(position.y + 0.5f) }, 0);
+			pbody->body->SetTransform({ PIXEL_TO_METERS(position.x - 0.5f), PIXEL_TO_METERS(position.y + 0.5f) }, 0);
 		}
 		isHurt = false;
 	}

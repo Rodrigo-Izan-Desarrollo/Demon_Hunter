@@ -41,10 +41,10 @@ public:
 	Animation slimevolador_dead;
 
 	SDL_Texture* texture;
+	SDL_Texture* pathdraw;
 
 	const char* texturePath;
 	const char* musicpathslime;
-
 
 	PhysBody* pbody;
 	PhysBody* damage;
@@ -55,7 +55,6 @@ public:
 
 	int tilesattack =10;
 
-
 	bool isAttacking = false;
 
 	bool leftmodeslimevolador = true;
@@ -63,11 +62,13 @@ public:
 	bool downmodeslimevolador = false;
 	bool reverse = false;
 	bool death = false;
+	bool paint = false;
 
 	b2Vec2 velocity;
 	iPoint origPos;
 	iPoint targPos;
 	DynArray<iPoint> lastPath;
+	const DynArray<iPoint>* lastPath2;
 	iPoint playerDetectedPosition;
 
 	const char* texturePathBomber;
