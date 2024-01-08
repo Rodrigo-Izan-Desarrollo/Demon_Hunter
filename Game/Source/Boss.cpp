@@ -203,6 +203,15 @@ bool Boss::Update(float dt)
 	{
 		currentAnimation = &boss_hurt;
 		lives--;
+		if (leftmode)
+		{
+			pbody->body->SetTransform({ PIXEL_TO_METERS(position.x + 1), PIXEL_TO_METERS(position.y + 0.5f) }, 0);
+
+		}
+		if (rightmode)
+		{
+			pbody->body->SetTransform({ PIXEL_TO_METERS(position.x - 1), PIXEL_TO_METERS(position.y + 0.5f) }, 0);
+		}
 		isHurt = false;
 	}
 	if (currentAnimation == &boss_hurt && currentAnimation->HasFinished()) {

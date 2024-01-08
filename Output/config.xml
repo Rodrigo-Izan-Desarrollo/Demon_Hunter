@@ -115,10 +115,10 @@
 			   musicpathslime= "Assets/Audio/Fx/Slimedeath.wav"
 		/>
 
-	  <!--<boss x="15040" y="1216"
+	  <boss x="15040" y="1216"
 			   texturepathenemy_5="Assets/Textures/Enemies/Boss-2.png"
 			   musicpathslime= "Assets/Audio/Fx/Slimedeath.wav"
-		/>-->
+		/>
 
 		<powerup_1 x="3520" y="1424" texturepathpower_1="Assets/Textures/Player/power_2.png"/>
 	  
@@ -389,7 +389,7 @@
 		  <animation x="645" y="511" w="160" h="128" />
 	  </boss_hurt>
 
-	  <boss_dead loop="true" speed="0.175f" >
+	  <boss_dead loop="false" speed="0.175f" >
 		  <animation x="1" y="669" w="160" h="128" />
 		  <animation x="162" y="669"  w="160" h="128" />
 		  <animation x="323" y="669"  w="160" h="128" />

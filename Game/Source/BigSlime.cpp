@@ -202,14 +202,15 @@ bool BigSlime::Update(float dt)
 	{
 		currentAnimation = &bigslime_hurt;
 		lives--;
-		/*if (leftmode)
+		if (leftmode)
 		{
-			velocity.x = 1.5f;
+			pbody->body->SetTransform({ PIXEL_TO_METERS(position.x + 1), PIXEL_TO_METERS(position.y + 0.5f) }, 0);
+			
 		}
 		if (rightmode)
 		{
-			velocity.x = -1.5f;
-		}*/
+			pbody->body->SetTransform({ PIXEL_TO_METERS(position.x - 1), PIXEL_TO_METERS(position.y + 0.5f) }, 0);
+		}
 		isHurt = false;
 	}
 	if (currentAnimation == &bigslime_hurt && currentAnimation->HasFinished()) {
