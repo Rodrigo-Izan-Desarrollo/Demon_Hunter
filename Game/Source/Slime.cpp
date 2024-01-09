@@ -120,18 +120,7 @@ bool Slime::Update(float dt)
 	}
 	else
 	{
-		onView = false; //generar un movimiento por las zonas determinadas cuando no este onView
-		if (!onView && !isAttacking)
-		{
-			if (rightmode)
-					{
-						velocity.x = 0.5f;
-					}
-					if (leftmode)
-					{
-						velocity.x = -0.5f;
-					}
-		}
+		movement();
 		if (lastPath2 == app->map->pathfindingSuelo->GetLastPath())
 		{
 			app->map->pathfindingSuelo->ClearLastPath();
@@ -155,15 +144,7 @@ bool Slime::Update(float dt)
 		paint = !paint;
 	}
 
-	if (paint)
-	{
-		const DynArray<iPoint>* path = app->map->pathfindingSuelo->GetLastPath();
-			for (uint i = 0; i < path->Count(); ++i)
-			{
-				iPoint pos = app->map->MapToWorld(path->At(i)->x, path->At(i)->y);
-				app->render->DrawTexture(pathdraw, pos.x, pos.y);
-			}
-	}
+	paintpathfinding();
 	
 
 	if (lastPath.Count() > 0) //recorre el path
@@ -235,6 +216,7 @@ bool Slime::Update(float dt)
 	return true;
 }
 
+
 bool Slime::CleanUp()
 {
 	return true;
@@ -265,5 +247,34 @@ void Slime::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	default:
 		break;
+	}
+}
+
+void Slime::paintpathfinding() {
+
+		if (paint)
+	{
+		const DynArray<iPoint>* path = app->map->pathfindingSuelo->GetLastPath();
+			for (uint i = 0; i < path->Count(); ++i)
+			{
+				iPoint pos = app->map->MapToWorld(path->At(i)->x, path->At(i)->y);
+				app->render->DrawTexture(pathdraw, pos.x, pos.y);
+			}
+	}
+}
+
+void Slime::movement() {
+
+	onView = false; //generar un movimiento por las zonas determinadas cuando no este onView
+	if (!onView && !isAttacking)
+	{
+		if (rightmode)
+		{
+			velocity.x = 0.5f;
+		}
+		if (leftmode)
+		{
+			velocity.x = -0.5f;
+		}
 	}
 }

@@ -100,7 +100,6 @@
     <ClCompile Include="Source\Boss.cpp" />
     <ClCompile Include="Source\EntityManager.cpp" />
     <ClCompile Include="Source\missutils.cpp" />
-    <ClCompile Include="Source\Skeleton.cpp" />
     <ClCompile Include="Source\Powerup_1.cpp" />
     <ClCompile Include="Source\Powerup_2.cpp" />
     <ClCompile Include="Source\Powerup_3.cpp" />
@@ -125,7 +124,6 @@
     <ClInclude Include="Source\Boss.h" />
     <ClInclude Include="Source\Entity.h" />
     <ClInclude Include="Source\EntityManager.h" />
-    <ClInclude Include="Source\Skeleton.h" />
     <ClInclude Include="Source\Powerup_1.h" />
     <ClInclude Include="Source\Powerup_2.h" />
     <ClInclude Include="Source\Powerup_3.h" />
