@@ -15,6 +15,8 @@
 
 #include "Defs.h"
 #include "Log.h"
+#include "GuiControl.h"
+#include "GuiManager.h"
 
 Scene::Scene() : Module()
 {
@@ -318,3 +320,9 @@ bool Scene::SaveState(pugi::xml_node node) {
 	return true;
 }
 
+bool Scene::OnGuiMouseClickEvent(GuiControl* control)
+{
+	LOG("Press Gui Control: %d", control->id);
+
+	return true;
+}
