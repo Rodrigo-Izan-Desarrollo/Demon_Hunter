@@ -28,6 +28,10 @@ public:
 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 
+	void paintpathfinding();
+
+	void movement();
+
 
 public:
 

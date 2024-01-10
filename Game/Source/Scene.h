@@ -4,7 +4,6 @@
 #include "Module.h"
 #include "Player.h"
 #include "Slime.h"
-#include "Skeleton.h"
 #include "Bomber.h"
 #include "BigSlime.h"
 #include "Boss.h"
@@ -51,7 +50,7 @@ public:
 
 	//Enemies
 	Slime* slime;
-	Skeleton* skeleton;
+
 	BigSlime* bigslime;
 	Boss* boss;
 	SlimeVolador* slimevolador;

@@ -55,9 +55,6 @@
     <ClCompile Include="Source\Scene.cpp">
       <Filter>cpp.files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Skeleton.cpp">
-      <Filter>cpp.files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Slime.cpp">
       <Filter>cpp.files</Filter>
     </ClCompile>
@@ -163,9 +160,6 @@
       <Filter>h.files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Scene.h">
-      <Filter>h.files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Skeleton.h">
       <Filter>h.files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Slime.h">

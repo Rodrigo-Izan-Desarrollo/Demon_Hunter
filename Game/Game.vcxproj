@@ -102,7 +102,6 @@
     <ClCompile Include="Source\GuiControlButton.cpp" />
     <ClCompile Include="Source\GuiManager.cpp" />
     <ClCompile Include="Source\missutils.cpp" />
-    <ClCompile Include="Source\Skeleton.cpp" />
     <ClCompile Include="Source\Powerup_1.cpp" />
     <ClCompile Include="Source\Powerup_2.cpp" />
     <ClCompile Include="Source\Powerup_3.cpp" />
@@ -130,7 +129,6 @@
     <ClInclude Include="Source\GuiControl.h" />
     <ClInclude Include="Source\GuiControlButton.h" />
     <ClInclude Include="Source\GuiManager.h" />
-    <ClInclude Include="Source\Skeleton.h" />
     <ClInclude Include="Source\Powerup_1.h" />
     <ClInclude Include="Source\Powerup_2.h" />
     <ClInclude Include="Source\Powerup_3.h" />

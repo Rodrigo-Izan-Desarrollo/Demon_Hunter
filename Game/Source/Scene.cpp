@@ -190,6 +190,7 @@ bool Scene::LoadState(pugi::xml_node node) {
 	player->leftmode = node.child("modes").attribute("leftmode").as_bool();
 	player->caninv = node.child("modes").attribute("caninv").as_bool();
 	player->Godmode = node.child("modes").attribute("God-mode").as_bool();
+	player->lifes = node.child("modes").attribute("lifes").as_int();
 
 		//Player canpower-ups
 	player->canpower_1 = node.child("canpower").attribute("canpower-1").as_bool();
@@ -262,6 +263,7 @@ bool Scene::SaveState(pugi::xml_node node) {
 	modesnode.append_attribute("leftmode").set_value(player->leftmode);
 	modesnode.append_attribute("caninv").set_value(player->caninv);
 	modesnode.append_attribute("God-mode").set_value(player->Godmode);
+	modesnode.append_attribute("lifes").set_value(player->lifes);
 
 		//Player canpower-ups
 	pugi::xml_node canpowernode = node.append_child("canpower");
