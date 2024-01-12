@@ -4,6 +4,7 @@
 #include "Render.h"
 #include "Textures.h"
 #include "Audio.h"
+#include "SceneLogo.h"
 #include "Scene.h"
 #include "Map.h"
 #include "Physics.h"
@@ -32,8 +33,9 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	tex = new Textures(this);
 	audio = new Audio(this);
 	physics = new Physics(this);
-
 	fade = new FadeToBlack(this);
+
+	sceneLogo = new SceneLogo(this, true);
 	scene = new Scene(this,false);
 	map = new Map(this, false);
 	entityManager = new EntityManager(this, false);
@@ -48,6 +50,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(fade);
 	AddModule(physics);
 
+	AddModule(sceneLogo);
 	AddModule(scene);
 	AddModule(map);
 	AddModule(entityManager);
