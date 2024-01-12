@@ -32,9 +32,14 @@ bool SceneLogo::Start()
 {
 	// Textures
 	count = 0;
-	Intro_1 = app->tex->Load("Assets/Screens/Intro_2.png");
+	Intro_1 = app->tex->Load("Assets/Screens/Intro_1.png");
+	Intro_2 = app->tex->Load("Assets/Screens/Intro_2.png");
 	
-	// Audio
+	//PLay Fx
+	logo_theme = app->audio->LoadFx("Assets/Audio/Music/Sound_efect_logo.ogg");
+	app->audio->PlayFx(logo_theme);
+
+	currentTexture = Intro_1;
 
 	return true;
 }
@@ -48,7 +53,10 @@ bool SceneLogo::PreUpdate()
 // Called each loop iteration
 bool SceneLogo::Update(float dt)
 {
-	if (count > 1000) {
+	if (count > 250) {
+		currentTexture = Intro_2;
+	}
+	if (count > 500) {
 		app->fade->StartFadeToBlack(this, (Module*)app->scene, 0);
 	}
 	else {
@@ -60,7 +68,6 @@ bool SceneLogo::Update(float dt)
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
-		app->audio->PlayFx(fxEnter);
 		app->fade->StartFadeToBlack(this, (Module*)app->scene, 0);
 	}
 
@@ -72,8 +79,7 @@ bool SceneLogo::PostUpdate()
 {
 	bool ret = true;
 
-	app->render->DrawTexture(Intro_1, 30,380);
-	fxEnter = 0;
+	app->render->DrawTexture(currentTexture, 30,380);
 
 	return ret;
 }
@@ -84,6 +90,8 @@ bool SceneLogo::CleanUp()
 	LOG("Freeing best logo ever scene");
 
 	app->tex->UnLoad(Intro_1);
+	app->tex->UnLoad(Intro_2);
+	app->audio->UnloadFx(logo_theme);
 
 	return true;
 }

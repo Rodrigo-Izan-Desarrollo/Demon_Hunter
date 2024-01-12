@@ -37,11 +37,12 @@ private:
 	// Texture
 	SDL_Texture* Intro_1;
 	SDL_Texture* Intro_2;
+	SDL_Texture* currentTexture;
 
 	int count;
 
-	// fx
-	uint fxEnter;
+	// Screen music
+	uint logo_theme;
 
 };
 
