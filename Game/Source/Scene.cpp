@@ -18,7 +18,7 @@
 #include "GuiControl.h"
 #include "GuiManager.h"
 
-Scene::Scene() : Module()
+Scene::Scene(App* application, bool start_enabled) : Module(application, start_enabled)
 {
 	name.Create("scene");
 }
@@ -103,8 +103,49 @@ bool Scene::Awake(pugi::xml_node& config)
 // Called before the first frame
 bool Scene::Start()
 {
-	
+	//Load texturas del Scene.h
+		//Intro
+	Intro_1 = app->tex->Load("Assets/Textures/Screens/Intro_2");
+	Intro_2 = app->tex->Load("Assets/Textures/scene.png");
+		//Menu
+	Menu_1 = app->tex->Load("Assets/Textures/scene.png");
+	Menu_2 = app->tex->Load("Assets/Textures/scene.png");
+	Menu_3 = app->tex->Load("Assets/Textures/scene.png");
+	Menu_4 = app->tex->Load("Assets/Textures/scene.png");
+	Menu_5 = app->tex->Load("Assets/Textures/scene.png");
+	Menu_6 = app->tex->Load("Assets/Textures/scene.png");
+	Menu_7 = app->tex->Load("Assets/Textures/scene.png");
+	Menu_8 = app->tex->Load("Assets/Textures/scene.png");
+	Menu_9 = app->tex->Load("Assets/Textures/scene.png");
+	Menu_10 = app->tex->Load("Assets/Textures/scene.png");
+	Menu_11 = app->tex->Load("Assets/Textures/scene.png");
+	Menu_12 = app->tex->Load("Assets/Textures/scene.png");
+		//Pausa
+	Pausa_1 = app->tex->Load("Assets/Textures/scene.png");
+	Pausa_2 = app->tex->Load("Assets/Textures/scene.png");
+	Pausa_3 = app->tex->Load("Assets/Textures/scene.png");
+	Pausa_4 = app->tex->Load("Assets/Textures/scene.png");
+	Pausa_5 = app->tex->Load("Assets/Textures/scene.png");
+	Pausa_6 = app->tex->Load("Assets/Textures/scene.png");
+	Pausa_7 = app->tex->Load("Assets/Textures/scene.png");
+	Pausa_8 = app->tex->Load("Assets/Textures/scene.png");
+	Pausa_9 = app->tex->Load("Assets/Textures/scene.png");
+		//Settings
+	Settings_1 = app->tex->Load("Assets/Textures/scene.png");
+	Settings_2 = app->tex->Load("Assets/Textures/scene.png");
+	Settings_3 = app->tex->Load("Assets/Textures/scene.png");
+	Settings_4 = app->tex->Load("Assets/Textures/scene.png");
+		//Gameover
+	Gameover_1 = app->tex->Load("Assets/Textures/scene.png");
+	    //Win
+	Win_1 = app->tex->Load("Assets/Textures/scene.png");
+		//Credits
+	Credits_1 = app->tex->Load("Assets/Textures/scene.png");
+
+	//Music
+		//Game music
 	app->audio->PlayMusic(configNode.child("music").attribute("musicpathambient").as_string());
+
 
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);
@@ -144,7 +185,6 @@ bool Scene::Update(float dt)
 	{
 		app->SaveRequest();
 	}
-
 	
 	return true;
 }

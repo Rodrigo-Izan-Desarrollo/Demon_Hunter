@@ -10,7 +10,7 @@ class Window : public Module
 {
 public:
 
-	Window();
+	Window(App* application, bool start_enabled = true);
 
 	// Destructor
 	virtual ~Window();
@@ -25,7 +25,7 @@ public:
 	void SetTitle(const char* title);
 
 	// Retrive window size
-	void GetWindowSize(uint& width, uint& height) const;
+	void GetWindowSize(int& width, int& height) const;
 
 	// Retrieve window scale
 	uint GetScale() const;

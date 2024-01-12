@@ -7,7 +7,7 @@
 #include "SDL/include/SDL.h"
 
 
-Window::Window() : Module()
+Window::Window(App* application, bool start_enabled) : Module(application, start_enabled)
 {
 	window = NULL;
 	screenSurface = NULL;
@@ -89,7 +89,7 @@ void Window::SetTitle(const char* new_title)
 	SDL_SetWindowTitle(window, new_title);
 }
 
-void Window::GetWindowSize(uint& width, uint& height) const
+void Window::GetWindowSize(int& width, int& height) const
 {
 	width = this->width;
 	height = this->height;

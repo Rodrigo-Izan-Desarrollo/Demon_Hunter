@@ -11,6 +11,7 @@
 #include "Window.h"
 #include "Scene.h"
 #include "Box2D/Box2D/Box2D.h"
+#include "FadeToBlack.h"
 
 // Tell the compiler to reference the compiled Box2D libraries
 #ifdef _DEBUG
@@ -19,7 +20,7 @@
 #pragma comment( lib, "../Game/Source/External/Box2D/libx86/ReleaseLib/Box2D.lib" )
 #endif
 
-Physics::Physics() : Module()
+Physics::Physics(App* application, bool start_enabled) : Module(application, start_enabled)
 {
 	// Initialise all the internal class variables, at least to NULL pointer
 	world = NULL;
@@ -243,7 +244,7 @@ bool Physics::PostUpdate()
 				case b2Shape::e_circle:
 				{
 					b2CircleShape* shape = (b2CircleShape*)f->GetShape();
-					uint width, height;
+					int width, height;
 					app->win->GetWindowSize(width, height);
 					b2Vec2 pos = f->GetBody()->GetPosition();
 					float distance = app->scene->player->position.DistanceTo({ METERS_TO_PIXELS(pos.x), METERS_TO_PIXELS(pos.y) });

@@ -15,10 +15,12 @@ class Input;
 class Render;
 class Textures;
 class Audio;
+
 class Scene;
 class EntityManager;
 class Map;
 class Physics;
+class FadeToBlack;
 class GuiManager;
 
 class App
@@ -90,6 +92,7 @@ public:
 	EntityManager* entityManager;
 	Map* map;
 	Physics* physics;
+	FadeToBlack* fade;
 	GuiManager* guiManager;
 	bool vsync;
 

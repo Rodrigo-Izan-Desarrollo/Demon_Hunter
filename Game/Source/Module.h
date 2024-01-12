@@ -12,8 +12,11 @@ class Module
 {
 public:
 
-	Module() : active(false)
-	{}
+	App* Application;
+	Module(App* parent, bool startEnabled) : Application(parent), active(startEnabled)
+	{
+
+	}
 
 	void Init()
 	{
@@ -62,6 +65,24 @@ public:
 	}
 	virtual bool SaveState(pugi::xml_node node) {
 		return true;
+	}
+
+	virtual void Enable() {
+		if (!active) {
+			active = true;
+			Start();
+		}
+	}
+
+	virtual void Disable() {
+		if (active) {
+			active = false;
+			CleanUp();
+		}
+	}
+
+	inline bool isEnabled() {
+		return active;
 	}
 
 	virtual bool OnGuiMouseClickEvent(GuiControl* control)
