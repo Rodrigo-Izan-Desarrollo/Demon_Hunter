@@ -31,7 +31,7 @@ bool SceneLogo::Awake()
 bool SceneLogo::Start()
 {
 	// Textures
-	count = 0;
+	count = 0;	
 	Intro_1 = app->tex->Load("Assets/Screens/Intro_1.png");
 	Intro_2 = app->tex->Load("Assets/Screens/Intro_2.png");
 	
