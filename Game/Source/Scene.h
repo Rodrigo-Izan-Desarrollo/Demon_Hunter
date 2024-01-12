@@ -84,6 +84,50 @@ private:
 	List<Entity*> vslimesList;
 
 	GuiControlButton* gcButtom;
+
+	//Intro
+	SDL_Texture* Intro_1;	
+	SDL_Texture* Intro_2;
+
+	//Menu_inicio
+	SDL_Texture* Menu_1;
+	SDL_Texture* Menu_2;
+	SDL_Texture* Menu_3;
+	SDL_Texture* Menu_4;
+	SDL_Texture* Menu_5;
+	SDL_Texture* Menu_6;
+	SDL_Texture* Menu_7;
+	SDL_Texture* Menu_8;
+	SDL_Texture* Menu_9;
+	SDL_Texture* Menu_10;
+	SDL_Texture* Menu_11;
+	SDL_Texture* Menu_12;
+
+	//Menu_pausa
+	SDL_Texture* Pausa_1;
+	SDL_Texture* Pausa_2;
+	SDL_Texture* Pausa_3;
+	SDL_Texture* Pausa_4;
+	SDL_Texture* Pausa_5;
+	SDL_Texture* Pausa_6;
+	SDL_Texture* Pausa_7;
+	SDL_Texture* Pausa_8;
+	SDL_Texture* Pausa_9;
+
+	//Settings
+	SDL_Texture* Settings_1;
+	SDL_Texture* Settings_2;
+	SDL_Texture* Settings_3;
+	SDL_Texture* Settings_4;
+
+	//Gameover
+	SDL_Texture* Gameover_1;
+
+	//Win
+	SDL_Texture* Win_1;
+
+	//Credits
+	SDL_Texture* Credits_1;
 };
 
 #endif // __SCENE_H__
