@@ -20,7 +20,7 @@ class Scene : public Module
 {
 public:
 
-	Scene();
+	Scene(App* application, bool start_enabled = true);
 
 	// Destructor
 	virtual ~Scene();
@@ -73,7 +73,7 @@ private:
 
 	float textPosX, textPosY = 0;
 	uint texW, texH;
-	uint windowW, windowH;
+	int windowW, windowH;
 
 	const char* musicpathambient;
 	uint ambient_Fx;

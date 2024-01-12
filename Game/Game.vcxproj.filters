@@ -82,6 +82,9 @@
     <ClCompile Include="Source\GuiManager.cpp">
       <Filter>cpp.files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\FadeToBlack.cpp">
+      <Filter>cpp.files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Animation.h">
@@ -190,6 +193,9 @@
       <Filter>h.files</Filter>
     </ClInclude>
     <ClInclude Include="Source\GuiControlButton.h">
+      <Filter>h.files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\FadeToBlack.h">
       <Filter>h.files</Filter>
     </ClInclude>
   </ItemGroup>

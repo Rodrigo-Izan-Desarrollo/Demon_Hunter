@@ -7,6 +7,7 @@
 #include "Scene.h"
 #include "Map.h"
 #include "Physics.h"
+#include "FadeToBlack.h"
 #include "GuiManager.h"
 
 #include "Defs.h"
@@ -25,16 +26,18 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 
 	frames = 0;
 
-	win = new Window();
-	input = new Input();
-	render = new Render();
-	tex = new Textures();
-	audio = new Audio();
-	physics = new Physics();
-	scene = new Scene();
-	map = new Map();
-	entityManager = new EntityManager();
-	guiManager = new GuiManager();
+	win = new Window(this);
+	input = new Input(this);
+	render = new Render(this);
+	tex = new Textures(this);
+	audio = new Audio(this);
+	physics = new Physics(this);
+
+	fade = new FadeToBlack(this);
+	scene = new Scene(this,false);
+	map = new Map(this, false);
+	entityManager = new EntityManager(this, false);
+	guiManager = new GuiManager(this, false);
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -42,6 +45,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(input);
 	AddModule(tex);
 	AddModule(audio);
+	AddModule(fade);
 	AddModule(physics);
 
 	AddModule(scene);
