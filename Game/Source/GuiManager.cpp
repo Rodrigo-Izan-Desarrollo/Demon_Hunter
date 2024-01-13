@@ -38,6 +38,24 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char
 	return guiControl;
 }
 
+bool GuiManager::DestroyGuiControl(GuiControl* entity)
+{
+	ListItem<GuiControl*>* item = guiControlsList.start;
+
+	while (item != nullptr)
+	{
+		if (item->data == entity)
+		{
+			RELEASE(item->data);
+			guiControlsList.Del(item);
+			break;
+		}
+		item = item->next;
+	}
+
+	return true;
+}
+
 bool GuiManager::Update(float dt)
 {	
 

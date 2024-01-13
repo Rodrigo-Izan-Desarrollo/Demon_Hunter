@@ -6,6 +6,7 @@
 #include "Window.h"
 #include "SceneLogo.h"
 #include "SceneMenu.h"
+#include "SceneCredits.h"
 #include "Scene.h"
 #include "Map.h"
 #include "FadeToBlack.h"
@@ -45,6 +46,7 @@ bool SceneLogo::Start()
 	currentTexture = Intro_1;
 
 	app->sceneMenu->Disable();
+	app->sceneCredits->Disable();
 	app->scene->Disable();
 
 	return true;
