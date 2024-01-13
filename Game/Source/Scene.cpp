@@ -107,49 +107,27 @@ bool Scene::Awake(pugi::xml_node& config)
 // Called before the first frame
 bool Scene::Start()
 {
-		//Pausa
-	Pausa_1 = app->tex->Load("Assets/Textures/scene.png");
-	Pausa_2 = app->tex->Load("Assets/Textures/scene.png");
-	Pausa_3 = app->tex->Load("Assets/Textures/scene.png");
-	Pausa_4 = app->tex->Load("Assets/Textures/scene.png");
-	Pausa_5 = app->tex->Load("Assets/Textures/scene.png");
-	Pausa_6 = app->tex->Load("Assets/Textures/scene.png");
-	Pausa_7 = app->tex->Load("Assets/Textures/scene.png");
-	Pausa_8 = app->tex->Load("Assets/Textures/scene.png");
-	Pausa_9 = app->tex->Load("Assets/Textures/scene.png");
-		//Settings
-	Settings_1 = app->tex->Load("Assets/Textures/scene.png");
-	Settings_2 = app->tex->Load("Assets/Textures/scene.png");
-	Settings_3 = app->tex->Load("Assets/Textures/scene.png");
-	Settings_4 = app->tex->Load("Assets/Textures/scene.png");
-		//Gameover
-	Gameover_1 = app->tex->Load("Assets/Textures/scene.png");
-	    //Win
-	Win_1 = app->tex->Load("Assets/Textures/scene.png");
-		//Credits
-	Credits_1 = app->tex->Load("Assets/Textures/scene.png");
-
-	//Music
-		//Game music
 	if (app->scene->isEnabled())
 	{
+		//Music
+			//Game music
 		app->audio->PlayMusic(configNode.child("music").attribute("musicpathambient").as_string());
+		//Get the size of the window
+		app->win->GetWindowSize(windowW, windowH);
+
+		//Get the size of the texture
+		app->tex->GetSize(img, texW, texH);
+
+		textPosX = (float)windowW / 2 - (float)texW / 2;
+		textPosY = (float)windowH / 2 - (float)texH / 2;
+
+		SString title("Map:%dx%d Tiles:%dx%d Tilesets:%d",
+			app->map->mapData.width,
+			app->map->mapData.height,
+			app->map->mapData.tileWidth,
+			app->map->mapData.tileHeight,
+			app->map->mapData.tilesets.Count());
 	}
-	//Get the size of the window
-	app->win->GetWindowSize(windowW, windowH);
-
-	//Get the size of the texture
-	app->tex->GetSize(img, texW, texH);
-
-	textPosX = (float)windowW / 2 - (float)texW / 2;
-	textPosY = (float)windowH / 2 - (float)texH / 2;
-
-	SString title("Map:%dx%d Tiles:%dx%d Tilesets:%d",
-		app->map->mapData.width,
-		app->map->mapData.height,
-		app->map->mapData.tileWidth,
-		app->map->mapData.tileHeight,
-		app->map->mapData.tilesets.Count());
 
 	return true;
 }
@@ -202,7 +180,6 @@ iPoint Scene::GetPLayerPosition() {
 // Called before quitting
 bool Scene::CleanUp()
 {
-	LOG("Freeing scene");
 
 	return true;
 }
