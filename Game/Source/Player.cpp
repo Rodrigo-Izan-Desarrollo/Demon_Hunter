@@ -203,6 +203,7 @@ bool Player::Update(float dt)
 			check_1 = true;
 			check_2 = false;
 			check_3 = false;
+			save = true;
 		}
 	}
 	if (position.x >= 6781 && position.y == 994)
@@ -213,6 +214,7 @@ bool Player::Update(float dt)
 			check_1 = false;
 			check_2 = true;
 			check_3 = false;
+			save = true;
 		}
 	}
 	if (position.x >= 10430 && position.y == 802)
@@ -223,6 +225,7 @@ bool Player::Update(float dt)
 			check_1 = false;
 			check_2 = false;
 			check_3 = true;
+			save = true;
 		}
 	}
 
@@ -329,7 +332,7 @@ bool Player::Update(float dt)
 	}
 
 		// Movement in x
-	if (canmove && !Godmode && !dead && !dashing)
+	if (canmove && !Godmode && !dead && !dashing && app->scene->isEnabled())
 	{
 		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && !atacking /*Para que no se solapen las animaciones */ )  
 		{
@@ -460,7 +463,7 @@ bool Player::Update(float dt)
 
 	//Jump
 		//Jump input
-	if (!jumping && inground && !atacking && !dead)
+	if (!jumping && inground && !atacking && !dead && app->scene->isEnabled())
 	{
 		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 		{
@@ -494,7 +497,7 @@ bool Player::Update(float dt)
 
 	// Atack
 		//Atack input
-	if (!pbodyatack && (app->input->GetKey(SDL_SCANCODE_Q) == KEY_REPEAT || app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT) && !dead && !jumping && !invisible && canatack)
+	if (!pbodyatack && (app->input->GetKey(SDL_SCANCODE_Q) == KEY_REPEAT || app->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KEY_REPEAT) && !dead && !jumping && !invisible && canatack && app->scene->isEnabled())
 	{
 		app->audio->PlayFx(atack_Fx);//Load sound efect
 		atacktempo = SDL_GetTicks();// Start timer
@@ -546,7 +549,7 @@ bool Player::Update(float dt)
 
 	// Atack_2
 		//Atack_2 input
-	if (!pbodyatack_2 && app->input->GetKey(SDL_SCANCODE_E) == KEY_REPEAT && !dead && !jumping && !invisible && canatack_2)
+	if (!pbodyatack_2 && app->input->GetKey(SDL_SCANCODE_E) == KEY_REPEAT && !dead && !jumping && !invisible && canatack_2 && app->scene->isEnabled())
 	{
 		if (powerup_4 || powerup_2)
 		{

@@ -8,6 +8,9 @@
 #include "Map.h"
 #include "Physics.h"
 #include "Slime.h"
+#include "BigSlime.h"
+#include "Boss.h"
+#include "SceneMenu.h"
 #include <string.h>
 #include <string>
 #include <iostream>
@@ -103,23 +106,6 @@ bool Scene::Awake(pugi::xml_node& config)
 // Called before the first frame
 bool Scene::Start()
 {
-	//Load texturas del Scene.h
-		//Intro
-	Intro_1 = app->tex->Load("Assets/Textures/Screens/Intro_2");
-	Intro_2 = app->tex->Load("Assets/Textures/scene.png");
-		//Menu
-	Menu_1 = app->tex->Load("Assets/Textures/scene.png");
-	Menu_2 = app->tex->Load("Assets/Textures/scene.png");
-	Menu_3 = app->tex->Load("Assets/Textures/scene.png");
-	Menu_4 = app->tex->Load("Assets/Textures/scene.png");
-	Menu_5 = app->tex->Load("Assets/Textures/scene.png");
-	Menu_6 = app->tex->Load("Assets/Textures/scene.png");
-	Menu_7 = app->tex->Load("Assets/Textures/scene.png");
-	Menu_8 = app->tex->Load("Assets/Textures/scene.png");
-	Menu_9 = app->tex->Load("Assets/Textures/scene.png");
-	Menu_10 = app->tex->Load("Assets/Textures/scene.png");
-	Menu_11 = app->tex->Load("Assets/Textures/scene.png");
-	Menu_12 = app->tex->Load("Assets/Textures/scene.png");
 		//Pausa
 	Pausa_1 = app->tex->Load("Assets/Textures/scene.png");
 	Pausa_2 = app->tex->Load("Assets/Textures/scene.png");
@@ -144,8 +130,10 @@ bool Scene::Start()
 
 	//Music
 		//Game music
-	
-	app->audio->PlayMusic(configNode.child("music").attribute("musicpathambient").as_string());
+	if (app->scene->isEnabled())
+	{
+		app->audio->PlayMusic(configNode.child("music").attribute("musicpathambient").as_string());
+	}
 
 
 	//Get the size of the window
@@ -178,13 +166,14 @@ bool Scene::Update(float dt)
 {
 
 	// L14: TODO 3: Request App to Load / Save when pressing the keys F5 (save) / F6 (load)
-	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN && player->save)
 	{
 		app->LoadRequest();
 	}
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
 	{
 		app->SaveRequest();
+		player->save = true;
 	}
 	
 	return true;
