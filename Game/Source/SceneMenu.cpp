@@ -91,7 +91,7 @@ bool SceneMenu::Update(float dt)
 	{
 		currentTexture = Menu_1;
 		btn6->state = GuiControlState::DISABLED;
-		if (app->scene->player->save == false)
+		if (app->scene->player->save == node.child("modes").attribute("save").as_bool("false"))
 		{
 			currentTexture = Menu_6;
 			btn3->state = GuiControlState::DISABLED;
@@ -114,7 +114,7 @@ bool SceneMenu::Update(float dt)
 			app->fade->StartFadeToBlack(this, (Module*)app->scene, 0);
 			app->scene->Enable();
 		}
-		if (app->scene->player->save == true)
+		if (app->scene->player->save == node.child("modes").attribute("save").as_bool("true"))
 		{
 			btn3->state = GuiControlState::NORMAL;
 		}
@@ -193,6 +193,7 @@ bool SceneMenu::CleanUp()
 	app->tex->UnLoad(Menu_10);
 	app->tex->UnLoad(Menu_11);
 	app->tex->UnLoad(Menu_12);
+	app->tex->UnLoad(Credit_1);
 
 	//Destruye los botones
 	app->guiManager->Disable();

@@ -74,6 +74,8 @@ private:
 	// Screen music
 	uint logo_theme;
 
+	pugi::xml_node node;
+
 };
 
 #endif // __SCENELOGO_H__
