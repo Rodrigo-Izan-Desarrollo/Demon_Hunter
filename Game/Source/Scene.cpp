@@ -144,6 +144,7 @@ bool Scene::Start()
 
 	//Music
 		//Game music
+	
 	app->audio->PlayMusic(configNode.child("music").attribute("musicpathambient").as_string());
 
 
