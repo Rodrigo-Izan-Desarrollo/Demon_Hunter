@@ -70,6 +70,7 @@ public:
 	bool rightmode = false;
 	bool reverse = false;
 	bool iskilled = false;
+	bool canmove = true;
 	bool death = false;
 	bool paint = false;
 

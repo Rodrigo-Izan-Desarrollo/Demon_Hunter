@@ -111,7 +111,10 @@ bool Boss::Update(float dt)
 			}
 			if (isAttacking && !iskilled)
 			{
+				canmove = false;
+				currentAnimation->Reset();//reset the animation
 				currentAnimation = &boss_attack;
+				currentAnimation->loopCount = 0;
 
 				/*if (rightmode)
 				{
@@ -155,11 +158,21 @@ bool Boss::Update(float dt)
 	
 	
 
-	if (currentAnimation == &boss_attack && currentAnimation->HasFinished()) { // Reiniciar el ataque
-		isAttacking = false;
-		boss_attack.Reset();
-		currentAnimation->loopCount = 0;
-	}
+		if (currentAnimation == &boss_attack && currentAnimation->HasFinished()) {
+			if (pbodyatack) {
+				//Destroy pbodyatack
+				pbodyatack->body->SetActive(false);
+				app->physics->world->DestroyBody(pbodyatack->body);
+				pbodyatack = nullptr;
+			}
+
+			isAttacking = false;
+			canmove = true;
+
+			// Reset Animation
+			currentAnimation->Reset();
+			currentAnimation->loopCount = 0;
+		}
 
 
 	LOG("COUNTTTTTTTTTTT: %d", lastPath.Count());

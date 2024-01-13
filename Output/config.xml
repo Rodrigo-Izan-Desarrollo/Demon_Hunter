@@ -387,7 +387,7 @@
 		  <animation x="1772" y="193" w="160" h="128" />
 	  </boss_walking>
 
-	  <boss_attack loop="true" speed="0.175f" >
+	  <boss_attack loop="true" speed="0.3f" >
 		  <animation x="1" y="352" w="160" h="127" />
 		  <animation x="162" y="352"  w="160" h="127" />
 		  <animation x="323" y="352"  w="160" h="127" />
