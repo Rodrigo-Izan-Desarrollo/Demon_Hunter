@@ -6,6 +6,7 @@
 #include "PugiXml/src/pugixml.hpp"
 
 class App;
+class PhysBody;
 class GuiControl;
 
 class Module

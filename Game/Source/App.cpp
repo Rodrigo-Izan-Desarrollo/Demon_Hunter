@@ -39,6 +39,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	sceneLogo = new SceneLogo(this, true);
 	sceneMenu = new SceneMenu(this, false);
 	scene = new Scene(this,false);
+
 	map = new Map(this, false);
 	entityManager = new EntityManager(this, false);
 	guiManager = new GuiManager(this, false);
@@ -49,9 +50,9 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(input);
 	AddModule(tex);
 	AddModule(audio);
-	AddModule(fade);
 	AddModule(physics);
 
+	AddModule(fade);
 	AddModule(sceneLogo);
 	AddModule(sceneMenu);
 	AddModule(scene);

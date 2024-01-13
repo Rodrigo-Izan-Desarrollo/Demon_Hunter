@@ -5,6 +5,9 @@
 #include "Render.h"
 #include "Window.h"
 #include "SceneLogo.h"
+#include "SceneMenu.h"
+#include "Scene.h"
+#include "Map.h"
 #include "FadeToBlack.h"
 #include "Defs.h"
 #include "Log.h"
@@ -41,6 +44,12 @@ bool SceneLogo::Start()
 
 	currentTexture = Intro_1;
 
+	app->sceneMenu->Disable();
+	app->scene->Disable();
+	app->entityManager->Disable();
+	app->map->Disable();
+	app->guiManager->Disable();
+
 	return true;
 }
 
@@ -53,11 +62,12 @@ bool SceneLogo::PreUpdate()
 // Called each loop iteration
 bool SceneLogo::Update(float dt)
 {
-	if (count > 250) {
+	if (count > 220) {
 		currentTexture = Intro_2;
 	}
 	if (count > 500) {
 		app->fade->StartFadeToBlack(this, (Module*)app->sceneMenu, 0);
+		app->sceneMenu->Enable();
 	}
 	else {
 		count++;
@@ -69,6 +79,7 @@ bool SceneLogo::Update(float dt)
 
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
 		app->fade->StartFadeToBlack(this, (Module*)app->sceneMenu, 0);
+		app->sceneMenu->Enable();
 	}
 
 	return true;
@@ -79,7 +90,7 @@ bool SceneLogo::PostUpdate()
 {
 	bool ret = true;
 
-	app->render->DrawTexture(currentTexture, 30,380);
+	app->render->DrawTexture(currentTexture, 0,380);
 
 	return ret;
 }

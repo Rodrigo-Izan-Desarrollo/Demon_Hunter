@@ -2,6 +2,9 @@
 #define __SCENEMENU_H__
 
 #include "Module.h"
+#include "GuiControlButton.h"
+#include "GuiManager.h"
+#include "GuiControl.h"
 
 struct SDL_Texture;
 
@@ -32,6 +35,9 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
+	// GUI
+	bool OnGuiMouseClickEvent(GuiControl* control);
+
 private:
 
 	// Texture
@@ -49,6 +55,12 @@ private:
 	SDL_Texture* Menu_11;
 	SDL_Texture* Menu_12;
 	SDL_Texture* currentTexture;
+
+	GuiControlButton* btn1;
+	GuiControlButton* btn2;
+	GuiControlButton* btn3;
+	GuiControlButton* btn4;
+	GuiControlButton* btn5;
 
 	int count;
 

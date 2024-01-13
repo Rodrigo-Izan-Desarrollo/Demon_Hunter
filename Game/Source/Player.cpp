@@ -203,6 +203,7 @@ bool Player::Update(float dt)
 			check_1 = true;
 			check_2 = false;
 			check_3 = false;
+			save = true;
 		}
 	}
 	if (position.x >= 6781 && position.y == 994)
@@ -213,6 +214,7 @@ bool Player::Update(float dt)
 			check_1 = false;
 			check_2 = true;
 			check_3 = false;
+			save = true;
 		}
 	}
 	if (position.x >= 10430 && position.y == 802)
@@ -223,6 +225,7 @@ bool Player::Update(float dt)
 			check_1 = false;
 			check_2 = false;
 			check_3 = true;
+			save = true;
 		}
 	}
 
