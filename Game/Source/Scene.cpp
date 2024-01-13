@@ -11,6 +11,7 @@
 #include "BigSlime.h"
 #include "Boss.h"
 #include "SceneMenu.h"
+#include "FadeToBlack.h"
 #include <string.h>
 #include <string>
 #include <iostream>
@@ -134,8 +135,6 @@ bool Scene::Start()
 	{
 		app->audio->PlayMusic(configNode.child("music").attribute("musicpathambient").as_string());
 	}
-
-
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);
 
@@ -164,7 +163,6 @@ bool Scene::PreUpdate()
 // Called each loop iteration
 bool Scene::Update(float dt)
 {
-
 	// L14: TODO 3: Request App to Load / Save when pressing the keys F5 (save) / F6 (load)
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN && player->save)
 	{
@@ -174,6 +172,13 @@ bool Scene::Update(float dt)
 	{
 		app->SaveRequest();
 		player->save = true;
+	}
+
+	if (player->dead==true && player->lifes<=0)
+	{
+		app->fade->StartFadeToBlack(this, (Module*)app->lastScreen, 0);
+		//Stop music
+		app->audio->StopMusic();
 	}
 	
 	return true;

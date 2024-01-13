@@ -17,7 +17,7 @@ class Textures;
 class Audio;
 class SceneLogo;
 class SceneMenu;
-class SceneCredits;
+class LastScreen;
 class Scene;
 class EntityManager;
 class Map;
@@ -92,7 +92,7 @@ public:
 	Audio* audio;
 	SceneLogo* sceneLogo;
 	SceneMenu* sceneMenu;
-	SceneCredits* sceneCredits;
+	LastScreen* lastScreen;
 	Scene* scene;
 	EntityManager* entityManager;
 	Map* map;

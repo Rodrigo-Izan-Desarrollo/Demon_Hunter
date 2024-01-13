@@ -8,36 +8,36 @@
 	<FadeToBlack />
 	<sceneLogo />
 	<sceneLogo />
-	<sceneLogo />
 	<scene>
-		<playerposition x="541" y="994" />
+		<playerposition x="3442" y="1058" />
 		<modes sleeping="false" dead="false" canmove="true" inground="true" rightmode="true" leftmode="false" caninv="true" God-mode="false" lifes="2" save="true" />
 		<canpower canpower-1="false" canpower-2="false" canpower-3="false" />
 		<power power-1="false" power-2="false" power-3="false" canchange="true" />
 		<poweritem poweritem-1="false" poweritem-2="false" poweritem-3="false" />
-		<enemy1 x="1099" y="994" />
-		<enemy2 x="2989" y="1186" />
-		<enemy3 x="3040" y="1186" />
-		<enemy4 x="7337" y="1186" />
-		<enemy5 x="7816" y="1378" />
-		<enemy6 x="7911" y="1378" />
-		<venemy1 x="2696" y="673" />
-		<venemy2 x="2863" y="673" />
-		<venemy3 x="5119" y="577" />
-		<venemy4 x="5269" y="577" />
-		<venemy5 x="5369" y="577" />
-		<venemy6 x="7395" y="609" />
-		<venemy7 x="7714" y="417" />
-		<venemy8 x="8097" y="225" />
-		<venemy9 x="8385" y="33" />
-		<venemy10 x="9380" y="737" />
-		<venemy11 x="9995" y="545" />
-		<venemy12 x="10858" y="545" />
+		<enemy1 x="1039" y="940" />
+		<enemy2 x="2870" y="1134" />
+		<enemy3 x="2922" y="1134" />
+		<enemy4 x="7264" y="1134" />
+		<enemy5 x="7822" y="1321" />
+		<enemy6 x="7885" y="1325" />
+		<venemy1 x="2251" y="607" />
+		<venemy2 x="2936" y="607" />
+		<venemy3 x="4441" y="512" />
+		<venemy4 x="4666" y="512" />
+		<venemy5 x="5103" y="512" />
+		<venemy6 x="7441" y="544" />
+		<venemy7 x="7760" y="352" />
+		<venemy8 x="8072" y="160" />
+		<venemy9 x="8401" y="-32" />
+		<venemy10 x="9477" y="671" />
+		<venemy11 x="10127" y="480" />
+		<venemy12 x="10826" y="480" />
 	</scene>
+	<sceneLogo />
 	<:anonymous />
 	<entitymanager />
 	<guiManager />
 	<renderer>
-		<camera x="-416" y="-444" />
+		<camera x="-3315" y="-508" />
 	</renderer>
 </game_state>

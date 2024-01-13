@@ -1,5 +1,5 @@
-#ifndef __SCENECREDITS_H__
-#define __SCENECREDITS_H__
+#ifndef __LASTSCREEN_H__
+#define __LASTSCREEN_H__
 
 #include "Module.h"
 #include "GuiControlButton.h"
@@ -8,14 +8,14 @@
 
 struct SDL_Texture;
 
-class SceneCredits : public Module
+class LastScreen : public Module
 {
 public:
 
-	SceneCredits(App* application, bool start_enabled = true);
+	LastScreen(App* application, bool start_enabled = false);
 
 	// Destructor
-	virtual ~SceneCredits();
+	virtual ~LastScreen();
 
 	// Called before render is available
 	bool Awake();
@@ -42,11 +42,10 @@ private:
 
 	// Texture
 	//Menu_inicio
-	SDL_Texture* Credits_1;
-	SDL_Texture* Credits_2;
-	SDL_Texture* currentTexture;
+	SDL_Texture* Gameover;
+	SDL_Texture* Missioncompleted;
 
-	GuiControlButton* btn1;
+	SDL_Texture* currentTexture;
 
 	int count;
 

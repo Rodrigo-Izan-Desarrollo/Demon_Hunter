@@ -6,7 +6,7 @@
 #include "Window.h"
 #include "SceneLogo.h"
 #include "SceneMenu.h"
-#include "SceneCredits.h"
+#include "LastScreen.h"
 #include "Scene.h"
 #include "Map.h"
 #include "FadeToBlack.h"
@@ -54,7 +54,7 @@ bool SceneMenu::Start()
 
 	app->guiManager->Enable();
 	app->scene->Disable();
-	app->sceneCredits->Disable();
+	app->lastScreen->Disable();
 
 	btn1 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "Title", { 7, 30, 920, 290 }, this);
 	btn2 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "Play", { 99, 339, 235, 90 }, this);
