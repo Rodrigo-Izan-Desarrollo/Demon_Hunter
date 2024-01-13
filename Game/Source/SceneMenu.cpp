@@ -97,6 +97,8 @@ bool SceneMenu::Update(float dt)
 	if (btn2->state == GuiControlState::PRESSED)
 	{
 		currentTexture = Menu_3;
+		app->fade->StartFadeToBlack(this, (Module*)app->scene, 0);
+		app->scene->Enable();
 	}
 	if (app->scene->player->save==true)
 	{
@@ -106,10 +108,10 @@ bool SceneMenu::Update(float dt)
 	{
 		currentTexture = Menu_4;
 	}	
-	if (/*btn3->state == GuiControlState::PRESSED*/ app->input->GetKey(SDL_SCANCODE_1)==KEY_DOWN)
+	if (btn3->state == GuiControlState::PRESSED)
 	{
-		currentTexture = Menu_5;
 		app->fade->StartFadeToBlack(this, (Module*)app->scene, 0);
+		currentTexture = Menu_5;
 		//app->LoadRequest();
 		app->scene->Enable();
 	}

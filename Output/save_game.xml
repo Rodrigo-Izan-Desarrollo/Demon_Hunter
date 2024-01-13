@@ -4,38 +4,39 @@
 	<input />
 	<textures />
 	<audio />
-	<FadeToBlack />
 	<:anonymous />
+	<FadeToBlack />
+	<sceneLogo />
 	<sceneLogo />
 	<scene>
-		<playerposition x="3491" y="1053" />
-		<modes sleeping="false" dead="false" canmove="true" inground="false" rightmode="true" leftmode="false" caninv="true" God-mode="false" lifes="1" />
-		<canpower canpower-1="true" canpower-2="true" canpower-3="true" />
+		<playerposition x="6787" y="994" />
+		<modes sleeping="false" dead="false" canmove="true" inground="true" rightmode="true" leftmode="false" caninv="true" God-mode="false" lifes="1" />
+		<canpower canpower-1="true" canpower-2="true" canpower-3="false" />
 		<power power-1="true" power-2="false" power-3="false" canchange="true" />
-		<poweritem poweritem-1="false" poweritem-2="false" poweritem-3="false" />
-		<enemy1 x="1265" y="994" />
-		<enemy2 x="2958" y="1186" />
-		<enemy3 x="3060" y="1186" />
-		<enemy4 x="7243" y="1186" />
-		<enemy5 x="7995" y="1378" />
-		<enemy6 x="8090" y="1378" />
-		<venemy1 x="2194" y="674" />
-		<venemy2 x="3125" y="674" />
-		<venemy3 x="4698" y="578" />
-		<venemy4 x="5331" y="578" />
-		<venemy5 x="5557" y="578" />
-		<venemy6 x="7479" y="610" />
-		<venemy7 x="7596" y="418" />
-		<venemy8 x="8080" y="226" />
-		<venemy9 x="8432" y="34" />
-		<venemy10 x="9536" y="738" />
-		<venemy11 x="10319" y="546" />
-		<venemy12 x="10559" y="546" />
+		<poweritem poweritem-1="true" poweritem-2="true" poweritem-3="false" />
+		<enemy1 x="1135" y="994" />
+		<enemy2 x="3082" y="1186" />
+		<enemy3 x="2946" y="1186" />
+		<enemy4 x="7322" y="1186" />
+		<enemy5 x="7931" y="1378" />
+		<enemy6 x="8025" y="1378" />
+		<venemy1 x="2246" y="681" />
+		<venemy2 x="3221" y="681" />
+		<venemy3 x="4964" y="1067" />
+		<venemy4 x="5292" y="1070" />
+		<venemy5 x="5619" y="585" />
+		<venemy6 x="7474" y="617" />
+		<venemy7 x="7744" y="425" />
+		<venemy8 x="8051" y="233" />
+		<venemy9 x="8403" y="41" />
+		<venemy10 x="9245" y="745" />
+		<venemy11 x="10185" y="553" />
+		<venemy12 x="10595" y="553" />
 	</scene>
 	<:anonymous />
 	<entitymanager />
 	<guiManager />
 	<renderer>
-		<camera x="-3362" y="-508" />
+		<camera x="-6658" y="-444" />
 	</renderer>
 </game_state>

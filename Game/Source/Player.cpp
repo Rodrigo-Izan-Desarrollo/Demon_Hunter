@@ -497,7 +497,7 @@ bool Player::Update(float dt)
 
 	// Atack
 		//Atack input
-	if (!pbodyatack && (app->input->GetKey(SDL_SCANCODE_Q) == KEY_REPEAT || app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT) && !dead && !jumping && !invisible && canatack && app->scene->isEnabled())
+	if (!pbodyatack && (app->input->GetKey(SDL_SCANCODE_Q) == KEY_REPEAT || app->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KEY_REPEAT) && !dead && !jumping && !invisible && canatack && app->scene->isEnabled())
 	{
 		app->audio->PlayFx(atack_Fx);//Load sound efect
 		atacktempo = SDL_GetTicks();// Start timer
