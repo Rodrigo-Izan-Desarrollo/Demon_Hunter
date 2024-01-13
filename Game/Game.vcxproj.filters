@@ -85,6 +85,8 @@
     <ClCompile Include="Source\FadeToBlack.cpp">
       <Filter>cpp.files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\SceneLogo.cpp" />
+    <ClCompile Include="Source\SceneMenu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Animation.h">
@@ -198,6 +200,8 @@
     <ClInclude Include="Source\FadeToBlack.h">
       <Filter>h.files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\SceneLogo.h" />
+    <ClInclude Include="Source\SceneMenu.h" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="..\Output\config.xml">

@@ -57,7 +57,7 @@ bool SceneLogo::Update(float dt)
 		currentTexture = Intro_2;
 	}
 	if (count > 500) {
-		app->fade->StartFadeToBlack(this, (Module*)app->scene, 0);
+		app->fade->StartFadeToBlack(this, (Module*)app->sceneMenu, 0);
 	}
 	else {
 		count++;
@@ -68,7 +68,7 @@ bool SceneLogo::Update(float dt)
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
-		app->fade->StartFadeToBlack(this, (Module*)app->scene, 0);
+		app->fade->StartFadeToBlack(this, (Module*)app->sceneMenu, 0);
 	}
 
 	return true;

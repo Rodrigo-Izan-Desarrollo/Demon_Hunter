@@ -103,23 +103,6 @@ bool Scene::Awake(pugi::xml_node& config)
 // Called before the first frame
 bool Scene::Start()
 {
-	//Load texturas del Scene.h
-		//Intro
-	Intro_1 = app->tex->Load("Assets/Textures/Screens/Intro_2");
-	Intro_2 = app->tex->Load("Assets/Textures/scene.png");
-		//Menu
-	Menu_1 = app->tex->Load("Assets/Textures/scene.png");
-	Menu_2 = app->tex->Load("Assets/Textures/scene.png");
-	Menu_3 = app->tex->Load("Assets/Textures/scene.png");
-	Menu_4 = app->tex->Load("Assets/Textures/scene.png");
-	Menu_5 = app->tex->Load("Assets/Textures/scene.png");
-	Menu_6 = app->tex->Load("Assets/Textures/scene.png");
-	Menu_7 = app->tex->Load("Assets/Textures/scene.png");
-	Menu_8 = app->tex->Load("Assets/Textures/scene.png");
-	Menu_9 = app->tex->Load("Assets/Textures/scene.png");
-	Menu_10 = app->tex->Load("Assets/Textures/scene.png");
-	Menu_11 = app->tex->Load("Assets/Textures/scene.png");
-	Menu_12 = app->tex->Load("Assets/Textures/scene.png");
 		//Pausa
 	Pausa_1 = app->tex->Load("Assets/Textures/scene.png");
 	Pausa_2 = app->tex->Load("Assets/Textures/scene.png");
