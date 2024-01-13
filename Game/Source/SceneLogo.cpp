@@ -46,9 +46,6 @@ bool SceneLogo::Start()
 
 	app->sceneMenu->Disable();
 	app->scene->Disable();
-	app->entityManager->Disable();
-	app->map->Disable();
-	app->guiManager->Disable();
 
 	return true;
 }
@@ -90,7 +87,7 @@ bool SceneLogo::PostUpdate()
 {
 	bool ret = true;
 
-	app->render->DrawTexture(currentTexture, 0,380);
+	app->render->DrawTexture(currentTexture, 30,380);
 
 	return ret;
 }

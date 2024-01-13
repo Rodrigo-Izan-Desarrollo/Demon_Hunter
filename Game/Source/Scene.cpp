@@ -8,6 +8,9 @@
 #include "Map.h"
 #include "Physics.h"
 #include "Slime.h"
+#include "BigSlime.h"
+#include "Boss.h"
+#include "SceneMenu.h"
 #include <string.h>
 #include <string>
 #include <iostream>
