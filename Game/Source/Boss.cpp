@@ -62,14 +62,14 @@ bool Boss::Update(float dt)
 	{
 		currentAnimation = &boss;
 	}
-	
+
 	if (reverse && leftmode && !onView)
 	{
 		leftmode = false;
 		rightmode = true;
 		reverse = false;
 		currentAnimation = &boss_walking;
-	}	
+	}
 	if (reverse && rightmode && !onView)
 	{
 		leftmode = true;
@@ -80,13 +80,14 @@ bool Boss::Update(float dt)
 
 
 	origPos = app->map->WorldToMap(position.x, position.y);
-;
+	;
 	targPos = app->map->WorldToMap(app->scene->player->position.x, app->scene->player->position.y);
 
 	LOG("LAST PATH X: %d enemy x: %d", targPos.x, origPos.x);
-	
-		if (dist(app->scene->player->position, position) < app->map->mapData.tileWidth * tilesview)// tenemos una funcion que calcula la dist y calcula la del player y el enemigo y si esta en el rango de vision de tiles view que le siga y si esta mas cerca que le ataque
-		{
+
+
+	if (dist(app->scene->player->position, position) < app->map->mapData.tileWidth * tilesview)
+	{
 		app->map->pathfindingSuelo->CreatePath(origPos, targPos);
 
 		if (app->map->pathfindingSuelo->IsWalkable(targPos))
@@ -95,84 +96,92 @@ bool Boss::Update(float dt)
 			lastPath2 = app->map->pathfindingSuelo->GetLastPath();
 		}
 
-		if (!(app->scene->player->dead || app->scene->player->invisible)) //que si el player no esta muerto o invisible no le ataque
+		if (!(app->scene->player->dead || app->scene->player->invisible))
 		{
 			onView = true;
 			iskilled = false;
 			currentAnimation = &boss_walking;
-	
+
 			if (dist(app->scene->player->position, position) < app->map->mapData.tileWidth * tilesattack)
 			{
 				if (!isAttacking)
 				{
 					isAttacking = true;
-					
 				}
 			}
+
 			if (isAttacking && !iskilled)
 			{
-				canmove = false;
-				currentAnimation->Reset();//reset the animation
-				currentAnimation = &boss_attack;
-				currentAnimation->loopCount = 0;
+				if (attackTimer.ReadSec() > 3.0) // Controla el tiempo entre ataques
+				{
+					canmove = false;
+					currentAnimation->Reset(); // resetea la animación
+					currentAnimation = &boss_attack;
+					currentAnimation->loopCount = 0;
 
-				/*if (rightmode)
-				{
-					pbodyatack = app->physics->CreateRectangle(position.x + 35, position.y + 15, 10, 20, bodyType::STATIC);
-					pbodyatack->listener = this;
-					pbodyatack->ctype = ColliderType::ENEMY;
+					// Crear la colisión pbodyattack
+					if (rightmode)
+					{
+						pbodyatack = app->physics->CreateRectangle(position.x + 35, position.y + 15, 10, 20, bodyType::DYNAMIC); 
+						pbodyatack->listener = this;
+						pbodyatack->ctype = ColliderType::ENEMY_ATTACK;
+					}
+					else if (leftmode)
+					{
+						pbodyatack = app->physics->CreateRectangle(position.x - 2, position.y + 15, 10, 20, bodyType::DYNAMIC); 
+						pbodyatack->listener = this;
+						pbodyatack->ctype = ColliderType::ENEMY_ATTACK;
+					}
+
+					attackTimer.Start(); // Reinicia el temporizador de ataque
+					isAttacking = false;
 				}
-				if (leftmode)
-				{
-					pbodyatack = app->physics->CreateRectangle(position.x - 2, position.y + 15, 10, 20, bodyType::STATIC);
-					pbodyatack->listener = this;
-					pbodyatack->ctype = ColliderType::ENEMY;
-				}*/
-  			}
+			}
 		}
-		else
-		{
-			onView = false;
-		}
+	
+	else
+	{
+		onView = false;
+	}
 	}
 	else
 	{
-		onView = false; //generar un movimiento por las zonas determinadas cuando no este onView
+		onView = false;
+
 		if (!onView && !isAttacking)
 		{
 			if (rightmode)
-					{
-						velocity.x = 0.5f;
-					}
-					if (leftmode)
-					{
-						velocity.x = -0.5f;
-					}
+			{
+				velocity.x = 0.5f;
+			}
+			if (leftmode)
+			{
+				velocity.x = -0.5f;
+			}
 		}
+
 		if (lastPath2 == app->map->pathfindingSuelo->GetLastPath())
 		{
 			app->map->pathfindingSuelo->ClearLastPath();
 		}
-		
 	}
-	
-	
 
-		if (currentAnimation == &boss_attack && currentAnimation->HasFinished()) {
-			if (pbodyatack) {
-				//Destroy pbodyatack
-				pbodyatack->body->SetActive(false);
-				app->physics->world->DestroyBody(pbodyatack->body);
-				pbodyatack = nullptr;
-			}
-
-			isAttacking = false;
-			canmove = true;
-
-			// Reset Animation
-			currentAnimation->Reset();
-			currentAnimation->loopCount = 0;
+	if (currentAnimation == &boss_attack && currentAnimation->HasFinished())
+	{
+		if (pbodyatack)
+		{
+			pbodyatack->body->SetActive(false);
+			app->physics->world->DestroyBody(pbodyatack->body);
+			delete pbodyatack;
+			pbodyatack = nullptr;
 		}
+
+		isAttacking = false;
+		canmove = true;
+
+		currentAnimation->Reset();
+		currentAnimation->loopCount = 0;
+	}
 
 
 	LOG("COUNTTTTTTTTTTT: %d", lastPath.Count());

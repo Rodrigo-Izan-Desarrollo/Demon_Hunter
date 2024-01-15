@@ -76,6 +76,8 @@ public:
 
 	b2Vec2 velocity;
 
+	Timer attackTimer;
+
 	iPoint origPos;
 	iPoint targPos;
 	DynArray<iPoint> lastPath;
