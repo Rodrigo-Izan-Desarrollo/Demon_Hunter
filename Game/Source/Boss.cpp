@@ -115,28 +115,27 @@ bool Boss::Update(float dt)
 				if (attackTimer.ReadSec() > 3.0) // Controla el tiempo entre ataques
 				{
 					canmove = false;
-					currentAnimation->Reset(); // resetea la animación
 					currentAnimation = &boss_attack;
-					currentAnimation->loopCount = 0;
-
+					
 					// Crear la colisión pbodyattack
 					if (rightmode)
 					{
-						pbodyatack = app->physics->CreateRectangle(position.x + 35, position.y + 15, 10, 20, bodyType::DYNAMIC); 
+						pbodyatack = app->physics->CreateRectangle(position.x + 35, position.y + 15, 20, 20, bodyType::DYNAMIC); 
 						pbodyatack->listener = this;
 						pbodyatack->ctype = ColliderType::ENEMY_ATTACK;
 					}
 					else if (leftmode)
 					{
-						pbodyatack = app->physics->CreateRectangle(position.x - 2, position.y + 15, 10, 20, bodyType::DYNAMIC); 
+						pbodyatack = app->physics->CreateRectangle(position.x - 2, position.y + 15, 20, 20, bodyType::DYNAMIC); 
 						pbodyatack->listener = this;
 						pbodyatack->ctype = ColliderType::ENEMY_ATTACK;
 					}
 
 					attackTimer.Start(); // Reinicia el temporizador de ataque
-					isAttacking = false;
+					
 				}
 			}
+			isAttacking = false;
 		}
 	
 	else
