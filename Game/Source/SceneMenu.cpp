@@ -157,7 +157,9 @@ bool SceneMenu::PostUpdate()
 {
 	bool ret = true;
 
-	app->render->DrawTexture(currentTexture, 30,380);
+	//app->render->DrawTexture(currentTexture, 30,380);
+
+	app->render->DrawTexture(currentTexture, app->scene->player->position.x - 125, app->scene->player->position.y - 550);
 
 	return ret;
 }

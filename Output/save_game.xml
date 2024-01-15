@@ -14,24 +14,24 @@
 		<canpower canpower-1="false" canpower-2="false" canpower-3="false" />
 		<power power-1="false" power-2="false" power-3="false" canchange="true" />
 		<poweritem poweritem-1="false" poweritem-2="false" poweritem-3="false" />
-		<enemy1 x="1228" y="994" />
-		<enemy2 x="3073" y="1186" />
-		<enemy3 x="3124" y="1186" />
-		<enemy4 x="7387" y="1186" />
-		<enemy5 x="7994" y="1378" />
-		<enemy6 x="8089" y="1378" />
-		<venemy1 x="2304" y="672" />
-		<venemy2 x="3255" y="672" />
-		<venemy3 x="4584" y="576" />
-		<venemy4 x="4810" y="576" />
-		<venemy5 x="5442" y="576" />
-		<venemy6 x="7322" y="608" />
-		<venemy7 x="7705" y="416" />
-		<venemy8 x="8024" y="224" />
-		<venemy9 x="8312" y="33" />
-		<venemy10 x="9644" y="736" />
-		<venemy11 x="10468" y="544" />
-		<venemy12 x="10790" y="544" />
+		<enemy1 x="1265" y="994" />
+		<enemy2 x="3146" y="1186" />
+		<enemy3 x="3196" y="1186" />
+		<enemy4 x="7315" y="1186" />
+		<enemy5 x="8011" y="1378" />
+		<enemy6 x="8091" y="1378" />
+		<venemy1 x="2449" y="673" />
+		<venemy2 x="3110" y="673" />
+		<venemy3 x="4729" y="577" />
+		<venemy4 x="4955" y="577" />
+		<venemy5 x="5587" y="577" />
+		<venemy6 x="7467" y="609" />
+		<venemy7 x="7708" y="417" />
+		<venemy8 x="8093" y="225" />
+		<venemy9 x="8445" y="33" />
+		<venemy10 x="9499" y="737" />
+		<venemy11 x="10385" y="545" />
+		<venemy12 x="10645" y="545" />
 	</scene>
 	<sceneLogo />
 	<:anonymous />
