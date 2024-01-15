@@ -87,6 +87,7 @@
     </ClCompile>
     <ClCompile Include="Source\SceneLogo.cpp" />
     <ClCompile Include="Source\SceneMenu.cpp" />
+    <ClCompile Include="Source\LastScreen.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Animation.h">
@@ -202,6 +203,7 @@
     </ClInclude>
     <ClInclude Include="Source\SceneLogo.h" />
     <ClInclude Include="Source\SceneMenu.h" />
+    <ClInclude Include="Source\LastScreen.h" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="..\Output\config.xml">

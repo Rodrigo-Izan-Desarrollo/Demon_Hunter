@@ -11,6 +11,8 @@
 #include "BigSlime.h"
 #include "Boss.h"
 #include "SceneMenu.h"
+#include "LastScreen.h"
+#include "FadeToBlack.h"
 #include <string.h>
 #include <string>
 #include <iostream>
@@ -106,51 +108,27 @@ bool Scene::Awake(pugi::xml_node& config)
 // Called before the first frame
 bool Scene::Start()
 {
-		//Pausa
-	Pausa_1 = app->tex->Load("Assets/Textures/scene.png");
-	Pausa_2 = app->tex->Load("Assets/Textures/scene.png");
-	Pausa_3 = app->tex->Load("Assets/Textures/scene.png");
-	Pausa_4 = app->tex->Load("Assets/Textures/scene.png");
-	Pausa_5 = app->tex->Load("Assets/Textures/scene.png");
-	Pausa_6 = app->tex->Load("Assets/Textures/scene.png");
-	Pausa_7 = app->tex->Load("Assets/Textures/scene.png");
-	Pausa_8 = app->tex->Load("Assets/Textures/scene.png");
-	Pausa_9 = app->tex->Load("Assets/Textures/scene.png");
-		//Settings
-	Settings_1 = app->tex->Load("Assets/Textures/scene.png");
-	Settings_2 = app->tex->Load("Assets/Textures/scene.png");
-	Settings_3 = app->tex->Load("Assets/Textures/scene.png");
-	Settings_4 = app->tex->Load("Assets/Textures/scene.png");
-		//Gameover
-	Gameover_1 = app->tex->Load("Assets/Textures/scene.png");
-	    //Win
-	Win_1 = app->tex->Load("Assets/Textures/scene.png");
-		//Credits
-	Credits_1 = app->tex->Load("Assets/Textures/scene.png");
-
-	//Music
-		//Game music
 	if (app->scene->isEnabled())
 	{
+		//Music
+			//Game music
 		app->audio->PlayMusic(configNode.child("music").attribute("musicpathambient").as_string());
+		//Get the size of the window
+		app->win->GetWindowSize(windowW, windowH);
+
+		//Get the size of the texture
+		app->tex->GetSize(img, texW, texH);
+
+		textPosX = (float)windowW / 2 - (float)texW / 2;
+		textPosY = (float)windowH / 2 - (float)texH / 2;
+
+		SString title("Map:%dx%d Tiles:%dx%d Tilesets:%d",
+			app->map->mapData.width,
+			app->map->mapData.height,
+			app->map->mapData.tileWidth,
+			app->map->mapData.tileHeight,
+			app->map->mapData.tilesets.Count());
 	}
-
-
-	//Get the size of the window
-	app->win->GetWindowSize(windowW, windowH);
-
-	//Get the size of the texture
-	app->tex->GetSize(img, texW, texH);
-
-	textPosX = (float)windowW / 2 - (float)texW / 2;
-	textPosY = (float)windowH / 2 - (float)texH / 2;
-
-	SString title("Map:%dx%d Tiles:%dx%d Tilesets:%d",
-		app->map->mapData.width,
-		app->map->mapData.height,
-		app->map->mapData.tileWidth,
-		app->map->mapData.tileHeight,
-		app->map->mapData.tilesets.Count());
 
 	return true;
 }
@@ -164,7 +142,6 @@ bool Scene::PreUpdate()
 // Called each loop iteration
 bool Scene::Update(float dt)
 {
-
 	// L14: TODO 3: Request App to Load / Save when pressing the keys F5 (save) / F6 (load)
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN && player->save)
 	{
@@ -175,7 +152,24 @@ bool Scene::Update(float dt)
 		app->SaveRequest();
 		player->save = true;
 	}
+
+	if (player->dead==true && player->lifes<=0)
+	{
+		app->fade->StartFadeToBlack(this, (Module*)app->lastScreen, 0);
+		app->audio->StopMusic();
+		app->scene->Disable();
+		app->lastScreen->Enable();
+	}
 	
+	//Si newgame es true, que se restablezca la vida del player y su posicion inicial
+	if (app->sceneMenu->newgame == true)
+	{
+		player->position.x = 140;
+		player->position.y = 925;
+		player->pbody->body->SetTransform({ PIXEL_TO_METERS(player->position.x), PIXEL_TO_METERS(player->position.y) }, 0);
+		app->sceneMenu->newgame = false;
+	}
+
 	return true;
 }
 
@@ -197,7 +191,6 @@ iPoint Scene::GetPLayerPosition() {
 // Called before quitting
 bool Scene::CleanUp()
 {
-	LOG("Freeing scene");
 
 	return true;
 }
@@ -221,6 +214,7 @@ bool Scene::LoadState(pugi::xml_node node) {
 	player->caninv = node.child("modes").attribute("caninv").as_bool();
 	player->Godmode = node.child("modes").attribute("God-mode").as_bool();
 	player->lifes = node.child("modes").attribute("lifes").as_int();
+	player->save = node.child("modes").attribute("save").as_bool();
 
 		//Player canpower-ups
 	player->canpower_1 = node.child("canpower").attribute("canpower-1").as_bool();
@@ -250,6 +244,7 @@ bool Scene::LoadState(pugi::xml_node node) {
 		std::string count = std::to_string(slimecount + 1);
 
 		// Update the position of the slime entity based on XML attributes.
+		slime->death = node.child(("slime" + count).c_str()).attribute("death").as_bool();
 		slime->position.x = node.child(("enemy" + count).c_str()).attribute("x").as_int();
 		slime->position.y = node.child(("enemy" + count).c_str()).attribute("y").as_int();
 
@@ -294,6 +289,7 @@ bool Scene::SaveState(pugi::xml_node node) {
 	modesnode.append_attribute("caninv").set_value(player->caninv);
 	modesnode.append_attribute("God-mode").set_value(player->Godmode);
 	modesnode.append_attribute("lifes").set_value(player->lifes);
+	modesnode.append_attribute("save").set_value(player->save);
 
 		//Player canpower-ups
 	pugi::xml_node canpowernode = node.append_child("canpower");
@@ -331,6 +327,7 @@ bool Scene::SaveState(pugi::xml_node node) {
 		Entity* slime = slimesList.At(slimecount)->data;
 
 		// Load specific information of the slime from the attributes of the nodes.
+		enemyNode.append_attribute("death").set_value(slime->death);
 		enemyNode.append_attribute("x").set_value(slime->position.x);
 		enemyNode.append_attribute("y").set_value(slime->position.y);
 	}

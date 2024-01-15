@@ -38,6 +38,8 @@ public:
 	// GUI
 	bool OnGuiMouseClickEvent(GuiControl* control);
 
+	bool newgame = false;
+
 private:
 
 	// Texture
@@ -54,6 +56,9 @@ private:
 	SDL_Texture* Menu_10;
 	SDL_Texture* Menu_11;
 	SDL_Texture* Menu_12;
+
+	SDL_Texture* Credit_1;
+
 	SDL_Texture* currentTexture;
 
 	GuiControlButton* btn1;
@@ -62,10 +67,16 @@ private:
 	GuiControlButton* btn4;
 	GuiControlButton* btn5;
 
+	GuiControlButton* btn6;
+
 	int count;
+
+	bool credits = false;
 
 	// Screen music
 	uint logo_theme;
+
+	pugi::xml_node node;
 
 };
 

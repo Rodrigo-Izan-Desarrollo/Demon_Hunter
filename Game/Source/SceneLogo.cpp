@@ -6,6 +6,7 @@
 #include "Window.h"
 #include "SceneLogo.h"
 #include "SceneMenu.h"
+#include "LastScreen.h"
 #include "Scene.h"
 #include "Map.h"
 #include "FadeToBlack.h"
@@ -45,6 +46,7 @@ bool SceneLogo::Start()
 	currentTexture = Intro_1;
 
 	app->sceneMenu->Disable();
+	app->lastScreen->Disable();
 	app->scene->Disable();
 
 	return true;
@@ -64,6 +66,7 @@ bool SceneLogo::Update(float dt)
 	}
 	if (count > 500) {
 		app->fade->StartFadeToBlack(this, (Module*)app->sceneMenu, 0);
+		app->sceneLogo->Disable();
 		app->sceneMenu->Enable();
 	}
 	else {
@@ -76,6 +79,7 @@ bool SceneLogo::Update(float dt)
 
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
 		app->fade->StartFadeToBlack(this, (Module*)app->sceneMenu, 0);
+		app->sceneLogo->Disable();
 		app->sceneMenu->Enable();
 	}
 
