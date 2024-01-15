@@ -244,6 +244,7 @@ bool Scene::LoadState(pugi::xml_node node) {
 		std::string count = std::to_string(slimecount + 1);
 
 		// Update the position of the slime entity based on XML attributes.
+		slime->death = node.child(("slime" + count).c_str()).attribute("death").as_bool();
 		slime->position.x = node.child(("enemy" + count).c_str()).attribute("x").as_int();
 		slime->position.y = node.child(("enemy" + count).c_str()).attribute("y").as_int();
 
@@ -326,6 +327,7 @@ bool Scene::SaveState(pugi::xml_node node) {
 		Entity* slime = slimesList.At(slimecount)->data;
 
 		// Load specific information of the slime from the attributes of the nodes.
+		enemyNode.append_attribute("death").set_value(slime->death);
 		enemyNode.append_attribute("x").set_value(slime->position.x);
 		enemyNode.append_attribute("y").set_value(slime->position.y);
 	}
