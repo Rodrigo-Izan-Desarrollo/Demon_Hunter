@@ -74,10 +74,10 @@ bool GuiManager::CleanUp()
 {
 	ListItem<GuiControl*>* control = guiControlsList.start;
 
-	while (control != nullptr)
-	{
-		RELEASE(control);
-	}
+	//while (control != nullptr)
+	//{
+	//	RELEASE(control);
+	//}
 
 	return true;
 

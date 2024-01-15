@@ -92,11 +92,15 @@ public:
 	// Possible properties, it depends on how generic we
 	// want our Entity class, maybe it's not renderable...
 
-	iPoint position; 
+	iPoint position;
+	iPoint initialPosition;
 	bool leftmode;
 	bool rightmode;
 	bool death;
 	bool renderable = true;
+	//collider haz el colliderç
+	PhysBody* body = nullptr;
+
 	
 	bool tp = false;
 };

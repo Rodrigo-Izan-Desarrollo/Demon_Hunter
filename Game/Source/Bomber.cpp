@@ -23,6 +23,8 @@ bool SlimeVolador::Awake() {
 
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
+	initialPosition.x = parameters.attribute("x").as_int();
+	initialPosition.y = parameters.attribute("y").as_int();
 	leftmodeslimevolador = parameters.attribute("leftmode").as_bool();
 	rightmodeslimevolador = parameters.attribute("rightmode").as_bool();
 	texturePath = parameters.attribute("texturepathenemy_3").as_string();

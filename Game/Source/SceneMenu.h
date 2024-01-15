@@ -38,6 +38,8 @@ public:
 	// GUI
 	bool OnGuiMouseClickEvent(GuiControl* control);
 
+	bool newgame = false;
+
 private:
 
 	// Texture

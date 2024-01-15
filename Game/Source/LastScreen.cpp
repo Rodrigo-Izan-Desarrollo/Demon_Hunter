@@ -58,12 +58,13 @@ bool LastScreen::Update(float dt)
 	{
 		currentTexture = Gameover;
 	}
-	else
-	{
-		currentTexture = Missioncompleted;
-	}
-	if (count > 500) {
-		app->fade->StartFadeToBlack(this, (Module*)app->sceneMenu, 0);
+	//else
+	//{
+	//	currentTexture = Missioncompleted;
+	//}
+	if (count > 200) {
+		app->fade->StartFadeToBlack(this, (Module*)app->sceneMenu, 0);	
+		app->lastScreen->Disable();
 		app->sceneMenu->Enable();
 	}
 	else 

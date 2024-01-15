@@ -23,6 +23,8 @@ bool Slime::Awake() {
 
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
+	initialPosition.x = parameters.attribute("x").as_int();
+	initialPosition.y = parameters.attribute("y").as_int();
 	texturePath = parameters.attribute("texturepathenemy_1").as_string();
 	musicpathslime = parameters.attribute("musicpathslime").as_string();
 

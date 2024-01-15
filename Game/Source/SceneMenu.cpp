@@ -112,7 +112,10 @@ bool SceneMenu::Update(float dt)
 		{
 			currentTexture = Menu_3;
 			app->fade->StartFadeToBlack(this, (Module*)app->scene, 0);
+			app->sceneMenu->Disable();
 			app->scene->Enable();
+			app->scene->player->lifes = 3;
+			newgame = true;
 		}
 		if (app->scene->player->save == node.child("modes").attribute("save").as_bool("true"))
 		{
@@ -127,7 +130,9 @@ bool SceneMenu::Update(float dt)
 			app->fade->StartFadeToBlack(this, (Module*)app->scene, 0);
 			currentTexture = Menu_5;
 			app->LoadRequest();
+			app->sceneMenu->Disable();
 			app->scene->Enable();
+
 		}
 		if (btn4->state == GuiControlState::FOCUSED)
 		{

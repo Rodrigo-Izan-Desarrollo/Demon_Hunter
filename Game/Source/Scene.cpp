@@ -11,6 +11,7 @@
 #include "BigSlime.h"
 #include "Boss.h"
 #include "SceneMenu.h"
+#include "LastScreen.h"
 #include "FadeToBlack.h"
 #include <string.h>
 #include <string>
@@ -155,10 +156,20 @@ bool Scene::Update(float dt)
 	if (player->dead==true && player->lifes<=0)
 	{
 		app->fade->StartFadeToBlack(this, (Module*)app->lastScreen, 0);
-		//Stop music
 		app->audio->StopMusic();
+		app->scene->Disable();
+		app->lastScreen->Enable();
 	}
 	
+	//Si newgame es true, que se restablezca la vida del player y su posicion inicial
+	if (app->sceneMenu->newgame == true)
+	{
+		player->position.x = 140;
+		player->position.y = 925;
+		player->pbody->body->SetTransform({ PIXEL_TO_METERS(player->position.x), PIXEL_TO_METERS(player->position.y) }, 0);
+		app->sceneMenu->newgame = false;
+	}
+
 	return true;
 }
 
