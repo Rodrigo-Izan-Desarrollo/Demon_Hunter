@@ -120,7 +120,7 @@ bool Boss::Update(float dt)
 					// Crear la colisión pbodyattack
 					if (rightmode)
 					{
-						pbodyatack = app->physics->CreateRectangle(position.x + 35, position.y + 15, 20, 20, bodyType::DYNAMIC); 
+						pbodyatack = app->physics->CreateRectangle(position.x + 45, position.y + 15, 20, 20, bodyType::DYNAMIC); 
 						pbodyatack->listener = this;
 						pbodyatack->ctype = ColliderType::ENEMY_ATTACK;
 					}
