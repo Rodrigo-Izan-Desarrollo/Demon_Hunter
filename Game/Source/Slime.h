@@ -54,7 +54,6 @@ public:
 	const char* texturePath;
 	const char* musicpathslime;
 
-	PhysBody* pbody;
 	PhysBody* damage;
 
 	int tilesview = 7;
@@ -69,7 +68,6 @@ public:
 	bool rightmode = false;
 	bool reverse = false;
 	bool iskilled = false;
-	bool death = false;
 	bool paint = false;
 
 	b2Vec2 velocity;

@@ -5,6 +5,7 @@
 #include "Input.h"
 #include "Render.h"
 #include "Scene.h"
+#include "SceneMenu.h"
 #include "Log.h"
 #include "Point.h"
 #include "Physics.h"
@@ -23,6 +24,8 @@ bool Slime::Awake() {
 
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
+	initialPosition.x = parameters.attribute("x").as_int();
+	initialPosition.y = parameters.attribute("y").as_int();
 	texturePath = parameters.attribute("texturepathenemy_1").as_string();
 	musicpathslime = parameters.attribute("musicpathslime").as_string();
 
@@ -34,9 +37,9 @@ bool Slime::Start() {
 
 	//initilize textures
 	texture = app->tex->Load(texturePath);
-	pbody = app->physics->CreateCircle(position.x + 16, position.y + 16, 13, bodyType::DYNAMIC);
-	pbody->ctype = ColliderType::ENEMY;
-	pbody->listener = this;
+	body = app->physics->CreateCircle(position.x + 16, position.y + 16, 13, bodyType::DYNAMIC);
+	body->ctype = ColliderType::ENEMY;
+	body->listener = this;
 
 	slime.LoadAnimations("slime");
 	slime_dead.LoadAnimations("slime_dead");
@@ -47,6 +50,8 @@ bool Slime::Start() {
 	pathdraw = app->tex->Load("Assets/Maps/azul.png");
 	velocity = { -0.5,0 };
 
+	death = false;
+
 	currentAnimation = &slime;
 	return true;
 }
@@ -56,7 +61,14 @@ bool Slime::Update(float dt)
 	if (tp)
 	{
 		tp = false;
-		pbody->body->SetTransform({ PIXEL_TO_METERS(position.x), PIXEL_TO_METERS(position.y) }, 0);
+		if (app->sceneMenu->newgame)
+		{
+			body->body->SetTransform({ PIXEL_TO_METERS(initialPosition.x), PIXEL_TO_METERS(initialPosition.y) }, 0);
+		}
+		else
+		{
+			body->body->SetTransform({ PIXEL_TO_METERS(position.x), PIXEL_TO_METERS(position.y) }, 0);
+		}
 	}
 	if (iskilled)
 	{
@@ -187,19 +199,19 @@ bool Slime::Update(float dt)
 	}
 
 	if (currentAnimation == &slime_dead && currentAnimation->HasFinished() ) { 
-		pbody->body->SetActive(false);
+		body->body->SetActive(false);
 		app->entityManager->DestroyEntity(this);
-		app->physics->world->DestroyBody(pbody->body);
+		app->physics->world->DestroyBody(body->body);
 	}
 	// L07 DONE 4: Add a physics to an item - update the position of the object from the physics. 
 	if (!tp)
 	{
-		position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
-		position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
+		position.x = METERS_TO_PIXELS(body->body->GetTransform().p.x) - 16;
+		position.y = METERS_TO_PIXELS(body->body->GetTransform().p.y) - 16;
 		
 	}
 
-	pbody->body->SetLinearVelocity(velocity);
+	body->body->SetLinearVelocity(velocity);
 
 	currentAnimation->Update();
 	if (leftmode )

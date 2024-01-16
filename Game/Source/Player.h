@@ -172,6 +172,9 @@ public:
 		//Camera movement
 	bool cameramove = true;
 
+		//Save sate
+	bool save = false;
+
 
 	pugi::xml_node config;
 

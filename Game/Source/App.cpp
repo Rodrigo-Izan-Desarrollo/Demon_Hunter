@@ -5,6 +5,8 @@
 #include "Textures.h"
 #include "Audio.h"
 #include "SceneLogo.h"
+#include "SceneMenu.h"
+#include "LastScreen.h"
 #include "Scene.h"
 #include "Map.h"
 #include "Physics.h"
@@ -36,7 +38,10 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	fade = new FadeToBlack(this);
 
 	sceneLogo = new SceneLogo(this, true);
+	sceneMenu = new SceneMenu(this, false);
 	scene = new Scene(this,false);
+	lastScreen = new LastScreen(this, false);
+
 	map = new Map(this, false);
 	entityManager = new EntityManager(this, false);
 	guiManager = new GuiManager(this, false);
@@ -47,11 +52,13 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(input);
 	AddModule(tex);
 	AddModule(audio);
-	AddModule(fade);
 	AddModule(physics);
 
+	AddModule(fade);
 	AddModule(sceneLogo);
+	AddModule(sceneMenu);
 	AddModule(scene);
+	AddModule(lastScreen);
 	AddModule(map);
 	AddModule(entityManager);
 	AddModule(guiManager);

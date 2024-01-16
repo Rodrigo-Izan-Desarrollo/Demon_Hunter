@@ -37,6 +37,8 @@ public:
 	void GetSlimes(List<Entity*>& slimesList) const;
 	void GetBomber(List<Entity*>& slimesList) const;
 
+
+
 public:
 
 	List<Entity*> entities;
