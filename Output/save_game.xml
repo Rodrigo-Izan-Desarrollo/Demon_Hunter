@@ -9,6 +9,7 @@
 	<sceneLogo />
 	<sceneLogo />
 	<scene>
+
 		<playerposition x="3382" y="1042" />
 		<modes sleeping="false" dead="false" canmove="true" inground="true" rightmode="true" leftmode="false" caninv="true" God-mode="false" lifes="3" save="true" />
 		<canpower canpower-1="false" canpower-2="false" canpower-3="false" />
@@ -32,12 +33,15 @@
 		<venemy10 x="9552" y="719" />
 		<venemy11 x="10202" y="528" />
 		<venemy12 x="10902" y="528" />
+
 	</scene>
 	<sceneLogo />
 	<:anonymous />
 	<entitymanager />
 	<guiManager />
 	<renderer>
+
 		<camera x="-3273" y="-508" />
+
 	</renderer>
 </game_state>
