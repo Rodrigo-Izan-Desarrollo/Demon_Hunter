@@ -53,8 +53,6 @@ bool SceneMenu::Start()
 	currentTexture = Menu_1;
 
 	app->guiManager->Enable();
-	app->scene->Disable();
-	app->lastScreen->Disable();
 
 	btn1 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "Title", { 7, 30, 920, 290 }, this);
 	btn2 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "Play", { 99, 339, 235, 90 }, this);
@@ -113,6 +111,7 @@ bool SceneMenu::Update(float dt)
 			currentTexture = Menu_3;
 			app->fade->StartFadeToBlack(this, (Module*)app->scene, 0);
 			app->sceneMenu->Disable();
+			app->map->Enable();
 			app->scene->Enable();
 			app->scene->player->lifes = 3;
 			newgame = true;
@@ -131,8 +130,8 @@ bool SceneMenu::Update(float dt)
 			currentTexture = Menu_5;
 			app->LoadRequest();
 			app->sceneMenu->Disable();
+			app->map->Enable();
 			app->scene->Enable();
-
 		}
 		if (btn4->state == GuiControlState::FOCUSED)
 		{

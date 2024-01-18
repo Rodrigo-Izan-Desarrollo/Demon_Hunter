@@ -108,6 +108,7 @@ bool Scene::Awake(pugi::xml_node& config)
 // Called before the first frame
 bool Scene::Start()
 {
+
 	if (app->scene->isEnabled())
 	{
 		//Music
@@ -191,7 +192,7 @@ iPoint Scene::GetPLayerPosition() {
 // Called before quitting
 bool Scene::CleanUp()
 {
-
+	LOG("Freeing scene");
 	return true;
 }
 
