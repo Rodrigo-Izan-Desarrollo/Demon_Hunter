@@ -137,17 +137,19 @@ bool Audio::PlayMusic(const char* path, float fadeTime)
 	LOG("Successfully playing %s", path);
 	return ret;
 }
-//Stop the music
-bool Audio::StopMusic()
+//Unload a music file
+bool Audio::UnloadMusic(const char* path)
 {
-	bool ret = true;
+	bool ret = false;
 
 	if (!active)
 		return false;
 
 	if (music != NULL)
 	{
-		Mix_HaltMusic();
+		Mix_FreeMusic(music);
+		music = NULL;
+		ret = true;
 	}
 
 	return ret;

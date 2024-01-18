@@ -60,6 +60,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 
 	AddModule(lastScreen);
 	AddModule(scene);
+	AddModule(sceneSettings);
 	AddModule(sceneMenu);
 	AddModule(sceneLogo);
 

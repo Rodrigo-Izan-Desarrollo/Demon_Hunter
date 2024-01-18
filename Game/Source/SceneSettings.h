@@ -44,20 +44,17 @@ private:
 
 	// Texture
 	//Menu_inicio
-	SDL_Texture* Menu_1;
-	SDL_Texture* Menu_2;
-	SDL_Texture* Menu_3;
-	SDL_Texture* Menu_4;
-	SDL_Texture* Menu_5;
-	SDL_Texture* Menu_6;
-	SDL_Texture* Menu_7;
-	SDL_Texture* Menu_8;
-	SDL_Texture* Menu_9;
-	SDL_Texture* Menu_10;
+	SDL_Texture* Sound_1;
+	SDL_Texture* Sound_2;
+	SDL_Texture* Sound_3;
+	SDL_Texture* Sound_4;
+	SDL_Texture* Resta_1;
+	SDL_Texture* Resta_2;
+	SDL_Texture* Resta_3;
+	SDL_Texture* Suma_1;
+	SDL_Texture* Suma_2;
+	SDL_Texture* Suma_3;
 	SDL_Texture* Menu_11;
-	SDL_Texture* Menu_12;
-
-	SDL_Texture* Credit_1;
 
 	SDL_Texture* currentTexture;
 

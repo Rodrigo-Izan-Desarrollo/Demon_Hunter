@@ -112,6 +112,7 @@ bool SceneMenu::Update(float dt)
 			app->fade->StartFadeToBlack(this, (Module*)app->scene, 0);
 			app->sceneMenu->Disable();
 			app->map->Enable();
+			app->entityManager->Enable();
 			app->scene->Enable();
 			app->scene->player->lifes = 3;
 			newgame = true;
@@ -131,6 +132,7 @@ bool SceneMenu::Update(float dt)
 			app->LoadRequest();
 			app->sceneMenu->Disable();
 			app->map->Enable();
+			app->entityManager->Enable();
 			app->scene->Enable();
 		}
 		if (btn4->state == GuiControlState::FOCUSED)
@@ -161,9 +163,14 @@ bool SceneMenu::PostUpdate()
 {
 	bool ret = true;
 
-	//app->render->DrawTexture(currentTexture, 30,380);
-
-	app->render->DrawTexture(currentTexture, app->scene->player->position.x - 125, app->scene->player->position.y - 550);
+	if (app->scene->player==nullptr)
+	{
+		app->render->DrawTexture(currentTexture, 30, 380);
+	}
+	else
+	{
+		app->render->DrawTexture(currentTexture, app->scene->player->position.x - 125, app->scene->player->position.y - 550);
+	}
 
 	return ret;
 }

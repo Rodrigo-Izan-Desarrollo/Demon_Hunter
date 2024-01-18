@@ -163,7 +163,6 @@ bool Scene::Update(float dt)
 	if (player->dead==true && player->lifes<=0)
 	{
 		app->fade->StartFadeToBlack(this, (Module*)app->lastScreen, 0);
-		app->audio->StopMusic();
 		app->scene->Disable();
 		app->lastScreen->Enable();
 	}
@@ -199,6 +198,10 @@ iPoint Scene::GetPLayerPosition() {
 bool Scene::CleanUp()
 {
 	LOG("Freeing scene");
+
+	//Unload music
+	app->audio->UnloadMusic(configNode.child("music").attribute("musicpathambient").as_string());
+
 	return true;
 }
 

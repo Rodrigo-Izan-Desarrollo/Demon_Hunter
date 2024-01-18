@@ -35,27 +35,22 @@ bool SceneSettings::Awake()
 // Called before the first frame
 bool SceneSettings::Start()
 {
-	// Textures
-	Menu_1 = app->tex->Load("Assets/Screens/Menu_intro_1.png");
-	Menu_2 = app->tex->Load("Assets/Screens/Menu_intro_2.png");
-	Menu_3 = app->tex->Load("Assets/Screens/Menu_intro_3.png");
-	Menu_4 = app->tex->Load("Assets/Screens/Menu_intro_4.png");
-	Menu_5 = app->tex->Load("Assets/Screens/Menu_intro_5.png");
-	Menu_6 = app->tex->Load("Assets/Screens/Menu_intro_6.png");
-	Menu_7 = app->tex->Load("Assets/Screens/Menu_intro_7.png");
-	Menu_8 = app->tex->Load("Assets/Screens/Menu_intro_8.png");
-	Menu_9 = app->tex->Load("Assets/Screens/Menu_intro_9.png");
-	Menu_10 = app->tex->Load("Assets/Screens/Menu_intro_10.png");
-	Menu_11 = app->tex->Load("Assets/Screens/Menu_intro_11.png");
-	Menu_12 = app->tex->Load("Assets/Screens/Menu_intro_12.png");
+	// Soun textures
+	Sound_1 = app->tex->Load("Assets/Textures/Menu/Sound_1.png");
+	Sound_2 = app->tex->Load("Assets/Textures/Menu/Sound_2.png");
+	Sound_3 = app->tex->Load("Assets/Textures/Menu/Sound_3.png");
+	Sound_4 = app->tex->Load("Assets/Textures/Menu/Sound_4.png");
+	Resta_1 = app->tex->Load("Assets/Textures/Menu/Resta_1.png");
+	Resta_2 = app->tex->Load("Assets/Textures/Menu/Resta_2.png");
+	Resta_3 = app->tex->Load("Assets/Textures/Menu/Resta_3.png");
+	Suma_1 = app->tex->Load("Assets/Textures/Menu/Suma_1.png");
+	Suma_2 = app->tex->Load("Assets/Textures/Menu/Suma_2.png");
+	Suma_3 = app->tex->Load("Assets/Textures/Menu/Suma_3.png");
 
-	Credit_1 = app->tex->Load("Assets/Screens/Credits_1.png");
-
-	currentTexture = Menu_1;
+	currentTexture = Sound_1;
 
 	app->guiManager->Enable();
 	app->scene->Disable();
-	app->lastScreen->Disable();
 
 	btn1 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "Title", { 7, 30, 920, 290 }, this);
 	btn2 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "Play", { 99, 339, 235, 90 }, this);
@@ -83,77 +78,6 @@ bool SceneSettings::PreUpdate()
 // Called each loop iteration
 bool SceneSettings::Update(float dt)
 {
-	if (credits)
-	{
-		currentTexture = Credit_1;
-		btn6->state = GuiControlState::NORMAL;
-	}
-	if (!credits)
-	{
-		currentTexture = Menu_1;
-		btn6->state = GuiControlState::DISABLED;
-		if (app->scene->player->save == node.child("modes").attribute("save").as_bool("false"))
-		{
-			currentTexture = Menu_6;
-			btn3->state = GuiControlState::DISABLED;
-		}
-		if (btn1->state == GuiControlState::FOCUSED)
-		{
-			currentTexture = Menu_11;
-		}
-		if (btn1->state == GuiControlState::PRESSED)
-		{
-			currentTexture = Menu_12;
-		}
-		if (btn2->state == GuiControlState::FOCUSED)
-		{
-			currentTexture = Menu_2;
-		}
-		if (btn2->state == GuiControlState::PRESSED)
-		{
-			currentTexture = Menu_3;
-			app->fade->StartFadeToBlack(this, (Module*)app->scene, 0);
-			app->sceneMenu->Disable();
-			app->scene->Enable();
-			app->scene->player->lifes = 3;
-			newgame = true;
-		}
-		if (app->scene->player->save == node.child("modes").attribute("save").as_bool("true"))
-		{
-			btn3->state = GuiControlState::NORMAL;
-		}
-		if (btn3->state == GuiControlState::FOCUSED)
-		{
-			currentTexture = Menu_4;
-		}
-		if (btn3->state == GuiControlState::PRESSED)
-		{
-			app->fade->StartFadeToBlack(this, (Module*)app->scene, 0);
-			currentTexture = Menu_5;
-			app->LoadRequest();
-			app->sceneMenu->Disable();
-			app->scene->Enable();
-
-		}
-		if (btn4->state == GuiControlState::FOCUSED)
-		{
-			currentTexture = Menu_7;
-		}
-		if (btn4->state == GuiControlState::PRESSED)
-		{
-			currentTexture = Menu_8;
-			/*app->fade->StartFadeToBlack(this, (Module*)app->sceneSettings, 0);*/
-		}
-		if (btn5->state == GuiControlState::FOCUSED)
-		{
-			currentTexture = Menu_9;
-		}
-		if (btn5->state == GuiControlState::PRESSED)
-		{
-			currentTexture = Menu_10;
-			return false;
-		}
-	}
 
 	return true;
 }
@@ -172,14 +96,6 @@ bool SceneSettings::PostUpdate()
 
 bool SceneSettings::OnGuiMouseClickEvent(GuiControl* control) {
 
-	if (control == btn1 && !credits)
-	{
-		credits = true;
-	}
-	if (control == btn6 && credits)
-	{
-		credits = false;
-	}
 	return true;
 }
 
@@ -187,21 +103,6 @@ bool SceneSettings::OnGuiMouseClickEvent(GuiControl* control) {
 bool SceneSettings::CleanUp()
 {
 	LOG("Freeing best logo ever scene");
-
-	//Hazme CleanUp de todo los que puedas
-	app->tex->UnLoad(Menu_1);
-	app->tex->UnLoad(Menu_2);
-	app->tex->UnLoad(Menu_3);
-	app->tex->UnLoad(Menu_4);
-	app->tex->UnLoad(Menu_5);
-	app->tex->UnLoad(Menu_6);
-	app->tex->UnLoad(Menu_7);
-	app->tex->UnLoad(Menu_8);
-	app->tex->UnLoad(Menu_9);
-	app->tex->UnLoad(Menu_10);
-	app->tex->UnLoad(Menu_11);
-	app->tex->UnLoad(Menu_12);
-	app->tex->UnLoad(Credit_1);
 
 	//Destruye los botones
 	app->guiManager->Disable();
