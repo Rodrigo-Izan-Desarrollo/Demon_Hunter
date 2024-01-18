@@ -23,6 +23,8 @@
 #include "GuiControl.h"
 #include "GuiManager.h"
 
+#include "SDL_mixer/include/SDL_mixer.h"
+
 Scene::Scene(App* application, bool start_enabled) : Module(application, start_enabled)
 {
 	name.Create("scene");
@@ -152,6 +154,10 @@ bool Scene::Update(float dt)
 	{
 		app->SaveRequest();
 		player->save = true;
+	}
+	if (app->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN)
+	{
+		Mix_VolumeMusic(0);
 	}
 
 	if (player->dead==true && player->lifes<=0)
