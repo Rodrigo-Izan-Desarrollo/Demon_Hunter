@@ -67,6 +67,8 @@ public:
 
 	bool OnGuiMouseClickEvent(GuiControl* control);
 
+	bool pausa = false;
+
 private:
 
 	SDL_Texture* img;

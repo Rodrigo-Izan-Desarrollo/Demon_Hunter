@@ -101,7 +101,7 @@ public:
 	Physics* physics;
 	FadeToBlack* fade;
 	GuiManager* guiManager;
-	bool vsync;
+	bool vsync = true;
 
 private:
 

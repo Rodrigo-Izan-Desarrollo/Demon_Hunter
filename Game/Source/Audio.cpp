@@ -219,3 +219,8 @@ void Audio::ChangeVolume(int volume) {
 void Audio::ChangeFXVolume(int volume) {
 	Mix_Volume(-1, volume);
 }
+
+//Get volume
+int Audio::GetVolume() {
+	return Mix_VolumeMusic(-1);
+}

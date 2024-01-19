@@ -36,28 +36,32 @@ bool SceneSettings::Awake()
 bool SceneSettings::Start()
 {
 	// Soun textures
-	Sound_1 = app->tex->Load("Assets/Textures/Menu/Sound_1.png");
-	Sound_2 = app->tex->Load("Assets/Textures/Menu/Sound_2.png");
-	Sound_3 = app->tex->Load("Assets/Textures/Menu/Sound_3.png");
-	Sound_4 = app->tex->Load("Assets/Textures/Menu/Sound_4.png");
-	Resta_1 = app->tex->Load("Assets/Textures/Menu/Resta_1.png");
-	Resta_2 = app->tex->Load("Assets/Textures/Menu/Resta_2.png");
-	Resta_3 = app->tex->Load("Assets/Textures/Menu/Resta_3.png");
-	Suma_1 = app->tex->Load("Assets/Textures/Menu/Suma_1.png");
-	Suma_2 = app->tex->Load("Assets/Textures/Menu/Suma_2.png");
-	Suma_3 = app->tex->Load("Assets/Textures/Menu/Suma_3.png");
+	Sound_1 = app->tex->Load("Assets/Screens/Menu_sound_1.png");
+	Sound_2 = app->tex->Load("Assets/Screens/Menu_sound_2.png");
+	Sound_3 = app->tex->Load("Assets/Screens/Menu_sound_3.png");
+	Sound_4 = app->tex->Load("Assets/Screens/Menu_sound_4.png");
+	Resta_1 = app->tex->Load("Assets/Screens/Resta_1.png");
+	Resta_2 = app->tex->Load("Assets/Screens/Resta_2.png");
+	Resta_3 = app->tex->Load("Assets/Screens/Resta_3.png");
+	Suma_1 = app->tex->Load("Assets/Screens/Suma_1.png");
+	Suma_2 = app->tex->Load("Assets/Screens/Suma_2.png");
+	Suma_3 = app->tex->Load("Assets/Screens/Suma_3.png");	
 
 	currentTexture = Sound_1;
+	currentTextureresta_1 = Resta_1;
+	currentTexturesuma_1 = Suma_1;
+	currentTexturesuma_2 = Suma_1;
+	currentTextureresta_2 = Resta_1;
 
 	app->guiManager->Enable();
 	app->scene->Disable();
 
-	btn1 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "Title", { 7, 30, 920, 290 }, this);
-	btn2 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "Play", { 99, 339, 235, 90 }, this);
-	btn3 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, "Continue", { 92, 455, 254, 45 }, this);
-	btn4 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 4, "Settings", { 112, 525, 213, 42 }, this);
-	btn5 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 5, "Exit", { 0, 721, 51, 46 }, this);
-	btn6 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "Title", { 7, 30, 920, 290 }, this);
+	btn1 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "Fullscreen", { app->scene->player->position.x - 125 + 660, 371, 117, 117 }, this);
+	btn2 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "Vsync", { app->scene->player->position.x - 125 + 660, 514, 117, 117 }, this);
+	btn3 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, "Suma2", { app->scene->player->position.x - 125 + 730, 241, 117, 117 }, this);
+	btn4 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 4, "Resta2", { app->scene->player->position.x - 125 + 544, 241, 117, 117 }, this);
+	btn5 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 5, "Suma1", { app->scene->player->position.x - 125 + 730, 86, 117, 117 }, this);
+	btn6 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "Resta1", { app->scene->player->position.x - 125 + 544, 86, 117, 117 }, this);
 
 	//Habilita los botones
 	btn1->state = GuiControlState::NORMAL;
@@ -78,6 +82,97 @@ bool SceneSettings::PreUpdate()
 // Called each loop iteration
 bool SceneSettings::Update(float dt)
 {
+	currentTexture = Sound_1;
+	currentTextureresta_1 = Resta_1;
+	currentTexturesuma_1 = Suma_1;
+	currentTexturesuma_2 = Suma_1;
+	currentTextureresta_2 = Resta_1;
+
+	if (!app->scene->pausa)
+	{
+		if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
+		{
+			app->fade->StartFadeToBlack(this, (Module*)app->sceneMenu, 10);
+			app->sceneSettings->Disable();
+			app->sceneMenu->Enable();
+		}
+	}
+	else
+	{
+		if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
+		{
+			app->fade->StartFadeToBlack(this, (Module*)app->scene, 10);
+			app->sceneSettings->Disable();
+			app->scene->Enable();
+		}
+	}
+
+	if (btn6->state == GuiControlState::FOCUSED)
+	{
+		currentTextureresta_1 = Resta_2;
+	}
+	if (btn6->state == GuiControlState::PRESSED)
+	{
+		currentTextureresta_1 = Resta_3;
+		app->audio->ChangeVolume(-10.0f);
+		LOG("Volumen: %f", app->audio->GetVolume());
+	}
+	if (btn4->state == GuiControlState::FOCUSED)
+	{
+		currentTextureresta_2 = Resta_2;
+	}
+	if (btn4->state == GuiControlState::PRESSED)
+	{
+		currentTextureresta_2 = Resta_3;
+		app->audio->ChangeFXVolume(-10.0f);
+	}
+
+	if (btn5->state == GuiControlState::FOCUSED)
+	{
+		currentTexturesuma_1 = Suma_2;
+	}
+	if (btn5->state == GuiControlState::PRESSED)
+	{
+		currentTexturesuma_1 = Suma_3;
+		app->audio->ChangeVolume(10.0f);
+	}
+	if (btn3->state == GuiControlState::FOCUSED)
+	{
+		currentTexturesuma_2 = Suma_2;
+	}
+	if (btn3->state == GuiControlState::PRESSED)
+	{
+		currentTexturesuma_2 = Suma_3;
+		app->audio->ChangeFXVolume(+10.0f);
+	}
+
+	if (btn1->state == GuiControlState::PRESSED)
+	{
+		fullscreen = !fullscreen;
+	}
+	if (btn2->state == GuiControlState::PRESSED)
+	{
+		vsync = !vsync;
+		app->vsync = !app->vsync;
+	}
+
+	if (fullscreen && !vsync)
+	{
+		currentTexture = Sound_2;
+		app->win->SetFullscreen(fullscreen);
+	}
+	if (!fullscreen)
+	{
+		app->win->SetFullscreenDesktop(fullscreen);
+	}
+	if (vsync && !fullscreen)
+	{
+		currentTexture = Sound_3;
+	}
+	if (vsync && fullscreen)
+	{
+		currentTexture = Sound_4;
+	}
 
 	return true;
 }
@@ -87,9 +182,12 @@ bool SceneSettings::PostUpdate()
 {
 	bool ret = true;
 
-	//app->render->DrawTexture(currentTexture, 30,380);
-
 	app->render->DrawTexture(currentTexture, app->scene->player->position.x - 125, app->scene->player->position.y - 550);
+
+	app->render->DrawTexture(currentTextureresta_1, app->scene->player->position.x - 125 + 544, app->scene->player->position.y - 550 + 86);
+	app->render->DrawTexture(currentTexturesuma_1,app->scene->player->position.x - 125 + 750, app->scene->player->position.y - 550 + 86);
+	app->render->DrawTexture(currentTextureresta_2, app->scene->player->position.x - 125 + 544, app->scene->player->position.y - 550 + 241);
+	app->render->DrawTexture(currentTexturesuma_2, app->scene->player->position.x - 125 + 750, app->scene->player->position.y - 550 + 241);
 
 	return ret;
 }
@@ -104,8 +202,23 @@ bool SceneSettings::CleanUp()
 {
 	LOG("Freeing best logo ever scene");
 
-	//Destruye los botones
-	app->guiManager->Disable();
+	app->tex->UnLoad(Sound_1);
+	app->tex->UnLoad(Sound_2);
+	app->tex->UnLoad(Sound_3);
+	app->tex->UnLoad(Sound_4);
+	app->tex->UnLoad(Resta_1);
+	app->tex->UnLoad(Resta_2);
+	app->tex->UnLoad(Resta_3);
+	app->tex->UnLoad(Suma_1);
+	app->tex->UnLoad(Suma_2);
+	app->tex->UnLoad(Suma_3);
+
+	app->guiManager->DestroyGuiControl(btn1);
+	app->guiManager->DestroyGuiControl(btn2);
+	app->guiManager->DestroyGuiControl(btn3);
+	app->guiManager->DestroyGuiControl(btn4);
+	app->guiManager->DestroyGuiControl(btn5);
+	app->guiManager->DestroyGuiControl(btn6);
 
 	return true;
 }

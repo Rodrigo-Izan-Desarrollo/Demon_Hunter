@@ -11,6 +11,7 @@
 #include "BigSlime.h"
 #include "Boss.h"
 #include "SceneMenu.h"
+#include "SceneSettings.h"
 #include "LastScreen.h"
 #include "FadeToBlack.h"
 #include <string.h>
@@ -176,6 +177,14 @@ bool Scene::Update(float dt)
 		app->sceneMenu->newgame = false;
 	}
 
+	if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
+	{
+		app->fade->StartFadeToBlack(this, (Module*)app->sceneSettings, 10);
+		app->scene->Disable();
+		app->sceneSettings->Enable();
+		pausa = true;
+	}
+
 	return true;
 }
 
@@ -183,9 +192,6 @@ bool Scene::Update(float dt)
 bool Scene::PostUpdate()
 {
 	bool ret = true;
-
-	if(app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
-		ret = false;
 
 	return ret;
 }

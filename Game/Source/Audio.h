@@ -44,6 +44,9 @@ public:
 	// Change sfx volume (from 0 to 128)
 	void ChangeFXVolume(int volume = 128);
 
+	//Get volume
+	int GetVolume();
+
 private:
 
 	_Mix_Music* music;

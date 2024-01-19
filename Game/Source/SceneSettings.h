@@ -57,6 +57,10 @@ private:
 	SDL_Texture* Menu_11;
 
 	SDL_Texture* currentTexture;
+	SDL_Texture* currentTexturesuma_1;
+	SDL_Texture* currentTextureresta_1;
+	SDL_Texture* currentTexturesuma_2;
+	SDL_Texture* currentTextureresta_2;
 
 	GuiControlButton* btn1;
 	GuiControlButton* btn2;
@@ -68,7 +72,8 @@ private:
 
 	int count;
 
-	bool credits = false;
+	bool fullscreen = false;
+	bool vsync = false;
 
 	// Screen music
 	uint logo_theme;
