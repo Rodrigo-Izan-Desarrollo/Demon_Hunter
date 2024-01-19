@@ -17,6 +17,7 @@ class Textures;
 class Audio;
 class SceneLogo;
 class SceneMenu;
+class SceneSettings;
 class LastScreen;
 class Scene;
 class EntityManager;
@@ -92,6 +93,7 @@ public:
 	Audio* audio;
 	SceneLogo* sceneLogo;
 	SceneMenu* sceneMenu;
+	SceneSettings* sceneSettings;
 	LastScreen* lastScreen;
 	Scene* scene;
 	EntityManager* entityManager;
@@ -99,7 +101,7 @@ public:
 	Physics* physics;
 	FadeToBlack* fade;
 	GuiManager* guiManager;
-	bool vsync;
+	bool vsync = true;
 
 private:
 

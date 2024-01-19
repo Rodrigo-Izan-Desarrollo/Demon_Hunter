@@ -30,6 +30,12 @@ public:
 	// Retrieve window scale
 	uint GetScale() const;
 
+	//Activa la fullscreen
+	void SetFullscreen(bool fullscreen);
+
+	//Quita la fullscreen
+	void SetFullscreenDesktop(bool fullscreen);
+
 public:
 	// The window we'll be rendering to
 	SDL_Window* window;

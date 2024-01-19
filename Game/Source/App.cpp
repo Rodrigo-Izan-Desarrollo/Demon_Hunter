@@ -6,6 +6,7 @@
 #include "Audio.h"
 #include "SceneLogo.h"
 #include "SceneMenu.h"
+#include "SceneSettings.h"
 #include "LastScreen.h"
 #include "Scene.h"
 #include "Map.h"
@@ -39,6 +40,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 
 	sceneLogo = new SceneLogo(this, true);
 	sceneMenu = new SceneMenu(this, false);
+	sceneSettings = new SceneSettings(this, false);
 	scene = new Scene(this,false);
 	lastScreen = new LastScreen(this, false);
 
@@ -55,10 +57,15 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(physics);
 
 	AddModule(fade);
-	AddModule(sceneLogo);
-	AddModule(sceneMenu);
-	AddModule(scene);
+
 	AddModule(lastScreen);
+	AddModule(scene);
+	AddModule(sceneSettings);
+	AddModule(sceneMenu);
+	AddModule(sceneLogo);
+
+
+
 	AddModule(map);
 	AddModule(entityManager);
 	AddModule(guiManager);

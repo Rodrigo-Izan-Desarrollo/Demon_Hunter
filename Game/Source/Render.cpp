@@ -269,3 +269,12 @@ bool Render::SaveState(pugi::xml_node node) {
 
 	return true;
 }
+//SetVSync
+void Render::SetVSync(bool vsync) {
+	if (vsync) {
+		SDL_GL_SetSwapInterval(1);
+	}
+	else {
+		SDL_GL_SetSwapInterval(0);
+	}
+}

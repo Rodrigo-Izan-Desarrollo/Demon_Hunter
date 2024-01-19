@@ -6,6 +6,7 @@
 #include "Window.h"
 #include "SceneLogo.h"
 #include "SceneMenu.h"
+#include "SceneSettings.h"
 #include "LastScreen.h"
 #include "Scene.h"
 #include "Map.h"
@@ -53,8 +54,7 @@ bool SceneMenu::Start()
 	currentTexture = Menu_1;
 
 	app->guiManager->Enable();
-	app->scene->Disable();
-	app->lastScreen->Disable();
+	app->sceneSettings->Disable();
 
 	btn1 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "Title", { 7, 30, 920, 290 }, this);
 	btn2 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "Play", { 99, 339, 235, 90 }, this);
@@ -113,6 +113,9 @@ bool SceneMenu::Update(float dt)
 			currentTexture = Menu_3;
 			app->fade->StartFadeToBlack(this, (Module*)app->scene, 0);
 			app->sceneMenu->Disable();
+			app->guiManager->Disable();
+			app->map->Enable();
+			app->entityManager->Enable();
 			app->scene->Enable();
 			app->scene->player->lifes = 3;
 			newgame = true;
@@ -131,8 +134,10 @@ bool SceneMenu::Update(float dt)
 			currentTexture = Menu_5;
 			app->LoadRequest();
 			app->sceneMenu->Disable();
+			app->guiManager->Disable();
+			app->map->Enable();
+			app->entityManager->Enable();
 			app->scene->Enable();
-
 		}
 		if (btn4->state == GuiControlState::FOCUSED)
 		{
@@ -141,7 +146,9 @@ bool SceneMenu::Update(float dt)
 		if (btn4->state == GuiControlState::PRESSED)
 		{
 			currentTexture = Menu_8;
-			/*app->fade->StartFadeToBlack(this, (Module*)app->sceneSettings, 0);*/
+			app->fade->StartFadeToBlack(this, (Module*)app->sceneSettings, 0);
+			app->sceneMenu->Disable();
+			app->sceneSettings->Enable();
 		}
 		if (btn5->state == GuiControlState::FOCUSED)
 		{
@@ -162,9 +169,14 @@ bool SceneMenu::PostUpdate()
 {
 	bool ret = true;
 
-	//app->render->DrawTexture(currentTexture, 30,380);
-
-	app->render->DrawTexture(currentTexture, app->scene->player->position.x - 125, app->scene->player->position.y - 550);
+	if (app->scene->player==nullptr)
+	{
+		app->render->DrawTexture(currentTexture, 30, 380);
+	}
+	else
+	{
+		app->render->DrawTexture(currentTexture, app->scene->player->position.x - 125, app->scene->player->position.y - 550);
+	}
 
 	return ret;
 }
@@ -187,7 +199,6 @@ bool SceneMenu::CleanUp()
 {
 	LOG("Freeing best logo ever scene");
 
-	//Hazme CleanUp de todo los que puedas
 	app->tex->UnLoad(Menu_1);
 	app->tex->UnLoad(Menu_2);
 	app->tex->UnLoad(Menu_3);
@@ -202,8 +213,13 @@ bool SceneMenu::CleanUp()
 	app->tex->UnLoad(Menu_12);
 	app->tex->UnLoad(Credit_1);
 
-	//Destruye los botones
-	app->guiManager->Disable();
+	app->guiManager->DestroyGuiControl(btn1);
+	app->guiManager->DestroyGuiControl(btn2);
+	app->guiManager->DestroyGuiControl(btn3);
+	app->guiManager->DestroyGuiControl(btn4);
+	app->guiManager->DestroyGuiControl(btn5);
+	app->guiManager->DestroyGuiControl(btn6);
 
+	
 	return true;
 }

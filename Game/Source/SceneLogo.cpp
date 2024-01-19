@@ -45,9 +45,7 @@ bool SceneLogo::Start()
 
 	currentTexture = Intro_1;
 
-	app->sceneMenu->Disable();
-	app->lastScreen->Disable();
-	app->scene->Disable();
+	app->map->Disable();
 
 	return true;
 }
@@ -103,6 +101,7 @@ bool SceneLogo::CleanUp()
 
 	app->tex->UnLoad(Intro_1);
 	app->tex->UnLoad(Intro_2);
+
 	app->audio->UnloadFx(logo_theme);
 
 	return true;

@@ -26,8 +26,8 @@ public:
 	// Play a music file
 	bool PlayMusic(const char* path, float fadeTime = DEFAULT_MUSIC_FADE_TIME);
 
-	//Stop the music
-	bool StopMusic();
+	//Unload a music file
+	bool UnloadMusic(const char* path);
 
 	// Load a WAV in memory
 	unsigned int LoadFx(const char* path);
@@ -37,6 +37,15 @@ public:
 
 	// Play a previously loaded WAV
 	bool PlayFx(unsigned int fx, int repeat = 0);
+
+	// Change music volume (from 0 to 128)
+	void ChangeVolume(int volume = 128);
+
+	// Change sfx volume (from 0 to 128)
+	void ChangeFXVolume(int volume = 128);
+
+	//Get volume
+	int GetVolume();
 
 private:
 
