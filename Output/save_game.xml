@@ -8,6 +8,7 @@
 	<FadeToBlack />
 	<sceneLogo />
 	<scene>
+
 		<playerposition x="3398" y="1058" />
 		<modes sleeping="false" dead="false" canmove="true" inground="true" rightmode="true" leftmode="false" caninv="true" God-mode="false" lifes="2" save="true" />
 		<canpower canpower-1="false" canpower-2="false" canpower-3="false" />
@@ -31,6 +32,7 @@
 		<venemy10 x="9683" y="736" />
 		<venemy11 x="10429" y="544" />
 		<venemy12 x="10829" y="544" />
+
 	</scene>
 	<sceneLogo />
 	<sceneLogo />
@@ -39,6 +41,8 @@
 	<entitymanager />
 	<guiManager />
 	<renderer>
+
 		<camera x="-3271" y="-508" />
+
 	</renderer>
 </game_state>

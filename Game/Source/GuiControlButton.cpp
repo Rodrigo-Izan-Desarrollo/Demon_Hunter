@@ -60,6 +60,8 @@ bool GuiControlButton::Update(float dt)
 
 		app->render->DrawText(text.GetString(), bounds.x, bounds.y, bounds.w, bounds.h);
 
+		app->render->DrawText("HOLA", bounds.x, bounds.y, bounds.w, bounds.h);
+
 	}
 
 	return false;

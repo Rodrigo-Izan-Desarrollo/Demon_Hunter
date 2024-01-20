@@ -387,7 +387,7 @@
 		  <animation x="1772" y="193" w="160" h="128" />
 	  </boss_walking>
 
-	  <boss_attack loop="true" speed="0.175f" >
+	  <boss_attack loop="false" speed="0.175f" >
 		  <animation x="1" y="352" w="160" h="127" />
 		  <animation x="162" y="352"  w="160" h="127" />
 		  <animation x="323" y="352"  w="160" h="127" />
@@ -405,7 +405,7 @@
 		  <animation x="2255" y="352" w="160" h="127" />
 	  </boss_attack>
 
-	  <boss_hurt loop="true" speed="0.175f" >
+	  <boss_hurt loop="false" speed="0.175f" >
 		  <animation x="1" y="511" w="160" h="127" />
 		  <animation x="162" y="511"  w="160" h="127" />
 		  <animation x="323" y="511"  w="160" h="127" />
