@@ -382,6 +382,7 @@ bool Player::Update(float dt)
 	{
 		canmove = false;
 		currentAnimation = &player_dead;
+		app->scene->pausa = false;
 	}
 		//Activation of respawn
 	if (currentAnimation == &player_dead && currentAnimation->HasFinished() && lifes > 0 && dead && !respawning)
