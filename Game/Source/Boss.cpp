@@ -218,13 +218,13 @@ bool Boss::Update(float dt)
 		{
 			rightmode = false;
 			leftmode = true;
-			velocity.x = -1;
+			velocity.x = -1.25f;
 		}
 		else if (!isAttacking)
 		{
 			rightmode = true;
 			leftmode = false;
-			velocity.x = +1;
+			velocity.x = +1.25f;
 		}
 		
 		if (nextPathTile->x == origPos.x) {

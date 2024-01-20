@@ -61,7 +61,7 @@ public:
 
 	bool onView = false;
 
-	int tilesattack = 2;
+	int tilesattack = 3;
 
 	bool isAttacking = false;
 	bool Hasattacked = false;
