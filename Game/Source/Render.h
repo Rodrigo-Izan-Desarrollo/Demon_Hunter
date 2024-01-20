@@ -48,6 +48,9 @@ public:
 	virtual bool LoadState(pugi::xml_node node);
 	virtual bool SaveState(pugi::xml_node node);
 
+	//VSync
+	void SetVSync(bool vsync);
+
 public:
 
 	SDL_Renderer* renderer;

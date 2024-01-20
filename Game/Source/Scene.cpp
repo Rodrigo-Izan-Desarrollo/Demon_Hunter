@@ -11,6 +11,7 @@
 #include "BigSlime.h"
 #include "Boss.h"
 #include "SceneMenu.h"
+#include "SceneSettings.h"
 #include "LastScreen.h"
 #include "FadeToBlack.h"
 #include <string.h>
@@ -22,6 +23,8 @@
 #include "Log.h"
 #include "GuiControl.h"
 #include "GuiManager.h"
+
+#include "SDL_mixer/include/SDL_mixer.h"
 
 Scene::Scene(App* application, bool start_enabled) : Module(application, start_enabled)
 {
@@ -108,6 +111,7 @@ bool Scene::Awake(pugi::xml_node& config)
 // Called before the first frame
 bool Scene::Start()
 {
+
 	if (app->scene->isEnabled())
 	{
 		//Music
@@ -152,11 +156,14 @@ bool Scene::Update(float dt)
 		app->SaveRequest();
 		player->save = true;
 	}
+	if (app->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN)
+	{
+		Mix_VolumeMusic(0);
+	}
 
 	if (player->dead==true && player->lifes<=0)
 	{
 		app->fade->StartFadeToBlack(this, (Module*)app->lastScreen, 0);
-		app->audio->StopMusic();
 		app->scene->Disable();
 		app->lastScreen->Enable();
 	}
@@ -170,6 +177,14 @@ bool Scene::Update(float dt)
 		app->sceneMenu->newgame = false;
 	}
 
+	if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
+	{
+		app->fade->StartFadeToBlack(this, (Module*)app->sceneSettings, 10);
+		app->scene->Disable();
+		app->sceneSettings->Enable();
+		pausa = true;
+	}
+
 	return true;
 }
 
@@ -177,9 +192,6 @@ bool Scene::Update(float dt)
 bool Scene::PostUpdate()
 {
 	bool ret = true;
-
-	if(app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
-		ret = false;
 
 	return ret;
 }
@@ -191,6 +203,10 @@ iPoint Scene::GetPLayerPosition() {
 // Called before quitting
 bool Scene::CleanUp()
 {
+	LOG("Freeing scene");
+
+	//Unload music
+	app->audio->UnloadMusic(configNode.child("music").attribute("musicpathambient").as_string());
 
 	return true;
 }
