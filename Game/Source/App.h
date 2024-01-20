@@ -19,6 +19,7 @@ class SceneLogo;
 class SceneMenu;
 class SceneSettings;
 class LastScreen;
+class ScenePause;
 class Scene;
 class EntityManager;
 class Map;
@@ -95,6 +96,7 @@ public:
 	SceneMenu* sceneMenu;
 	SceneSettings* sceneSettings;
 	LastScreen* lastScreen;
+	ScenePause* scenePause;
 	Scene* scene;
 	EntityManager* entityManager;
 	Map* map;

@@ -13,6 +13,7 @@
 #include "SceneMenu.h"
 #include "SceneSettings.h"
 #include "LastScreen.h"
+#include "ScenePause.h"
 #include "FadeToBlack.h"
 #include <string.h>
 #include <string>
@@ -179,9 +180,9 @@ bool Scene::Update(float dt)
 
 	if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
 	{
-		app->fade->StartFadeToBlack(this, (Module*)app->sceneSettings, 10);
+		app->fade->StartFadeToBlack(this, (Module*)app->scenePause, 10);
 		app->scene->Disable();
-		app->sceneSettings->Enable();
+		app->scenePause->Enable();
 		pausa = true;
 	}
 
