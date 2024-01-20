@@ -85,11 +85,13 @@
     <ClCompile Include="Source\FadeToBlack.cpp">
       <Filter>cpp.files</Filter>
     </ClCompile>
+
     <ClCompile Include="Source\SceneLogo.cpp" />
     <ClCompile Include="Source\SceneMenu.cpp" />
     <ClCompile Include="Source\LastScreen.cpp" />
     <ClCompile Include="Source\SceneSettings.cpp" />
     <ClCompile Include="Source\Scenepause.cpp" />
+
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Animation.h">
@@ -203,6 +205,7 @@
     <ClInclude Include="Source\FadeToBlack.h">
       <Filter>h.files</Filter>
     </ClInclude>
+
     <ClInclude Include="Source\SceneLogo.h" />
     <ClInclude Include="Source\SceneMenu.h" />
     <ClInclude Include="Source\LastScreen.h" />

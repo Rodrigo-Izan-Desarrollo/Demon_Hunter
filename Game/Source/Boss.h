@@ -64,6 +64,7 @@ public:
 	int tilesattack = 3;
 
 	bool isAttacking = false;
+	bool Hasattacked = false;
 	bool isHurt = false;
 
 	bool leftmode = true;

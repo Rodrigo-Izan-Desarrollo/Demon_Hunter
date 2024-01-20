@@ -47,7 +47,7 @@ bool Boss::Start() {
 	slime_Fx = app->audio->LoadFx(musicpathslime);
 
 	pathdraw = app->tex->Load("Assets/Maps/azul.png");
-	velocity = { 0,0 };
+	velocity = { 0,10 };
 
 	currentAnimation = &boss;
 	return true;
@@ -65,14 +65,14 @@ bool Boss::Update(float dt)
 		currentAnimation = &boss;
 	}
 
-	if (reverse && leftmode && !onView)
+	if (reverse && leftmode && !onView && canmove)
 	{
 		leftmode = false;
 		rightmode = true;
 		reverse = false;
 		currentAnimation = &boss_walking;
 	}
-	if (reverse && rightmode && !onView)
+	if (reverse && rightmode && !onView && canmove)
 	{
 		leftmode = true;
 		rightmode = false;
@@ -102,7 +102,10 @@ bool Boss::Update(float dt)
 		{
 			onView = true;
 			iskilled = false;
-			currentAnimation = &boss_walking;
+			if (!isAttacking && canmove)
+			{
+				currentAnimation = &boss_walking;
+			}
 
 			if (dist(app->scene->player->position, position) < app->map->mapData.tileWidth * tilesattack)
 			{
@@ -116,40 +119,23 @@ bool Boss::Update(float dt)
 			{
 				if (attackTimer.ReadSec() > 3.0) // Controla el tiempo entre ataques
 				{
-					canmove = false;
 					currentAnimation = &boss_attack;
-					
-					// Crear la colisión pbodyattack
-					if (rightmode)
-					{
-						pbodyatack = app->physics->CreateRectangle(position.x + 45, position.y + 15, 20, 20, bodyType::DYNAMIC); 
-						pbodyatack->listener = this;
-						pbodyatack->ctype = ColliderType::ENEMY_ATTACK;
-					}
-					else if (leftmode)
-					{
-						pbodyatack = app->physics->CreateRectangle(position.x - 2, position.y + 15, 20, 20, bodyType::DYNAMIC); 
-						pbodyatack->listener = this;
-						pbodyatack->ctype = ColliderType::ENEMY_ATTACK;
-					}
-
+					canmove = false;
+					velocity.x = 0;
 					attackTimer.Start(); // Reinicia el temporizador de ataque
-					
 				}
 			}
-			isAttacking = false;
 		}
-	
-	else
-	{
+		else
+		{
 		onView = false;
-	}
+		}
 	}
 	else
 	{
 		onView = false;
 
-		if (!onView && !isAttacking)
+		if (!onView && !isAttacking && canmove)
 		{
 			if (rightmode)
 			{
@@ -167,13 +153,32 @@ bool Boss::Update(float dt)
 		}
 	}
 
-	if (currentAnimation == &boss_attack && currentAnimation->HasFinished())
+	if (currentAnimation == &boss_attack && currentAnimation-> currentFrame >= 9 && !Hasattacked)
 	{
-		if (pbodyatack)
+		Hasattacked = true;
+		// Crear la colisión pbodyattack
+		if (rightmode)
 		{
+			pbodyatack = app->physics->CreateRectangle(position.x + 45, position.y + 15, 20, 20, bodyType::DYNAMIC);
+			pbodyatack->listener = this;
+			pbodyatack->ctype = ColliderType::ENEMY_ATTACK;
+		}
+		else if (leftmode)
+		{
+			pbodyatack = app->physics->CreateRectangle(position.x - 2, position.y + 15, 20, 20, bodyType::DYNAMIC);
+			pbodyatack->listener = this;
+			pbodyatack->ctype = ColliderType::ENEMY_ATTACK;
+		}
+
+	}
+	
+	if (currentAnimation == &boss_attack && currentAnimation->HasFinished() )
+	{
+		Hasattacked = false;
+		if (pbodyatack) {
+			//Destroy pbodyatack
 			pbodyatack->body->SetActive(false);
 			app->physics->world->DestroyBody(pbodyatack->body);
-			delete pbodyatack;
 			pbodyatack = nullptr;
 		}
 
@@ -209,31 +214,22 @@ bool Boss::Update(float dt)
 		nextPathTile = lastPath.At(lastPath.Count() - 1);
 
 
-		if (nextPathTile->x < origPos.x)
+		if (nextPathTile->x < origPos.x && !isAttacking)
 		{
 			rightmode = false;
 			leftmode = true;
-			velocity.x = -1;
-			if (isAttacking)
-			{
-				velocity.x = -1.5f;
-			}
+			velocity.x = -1.25f;
 		}
-		else
+		else if (!isAttacking)
 		{
 			rightmode = true;
 			leftmode = false;
-			velocity.x = +1;
-			if (isAttacking)
-			{
-				velocity.x = 1.5f;
-			}
+			velocity.x = +1.25f;
 		}
+		
 		if (nextPathTile->x == origPos.x) {
 			lastPath.Pop(*nextPathTile);
 		}
-
-
 	}
 	if (isHurt)
 	{
