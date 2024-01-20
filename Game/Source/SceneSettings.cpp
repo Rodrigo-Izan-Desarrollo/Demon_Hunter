@@ -7,6 +7,7 @@
 #include "SceneLogo.h"
 #include "SceneMenu.h"
 #include "SceneSettings.h"
+#include "Scenepause.h"
 #include "LastScreen.h"
 #include "Scene.h"
 #include "Map.h"
@@ -101,9 +102,9 @@ bool SceneSettings::Update(float dt)
 	{
 		if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		{
-			app->fade->StartFadeToBlack(this, (Module*)app->scene, 10);
+			app->fade->StartFadeToBlack(this, (Module*)app->scenePause, 10);
 			app->sceneSettings->Disable();
-			app->scene->Enable();
+			app->scenePause->Enable();
 		}
 	}
 
