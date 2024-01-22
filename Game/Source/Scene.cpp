@@ -297,6 +297,7 @@ bool Scene::Update(float dt)
 		pausa = true;
 	}
 
+
 	if (player->check_1)
 	{
 		currentcheckpoint = &checkpoint;
@@ -305,6 +306,7 @@ bool Scene::Update(float dt)
 	{
 		currentcheckpoint2 = &checkpoint_2;
 	}
+
 
 	return true;
 }

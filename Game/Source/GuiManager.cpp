@@ -1,7 +1,7 @@
 #include "GuiManager.h"
 #include "App.h"
 #include "Textures.h"
-
+#include "Scene.h"
 #include "GuiControlButton.h"
 #include "Audio.h"
 
@@ -14,6 +14,8 @@ GuiManager::~GuiManager() {}
 
 bool GuiManager::Start()
 {
+	texture = app->tex->Load("Assets/hud/Lives.png");
+
 	return true;
 }
 
@@ -66,6 +68,15 @@ bool GuiManager::Update(float dt)
 		control->data->Update(dt);
 		control = control->next;
 	}
+
+	app->render->DrawTexture(texture, 20, 20, NULL , SDL_FLIP_NONE , 0);
+	
+	char buffer[20];  // Suficientemente grande para almacenar el entero como cadena
+	snprintf(buffer, sizeof(buffer), "%d", app->scene->player->lifes);
+
+	const char* miVariable = buffer;
+
+	app->render->DrawText(miVariable, 60, 25, 35, 35);
 
 	return true;
 }
