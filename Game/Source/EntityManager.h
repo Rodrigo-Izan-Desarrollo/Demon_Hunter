@@ -36,6 +36,9 @@ public:
 	//Create new funtions for getting agruping the entities
 	void GetSlimes(List<Entity*>& slimesList) const;
 	void GetBomber(List<Entity*>& slimesList) const;
+	void GetBigSlime(List<Entity*>& slimesList) const;
+	void GetBoss(List<Entity*>& slimesList) const;
+
 
 
 

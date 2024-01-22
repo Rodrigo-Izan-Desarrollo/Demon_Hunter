@@ -58,12 +58,18 @@ bool Scene::Awake(pugi::xml_node& config)
 		bigslime = (BigSlime*)app->entityManager->CreateEntity(EntityType::BIGSLIME);
 		bigslime->parameters = itemNode;
 	}
+	bslimesList;
+	//Use the funtion
+	app->entityManager->GetBigSlime(bslimesList);
 	
 	for (pugi::xml_node itemNode = config.child("boss"); itemNode; itemNode = itemNode.next_sibling("boss"))
 	{
 		boss = (Boss*)app->entityManager->CreateEntity(EntityType::BOSS);
 		boss->parameters = itemNode;
 	}
+	bossList;
+	//Use the funtion
+	app->entityManager->GetBoss(bossList);
 
 	for (pugi::xml_node itemNode = config.child("slimevolador"); itemNode; itemNode = itemNode.next_sibling("slimevolador"))
 	{
@@ -275,7 +281,6 @@ bool Scene::Update(float dt)
 		app->lastScreen->Enable();
 	}
 	
-	//Si newgame es true, que se restablezca la vida del player y su posicion inicial
 	if (app->sceneMenu->newgame == true)
 	{
 		player->position.x = 140;
@@ -410,7 +415,6 @@ bool Scene::LoadState(pugi::xml_node node) {
 	}
 
 	//Bomber
-	//Same with bomber
 	for (int vslimecount = 0; vslimecount < vslimesList.Count(); vslimecount++) {
 
 		Entity* slimevolador = vslimesList.At(vslimecount)->data;
@@ -419,6 +423,28 @@ bool Scene::LoadState(pugi::xml_node node) {
 		slimevolador->position.x = node.child(("venemy" + count).c_str()).attribute("x").as_int();
 		slimevolador->position.y = node.child(("venemy" + count).c_str()).attribute("y").as_int();
 		slimevolador->tp = true;
+	}
+
+	//Boss
+	for (int bosscount = 0; bosscount < bossList.Count(); bosscount++) {
+
+		Entity* boss = bossList.At(bosscount)->data;
+
+		std::string count = std::to_string(bosscount + 1);
+		boss->position.x = node.child(("boss" + count).c_str()).attribute("x").as_int();
+		boss->position.y = node.child(("boss" + count).c_str()).attribute("y").as_int();
+		boss->tp = true;
+	}
+
+	//BigSlime
+	for (int bigslimecount = 0; bigslimecount < bslimesList.Count(); bigslimecount++) {
+
+		Entity* bigslime = bslimesList.At(bigslimecount)->data;
+
+		std::string count = std::to_string(bigslimecount + 1);
+		bigslime->position.x = node.child(("bigslime" + count).c_str()).attribute("x").as_int();
+		bigslime->position.y = node.child(("bigslime" + count).c_str()).attribute("y").as_int();
+		bigslime->tp = true;
 	}
 
 	return true;
@@ -499,6 +525,30 @@ bool Scene::SaveState(pugi::xml_node node) {
 
 		enemyNode.append_attribute("x").set_value(slimevolador->position.x);
 		enemyNode.append_attribute("y").set_value(slimevolador->position.y);
+	}
+
+	//Boss
+	for (int bosscount = 0; bosscount < bossList.Count(); bosscount++) {
+
+		std::string count = std::to_string(bosscount + 1);
+		pugi::xml_node enemyNode = node.append_child(("boss" + count).c_str());
+
+		Entity* boss = bossList.At(bosscount)->data;
+
+		enemyNode.append_attribute("x").set_value(boss->position.x);
+		enemyNode.append_attribute("y").set_value(boss->position.y);
+	}
+
+	//BigSlime
+	for (int bigslimecount = 0; bigslimecount < bslimesList.Count(); bigslimecount++) {
+
+		std::string count = std::to_string(bigslimecount + 1);
+		pugi::xml_node enemyNode = node.append_child(("bigslime" + count).c_str());
+
+		Entity* bigslime = bslimesList.At(bigslimecount)->data;
+
+		enemyNode.append_attribute("x").set_value(bigslime->position.x);
+		enemyNode.append_attribute("y").set_value(bigslime->position.y);
 	}
 
 	return true;
