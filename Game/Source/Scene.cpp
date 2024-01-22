@@ -274,6 +274,20 @@ bool Scene::Update(float dt)
 		Mix_VolumeMusic(0);
 	}
 
+	/*float camSpeed = 0.35f;
+
+	if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+		app->render->camera.x += (int)ceil(camSpeed * dt);
+
+	if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+		app->render->camera.x -= (int)ceil(camSpeed * dt);
+
+	if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
+		app->render->camera.y += (int)ceil(camSpeed * dt);
+
+	if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
+		app->render->camera.y -= (int)ceil(camSpeed * dt);*/
+
 	if (player->dead==true && player->lifes<=0)
 	{
 		app->fade->StartFadeToBlack(this, (Module*)app->lastScreen, 0);
