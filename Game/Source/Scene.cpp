@@ -185,6 +185,8 @@ bool Scene::Update(float dt)
 		pausa = true;
 	}
 
+
+
 	return true;
 }
 

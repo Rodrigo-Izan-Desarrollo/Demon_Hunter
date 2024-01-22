@@ -113,7 +113,7 @@ bool SceneMenu::Update(float dt)
 			currentTexture = Menu_3;
 			app->fade->StartFadeToBlack(this, (Module*)app->scene, 0);
 			app->sceneMenu->Disable();
-			app->guiManager->Disable();
+			//app->guiManager->Disable();
 			app->map->Enable();
 			app->entityManager->Enable();
 			app->scene->Enable();

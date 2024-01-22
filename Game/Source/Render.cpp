@@ -53,7 +53,11 @@ bool Render::Awake(pugi::xml_node& config)
 		camera.h = app->win->screenSurface->h;
 		camera.x = 0;
 		camera.y = -380;
+
 	}
+
+	TTF_Init();
+	font = TTF_OpenFont("Assets/Fonts/arial/arial.ttf",25);
 
 	return ret;
 }
