@@ -81,7 +81,9 @@ private:
 	pugi::xml_node configNode;
 
 	List<Entity*> slimesList;
+	List<Entity*> bslimesList;
 	List<Entity*> vslimesList;
+	List<Entity*> bossList;
 
 	GuiControlButton* gcButtom;
 
