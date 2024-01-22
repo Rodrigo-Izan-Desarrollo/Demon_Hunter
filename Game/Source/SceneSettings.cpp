@@ -7,6 +7,7 @@
 #include "SceneLogo.h"
 #include "SceneMenu.h"
 #include "SceneSettings.h"
+#include "Scenepause.h"
 #include "LastScreen.h"
 #include "Scene.h"
 #include "Map.h"
@@ -56,12 +57,12 @@ bool SceneSettings::Start()
 	app->guiManager->Enable();
 	app->scene->Disable();
 
-	btn1 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "Fullscreen", { app->scene->player->position.x - 125 + 660, 371, 117, 117 }, this);
-	btn2 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "Vsync", { app->scene->player->position.x - 125 + 660, 514, 117, 117 }, this);
-	btn3 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, "Suma2", { app->scene->player->position.x - 125 + 730, 241, 117, 117 }, this);
-	btn4 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 4, "Resta2", { app->scene->player->position.x - 125 + 544, 241, 117, 117 }, this);
-	btn5 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 5, "Suma1", { app->scene->player->position.x - 125 + 730, 86, 117, 117 }, this);
-	btn6 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "Resta1", { app->scene->player->position.x - 125 + 544, 86, 117, 117 }, this);
+	btn1 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "Fullscreen", {660, 371, 117, 117 }, this);
+	btn2 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "Vsync", { 660, 514, 117, 117 }, this);
+	btn3 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, "Suma2", {730, 241, 117, 117 }, this);
+	btn4 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 4, "Resta2", { 544, 241, 117, 117 }, this);
+	btn5 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 5, "Suma1", {730, 86, 117, 117 }, this);
+	btn6 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "Resta1", { 544, 86, 117, 117 }, this);
 
 	//Habilita los botones
 	btn1->state = GuiControlState::NORMAL;
@@ -101,9 +102,9 @@ bool SceneSettings::Update(float dt)
 	{
 		if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		{
-			app->fade->StartFadeToBlack(this, (Module*)app->scene, 10);
+			app->fade->StartFadeToBlack(this, (Module*)app->scenePause, 10);
 			app->sceneSettings->Disable();
-			app->scene->Enable();
+			app->scenePause->Enable();
 		}
 	}
 
@@ -134,7 +135,7 @@ bool SceneSettings::Update(float dt)
 	if (btn5->state == GuiControlState::PRESSED)
 	{
 		currentTexturesuma_1 = Suma_3;
-		app->audio->ChangeVolume(10.0f);
+		app->audio->ChangeVolume(+10.0f);
 	}
 	if (btn3->state == GuiControlState::FOCUSED)
 	{
@@ -184,10 +185,10 @@ bool SceneSettings::PostUpdate()
 
 	app->render->DrawTexture(currentTexture, app->scene->player->position.x - 125, app->scene->player->position.y - 550);
 
-	app->render->DrawTexture(currentTextureresta_1, app->scene->player->position.x - 125 + 544, app->scene->player->position.y - 550 + 86);
-	app->render->DrawTexture(currentTexturesuma_1,app->scene->player->position.x - 125 + 750, app->scene->player->position.y - 550 + 86);
-	app->render->DrawTexture(currentTextureresta_2, app->scene->player->position.x - 125 + 544, app->scene->player->position.y - 550 + 241);
-	app->render->DrawTexture(currentTexturesuma_2, app->scene->player->position.x - 125 + 750, app->scene->player->position.y - 550 + 241);
+	app->render->DrawTexture(currentTextureresta_1, app->scene->player->position.x + 419, app->scene->player->position.y - 464);
+	app->render->DrawTexture(currentTexturesuma_1,app->scene->player->position.x + 625, app->scene->player->position.y - 464);
+	app->render->DrawTexture(currentTextureresta_2, app->scene->player->position.x + 419, app->scene->player->position.y - 309);
+	app->render->DrawTexture(currentTexturesuma_2, app->scene->player->position.x + 625, app->scene->player->position.y - 309);
 
 	return ret;
 }

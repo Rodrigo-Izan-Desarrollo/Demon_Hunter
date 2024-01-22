@@ -5,40 +5,45 @@
 	<textures />
 	<audio />
 	<:anonymous />
-	<FadeToBlack />
+	<sceneLogo />
 	<sceneLogo />
 	<scene>
-		<playerposition x="14023" y="804" />
-		<modes sleeping="false" dead="false" canmove="true" inground="true" rightmode="true" leftmode="false" caninv="true" God-mode="false" lifes="3" save="true" />
+		<playerposition x="2088" y="1214" />
+		<modes sleeping="true" dead="false" canmove="true" inground="false" rightmode="false" leftmode="true" caninv="true" God-mode="true" lifes="3" save="true" />
 		<canpower canpower-1="false" canpower-2="false" canpower-3="false" />
 		<power power-1="false" power-2="false" power-3="false" canchange="true" />
 		<poweritem poweritem-1="false" poweritem-2="false" poweritem-3="false" />
-		<enemy1 death="false" x="1146" y="994" />
-		<enemy2 death="false" x="2991" y="1186" />
-		<enemy3 death="false" x="3042" y="1186" />
-		<enemy4 death="false" x="7385" y="1186" />
-		<enemy5 death="false" x="7912" y="1378" />
-		<enemy6 death="false" x="8007" y="1378" />
-		<venemy1 x="2205" y="672" />
-		<venemy2 x="3114" y="672" />
-		<venemy3 x="4596" y="576" />
-		<venemy4 x="4646" y="576" />
-		<venemy5 x="5279" y="576" />
-		<venemy6 x="7363" y="608" />
-		<venemy7 x="7619" y="416" />
-		<venemy8 x="7939" y="224" />
-		<venemy9 x="8291" y="32" />
-		<venemy10 x="9654" y="736" />
-		<venemy11 x="10304" y="544" />
-		<venemy12 x="10953" y="544" />
+		<enemy1 death="false" x="1237" y="994" />
+		<enemy2 death="false" x="2851" y="1186" />
+		<enemy3 death="false" x="2901" y="1186" />
+		<enemy4 death="false" x="7378" y="1186" />
+		<enemy5 death="false" x="7861" y="1378" />
+		<enemy6 death="false" x="7955" y="1378" />
+		<venemy1 x="2419" y="674" />
+		<venemy2 x="3140" y="674" />
+		<venemy3 x="4968" y="578" />
+		<venemy4 x="5420" y="578" />
+		<venemy5 x="5624" y="578" />
+		<venemy6 x="7310" y="610" />
+		<venemy7 x="7723" y="418" />
+		<venemy8 x="7912" y="226" />
+		<venemy9 x="8240" y="34" />
+		<venemy10 x="9656" y="738" />
+		<venemy11 x="10050" y="546" />
+		<venemy12 x="10823" y="546" />
+		<boss1 x="14375" y="14726" />
+		<bigslime1 x="2162" y="1309" />
+		<bigslime2 x="5096" y="1309" />
+		<bigslime3 x="6831" y="445" />
 	</scene>
 	<sceneLogo />
 	<sceneLogo />
 	<sceneLogo />
+	<FadeToBlack />
 	<:anonymous />
 	<entitymanager />
 	<guiManager />
 	<renderer>
-		<camera x="-13896" y="-252" />
+		<camera x="-1963" y="-664" />
 	</renderer>
 </game_state>

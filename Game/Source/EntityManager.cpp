@@ -179,3 +179,33 @@ void EntityManager::GetBomber(List<Entity*>& slimesList) const
 		}
 	}
 }
+
+void EntityManager::GetBigSlime(List<Entity*>& slimesList) const
+{
+	slimesList.Clear();
+
+	ListItem<Entity*>* entity;
+
+	for (entity = entities.start; entity != NULL; entity = entity->next)
+	{
+		if (entity->data->type == EntityType::BIGSLIME)
+		{
+			slimesList.Add(entity->data);
+		}
+	}
+}
+
+void EntityManager::GetBoss(List<Entity*>& slimesList) const
+{
+	slimesList.Clear();
+
+	ListItem<Entity*>* entity;
+
+	for (entity = entities.start; entity != NULL; entity = entity->next)
+	{
+		if (entity->data->type == EntityType::BOSS)
+		{
+			slimesList.Add(entity->data);
+		}
+	}
+}

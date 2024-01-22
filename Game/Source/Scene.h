@@ -70,9 +70,7 @@ public:
 	bool pausa = false;
 
 private:
-
 	SDL_Texture* img;
-
 	float textPosX, textPosY = 0;
 	uint texW, texH;
 	int windowW, windowH;
@@ -83,35 +81,57 @@ private:
 	pugi::xml_node configNode;
 
 	List<Entity*> slimesList;
+	List<Entity*> bslimesList;
 	List<Entity*> vslimesList;
+	List<Entity*> bossList;
 
 	GuiControlButton* gcButtom;
 
-	//Menu_pausa
-	SDL_Texture* Pausa_1;
-	SDL_Texture* Pausa_2;
-	SDL_Texture* Pausa_3;
-	SDL_Texture* Pausa_4;
-	SDL_Texture* Pausa_5;
-	SDL_Texture* Pausa_6;
-	SDL_Texture* Pausa_7;
-	SDL_Texture* Pausa_8;
-	SDL_Texture* Pausa_9;
+	//Textures
+	SDL_Texture* Carteles;
 
-	//Settings
-	SDL_Texture* Settings_1;
-	SDL_Texture* Settings_2;
-	SDL_Texture* Settings_3;
-	SDL_Texture* Settings_4;
+	SDL_Texture* Portal;
 
-	//Gameover
-	SDL_Texture* Gameover_1;
+	SDL_Texture* Checkpoint;
 
-	//Win
-	SDL_Texture* Win_1;
+	//Animations
+	Animation checkpoint;
+	Animation checkpoint2;
+	Animation checkpoint_2;
+	Animation checkpoint2_2;
+	Animation* currentcheckpoint;
+	Animation* currentcheckpoint2;
 
-	//Credits
-	SDL_Texture* Credits_1;
+	Animation portalAnim;
+	Animation* currentportal;
+
+	Animation Q;
+	Animation* currentQ;
+
+	Animation Click;
+	Animation* currentClick;
+
+	Animation One;
+	Animation* currentOne;
+
+	Animation LSHIFT;
+	Animation* currentLSHIFT;
+
+	Animation Two;
+	Animation* currentTwo;
+
+	Animation E;
+	Animation* currentE;
+
+	Animation Three;
+	Animation* currentThree;
+
+	Animation R;
+	Animation* currentR;
+
+	Animation Arrow;
+	Animation* currentArrow;
+
 };
 
 #endif // __SCENE_H__

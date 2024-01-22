@@ -22,8 +22,6 @@
   </audio>
   <scene>
     <map path="Assets/Maps/" name="Map_final.tmx"/>
-
-
 		<player x="140" y="925" 
 				texturepathnormal="Assets/Textures/Player/player_1.png" 
 				texturepathatack="Assets/Textures/Player/player_2.png" 
@@ -271,8 +269,6 @@
 		  <animation x="125" y="50" w="30" h="23"  />
 	  </slime_dead>
 
-	
-
 	  <slime_walking loop="true" speed="0.090">
 		  <animation x="94" y="36" w="47" h="31" />
 		  <animation x="125" y="36" w="47" h="31" />
@@ -437,18 +433,5 @@
 		  <animation x="3221" y="669" w="160" h="128" />
 		  <animation x="3382" y="669" w="160" h="128" />
 	  </boss_dead>
-	  
-	  <checkpoint>
-		  <animation x="0" y="0" w="32" h="32" />
-		  <animation x="32" y="0" w="32" h="32" />
-		  <animation x="64" y="0" w="32" h="32" />
-		  <animation x="96" y="0" w="32" h="32" />
-		  <animation x="128" y="0" w="32" h="32" />  
-	  </checkpoint>
-	  
-	  
-		
   </animations>
-		
-	
 </config>

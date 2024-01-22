@@ -13,6 +13,7 @@
 #include "SceneMenu.h"
 #include "SceneSettings.h"
 #include "LastScreen.h"
+#include "ScenePause.h"
 #include "FadeToBlack.h"
 #include <string.h>
 #include <string>
@@ -57,12 +58,18 @@ bool Scene::Awake(pugi::xml_node& config)
 		bigslime = (BigSlime*)app->entityManager->CreateEntity(EntityType::BIGSLIME);
 		bigslime->parameters = itemNode;
 	}
+	bslimesList;
+	//Use the funtion
+	app->entityManager->GetBigSlime(bslimesList);
 	
 	for (pugi::xml_node itemNode = config.child("boss"); itemNode; itemNode = itemNode.next_sibling("boss"))
 	{
 		boss = (Boss*)app->entityManager->CreateEntity(EntityType::BOSS);
 		boss->parameters = itemNode;
 	}
+	bossList;
+	//Use the funtion
+	app->entityManager->GetBoss(bossList);
 
 	for (pugi::xml_node itemNode = config.child("slimevolador"); itemNode; itemNode = itemNode.next_sibling("slimevolador"))
 	{
@@ -114,6 +121,88 @@ bool Scene::Start()
 
 	if (app->scene->isEnabled())
 	{
+		//Textures
+		Portal = app->tex->Load("Assets/Maps/Portales.png");
+		Carteles = app->tex->Load("Assets/Maps/Carteles.png");
+		Checkpoint = app->tex->Load("Assets/Maps/Checkpoint.png");
+
+		
+		//Animations
+		checkpoint.PushBack({ 0,0,32,32 });
+		checkpoint.PushBack({ 32,0,32,32 });
+		checkpoint.PushBack({ 64,0,32,32 });
+		checkpoint.PushBack({ 96,0,32,32 });
+		checkpoint.PushBack({ 128,0,32,32 });
+		checkpoint.speed = 0.15f;
+		checkpoint.loop = false;
+
+		checkpoint2.PushBack({ 0,0,32,32 });
+		checkpoint2.loop = false;
+
+		checkpoint_2.PushBack({ 0,0,32,32 });
+		checkpoint_2.PushBack({ 32,0,32,32 });
+		checkpoint_2.PushBack({ 64,0,32,32 });
+		checkpoint_2.PushBack({ 96,0,32,32 });
+		checkpoint_2.PushBack({ 128,0,32,32 });
+		checkpoint_2.speed = 0.15f;
+		checkpoint_2.loop = false;
+
+		checkpoint2_2.PushBack({ 0,0,32,32 });
+		checkpoint2_2.loop = false;
+
+		portalAnim.PushBack({ 0,14,38,36 });
+		portalAnim.PushBack({ 48,14,38,36 });
+		portalAnim.PushBack({ 96,14,38,36 });
+		portalAnim.PushBack({ 144,14,38,36 });
+		portalAnim.speed = 0.125f;
+		portalAnim.loop = true;
+
+		Q.PushBack({ 0,0,40,50 });
+		Q.PushBack({ 44,0,40,50 });
+		Q.speed= 0.2f;
+		Q.loop = true;
+
+		Click.PushBack({ 88,0,31,50 });
+		Click.PushBack({ 123,0,31,50 });
+		Click.speed = 0.2f;
+		Click.loop = true;
+
+		Arrow.PushBack({ 158,0,37,50 });
+		Arrow.PushBack({ 199,0,37,50 });
+		Arrow.speed = 0.2f;
+		Arrow.loop = true;
+
+		One.PushBack({ 240,0,37,50 });
+		One.PushBack({ 281,0,37,50 });
+		One.speed = 0.2f;
+		One.loop = true;
+
+		LSHIFT.PushBack({ 322,0,66,50 });
+		LSHIFT.PushBack({ 390,0,66,50 });
+		LSHIFT.speed = 0.2f;
+		LSHIFT.loop = true;
+
+		Two.PushBack({ 462,0,37,50 });
+		Two.PushBack({ 503,0,35,50 });
+		Two.speed = 0.2f;
+		Two.loop = true;
+
+		E.PushBack({ 544,0,37,50 });
+		E.PushBack({ 585,0,37,50 });
+		E.speed = 0.2f;
+		E.loop = true;
+
+		Three.PushBack({ 626,0,37,50 });
+		Three.PushBack({ 667,0,37,50 });
+		Three.speed = 0.2f;
+		Three.loop = true;
+
+		R.PushBack({ 708,0,37,50 });
+		R.PushBack({ 749,0,37,50 });
+		R.speed = 0.2f;
+		R.loop = true;
+		
+		
 		//Music
 			//Game music
 		app->audio->PlayMusic(configNode.child("music").attribute("musicpathambient").as_string());
@@ -132,6 +221,19 @@ bool Scene::Start()
 			app->map->mapData.tileWidth,
 			app->map->mapData.tileHeight,
 			app->map->mapData.tilesets.Count());
+
+		currentportal = &portalAnim;
+		currentcheckpoint = &checkpoint2;
+		currentcheckpoint2 = &checkpoint2_2;
+		currentQ = &Q;
+		currentClick = &Click;
+		currentOne = &One;
+		currentLSHIFT = &LSHIFT;
+		currentTwo = &Two;
+		currentE = &E;
+		currentThree = &Three;
+		currentR = &R;
+		currentArrow = &Arrow;
 	}
 
 	return true;
@@ -146,7 +248,18 @@ bool Scene::PreUpdate()
 // Called each loop iteration
 bool Scene::Update(float dt)
 {
-	// L14: TODO 3: Request App to Load / Save when pressing the keys F5 (save) / F6 (load)
+	currentportal->Update();
+	currentcheckpoint->Update();
+	currentQ->Update();
+	currentClick->Update();
+	currentOne->Update();
+	currentLSHIFT->Update();
+	currentTwo->Update();
+	currentE->Update();
+	currentThree->Update();
+	currentR->Update();
+	currentArrow->Update();
+
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN && player->save)
 	{
 		app->LoadRequest();
@@ -168,7 +281,6 @@ bool Scene::Update(float dt)
 		app->lastScreen->Enable();
 	}
 	
-	//Si newgame es true, que se restablezca la vida del player y su posicion inicial
 	if (app->sceneMenu->newgame == true)
 	{
 		player->position.x = 140;
@@ -179,12 +291,21 @@ bool Scene::Update(float dt)
 
 	if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
 	{
-		app->fade->StartFadeToBlack(this, (Module*)app->sceneSettings, 10);
+		app->fade->StartFadeToBlack(this, (Module*)app->scenePause, 10);
 		app->scene->Disable();
-		app->sceneSettings->Enable();
+		app->scenePause->Enable();
 		pausa = true;
 	}
 
+
+	if (player->check_1)
+	{
+		currentcheckpoint = &checkpoint;
+	}
+	if (player->check_2)
+	{
+		currentcheckpoint2 = &checkpoint_2;
+	}
 
 
 	return true;
@@ -195,10 +316,35 @@ bool Scene::PostUpdate()
 {
 	bool ret = true;
 
+	//Draw texture
+	app->render->DrawTexture(Portal, 3328, 1532, &currentportal->GetCurrentFrame());
+	app->render->DrawTexture(Portal, 4672, 1310, &currentportal->GetCurrentFrame());
+	app->render->DrawTexture(Portal, 8660, 92, &currentportal->GetCurrentFrame(), SDL_FLIP_HORIZONTAL);
+
+	app->render->DrawTexture(Carteles, 928, 832, &currentQ->GetCurrentFrame());
+	app->render->DrawTexture(Carteles, 980, 832, &currentClick->GetCurrentFrame());
+
+	app->render->DrawTexture(Carteles, 3328, 1350, &currentOne->GetCurrentFrame());
+	app->render->DrawTexture(Carteles, 3392, 1350, &currentLSHIFT->GetCurrentFrame());
+
+	app->render->DrawTexture(Carteles, 4704, 1255, &currentTwo->GetCurrentFrame());
+	app->render->DrawTexture(Carteles, 4768, 1255, &currentE->GetCurrentFrame());
+
+	app->render->DrawTexture(Carteles, 8608, 40, &currentThree->GetCurrentFrame());
+	app->render->DrawTexture(Carteles, 8672, 40, &currentR->GetCurrentFrame());
+
+	app->render->DrawTexture(Carteles, 4192, 992, &currentArrow->GetCurrentFrame());
+	app->render->DrawTexture(Carteles, 5120, 928, &currentArrow->GetCurrentFrame());
+	app->render->DrawTexture(Carteles, 7136, 960, &currentArrow->GetCurrentFrame());
+
+	app->render->DrawTexture(Checkpoint, 3392, 1056, &currentcheckpoint->GetCurrentFrame());
+	app->render->DrawTexture(Checkpoint, 6784, 992, &currentcheckpoint2->GetCurrentFrame());
+
 	return ret;
 }
 
 iPoint Scene::GetPLayerPosition() {
+
 	return player->position;
 }
 
@@ -271,7 +417,6 @@ bool Scene::LoadState(pugi::xml_node node) {
 	}
 
 	//Bomber
-	//Same with bomber
 	for (int vslimecount = 0; vslimecount < vslimesList.Count(); vslimecount++) {
 
 		Entity* slimevolador = vslimesList.At(vslimecount)->data;
@@ -280,6 +425,28 @@ bool Scene::LoadState(pugi::xml_node node) {
 		slimevolador->position.x = node.child(("venemy" + count).c_str()).attribute("x").as_int();
 		slimevolador->position.y = node.child(("venemy" + count).c_str()).attribute("y").as_int();
 		slimevolador->tp = true;
+	}
+
+	//Boss
+	for (int bosscount = 0; bosscount < bossList.Count(); bosscount++) {
+
+		Entity* boss = bossList.At(bosscount)->data;
+
+		std::string count = std::to_string(bosscount + 1);
+		boss->position.x = node.child(("boss" + count).c_str()).attribute("x").as_int();
+		boss->position.y = node.child(("boss" + count).c_str()).attribute("y").as_int();
+		boss->tp = true;
+	}
+
+	//BigSlime
+	for (int bigslimecount = 0; bigslimecount < bslimesList.Count(); bigslimecount++) {
+
+		Entity* bigslime = bslimesList.At(bigslimecount)->data;
+
+		std::string count = std::to_string(bigslimecount + 1);
+		bigslime->position.x = node.child(("bigslime" + count).c_str()).attribute("x").as_int();
+		bigslime->position.y = node.child(("bigslime" + count).c_str()).attribute("y").as_int();
+		bigslime->tp = true;
 	}
 
 	return true;
@@ -360,6 +527,30 @@ bool Scene::SaveState(pugi::xml_node node) {
 
 		enemyNode.append_attribute("x").set_value(slimevolador->position.x);
 		enemyNode.append_attribute("y").set_value(slimevolador->position.y);
+	}
+
+	//Boss
+	for (int bosscount = 0; bosscount < bossList.Count(); bosscount++) {
+
+		std::string count = std::to_string(bosscount + 1);
+		pugi::xml_node enemyNode = node.append_child(("boss" + count).c_str());
+
+		Entity* boss = bossList.At(bosscount)->data;
+
+		enemyNode.append_attribute("x").set_value(boss->position.x);
+		enemyNode.append_attribute("y").set_value(boss->position.y);
+	}
+
+	//BigSlime
+	for (int bigslimecount = 0; bigslimecount < bslimesList.Count(); bigslimecount++) {
+
+		std::string count = std::to_string(bigslimecount + 1);
+		pugi::xml_node enemyNode = node.append_child(("bigslime" + count).c_str());
+
+		Entity* bigslime = bslimesList.At(bigslimecount)->data;
+
+		enemyNode.append_attribute("x").set_value(bigslime->position.x);
+		enemyNode.append_attribute("y").set_value(bigslime->position.y);
 	}
 
 	return true;
