@@ -104,10 +104,11 @@ bool Scene::Awake(pugi::xml_node& config)
 		player->parameters = config.child("player");
 	}
 
-	for (pugi::xml_node itemNode = config.child("vidas"); itemNode; itemNode = itemNode.next_sibling("vidas"))
+	for (pugi::xml_node itemNode = config.child("Vida"); itemNode; itemNode = itemNode.next_sibling("Vida"))
 	{
 		vida = (Vida*)app->entityManager->CreateEntity(EntityType::VIDA);
 		vida->parameters = itemNode;
+
 	}
 
 	if (config.child("map")) {

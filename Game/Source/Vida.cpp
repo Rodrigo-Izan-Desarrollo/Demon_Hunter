@@ -20,7 +20,7 @@ bool Vida::Awake() {
 
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
-	textureVida = parameters.attribute("vidas").as_string();
+	textureVida = parameters.attribute("textureVida").as_string();
 
 	return true;
 }

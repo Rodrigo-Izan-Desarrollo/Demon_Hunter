@@ -143,7 +143,7 @@
 		/>
 
 
-	    <Vida x="160" y="925" vidas="Assets/Textures/Player/Vidas.png"/>
+	    <Vida x="160" y="925" textureVida="Assets/Textures/Player/Vidas.png"/>
 
 		<powerup_1 x="3520" y="1424" texturepathpower_1="Assets/Textures/Player/power_2.png"/>
 	  
