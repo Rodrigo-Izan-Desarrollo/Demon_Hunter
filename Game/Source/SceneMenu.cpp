@@ -199,19 +199,19 @@ bool SceneMenu::CleanUp()
 {
 	LOG("Freeing best logo ever scene");
 
-	app->tex->UnLoad(Menu_1);
-	app->tex->UnLoad(Menu_2);
-	app->tex->UnLoad(Menu_3);
-	app->tex->UnLoad(Menu_4);
-	app->tex->UnLoad(Menu_5);
-	app->tex->UnLoad(Menu_6);
-	app->tex->UnLoad(Menu_7);
-	app->tex->UnLoad(Menu_8);
-	app->tex->UnLoad(Menu_9);
-	app->tex->UnLoad(Menu_10);
-	app->tex->UnLoad(Menu_11);
-	app->tex->UnLoad(Menu_12);
-	app->tex->UnLoad(Credit_1);
+	SDL_DestroyTexture(Menu_1);
+	SDL_DestroyTexture(Menu_2);
+	SDL_DestroyTexture(Menu_3);
+	SDL_DestroyTexture(Menu_4);
+	SDL_DestroyTexture(Menu_5);
+	SDL_DestroyTexture(Menu_6);
+	SDL_DestroyTexture(Menu_7);
+	SDL_DestroyTexture(Menu_8);
+	SDL_DestroyTexture(Menu_9);
+	SDL_DestroyTexture(Menu_10);
+	SDL_DestroyTexture(Menu_11);
+	SDL_DestroyTexture(Menu_12);
+	SDL_DestroyTexture(Credit_1);
 
 	app->guiManager->DestroyGuiControl(btn1);
 	app->guiManager->DestroyGuiControl(btn2);

@@ -356,6 +356,11 @@ bool Scene::CleanUp()
 	//Unload music
 	app->audio->UnloadMusic(configNode.child("music").attribute("musicpathambient").as_string());
 
+	//Destruye las texturas
+	SDL_DestroyTexture(Portal);
+	SDL_DestroyTexture(Carteles);
+	SDL_DestroyTexture(Checkpoint);
+
 	return true;
 }
 

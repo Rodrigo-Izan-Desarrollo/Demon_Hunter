@@ -101,8 +101,8 @@ bool SceneLogo::CleanUp()
 {
 	LOG("Freeing best logo ever scene");
 
-	app->tex->UnLoad(Intro_1);
-	app->tex->UnLoad(Intro_2);
+	SDL_DestroyTexture(Intro_1);
+	SDL_DestroyTexture(Intro_2);
 
 	app->audio->UnloadFx(logo_theme);
 
