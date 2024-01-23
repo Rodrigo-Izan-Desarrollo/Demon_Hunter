@@ -117,7 +117,7 @@ bool SceneMenu::Update(float dt)
 			app->map->Enable();
 			app->entityManager->Enable();
 			app->scene->Enable();
-			app->scene->player->lifes = 3;
+			app->scene->player->lifes = 2;
 			newgame = true;
 		}
 		if (app->scene->player->save == node.child("modes").attribute("save").as_bool("true"))
