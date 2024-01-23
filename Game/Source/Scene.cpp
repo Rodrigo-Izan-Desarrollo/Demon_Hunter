@@ -10,6 +10,7 @@
 #include "Slime.h"
 #include "BigSlime.h"
 #include "Boss.h"
+#include "SceneLogo.h"
 #include "SceneMenu.h"
 #include "SceneSettings.h"
 #include "LastScreen.h"
@@ -118,7 +119,6 @@ bool Scene::Awake(pugi::xml_node& config)
 // Called before the first frame
 bool Scene::Start()
 {
-
 	if (app->scene->isEnabled())
 	{
 		//Textures
