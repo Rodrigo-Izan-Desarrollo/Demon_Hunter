@@ -8,6 +8,7 @@
 #include "SceneMenu.h"
 #include "LastScreen.h"
 #include "Scenepause.h"
+#include "SceneSettings.h"
 #include "Scene.h"
 #include "Map.h"
 #include "FadeToBlack.h"
@@ -46,8 +47,11 @@ bool SceneLogo::Start()
 
 	currentTexture = Intro_1;
 
-	app->map->Disable();
+	app->sceneMenu->Disable();
+	app->sceneSettings->Disable();
+	app->scene->Disable();
 	app->scenePause->Disable();
+	app->lastScreen->Disable();
 
 	return true;
 }

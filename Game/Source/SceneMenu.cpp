@@ -54,7 +54,6 @@ bool SceneMenu::Start()
 	currentTexture = Menu_1;
 
 	app->guiManager->Enable();
-	app->sceneSettings->Disable();
 
 	btn1 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "Title", { 7, 30, 920, 290 }, this);
 	btn2 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "Play", { 99, 339, 235, 90 }, this);
