@@ -104,6 +104,12 @@ bool Scene::Awake(pugi::xml_node& config)
 		player->parameters = config.child("player");
 	}
 
+	for (pugi::xml_node itemNode = config.child("vidas"); itemNode; itemNode = itemNode.next_sibling("vidas"))
+	{
+		vida = (Vida*)app->entityManager->CreateEntity(EntityType::VIDA);
+		vida->parameters = itemNode;
+	}
+
 	if (config.child("map")) {
 		//Get the map name from the config file and assigns the value in the module
 		app->map->name = config.child("map").attribute("name").as_string();

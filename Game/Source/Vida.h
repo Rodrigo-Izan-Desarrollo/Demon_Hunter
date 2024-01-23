@@ -36,7 +36,7 @@ public:
 
 	SDL_Texture* texture;
 
-	const char* texturePath;
+	const char* textureVida;
 
 	PhysBody* pbody;
 };

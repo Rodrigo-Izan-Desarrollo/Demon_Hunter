@@ -20,7 +20,7 @@ bool Vida::Awake() {
 
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
-	texturePath = parameters.attribute("vida").as_string();
+	textureVida = parameters.attribute("vidas").as_string();
 
 	return true;
 }
@@ -28,12 +28,21 @@ bool Vida::Awake() {
 bool Vida::Start() {
 
 	//Initilize textures
-	texture = app->tex->Load(texturePath);
+	texture = app->tex->Load(textureVida);
 
 	//Create pbody
-	pbody = app->physics->CreateCircle(position.x+16, position.y, 13, bodyType::STATIC);
+	pbody = app->physics->CreateCircle(position.x + 16, position.y, 13, bodyType::STATIC);
 	pbody->ctype = ColliderType::VIDA;
 	pbody->listener = this;
+
+	//Animation
+	idle.PushBack({ 0, 0, 30, 32 });
+	idle.PushBack({ 30, 0, 30, 32 });
+	idle.PushBack({ 60, 0, 30, 32 });
+	idle.loop = true;
+	idle.speed = 0.125f;
+
+	currentAnimation = &idle;
 
 	return true;
 }
@@ -53,8 +62,6 @@ bool Vida::Update(float dt)
 
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
-
-	app->render->DrawTexture(texture, position.x, position.y, &currentAnimation->GetCurrentFrame());
 
 	return true;
 }
