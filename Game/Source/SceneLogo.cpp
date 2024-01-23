@@ -65,7 +65,7 @@ bool SceneLogo::Update(float dt)
 		currentTexture = Intro_2;
 	}
 	if (count > 500) {
-		app->fade->StartFadeToBlack(this, (Module*)app->sceneMenu, 0);
+		app->fade->StartFadeToBlack(this, (Module*)app->sceneMenu, 60);
 		app->sceneLogo->Disable();
 		app->sceneMenu->Enable();
 	}

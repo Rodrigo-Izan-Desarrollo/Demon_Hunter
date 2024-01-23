@@ -111,7 +111,7 @@ bool SceneMenu::Update(float dt)
 		if (btn2->state == GuiControlState::PRESSED)
 		{
 			currentTexture = Menu_3;
-			app->fade->StartFadeToBlack(this, (Module*)app->scene, 0);
+			app->fade->StartFadeToBlack(this, (Module*)app->scene, 60);
 			app->sceneMenu->Disable();
 			//app->guiManager->Disable();
 			app->map->Enable();
@@ -130,7 +130,7 @@ bool SceneMenu::Update(float dt)
 		}
 		if (btn3->state == GuiControlState::PRESSED)
 		{
-			app->fade->StartFadeToBlack(this, (Module*)app->scene, 0);
+			app->fade->StartFadeToBlack(this, (Module*)app->scene, 60);
 			currentTexture = Menu_5;
 			app->LoadRequest();
 			app->sceneMenu->Disable();
@@ -146,7 +146,7 @@ bool SceneMenu::Update(float dt)
 		if (btn4->state == GuiControlState::PRESSED)
 		{
 			currentTexture = Menu_8;
-			app->fade->StartFadeToBlack(this, (Module*)app->sceneSettings, 0);
+			app->fade->StartFadeToBlack(this, (Module*)app->sceneSettings, 60);
 			app->sceneMenu->Disable();
 			app->sceneSettings->Enable();
 		}
