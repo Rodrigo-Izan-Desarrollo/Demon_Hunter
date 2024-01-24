@@ -134,8 +134,6 @@ public:
 	// L13: Create navigation map for pathfinding
 	void CreateNavigationMap(int& width, int& height, uchar** buffer) const;
 
-	
-
 	int GetTileWidth();
 	int GetTileHeight();
 
@@ -149,11 +147,6 @@ private:
 	TileSet* GetTilesetFromTileId(int gid) const;
 	bool LoadProperties(pugi::xml_node& node, Properties& properties);
 
-
-	void UpdateTileLoadSize(ListItem<MapLayer*>* mapLayerItem);
-
-	
-
 public:
 	MapData mapData;
 	SString name;
@@ -165,12 +158,6 @@ private:
 	MapLayer* navigationLayer;
 
 	int walkableGid = 4;
-
-	int tilesToLoad = 32;
-	int startWidth = 0;
-	int endWidth = 0;
-	int startHeight = 0;
-	int endHeight = 0;
 
 };
 

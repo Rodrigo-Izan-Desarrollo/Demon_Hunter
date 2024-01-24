@@ -105,13 +105,6 @@ bool Scene::Awake(pugi::xml_node& config)
 		player->parameters = config.child("player");
 	}
 
-	for (pugi::xml_node itemNode = config.child("Vida"); itemNode; itemNode = itemNode.next_sibling("Vida"))
-	{
-		vida = (Vida*)app->entityManager->CreateEntity(EntityType::VIDA);
-		vida->parameters = itemNode;
-
-	}
-
 	if (config.child("map")) {
 		//Get the map name from the config file and assigns the value in the module
 		app->map->name = config.child("map").attribute("name").as_string();
@@ -280,20 +273,6 @@ bool Scene::Update(float dt)
 	{
 		Mix_VolumeMusic(0);
 	}
-
-	/*float camSpeed = 0.35f;
-
-	if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
-		app->render->camera.x += (int)ceil(camSpeed * dt);
-
-	if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
-		app->render->camera.x -= (int)ceil(camSpeed * dt);
-
-	if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
-		app->render->camera.y += (int)ceil(camSpeed * dt);
-
-	if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
-		app->render->camera.y -= (int)ceil(camSpeed * dt);*/
 
 	if (player->dead==true && player->lifes<=0)
 	{

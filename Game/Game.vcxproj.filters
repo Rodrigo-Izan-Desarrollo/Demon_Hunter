@@ -85,28 +85,13 @@
     <ClCompile Include="Source\FadeToBlack.cpp">
       <Filter>cpp.files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\LastScreen.cpp">
-      <Filter>cpp.files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\SceneLogo.cpp">
-      <Filter>cpp.files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\SceneMenu.cpp">
-      <Filter>cpp.files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Scenepause.cpp">
-      <Filter>cpp.files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\SceneSettings.cpp">
-      <Filter>cpp.files</Filter>
-    </ClCompile>
-<<<<<<< Updated upstream
-    <ClCompile Include="Source\Vida.cpp">
-=======
-    <ClCompile Include="Source\vidas.cpp">
->>>>>>> Stashed changes
-      <Filter>cpp.files</Filter>
-    </ClCompile>
+
+    <ClCompile Include="Source\SceneLogo.cpp" />
+    <ClCompile Include="Source\SceneMenu.cpp" />
+    <ClCompile Include="Source\LastScreen.cpp" />
+    <ClCompile Include="Source\SceneSettings.cpp" />
+    <ClCompile Include="Source\Scenepause.cpp" />
+
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Animation.h">
@@ -220,28 +205,14 @@
     <ClInclude Include="Source\FadeToBlack.h">
       <Filter>h.files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\LastScreen.h">
-      <Filter>h.files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\SceneLogo.h">
-      <Filter>h.files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\SceneMenu.h">
-      <Filter>h.files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Scenepause.h">
-      <Filter>h.files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\SceneSettings.h">
-      <Filter>h.files</Filter>
-    </ClInclude>
-<<<<<<< Updated upstream
-    <ClInclude Include="Source\Vida.h">
-=======
-    <ClInclude Include="Source\vidas.h">
->>>>>>> Stashed changes
-      <Filter>h.files</Filter>
-    </ClInclude>
+
+
+    <ClInclude Include="Source\SceneLogo.h" />
+    <ClInclude Include="Source\SceneMenu.h" />
+    <ClInclude Include="Source\LastScreen.h" />
+    <ClInclude Include="Source\SceneSettings.h" />
+    <ClInclude Include="Source\Scenepause.h" />
+
   </ItemGroup>
   <ItemGroup>
     <Xml Include="..\Output\config.xml">

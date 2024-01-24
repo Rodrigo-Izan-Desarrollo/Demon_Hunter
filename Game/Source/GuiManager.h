@@ -2,7 +2,6 @@
 #define __GUIMANAGER_H__
 
 #include "Module.h"
-#include "Timer.h"
 #include "GuiControl.h"
 
 #include "List.h"
@@ -38,8 +37,6 @@ public:
 
 	List<GuiControl*> guiControlsList;
 	SDL_Texture* texture;
-	Timer  timer;
-	bool timerPaused = false;
 
 };
 

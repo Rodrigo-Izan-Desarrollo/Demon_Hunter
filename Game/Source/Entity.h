@@ -18,7 +18,6 @@ enum class EntityType
 	BOSS,
 	SKELETON,
 	SLIMEVOLADOR,
-	VIDA,
 	POWERUP_1,
 	POWERUP_2,
 	POWERUP_3,

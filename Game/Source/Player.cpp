@@ -726,9 +726,6 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		canpower_1 = true;
 		app->audio->PlayFx(pick_up_Fx);
 		break;
-	case ColliderType::VIDA:
-		lifes++;
-		break;
 	case ColliderType::POWERUP_2:
 		canpower_2 = true;
 		app->audio->PlayFx(pick_up_Fx);
