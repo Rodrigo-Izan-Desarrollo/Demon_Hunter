@@ -63,9 +63,6 @@ bool SceneSettings::Start()
 	btn5->state = GuiControlState::NORMAL;
 	btn6->state = GuiControlState::NORMAL;
 
-	//Disable modules
-	app->guiManager->Enable();
-
 	//Current texture
 	currentTexture = Sound_1;
 	currentTextureresta_1 = Resta_1;

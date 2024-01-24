@@ -59,9 +59,6 @@ bool ScenePause::Start()
 	btn2->state = GuiControlState::NORMAL;
 	btn4->state = GuiControlState::NORMAL;
 
-	//Enable the gui
-	app->guiManager->Enable();
-
 	//Set the current texture
 	currentTexture = Pause_1;
 
