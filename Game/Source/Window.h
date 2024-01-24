@@ -31,14 +31,17 @@ public:
 	uint GetScale() const;
 
 	//Activa la fullscreen
-	void SetFullscreen(bool fullscreen);
+	void ToggleFullscreen();
 
-	//Quita la fullscreen
-	void SetFullscreenDesktop(bool fullscreen);
 
 public:
 	// The window we'll be rendering to
 	SDL_Window* window;
+
+	bool fullscreen;
+	bool borderless;
+	bool resizable;
+	bool fullscreen_window;
 
 	// The surface contained by the window
 	SDL_Surface* screenSurface;

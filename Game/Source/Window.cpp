@@ -100,25 +100,12 @@ uint Window::GetScale() const
 	return scale;
 }
 
-
-void Window::SetFullscreen(bool fullscreen)
+//Set fullscreen
+void Window::ToggleFullscreen()
 {
-	if (fullscreen == true)
+	if (fullscreen_window == true)
 	{
 		SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN);
-	}
-	else
-	{
-		SDL_SetWindowFullscreen(window, 0);
-	}
-}
-
-//Quita la fullscreen
-void Window::SetFullscreenDesktop(bool fullscreen)
-{
-	if (fullscreen == true)
-	{
-		SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN_DESKTOP);
 	}
 	else
 	{
