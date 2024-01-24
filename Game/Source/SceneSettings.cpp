@@ -115,8 +115,8 @@ bool SceneSettings::Update(float dt)
 	if (btn6->state == GuiControlState::PRESSED)
 	{
 		currentTextureresta_1 = Resta_3;
-		app->audio->ChangeVolume(-10.0f);
-		LOG("Volumen: %f", app->audio->GetVolume());
+		app->audio->volume - 10;
+		app->audio->ChangeVolume(app->audio->volume);
 	}
 	if (btn4->state == GuiControlState::FOCUSED)
 	{
@@ -125,7 +125,8 @@ bool SceneSettings::Update(float dt)
 	if (btn4->state == GuiControlState::PRESSED)
 	{
 		currentTextureresta_2 = Resta_3;
-		app->audio->ChangeFXVolume(-10.0f);
+		app->audio->volume - 10;
+		app->audio->ChangeVolume(app->audio->volume);
 	}
 
 	if (btn5->state == GuiControlState::FOCUSED)
@@ -135,7 +136,8 @@ bool SceneSettings::Update(float dt)
 	if (btn5->state == GuiControlState::PRESSED)
 	{
 		currentTexturesuma_1 = Suma_3;
-		app->audio->ChangeVolume(+10.0f);
+		app->audio->volume + 10;
+		app->audio->ChangeVolume(app->audio->volume);
 	}
 	if (btn3->state == GuiControlState::FOCUSED)
 	{
@@ -144,7 +146,8 @@ bool SceneSettings::Update(float dt)
 	if (btn3->state == GuiControlState::PRESSED)
 	{
 		currentTexturesuma_2 = Suma_3;
-		app->audio->ChangeFXVolume(+10.0f);
+		app->audio->volume + 10;
+		app->audio->ChangeVolume(app->audio->volume);
 	}
 
 	if (btn1->state == GuiControlState::PRESSED)

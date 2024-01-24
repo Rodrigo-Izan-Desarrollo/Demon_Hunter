@@ -42,13 +42,15 @@ public:
 	bool PlayFx(unsigned int fx, int repeat = 0);
 
 	// Change music volume (from 0 to 128)
-	void ChangeVolume(int volume = 128);
+	void ChangeVolume(int volume);
 
 	// Change sfx volume (from 0 to 128)
-	void ChangeFXVolume(int volume = 128);
+	void ChangeFXVolume(int volume);
 
 	//Get volume
 	int GetVolume();
+
+	int volume = 128;
 
 private:
 
