@@ -50,7 +50,8 @@ private:
 	int count;
 
 	// Screen music
-	uint logo_theme;
+	uint over_theme;
+	uint win_theme;
 
 };
 

@@ -47,16 +47,8 @@ bool SceneSettings::Start()
 	Suma_1 = app->tex->Load("Assets/Screens/Suma_1.png");
 	Suma_2 = app->tex->Load("Assets/Screens/Suma_2.png");
 	Suma_3 = app->tex->Load("Assets/Screens/Suma_3.png");	
-
-	currentTexture = Sound_1;
-	currentTextureresta_1 = Resta_1;
-	currentTexturesuma_1 = Suma_1;
-	currentTexturesuma_2 = Suma_1;
-	currentTextureresta_2 = Resta_1;
-
-	app->guiManager->Enable();
-	app->scene->Disable();
-
+	
+	//Create buttons
 	btn1 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "Fullscreen", {660, 371, 117, 117 }, this);
 	btn2 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "Vsync", { 660, 514, 117, 117 }, this);
 	btn3 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, "Suma2", {730, 241, 117, 117 }, this);
@@ -64,12 +56,19 @@ bool SceneSettings::Start()
 	btn5 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 5, "Suma1", {730, 86, 117, 117 }, this);
 	btn6 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "Resta1", { 544, 86, 117, 117 }, this);
 
-	//Habilita los botones
+	//Hability buttons
 	btn1->state = GuiControlState::NORMAL;
 	btn2->state = GuiControlState::NORMAL;
 	btn4->state = GuiControlState::NORMAL;
 	btn5->state = GuiControlState::NORMAL;
 	btn6->state = GuiControlState::NORMAL;
+
+	//Current texture
+	currentTexture = Sound_1;
+	currentTextureresta_1 = Resta_1;
+	currentTexturesuma_1 = Suma_1;
+	currentTexturesuma_2 = Suma_1;
+	currentTextureresta_2 = Resta_1;
 
 	return true;
 }
@@ -83,12 +82,14 @@ bool SceneSettings::PreUpdate()
 // Called each loop iteration
 bool SceneSettings::Update(float dt)
 {
+	//Current texture
 	currentTexture = Sound_1;
 	currentTextureresta_1 = Resta_1;
 	currentTexturesuma_1 = Suma_1;
 	currentTexturesuma_2 = Suma_1;
 	currentTextureresta_2 = Resta_1;
 
+	//If the scene not come from pause
 	if (!app->scene->pausa)
 	{
 		if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
@@ -98,6 +99,7 @@ bool SceneSettings::Update(float dt)
 			app->sceneMenu->Enable();
 		}
 	}
+	//If the gscene come from pause
 	else
 	{
 		if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
@@ -108,6 +110,7 @@ bool SceneSettings::Update(float dt)
 		}
 	}
 
+	//Update buttons
 	if (btn6->state == GuiControlState::FOCUSED)
 	{
 		currentTextureresta_1 = Resta_2;
@@ -115,9 +118,11 @@ bool SceneSettings::Update(float dt)
 	if (btn6->state == GuiControlState::PRESSED)
 	{
 		currentTextureresta_1 = Resta_3;
-		app->audio->ChangeVolume(-10.0f);
-		LOG("Volumen: %f", app->audio->GetVolume());
+		//Change volume
+		app->audio->volume - 10;
+		app->audio->ChangeVolume(app->audio->volume);
 	}
+
 	if (btn4->state == GuiControlState::FOCUSED)
 	{
 		currentTextureresta_2 = Resta_2;
@@ -125,7 +130,8 @@ bool SceneSettings::Update(float dt)
 	if (btn4->state == GuiControlState::PRESSED)
 	{
 		currentTextureresta_2 = Resta_3;
-		app->audio->ChangeFXVolume(-10.0f);
+		app->audio->volume - 10;
+		app->audio->ChangeVolume(app->audio->volume);
 	}
 
 	if (btn5->state == GuiControlState::FOCUSED)
@@ -135,8 +141,10 @@ bool SceneSettings::Update(float dt)
 	if (btn5->state == GuiControlState::PRESSED)
 	{
 		currentTexturesuma_1 = Suma_3;
-		app->audio->ChangeVolume(+10.0f);
+		app->audio->volume + 10;
+		app->audio->ChangeVolume(app->audio->volume);
 	}
+
 	if (btn3->state == GuiControlState::FOCUSED)
 	{
 		currentTexturesuma_2 = Suma_2;
@@ -144,15 +152,19 @@ bool SceneSettings::Update(float dt)
 	if (btn3->state == GuiControlState::PRESSED)
 	{
 		currentTexturesuma_2 = Suma_3;
-		app->audio->ChangeFXVolume(+10.0f);
+		app->audio->volume + 10;
+		app->audio->ChangeVolume(app->audio->volume);
 	}
 
 	if (btn1->state == GuiControlState::PRESSED)
 	{
+		//Change fullscreen
 		fullscreen = !fullscreen;
+		app->win->fullscreen_window= !app->win->fullscreen_window;
 	}
 	if (btn2->state == GuiControlState::PRESSED)
 	{
+		//Change vsync
 		vsync = !vsync;
 		app->vsync = !app->vsync;
 	}
@@ -160,11 +172,14 @@ bool SceneSettings::Update(float dt)
 	if (fullscreen && !vsync)
 	{
 		currentTexture = Sound_2;
-		app->win->SetFullscreen(fullscreen);
+		app->win->fullscreen_window = true;
+		app->win->ToggleFullscreen();
+		
 	}
 	if (!fullscreen)
 	{
-		app->win->SetFullscreenDesktop(fullscreen);
+		app->win->fullscreen_window	=false;
+		app->win->ToggleFullscreen();
 	}
 	if (vsync && !fullscreen)
 	{
@@ -183,6 +198,7 @@ bool SceneSettings::PostUpdate()
 {
 	bool ret = true;
 
+	// Draw everything --------------------------------------
 	app->render->DrawTexture(currentTexture, app->scene->player->position.x - 125, app->scene->player->position.y - 550);
 
 	app->render->DrawTexture(currentTextureresta_1, app->scene->player->position.x + 419, app->scene->player->position.y - 464);
@@ -203,6 +219,7 @@ bool SceneSettings::CleanUp()
 {
 	LOG("Freeing best logo ever scene");
 
+	//Unload textures
 	SDL_DestroyTexture(Sound_1);
 	SDL_DestroyTexture(Sound_2);
 	SDL_DestroyTexture(Sound_3);
@@ -214,6 +231,7 @@ bool SceneSettings::CleanUp()
 	SDL_DestroyTexture(Suma_2);
 	SDL_DestroyTexture(Suma_3);
 
+	//Destroy buttons
 	app->guiManager->DestroyGuiControl(btn1);
 	app->guiManager->DestroyGuiControl(btn2);
 	app->guiManager->DestroyGuiControl(btn3);

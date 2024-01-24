@@ -72,7 +72,7 @@ private:
 
 	int count;
 
-	bool fullscreen = false;
+	bool fullscreen;
 	bool vsync = false;
 
 	// Screen music

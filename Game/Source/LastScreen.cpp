@@ -34,14 +34,22 @@ bool LastScreen::Awake()
 // Called before the first frame
 bool LastScreen::Start()
 {
-	count = 0;
-	// Textures
-	Gameover = app->tex->Load("Assets/Screens/Menu_gameover.png");
-	Missioncompleted = app->tex->Load("Assets/Screens/Completed_1.png");
+	if (app->lastScreen->isEnabled())
+	{
+		// Initialize the timer
+		count = 0;
 
-	app->guiManager->Enable();
-	app->scene->Disable();
+		// Textures
+		Gameover = app->tex->Load("Assets/Screens/Menu_gameover.png");
+		Missioncompleted = app->tex->Load("Assets/Screens/Completed_1.png");
 
+		// Initialize fx
+		over_theme = app->audio->LoadFx("Assets/Audio/Fx/Game_over.wav");// 6s
+		win_theme = app->audio->LoadFx("Assets/Audio/Fx/Mission_completed.wav");// 4s
+
+		// Disable the enable scenes
+		app->guiManager->Disable();
+	}
 	return true;
 }
 
@@ -57,13 +65,20 @@ bool LastScreen::Update(float dt)
 	if (app->scene->player->dead==true && app->scene->player->lifes<=0)
 	{
 		currentTexture = Gameover;
+		app->audio->PlayFx(over_theme);
 	}
-	//else
-	//{
-	//	currentTexture = Missioncompleted;
-	//}
-	if (count > 200) {
+	else
+	{
+		currentTexture = Missioncompleted;
+		app->audio->PlayFx(win_theme);
+	}
+	if (count > 375 && currentTexture == Gameover) {
 		app->fade->StartFadeToBlack(this, (Module*)app->sceneMenu, 0);	
+		app->lastScreen->Disable();
+		app->sceneMenu->Enable();
+	}
+	if (count > 250 && currentTexture == Missioncompleted) {
+		app->fade->StartFadeToBlack(this, (Module*)app->sceneMenu, 0);
 		app->lastScreen->Disable();
 		app->sceneMenu->Enable();
 	}
@@ -95,6 +110,12 @@ bool LastScreen::CleanUp()
 	//Hazme CleanUp de todo los que puedas
 	SDL_DestroyTexture(Gameover);
 	SDL_DestroyTexture(Missioncompleted);
+
+	//Unload Fx
+	app->audio->UnloadFx(over_theme);
+	app->audio->UnloadFx(win_theme);
+
+	count = 0;
 
 	return true;
 }

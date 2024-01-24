@@ -305,7 +305,6 @@ bool Scene::Update(float dt)
 		pausa = true;
 	}
 
-
 	if (player->check_1)
 	{
 		currentcheckpoint = &checkpoint;

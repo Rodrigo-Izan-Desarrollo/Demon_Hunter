@@ -36,8 +36,10 @@ bool SceneLogo::Awake()
 // Called before the first frame
 bool SceneLogo::Start()
 {
-	// Textures
-	count = 0;	
+	//Initialize the timer
+	count = 0;
+
+	//Textures
 	Intro_1 = app->tex->Load("Assets/Screens/Intro_1.png");
 	Intro_2 = app->tex->Load("Assets/Screens/Intro_2.png");
 	
@@ -45,13 +47,16 @@ bool SceneLogo::Start()
 	logo_theme = app->audio->LoadFx("Assets/Audio/Music/Sound_efect_logo.ogg");
 	app->audio->PlayFx(logo_theme);
 
-	currentTexture = Intro_1;
-
+	//Disable the enable scenes
 	app->sceneMenu->Disable();
 	app->sceneSettings->Disable();
 	app->scene->Disable();
 	app->scenePause->Disable();
 	app->lastScreen->Disable();
+	app->guiManager->Disable();
+
+	//Initialize the current texture
+	currentTexture = Intro_1;
 
 	return true;
 }
@@ -65,9 +70,11 @@ bool SceneLogo::PreUpdate()
 // Called each loop iteration
 bool SceneLogo::Update(float dt)
 {
+	//Change the texture if the count is bigger than 220
 	if (count > 220) {
 		currentTexture = Intro_2;
 	}
+	//Change the scene if the count is bigger than 500
 	if (count > 500) {
 		app->fade->StartFadeToBlack(this, (Module*)app->sceneMenu, 60);
 		app->sceneLogo->Disable();
@@ -77,10 +84,12 @@ bool SceneLogo::Update(float dt)
 		count++;
 	}
 
+	//Exit the game if the player press the scape key
 	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_UP) {
 		return false;
 	}
 
+	//Change the scene if the player press the space key
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
 		app->fade->StartFadeToBlack(this, (Module*)app->sceneMenu, 0);
 		app->sceneLogo->Disable();
@@ -95,6 +104,7 @@ bool SceneLogo::PostUpdate()
 {
 	bool ret = true;
 
+	// Draw everything --------------------------------------
 	app->render->DrawTexture(currentTexture, 30,380);
 
 	return ret;
@@ -105,10 +115,14 @@ bool SceneLogo::CleanUp()
 {
 	LOG("Freeing best logo ever scene");
 
+	//Unload textures
 	SDL_DestroyTexture(Intro_1);
 	SDL_DestroyTexture(Intro_2);
 
+	//Unload Fx
 	app->audio->UnloadFx(logo_theme);
+
+	count = 0;
 
 	return true;
 }
