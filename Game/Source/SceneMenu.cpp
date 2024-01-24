@@ -54,7 +54,7 @@ bool SceneMenu::Start()
 	currentTexture = Menu_1;
 
 	app->guiManager->Enable();
-
+	app->sceneSettings->Disable();
 
 	btn1 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "Title", { 7, 30, 920, 290 }, this);
 	btn2 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "Play", { 99, 339, 235, 90 }, this);
@@ -111,12 +111,13 @@ bool SceneMenu::Update(float dt)
 		if (btn2->state == GuiControlState::PRESSED)
 		{
 			currentTexture = Menu_3;
-			app->fade->StartFadeToBlack(this, (Module*)app->scene, 60);
+			app->fade->StartFadeToBlack(this, (Module*)app->scene, 0);
 			app->sceneMenu->Disable();
-			//app->map->Enable();
-			//app->entityManager->Enable();
+			//app->guiManager->Disable();
+			app->map->Enable();
+			app->entityManager->Enable();
 			app->scene->Enable();
-			app->scene->player->lifes = 2;
+			app->scene->player->lifes = 3;
 			newgame = true;
 		}
 		if (app->scene->player->save == node.child("modes").attribute("save").as_bool("true"))
@@ -129,12 +130,13 @@ bool SceneMenu::Update(float dt)
 		}
 		if (btn3->state == GuiControlState::PRESSED)
 		{
-			app->fade->StartFadeToBlack(this, (Module*)app->scene, 60);
+			app->fade->StartFadeToBlack(this, (Module*)app->scene, 0);
 			currentTexture = Menu_5;
-			app->sceneMenu->Disable();
 			app->LoadRequest();
-			//app->map->Enable();
-			//app->entityManager->Enable();
+			app->sceneMenu->Disable();
+			app->guiManager->Disable();
+			app->map->Enable();
+			app->entityManager->Enable();
 			app->scene->Enable();
 		}
 		if (btn4->state == GuiControlState::FOCUSED)
@@ -144,7 +146,7 @@ bool SceneMenu::Update(float dt)
 		if (btn4->state == GuiControlState::PRESSED)
 		{
 			currentTexture = Menu_8;
-			app->fade->StartFadeToBlack(this, (Module*)app->sceneSettings, 60);
+			app->fade->StartFadeToBlack(this, (Module*)app->sceneSettings, 0);
 			app->sceneMenu->Disable();
 			app->sceneSettings->Enable();
 		}
@@ -197,19 +199,19 @@ bool SceneMenu::CleanUp()
 {
 	LOG("Freeing best logo ever scene");
 
-	SDL_DestroyTexture(Menu_1);
-	SDL_DestroyTexture(Menu_2);
-	SDL_DestroyTexture(Menu_3);
-	SDL_DestroyTexture(Menu_4);
-	SDL_DestroyTexture(Menu_5);
-	SDL_DestroyTexture(Menu_6);
-	SDL_DestroyTexture(Menu_7);
-	SDL_DestroyTexture(Menu_8);
-	SDL_DestroyTexture(Menu_9);
-	SDL_DestroyTexture(Menu_10);
-	SDL_DestroyTexture(Menu_11);
-	SDL_DestroyTexture(Menu_12);
-	SDL_DestroyTexture(Credit_1);
+	app->tex->UnLoad(Menu_1);
+	app->tex->UnLoad(Menu_2);
+	app->tex->UnLoad(Menu_3);
+	app->tex->UnLoad(Menu_4);
+	app->tex->UnLoad(Menu_5);
+	app->tex->UnLoad(Menu_6);
+	app->tex->UnLoad(Menu_7);
+	app->tex->UnLoad(Menu_8);
+	app->tex->UnLoad(Menu_9);
+	app->tex->UnLoad(Menu_10);
+	app->tex->UnLoad(Menu_11);
+	app->tex->UnLoad(Menu_12);
+	app->tex->UnLoad(Credit_1);
 
 	app->guiManager->DestroyGuiControl(btn1);
 	app->guiManager->DestroyGuiControl(btn2);

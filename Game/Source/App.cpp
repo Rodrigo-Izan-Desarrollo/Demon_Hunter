@@ -37,7 +37,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	tex = new Textures(this);
 	audio = new Audio(this);
 	physics = new Physics(this);
-	fade = new FadeToBlack(this, false);
+	fade = new FadeToBlack(this);
 
 	sceneLogo = new SceneLogo(this, true);
 	sceneMenu = new SceneMenu(this, false);

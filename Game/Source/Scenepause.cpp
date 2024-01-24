@@ -146,15 +146,15 @@ bool ScenePause::CleanUp()
 {
 	LOG("Freeing best logo ever scene");
 
-	SDL_DestroyTexture(Pause_1);
-	SDL_DestroyTexture(Pause_2);
-	SDL_DestroyTexture(Pause_3);
-	SDL_DestroyTexture(Pause_4);
-	SDL_DestroyTexture(Pause_5);
-	SDL_DestroyTexture(Pause_6);
-	SDL_DestroyTexture(Pause_7);
-	SDL_DestroyTexture(Pause_8);
-	SDL_DestroyTexture(Pause_9);
+	app->tex->UnLoad(Pause_1);
+	app->tex->UnLoad(Pause_2);
+	app->tex->UnLoad(Pause_3);
+	app->tex->UnLoad(Pause_4);
+	app->tex->UnLoad(Pause_5);
+	app->tex->UnLoad(Pause_6);
+	app->tex->UnLoad(Pause_7);
+	app->tex->UnLoad(Pause_8);
+	app->tex->UnLoad(Pause_9);
 
 	app->guiManager->DestroyGuiControl(btn1);
 	app->guiManager->DestroyGuiControl(btn2);

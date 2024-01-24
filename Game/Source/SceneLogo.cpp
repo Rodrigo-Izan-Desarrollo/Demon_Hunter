@@ -8,7 +8,6 @@
 #include "SceneMenu.h"
 #include "LastScreen.h"
 #include "Scenepause.h"
-#include "SceneSettings.h"
 #include "Scene.h"
 #include "Map.h"
 #include "FadeToBlack.h"
@@ -47,11 +46,8 @@ bool SceneLogo::Start()
 
 	currentTexture = Intro_1;
 
-	app->sceneMenu->Disable();
-	app->sceneSettings->Disable();
-	app->scene->Disable();
+	app->map->Disable();
 	app->scenePause->Disable();
-	app->lastScreen->Disable();
 
 	return true;
 }
@@ -69,7 +65,7 @@ bool SceneLogo::Update(float dt)
 		currentTexture = Intro_2;
 	}
 	if (count > 500) {
-		app->fade->StartFadeToBlack(this, (Module*)app->sceneMenu, 60);
+		app->fade->StartFadeToBlack(this, (Module*)app->sceneMenu, 0);
 		app->sceneLogo->Disable();
 		app->sceneMenu->Enable();
 	}
@@ -105,8 +101,8 @@ bool SceneLogo::CleanUp()
 {
 	LOG("Freeing best logo ever scene");
 
-	SDL_DestroyTexture(Intro_1);
-	SDL_DestroyTexture(Intro_2);
+	app->tex->UnLoad(Intro_1);
+	app->tex->UnLoad(Intro_2);
 
 	app->audio->UnloadFx(logo_theme);
 

@@ -10,7 +10,6 @@
 #include "Slime.h"
 #include "BigSlime.h"
 #include "Boss.h"
-#include "SceneLogo.h"
 #include "SceneMenu.h"
 #include "SceneSettings.h"
 #include "LastScreen.h"
@@ -119,6 +118,7 @@ bool Scene::Awake(pugi::xml_node& config)
 // Called before the first frame
 bool Scene::Start()
 {
+
 	if (app->scene->isEnabled())
 	{
 		//Textures
@@ -355,11 +355,6 @@ bool Scene::CleanUp()
 
 	//Unload music
 	app->audio->UnloadMusic(configNode.child("music").attribute("musicpathambient").as_string());
-
-	//Destruye las texturas
-	SDL_DestroyTexture(Portal);
-	SDL_DestroyTexture(Carteles);
-	SDL_DestroyTexture(Checkpoint);
 
 	return true;
 }
