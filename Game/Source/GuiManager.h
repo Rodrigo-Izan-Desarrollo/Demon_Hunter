@@ -3,7 +3,7 @@
 
 #include "Module.h"
 #include "GuiControl.h"
-
+#include "Timer.h"
 #include "List.h"
 
 class GuiManager : public Module
@@ -37,6 +37,9 @@ public:
 
 	List<GuiControl*> guiControlsList;
 	SDL_Texture* texture;
+
+	Timer  timer;
+	bool timerPaused = false;
 
 };
 

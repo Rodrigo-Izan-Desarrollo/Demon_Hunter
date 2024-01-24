@@ -15,6 +15,7 @@ GuiManager::~GuiManager() {}
 bool GuiManager::Start()
 {
 	texture = app->tex->Load("Assets/hud/Lives.png");
+	timer.Start();
 
 	return true;
 }
@@ -60,6 +61,16 @@ bool GuiManager::DestroyGuiControl(GuiControl* entity)
 
 bool GuiManager::Update(float dt)
 {	
+	float elapsedTime = timer.ReadMSec();
+
+	int minutes = static_cast<int>(elapsedTime / (1000 * 60));
+	int seconds = static_cast<int>((elapsedTime / 1000) - (minutes * 60));
+
+	char timeString[20];
+	snprintf(timeString, sizeof(timeString), "%02d:%02d", minutes, seconds);
+
+	app->render->DrawText(timeString, 900, 25, 100, 50);
+
 
 	ListItem<GuiControl*>* control = guiControlsList.start;
 
