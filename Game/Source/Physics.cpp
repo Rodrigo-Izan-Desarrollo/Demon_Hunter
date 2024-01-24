@@ -299,7 +299,7 @@ bool Physics::PostUpdate()
 						if (i > 0)
 						{
 							float distance = app->scene->player->position.DistanceTo({ METERS_TO_PIXELS(v.x), METERS_TO_PIXELS(v.y) });
-							if (distance < 1700)
+							if (distance < 700)
 							{
 								app->render->DrawLine(METERS_TO_PIXELS(prev.x), METERS_TO_PIXELS(prev.y), METERS_TO_PIXELS(v.x), METERS_TO_PIXELS(v.y), 100, 255, 100);
 							}
@@ -310,7 +310,7 @@ bool Physics::PostUpdate()
 
 					v = b->GetWorldPoint(shape->m_vertices[0]);
 					float distance = app->scene->player->position.DistanceTo({ METERS_TO_PIXELS(v.x), METERS_TO_PIXELS(v.y) });
-					if (distance < 1700)
+					if (distance < 700)
 					{
 						app->render->DrawLine(METERS_TO_PIXELS(prev.x), METERS_TO_PIXELS(prev.y), METERS_TO_PIXELS(v.x), METERS_TO_PIXELS(v.y), 100, 255, 100);
 					}
@@ -326,7 +326,7 @@ bool Physics::PostUpdate()
 					v1 = b->GetWorldPoint(shape->m_vertex0);
 					v2 = b->GetWorldPoint(shape->m_vertex1);
 					float distance = app->scene->player->position.DistanceTo({ METERS_TO_PIXELS(v1.x), METERS_TO_PIXELS(v1.y) });
-					if (distance < 1700)
+					if (distance < 700 )
 					{
 						app->render->DrawLine(METERS_TO_PIXELS(v1.x), METERS_TO_PIXELS(v1.y), METERS_TO_PIXELS(v2.x), METERS_TO_PIXELS(v2.y), 100, 100, 255);
 					}

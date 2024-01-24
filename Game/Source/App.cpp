@@ -343,6 +343,11 @@ bool App::CleanUp()
 
 	while(item != NULL && ret == true)
 	{
+		if (!item->data->active)
+		{
+			item = item->prev;
+			continue;
+		}
 		ret = item->data->CleanUp();
 		item = item->prev;
 	}

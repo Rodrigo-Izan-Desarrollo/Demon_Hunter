@@ -62,29 +62,26 @@ bool Map::Update(float dt)
 
         if (mapLayerItem->data->properties.GetProperty("Draw") != NULL && mapLayerItem->data->properties.GetProperty("Draw")->value) {
 
-            iPoint posMapin = WorldToMap(app->scene->player->position.x - 1000, 0);
-            iPoint posMapfi = WorldToMap(app->scene->player->position.x + 1250, 0);
+            UpdateTileLoadSize(mapLayerItem);
 
-            for (int x = posMapin.x; x < posMapfi.x; x++)
-            {
-                for (int y = 0; y < mapLayerItem->data->height; y++)
-                {
-                    int gid = mapLayerItem->data->Get(x, y);
-                    TileSet* tileset = GetTilesetFromTileId(gid);
+            for (int i = startWidth; i < endWidth; i++) {
+                for (int j = startHeight; j < endHeight; j++) {
+                    //Get the gid from tile
+                    int gid = mapLayerItem->data->Get(i, j);
 
-                    SDL_Rect r = tileset->GetTileRect(gid);
-                    iPoint pos = MapToWorld(x, y);
 
-                   
-                    app->render->DrawTexture(tileset->texture,
-                        pos.x,
-                        pos.y,
-                        &r);
+                    TileSet* tileSet = GetTilesetFromTileId(gid);
+                    SDL_Rect tileRect = tileSet->GetTileRect(gid);
+
+                    iPoint mapCoord = MapToWorld(i, j);
+
+                    app->render->DrawTexture(tileSet->texture, mapCoord.x, mapCoord.y, &tileRect);
+
                 }
             }
+
         }
         mapLayerItem = mapLayerItem->next;
-
     }
 
     return true;
@@ -503,6 +500,19 @@ void Map::CreateNavigationMap(int& width, int& height, uchar** buffer) const
     width = mapData.width;
     height = mapData.height;
 
+}
+
+void Map::UpdateTileLoadSize(ListItem<MapLayer*>* mapLayerItem)
+{
+    iPoint playerPosition = app->scene->player->position;
+
+    int playerX = playerPosition.x / 32;
+    int playerY = playerPosition.y / 32;
+
+    startWidth = MAX(playerX - tilesToLoad, 0);
+    endWidth = MIN(playerX + tilesToLoad, mapLayerItem->data->width);
+    startHeight = MAX(playerY - tilesToLoad, 0);
+    endHeight = MIN(playerY + tilesToLoad, mapLayerItem->data->height);
 }
 
 

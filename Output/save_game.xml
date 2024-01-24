@@ -8,6 +8,7 @@
 	<sceneLogo />
 	<sceneLogo />
 	<scene>
+
 		<playerposition x="10468" y="799" />
 		<modes sleeping="false" dead="false" canmove="true" inground="false" rightmode="true" leftmode="false" caninv="true" God-mode="false" lifes="1" save="true" />
 		<canpower canpower-1="true" canpower-2="true" canpower-3="true" />
@@ -35,6 +36,7 @@
 		<bigslime1 x="2188" y="1309" />
 		<bigslime2 x="5098" y="1309" />
 		<bigslime3 x="6839" y="445" />
+
 	</scene>
 	<sceneLogo />
 	<sceneLogo />
@@ -44,6 +46,8 @@
 	<entitymanager />
 	<guiManager />
 	<renderer>
+
 		<camera x="-10341" y="-252" />
+
 	</renderer>
 </game_state>
