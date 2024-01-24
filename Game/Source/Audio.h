@@ -26,6 +26,9 @@ public:
 	// Play a music file
 	bool PlayMusic(const char* path, float fadeTime = DEFAULT_MUSIC_FADE_TIME);
 
+	// Load a music file
+	unsigned int LoadMusic(const char* path);
+
 	//Unload a music file
 	bool UnloadMusic(const char* path);
 

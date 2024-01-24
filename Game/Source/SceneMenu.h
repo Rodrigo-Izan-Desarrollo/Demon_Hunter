@@ -61,6 +61,7 @@ private:
 
 	SDL_Texture* currentTexture;
 
+	// GUI
 	GuiControlButton* btn1;
 	GuiControlButton* btn2;
 	GuiControlButton* btn3;
@@ -69,12 +70,10 @@ private:
 
 	GuiControlButton* btn6;
 
-	int count;
-
 	bool credits = false;
 
 	// Screen music
-	uint logo_theme;
+	const char* Menu_theme;
 
 	pugi::xml_node node;
 

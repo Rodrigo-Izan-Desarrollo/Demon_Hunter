@@ -8,33 +8,33 @@
 	<sceneLogo />
 	<sceneLogo />
 	<scene>
-		<playerposition x="10468" y="799" />
-		<modes sleeping="false" dead="false" canmove="true" inground="false" rightmode="true" leftmode="false" caninv="true" God-mode="false" lifes="1" save="true" />
-		<canpower canpower-1="true" canpower-2="true" canpower-3="true" />
-		<power power-1="false" power-2="true" power-3="false" canchange="true" />
-		<poweritem poweritem-1="true" poweritem-2="true" poweritem-3="false" />
-		<enemy1 death="true" x="1128" y="994" />
-		<enemy2 death="true" x="3020" y="1186" />
-		<enemy3 death="true" x="2908" y="1186" />
-		<enemy4 death="true" x="7286" y="1186" />
-		<enemy5 death="true" x="7961" y="1378" />
-		<enemy6 death="true" x="7978" y="1378" />
-		<venemy1 x="1923" y="703" />
-		<venemy2 x="3393" y="703" />
-		<venemy3 x="4653" y="898" />
-		<venemy4 x="4640" y="898" />
-		<venemy5 x="4059" y="606" />
-		<venemy6 x="7305" y="1186" />
-		<venemy7 x="11522" y="455" />
-		<venemy8 x="8226" y="253" />
-		<venemy9 x="11169" y="66" />
-		<venemy10 x="9301" y="1229" />
-		<venemy11 x="10390" y="1326" />
-		<venemy12 x="8794" y="576" />
-		<boss1 x="6141" y="182169" />
-		<bigslime1 x="2188" y="1309" />
-		<bigslime2 x="5098" y="1309" />
-		<bigslime3 x="6839" y="445" />
+		<playerposition x="3404" y="1058" />
+		<modes sleeping="false" dead="false" canmove="true" inground="true" rightmode="true" leftmode="false" caninv="true" God-mode="false" lifes="1" save="true" />
+		<canpower canpower-1="false" canpower-2="false" canpower-3="false" />
+		<power power-1="false" power-2="false" power-3="false" canchange="true" />
+		<poweritem poweritem-1="false" poweritem-2="false" poweritem-3="false" />
+		<enemy1 death="true" x="1082" y="994" />
+		<enemy2 death="true" x="3045" y="1186" />
+		<enemy3 death="true" x="3006" y="1186" />
+		<enemy4 death="false" x="7403" y="1186" />
+		<enemy5 death="false" x="7900" y="1378" />
+		<enemy6 death="false" x="7994" y="1378" />
+		<venemy1 x="2325" y="678" />
+		<venemy2 x="3234" y="678" />
+		<venemy3 x="4890" y="582" />
+		<venemy4 x="5497" y="582" />
+		<venemy5 x="5547" y="582" />
+		<venemy6 x="7385" y="614" />
+		<venemy7 x="7583" y="422" />
+		<venemy8 x="7962" y="230" />
+		<venemy9 x="8314" y="38" />
+		<venemy10 x="9518" y="742" />
+		<venemy11 x="9944" y="550" />
+		<venemy12 x="10833" y="550" />
+		<boss1 x="13258" y="37439" />
+		<bigslime1 x="2103" y="1309" />
+		<bigslime2 x="4991" y="1309" />
+		<bigslime3 x="6938" y="445" />
 	</scene>
 	<sceneLogo />
 	<sceneLogo />
@@ -44,6 +44,6 @@
 	<entitymanager />
 	<guiManager />
 	<renderer>
-		<camera x="-10341" y="-252" />
+		<camera x="-3277" y="-508" />
 	</renderer>
 </game_state>

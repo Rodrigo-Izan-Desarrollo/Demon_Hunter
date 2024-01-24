@@ -137,6 +137,28 @@ bool Audio::PlayMusic(const char* path, float fadeTime)
 	LOG("Successfully playing %s", path);
 	return ret;
 }
+//Load a music file
+unsigned int Audio::LoadMusic(const char* path)
+{
+	unsigned int ret = 0;
+
+	if (!active)
+		return 0;
+
+	music = Mix_LoadMUS(path);
+
+	if (music == NULL)
+	{
+		LOG("Cannot load music %s. Mix_GetError(): %s\n", path, Mix_GetError());
+	}
+	else
+	{
+		ret = 1;
+	}
+
+	return ret;
+}
+
 //Unload a music file
 bool Audio::UnloadMusic(const char* path)
 {
