@@ -84,7 +84,7 @@ bool BigSlime::Update(float dt)
 	origPos = app->map->WorldToMap(position.x, position.y);
 	targPos = app->map->WorldToMap(app->scene->player->position.x, app->scene->player->position.y);
 
-	LOG("LAST PATH X: %d enemy x: %d", targPos.x, origPos.x);
+	/*LOG("LAST PATH X: %d enemy x: %d", targPos.x, origPos.x);*/
 	
 	if (dist(app->scene->player->position, position) < app->map->mapData.tileWidth * tilesview)// tenemos una funcion que calcula la dist y calcula la del player y el enemigo y si esta en el rango de vision de tiles view que le siga y si esta mas cerca que le ataque
 	{
@@ -149,7 +149,7 @@ bool BigSlime::Update(float dt)
 	}
 
 
-	LOG("COUNTTTTTTTTTTT: %d", lastPath.Count());
+	//LOG("COUNTTTTTTTTTTT: %d", lastPath.Count());
 	//pinta el pathfinding
 	if (app->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN)
 	{
@@ -271,7 +271,7 @@ void BigSlime::OnCollision(PhysBody* physA, PhysBody* physB) {
 		reverse = true;
 		break;
 	case ColliderType::WALLE:
-		LOG("PATOTURMO");
+		/*LOG("PATOTURMO");*/
 		reverse=true;
 		break;
 	case ColliderType::PATACK:

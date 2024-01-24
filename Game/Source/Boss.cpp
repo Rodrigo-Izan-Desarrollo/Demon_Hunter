@@ -85,7 +85,7 @@ bool Boss::Update(float dt)
 	;
 	targPos = app->map->WorldToMap(app->scene->player->position.x, app->scene->player->position.y);
 
-	LOG("LAST PATH X: %d enemy x: %d", targPos.x, origPos.x);
+	/*LOG("LAST PATH X: %d enemy x: %d", targPos.x, origPos.x);*/
 
 
 	if (dist(app->scene->player->position, position) < app->map->mapData.tileWidth * tilesview)
@@ -190,7 +190,7 @@ bool Boss::Update(float dt)
 	}
 
 
-	LOG("COUNTTTTTTTTTTT: %d", lastPath.Count());
+	/*LOG("COUNTTTTTTTTTTT: %d", lastPath.Count());*/
 	//pinta el pathfinding
 	if (app->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN)
 	{
@@ -303,7 +303,7 @@ void Boss::OnCollision(PhysBody* physA, PhysBody* physB) {
 		reverse = true;
 		break;
 	case ColliderType::WALLE:
-		LOG("PATOTURMO");
+		/*LOG("PATOTURMO");*/
 		reverse=true;
 		break;
 	case ColliderType::PATACK:

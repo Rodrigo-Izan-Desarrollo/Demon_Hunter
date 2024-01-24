@@ -82,7 +82,7 @@ bool SlimeVolador::Update(float dt)
 	origPos = app->map->WorldToMap(position.x, position.y);
 	targPos = app->map->WorldToMap(app->scene->player->position.x, app->scene->player->position.y);
 
-	LOG("LAST PATH X: %d enemy x: %d", targPos.x, origPos.x);
+	/*LOG("LAST PATH X: %d enemy x: %d", targPos.x, origPos.x);*/
 
 	if (dist(app->scene->player->position, position) < app->map->mapData.tileWidth * tilesview)// tenemos una funcion que calcula la dist y calcula la del player y el enemigo y si esta en el rango de vision de tiles view que le siga y si esta mas cerca que le ataque
 	{
@@ -164,7 +164,7 @@ bool SlimeVolador::Update(float dt)
 	}
 
 
-	LOG("COUNTTTTTTTTTTT: %d", lastPath.Count());
+	/*LOG("COUNTTTTTTTTTTT: %d", lastPath.Count());*/
 
 
 	//pinta el pathfinding
@@ -255,20 +255,20 @@ bool SlimeVolador::Update(float dt)
 	currentAnimation->Update();
 	if (rightmodeslimevolador)
 	{
-		LOG("ESTA ENTRANDO rigth");
+		/*LOG("ESTA ENTRANDO rigth");*/
 		app->render->DrawTexture(texture, position.x-10, position.y - 10, &currentAnimation->GetCurrentFrame());
 		
 	}
 	if (leftmodeslimevolador)
 	{
-		LOG("ESTA ENTRANDO left");
+		/*LOG("ESTA ENTRANDO left");*/
 		app->render->DrawTexture(texture, position.x, position.y - 10 , &currentAnimation->GetCurrentFrame(), SDL_FLIP_HORIZONTAL);
 	}
 	if (downmodeslimevolador)
 	{
 		if (app->scene->player->position.x < position.x  )
 		{
-			LOG("ESTA ENTRANDO down");
+			/*LOG("ESTA ENTRANDO down");*/
 			app->render->DrawTexture(texture, position.x - 5, position.y - 10, &currentAnimation->GetCurrentFrame(), SDL_FLIP_HORIZONTAL, 1.0f, 270.0);
 
 		}
@@ -313,7 +313,7 @@ void SlimeVolador::OnCollision(PhysBody* physA, PhysBody* physB) {
 		app->audio->PlayFx(muelto_Fx);
 		break;
 	case ColliderType::WALLE2:
-		LOG("PATOTURMO");
+		/*LOG("PATOTURMO");*/
 		reverse = true;
 
 		break;

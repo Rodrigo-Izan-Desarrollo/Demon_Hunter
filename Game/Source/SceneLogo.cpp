@@ -122,5 +122,7 @@ bool SceneLogo::CleanUp()
 	//Unload Fx
 	app->audio->UnloadFx(logo_theme);
 
+	count = 0;
+
 	return true;
 }
