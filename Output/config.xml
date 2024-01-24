@@ -142,6 +142,10 @@
 			   musicpathslime= "Assets/Audio/Fx/Slimedeath.wav"
 		/>
 
+	    <vida x="2016" y="1248" texturevida="Assets/Textures/Player/Vidas.png"/>
+
+	    <vida x="7072" y="384" texturevida="Assets/Textures/Player/Vidas.png"/>
+	     
 		<powerup_1 x="3520" y="1424" texturepathpower_1="Assets/Textures/Player/power_2.png"/>
 	  
 		<powerup_2 x="4750" y="1328" texturepathpower_2="Assets/Textures/Player/power_1.png"/>
