@@ -1,4 +1,4 @@
-#include "Powerup_1.h"
+#include "Vida.h"
 #include "App.h"
 #include "Textures.h"
 #include "Audio.h"
@@ -9,36 +9,36 @@
 #include "Point.h"
 #include "Physics.h"
 
-Powerup_1::Powerup_1() : Entity(EntityType::POWERUP_1)
+Vida::Vida() : Entity(EntityType::VIDA)
 {
-	name.Create("Powerup");
+	name.Create("Vida");
 }
 
-Powerup_1::~Powerup_1() {}
+Vida::~Vida() {}
 
-bool Powerup_1::Awake() {
+bool Vida::Awake() {
 
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
-	texturePath = parameters.attribute("texturepathpower_1").as_string();
+	texturePath = parameters.attribute("texturevida").as_string();
 
 	return true;
 }
 
-bool Powerup_1::Start() {
+bool Vida::Start() {
 
 	//Initilize textures
 	texture = app->tex->Load(texturePath);
 
 	//Create pbody
 	pbody = app->physics->CreateCircle(position.x+16, position.y, 13, bodyType::STATIC);
-	pbody->ctype = ColliderType::POWERUP_1;
+	pbody->ctype = ColliderType::VIDA;
 	pbody->listener = this;
 
 	//Animation
-	idle.PushBack({ 0, 0, 32, 32 });
-	idle.PushBack({ 32, 0, 32, 32 });
-	idle.PushBack({ 64, 0, 32, 32 });
+	idle.PushBack({ 0, 0, 30, 32 });
+	idle.PushBack({ 30, 0, 30, 32 });
+	idle.PushBack({ 60, 0, 30, 32 });
 	idle.loop = true;
 	idle.speed = 0.125f;
 
@@ -47,7 +47,7 @@ bool Powerup_1::Start() {
 	return true;
 }
 
-bool Powerup_1::Update(float dt)
+bool Vida::Update(float dt)
 { 
 	currentAnimation->Update();
 
@@ -63,17 +63,17 @@ bool Powerup_1::Update(float dt)
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
 
-	app->render->DrawTexture(texture, position.x, position.y, &currentAnimation->GetCurrentFrame());
+	app->render->DrawTexture(texture, position.x, position.y+13, &currentAnimation->GetCurrentFrame());
 
 	return true;
 }
 
-bool Powerup_1::CleanUp()
+bool Vida::CleanUp()
 {
 	return true;
 }
 
-void Powerup_1::OnCollision(PhysBody* physA, PhysBody* physB) {
+void Vida::OnCollision(PhysBody* physA, PhysBody* physB) {
 
 	switch (physB->ctype)
 	{

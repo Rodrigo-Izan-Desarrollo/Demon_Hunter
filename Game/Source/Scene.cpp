@@ -10,6 +10,7 @@
 #include "Slime.h"
 #include "BigSlime.h"
 #include "Boss.h"
+#include "Vida.h"
 #include "SceneLogo.h"
 #include "SceneMenu.h"
 #include "SceneSettings.h"
@@ -98,6 +99,13 @@ bool Scene::Awake(pugi::xml_node& config)
 		powerup_3 = (Powerup_3*)app->entityManager->CreateEntity(EntityType::POWERUP_3);
 		powerup_3->parameters = itemNode;
     
+	}
+
+	for (pugi::xml_node itemNode = config.child("vida"); itemNode; itemNode = itemNode.next_sibling("vida"))
+	{
+		vida = (Vida*)app->entityManager->CreateEntity(EntityType::VIDA);
+		vida->parameters = itemNode;
+
 	}
 
 	if (config.child("player")) {

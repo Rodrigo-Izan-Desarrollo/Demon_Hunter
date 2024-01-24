@@ -7,6 +7,7 @@
 #include "Bomber.h"
 #include "BigSlime.h"
 #include "Boss.h"
+#include "Vida.h"
 #include "Powerup_1.h"
 #include "Powerup_2.h"
 #include "Powerup_3.h"
@@ -56,6 +57,7 @@ public:
 	SlimeVolador* slimevolador;
 
 	//Items
+	Vida* vida;
 	Powerup_1* powerup_1;
 	Powerup_2* powerup_2;
 	Powerup_3* powerup_3;

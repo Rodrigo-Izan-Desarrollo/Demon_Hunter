@@ -1,5 +1,5 @@
-#ifndef __POWERUP1_H__
-#define __POWERUP1_H__
+#ifndef __VIDA_H__
+#define __VIDA_H__
 
 #include "Entity.h"
 #include "Point.h"
@@ -9,12 +9,12 @@
 
 struct SDL_Texture;
 
-class Powerup_1 : public Entity
+class Vida : public Entity
 {
 public:
 
-	Powerup_1();
-	virtual ~Powerup_1();
+	Vida();
+	virtual ~Vida();
 
 	bool Awake();
 

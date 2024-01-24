@@ -1,5 +1,6 @@
 #include "EntityManager.h"
 #include "Player.h"
+#include "Vida.h"
 #include "App.h"
 #include "Textures.h"
 #include "Scene.h"
@@ -95,6 +96,9 @@ Entity* EntityManager::CreateEntity(EntityType type)
 		break;
 	case EntityType::SLIMEVOLADOR:
 		entity = new SlimeVolador();
+		break;
+	case EntityType::VIDA:
+		entity = new Vida();
 		break;
 	case EntityType::POWERUP_1:
 		entity = new Powerup_1();
