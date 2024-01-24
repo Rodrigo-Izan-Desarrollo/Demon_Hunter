@@ -34,10 +34,11 @@ bool Player::Awake() {
 	texturePath_4_2 = parameters.attribute("texturepathgod_2").as_string();
 	texturePathcheck = parameters.attribute("texturepathcheck").as_string();
 
-	musicpathatack = parameters.attribute("musicpathatack").as_string();
-	musicpathjump = parameters.attribute("musicpathjump").as_string();
-	musicpathpickup = parameters.attribute("musicpathpickup").as_string();
-	musicpathpowerup = parameters.attribute("musicpathpowerup").as_string();
+	soundatack = parameters.attribute("soundatack").as_string();
+	soundjump = parameters.attribute("soundjump").as_string();
+	soundpickup = parameters.attribute("soundpathpickup").as_string();
+	soundpowerup = parameters.attribute("soundpowerup").as_string();
+	soundportal = parameters.attribute("soundportal").as_string();
 
 
 	return true;
@@ -56,10 +57,11 @@ bool Player::Start() {
 	texturecheck = app->tex->Load(texturePathcheck);
 
 	//Initialize sound efects
-	atack_Fx = app->audio->LoadFx(musicpathatack);
-	jump_Fx = app->audio->LoadFx(musicpathjump);
-	pick_up_Fx = app->audio->LoadFx(musicpathpickup);
-	powerup_Fx = app->audio->LoadFx(musicpathpowerup);
+	atack_Fx = app->audio->LoadFx(soundatack);
+	jump_Fx = app->audio->LoadFx(soundjump);
+	pick_up_Fx = app->audio->LoadFx(soundpickup);
+	powerup_Fx = app->audio->LoadFx(soundpowerup);
+	portal_Fx = app->audio->LoadFx(soundportal);
 
 	//Create de pbody
 	pbody = app->physics->CreateCircle(position.x + 30, position.y + 30, 13, bodyType::DYNAMIC);
@@ -468,7 +470,7 @@ bool Player::Update(float dt)
 	{
 		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 		{
-			app->audio->PlayFx(jump_Fx);//Load sound efect
+			app->audio->PlayFx(atack_Fx);//Load sound efect
 			jumping = true;
 			inground = false;
 
@@ -500,7 +502,7 @@ bool Player::Update(float dt)
 		//Atack input
 	if (!pbodyatack && (app->input->GetKey(SDL_SCANCODE_Q) == KEY_REPEAT || app->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KEY_REPEAT) && !dead && !jumping && !invisible && canatack && app->scene->isEnabled())
 	{
-		app->audio->PlayFx(atack_Fx);//Load sound efect
+		app->audio->PlayFx(jump_Fx);//Load sound efect
 		atacktempo = SDL_GetTicks();// Start timer
 		canatack = false;
 		atacking = true;
@@ -554,7 +556,7 @@ bool Player::Update(float dt)
 	{
 		if (powerup_4 || powerup_2)
 		{
-			app->audio->PlayFx(atack_Fx);//Load sound efect
+			app->audio->PlayFx(jump_Fx);//Load sound efect
 			atacktempo_2 = SDL_GetTicks();// Start timer
 			canatack_2 = false;
 			atacking_2 = true;
@@ -746,6 +748,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::PORTAL:
 		portal = true;
+		app->audio->PlayFx(portal_Fx);
 		break;
 	case ColliderType::ENEMY:
 		inground = true;

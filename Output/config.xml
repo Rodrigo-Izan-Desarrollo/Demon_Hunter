@@ -31,10 +31,12 @@
 				texturepathgod="Assets/Textures/Player/player_5.png" 
 				texturepathgod_2 ="Assets/Textures/Player/player_5_2.png" 
 				texturepathflash="Assets/Textures/Player/Flash.png" 
-				musicpathatack= "Assets/Audio/Fx/Player_atack.ogg" 
-				musicpathjump = "Assets/Audio/Fx/Player_jump.ogg" 
-				musicpathpickup= "Assets/Audio/Fx/Power_up_pickup.ogg" 
-				musicpathpowerup= "Assets/Audio/Fx/Power_up_activate.ogg" 
+				
+				soundatack= "Assets/Audio/Fx/Player_atack.wav"
+				soundjump = "Assets/Audio/Fx/Player_jump.wav" 
+				soundpathpickup= "Assets/Audio/Fx/Power_up_pickup.wav" 
+				soundpowerup= "Assets/Audio/Fx/Power_up_activate.wav" 
+				soundportal= "Assets/Audio/Fx/Portal.wav" 
 		/>
 	  
 		<slime x="1200" y="994" 

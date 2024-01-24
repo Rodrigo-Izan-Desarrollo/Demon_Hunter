@@ -36,28 +36,30 @@ bool SceneLogo::Awake()
 // Called before the first frame
 bool SceneLogo::Start()
 {
-	//Initialize the timer
-	count = 0;
+	if (app->sceneLogo->isEnabled())
+	{
+		//Initialize the timer
+		count = 0;
 
-	//Textures
-	Intro_1 = app->tex->Load("Assets/Screens/Intro_1.png");
-	Intro_2 = app->tex->Load("Assets/Screens/Intro_2.png");
-	
-	//PLay Fx
-	logo_theme = app->audio->LoadFx("Assets/Audio/Music/Sound_efect_logo.ogg");
-	app->audio->PlayFx(logo_theme);
+		//Textures
+		Intro_1 = app->tex->Load("Assets/Screens/Intro_1.png");
+		Intro_2 = app->tex->Load("Assets/Screens/Intro_2.png");
 
-	//Disable the enable scenes
-	app->sceneMenu->Disable();
-	app->sceneSettings->Disable();
-	app->scene->Disable();
-	app->scenePause->Disable();
-	app->lastScreen->Disable();
-	app->guiManager->Disable();
+		//PLay Fx
+		logo_theme = app->audio->LoadFx("Assets/Audio/Music/Sound_efect_logo.wav");
+		app->audio->PlayFx(logo_theme);
 
-	//Initialize the current texture
-	currentTexture = Intro_1;
+		//Disable the enable scenes
+		app->sceneMenu->Disable();
+		app->sceneSettings->Disable();
+		app->scene->Disable();
+		app->scenePause->Disable();
+		app->lastScreen->Disable();
+		app->guiManager->Disable();
 
+		//Initialize the current texture
+		currentTexture = Intro_1;
+	}
 	return true;
 }
 

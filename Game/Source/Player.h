@@ -47,10 +47,11 @@ public:
 	const char* texturePathcheck;
 
 	//Sound efects path
-	const char* musicpathatack;
-	const char* musicpathjump;
-	const char* musicpathpickup;
-	const char* musicpathpowerup;
+	const char* soundatack;
+	const char* soundjump;
+	const char* soundpickup;
+	const char* soundpowerup;
+	const char* soundportal;
 
 	//Timers
 	Uint32 invtempo = NULL;
@@ -78,6 +79,7 @@ public:
 	uint jump_Fx;
 	uint pick_up_Fx;
 	uint powerup_Fx;
+	uint portal_Fx;
 
 	//Pbodys
 	PhysBody* pbody;
@@ -120,6 +122,7 @@ public:
 	bool atacking = false;
 	bool atacking_2 = false;
 
+		//Can atack
 	bool canatack = true;	
 	bool canatack_2 = true;
 
@@ -175,7 +178,7 @@ public:
 		//Save sate
 	bool save = false;
 
-
+		//Conexion with config.xml
 	pugi::xml_node config;
 
 };
