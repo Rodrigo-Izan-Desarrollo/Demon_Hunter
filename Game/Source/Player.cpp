@@ -470,7 +470,7 @@ bool Player::Update(float dt)
 	{
 		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 		{
-			app->audio->PlayFx(atack_Fx);//Load sound efect
+			app->audio->PlayFx(jump_Fx);//Load sound efect
 			jumping = true;
 			inground = false;
 
@@ -502,7 +502,7 @@ bool Player::Update(float dt)
 		//Atack input
 	if (!pbodyatack && (app->input->GetKey(SDL_SCANCODE_Q) == KEY_REPEAT || app->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KEY_REPEAT) && !dead && !jumping && !invisible && canatack && app->scene->isEnabled())
 	{
-		app->audio->PlayFx(jump_Fx);//Load sound efect
+		app->audio->PlayFx(atack_Fx);//Load sound efect
 		atacktempo = SDL_GetTicks();// Start timer
 		canatack = false;
 		atacking = true;
@@ -556,7 +556,7 @@ bool Player::Update(float dt)
 	{
 		if (powerup_4 || powerup_2)
 		{
-			app->audio->PlayFx(jump_Fx);//Load sound efect
+			app->audio->PlayFx(atack_Fx);//Load sound efect
 			atacktempo_2 = SDL_GetTicks();// Start timer
 			canatack_2 = false;
 			atacking_2 = true;
@@ -726,7 +726,6 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	switch (physB->ctype) {
 	case ColliderType::VIDA:
 		lifes++;
-		app->audio->PlayFx(pick_up_Fx);
 		break;
 	case ColliderType::POWERUP_1:
 		canpower_1 = true;

@@ -36,30 +36,27 @@ bool SceneLogo::Awake()
 // Called before the first frame
 bool SceneLogo::Start()
 {
-	if (app->sceneLogo->isEnabled())
-	{
-		//Initialize the timer
-		count = 0;
+	//Initialize the timer
+	count = 0;
 
-		//Textures
-		Intro_1 = app->tex->Load("Assets/Screens/Intro_1.png");
-		Intro_2 = app->tex->Load("Assets/Screens/Intro_2.png");
+	//Textures
+	Intro_1 = app->tex->Load("Assets/Screens/Intro_1.png");
+	Intro_2 = app->tex->Load("Assets/Screens/Intro_2.png");
 
-		//PLay Fx
-		logo_theme = app->audio->LoadFx("Assets/Audio/Music/Sound_efect_logo.wav");
-		app->audio->PlayFx(logo_theme);
+	//PLay Fx
+	app->audio->PlayMusic("Assets/Audio/Music/Sound_efect_logo.wav");
 
-		//Disable the enable scenes
-		app->sceneMenu->Disable();
-		app->sceneSettings->Disable();
-		app->scene->Disable();
-		app->scenePause->Disable();
-		app->lastScreen->Disable();
-		app->guiManager->Disable();
+	//Disable the enable scenes
+	app->sceneMenu->Disable();
+	app->sceneSettings->Disable();
+	app->scene->Disable();
+	app->scenePause->Disable();
+	app->lastScreen->Disable();
+	app->guiManager->Disable();
 
-		//Initialize the current texture
-		currentTexture = Intro_1;
-	}
+	//Initialize the current texture
+	currentTexture = Intro_1;
+
 	return true;
 }
 
@@ -121,8 +118,8 @@ bool SceneLogo::CleanUp()
 	SDL_DestroyTexture(Intro_1);
 	SDL_DestroyTexture(Intro_2);
 
-	//Unload Fx
-	app->audio->UnloadFx(logo_theme);
+	//Unload Music
+	app->audio->UnloadMusic("Assets/Audio/Music/Sound_efect_logo.wav");
 
 	count = 0;
 
