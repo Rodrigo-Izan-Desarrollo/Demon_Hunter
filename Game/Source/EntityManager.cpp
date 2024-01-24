@@ -105,6 +105,9 @@ Entity* EntityManager::CreateEntity(EntityType type)
 	case EntityType::POWERUP_3:
 		entity = new Powerup_3();
 		break;
+	case EntityType::VIDA:
+		entity = new Vida();
+		break;
 	default:
 		break;
 	}
