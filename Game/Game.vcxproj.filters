@@ -100,7 +100,11 @@
     <ClCompile Include="Source\SceneSettings.cpp">
       <Filter>cpp.files</Filter>
     </ClCompile>
+<<<<<<< Updated upstream
     <ClCompile Include="Source\Vida.cpp">
+=======
+    <ClCompile Include="Source\vidas.cpp">
+>>>>>>> Stashed changes
       <Filter>cpp.files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -231,7 +235,11 @@
     <ClInclude Include="Source\SceneSettings.h">
       <Filter>h.files</Filter>
     </ClInclude>
+<<<<<<< Updated upstream
     <ClInclude Include="Source\Vida.h">
+=======
+    <ClInclude Include="Source\vidas.h">
+>>>>>>> Stashed changes
       <Filter>h.files</Filter>
     </ClInclude>
   </ItemGroup>

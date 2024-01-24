@@ -125,7 +125,11 @@
     <ClCompile Include="Source\Render.cpp" />
     <ClCompile Include="Source\Textures.cpp" />
     <ClCompile Include="Source\Timer.cpp" />
+<<<<<<< Updated upstream
     <ClCompile Include="Source\Vida.cpp" />
+=======
+    <ClCompile Include="Source\vidas.cpp" />
+>>>>>>> Stashed changes
     <ClCompile Include="Source\Window.cpp" />
     <ClInclude Include="Source\Animation.h" />
     <ClInclude Include="Source\BigSlime.h" />
@@ -160,7 +164,11 @@
     <ClInclude Include="Source\Render.h" />
     <ClInclude Include="Source\Textures.h" />
     <ClInclude Include="Source\Timer.h" />
+<<<<<<< Updated upstream
     <ClInclude Include="Source\Vida.h" />
+=======
+    <ClInclude Include="Source\vidas.h" />
+>>>>>>> Stashed changes
     <ClInclude Include="Source\Window.h" />
     <ClInclude Include="Source\Defs.h" />
     <ClInclude Include="Source\List.h" />
