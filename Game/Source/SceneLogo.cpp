@@ -53,6 +53,7 @@ bool SceneLogo::Start()
 	app->scene->Disable();
 	app->scenePause->Disable();
 	app->lastScreen->Disable();
+	app->guiManager->Disable();
 
 	//Initialize the current texture
 	currentTexture = Intro_1;

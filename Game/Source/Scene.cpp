@@ -121,6 +121,7 @@ bool Scene::Start()
 {
 	if (app->scene->isEnabled())
 	{
+		app->guiManager->Disable();
 		//Textures
 		Portal = app->tex->Load("Assets/Maps/Portales.png");
 		Carteles = app->tex->Load("Assets/Maps/Carteles.png");
@@ -296,7 +297,6 @@ bool Scene::Update(float dt)
 		app->scenePause->Enable();
 		pausa = true;
 	}
-
 
 	if (player->check_1)
 	{
