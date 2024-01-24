@@ -125,14 +125,7 @@
     <ClCompile Include="Source\Render.cpp" />
     <ClCompile Include="Source\Textures.cpp" />
     <ClCompile Include="Source\Timer.cpp" />
-<<<<<<< HEAD
-
     <ClCompile Include="Source\Vida.cpp" />
-
-    <ClCompile Include="Source\vidas.cpp" />
-
-=======
->>>>>>> parent of 1b8f17c (Merge pull request #51 from Rodrigo-Izan-Desarrollo/vidas)
     <ClCompile Include="Source\Window.cpp" />
     <ClInclude Include="Source\Animation.h" />
     <ClInclude Include="Source\BigSlime.h" />
@@ -167,14 +160,7 @@
     <ClInclude Include="Source\Render.h" />
     <ClInclude Include="Source\Textures.h" />
     <ClInclude Include="Source\Timer.h" />
-<<<<<<< HEAD
-
     <ClInclude Include="Source\Vida.h" />
-
-    <ClInclude Include="Source\vidas.h" />
-
-=======
->>>>>>> parent of 1b8f17c (Merge pull request #51 from Rodrigo-Izan-Desarrollo/vidas)
     <ClInclude Include="Source\Window.h" />
     <ClInclude Include="Source\Defs.h" />
     <ClInclude Include="Source\List.h" />
