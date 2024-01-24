@@ -93,8 +93,8 @@ bool LastScreen::CleanUp()
 	LOG("Freeing best logo ever scene");
 
 	//Hazme CleanUp de todo los que puedas
-	app->tex->UnLoad(Gameover);
-	app->tex->UnLoad(Missioncompleted);
+	SDL_DestroyTexture(Gameover);
+	SDL_DestroyTexture(Missioncompleted);
 
 	return true;
 }
