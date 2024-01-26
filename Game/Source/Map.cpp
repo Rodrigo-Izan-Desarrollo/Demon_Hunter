@@ -464,6 +464,7 @@ bool Map::LoadProperties(pugi::xml_node& node, Properties& properties)
 
 Properties::Property* Properties::GetProperty(const char* name)
 {
+
     ListItem<Property*>* item = list.start;
     Property* p = NULL;
 

@@ -41,16 +41,7 @@ bool FadeToBlack::Update(float dt)
 			currentStep = Fade_Step::FROM_BLACK;
 
 		}
-		/*if (app->scene->active)
-		{
-			app->map->Enable();
-			app->entityManager->Enable();
-		}
-		else 
-		{
-			app->map->Disable();
-			app->entityManager->Disable();
-		}*/
+	
 
 	}
 	else

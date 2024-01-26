@@ -288,8 +288,7 @@ bool Scene::Update(float dt)
 	if (player->dead==true && player->lifes<=0)
 	{
 		app->fade->FadeToBlackScene(this, (Module*)app->lastScreen, 0);
-		app->scene->Disable();
-		app->lastScreen->Enable();
+		
 	}
 	
 	if (app->sceneMenu->newgame == true)
