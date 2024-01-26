@@ -49,7 +49,6 @@ bool LastScreen::Start()
 
 		// Disable the enable scenes
 		app->guiManager->Disable();
-		app->scene->Disable();
 	}
 	return true;
 }
