@@ -139,6 +139,8 @@ bool SceneMenu::Update(float dt)
 			app->fade->FadeToBlackScene(this, (Module*)app->scene, 60.0f);
 			app->map->Enable();
 			app->entityManager->Enable();
+			//Hazme un load request de la partidaç
+			app->LoadRequest();
 		}
 
 		else if (btn4->state == GuiControlState::FOCUSED) {
