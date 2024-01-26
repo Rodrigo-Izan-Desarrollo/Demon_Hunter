@@ -73,10 +73,12 @@ bool LastScreen::Update(float dt)
 		app->audio->PlayFx(win_theme);
 	}
 	if (count > 375 && currentTexture == Gameover) {
+
 		return false;
 	}
 	if (count > 250 && currentTexture == Missioncompleted) {
 		return false;
+
 	}
 	else 
 	{

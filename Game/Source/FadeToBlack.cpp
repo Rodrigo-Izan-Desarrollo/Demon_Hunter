@@ -1,24 +1,19 @@
 #include "FadeToBlack.h"
-
-#include "Render.h"
 #include "App.h"
-#include "Window.h"
+#include "Render.h"
+#include "Scene.h"
+#include "Map.h"
+#include "EntityManager.h"
 
-#include "External/SDL/include/SDL_render.h"
+#include "SDL/include/SDL_render.h"
 
-#include "Defs.h"
-#include "Log.h"
-
-FadeToBlack::FadeToBlack(App* application, bool start_enabled) : Module(application, start_enabled)
+FadeToBlack::FadeToBlack(App* app, bool start_enabled) : Module(app,start_enabled)
 {
-	name.Create("FadeToBlack");
-	if (app != nullptr) {
-		int x, y, scale;
-		app->win->GetWindowSize(x, y);
-		scale = app->win->GetScale();
-		screenRect = { 0,0, x * y * scale };
-	}
+
+	screenRect = { 0, 0, 2000, 2000 };
+	name.Create("fadetoblack");
 }
+
 FadeToBlack::~FadeToBlack()
 {
 
@@ -26,18 +21,15 @@ FadeToBlack::~FadeToBlack()
 
 bool FadeToBlack::Start()
 {
-	LOG("Preparing Fade Screen");
-
+	// Enable blending mode for transparency
 	SDL_SetRenderDrawBlendMode(app->render->renderer, SDL_BLENDMODE_BLEND);
 	return true;
 }
 
 bool FadeToBlack::Update(float dt)
 {
-	if (currentStep == Fade_Step::NONE)
-	{
-		return true;
-	}
+	// Exit this function if we are not performing a fade
+	if (currentStep == Fade_Step::NONE) return true;
 
 	if (currentStep == Fade_Step::TO_BLACK)
 	{
@@ -46,9 +38,11 @@ bool FadeToBlack::Update(float dt)
 		{
 			moduleToDisable->Disable();
 			moduleToEnable->Enable();
-
 			currentStep = Fade_Step::FROM_BLACK;
+
 		}
+	
+
 	}
 	else
 	{
@@ -56,38 +50,69 @@ bool FadeToBlack::Update(float dt)
 		if (frameCount <= 0)
 		{
 			currentStep = Fade_Step::NONE;
+			fadeDone = true;
 		}
+	/*	if (!active)
+		{
+			active = true;
+			if (levelIdx==1) app->scene->nivel1funcion();
+			else if (levelIdx == 2) app->scene->nivel2funcion();
+			
+		}*/
 	}
+
 	return true;
 }
 
 bool FadeToBlack::PostUpdate()
 {
-	if (currentStep == Fade_Step::NONE)
-	{
-		return true;
-	}
+	// Exit this function if we are not performing a fade
+	if (currentStep == Fade_Step::NONE) return true;
+
 	float fadeRatio = (float)frameCount / (float)maxFadeFrames;
 
+	// Render the black square with alpha on the screen
 	SDL_SetRenderDrawColor(app->render->renderer, 0, 0, 0, (Uint8)(fadeRatio * 255.0f));
 	SDL_RenderFillRect(app->render->renderer, &screenRect);
 
 	return true;
 }
 
-bool FadeToBlack::StartFadeToBlack(Module* moduleToDisable, Module* moduleToEnable, float frames)
+bool FadeToBlack::FadeToBlackFunction(int levelIdx, float frames)
 {
 	bool ret = false;
 
+	// If we are already in a fade process, ignore this call
 	if (currentStep == Fade_Step::NONE)
 	{
 		currentStep = Fade_Step::TO_BLACK;
 		frameCount = 0;
 		maxFadeFrames = frames;
+		this->levelIdx = levelIdx;
+		ret = true;
+	}
+	active = false;
+	fadeDone = false;
+
+	return ret;
+}
+bool FadeToBlack::FadeToBlackScene(Module* moduleToDisable, Module* moduleToEnable, float frames)
+{
+	bool ret = false;
+
+	
+	if (currentStep == Fade_Step::NONE) {
+		currentStep = Fade_Step::TO_BLACK;
+		frameCount = 0;
+		maxFadeFrames = static_cast<Uint32>(frames);
 
 		this->moduleToDisable = moduleToDisable;
 		this->moduleToEnable = moduleToEnable;
+
+		
 		ret = true;
 	}
+
+
 	return ret;
 }

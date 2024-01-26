@@ -64,7 +64,14 @@ bool Map::Update(float dt)
 
             iPoint posMapin = WorldToMap(app->scene->player->position.x - 1000, 0);
             iPoint posMapfi = WorldToMap(app->scene->player->position.x + 1250, 0);
-
+            if (posMapin.x<0)
+            {
+                posMapin.x = 0;
+            }
+            if (posMapfi.x < 0)
+            {
+                posMapfi.x = 0;
+            }
             for (int x = posMapin.x; x < posMapfi.x; x++)
             {
                 for (int y = 0; y < mapLayerItem->data->height; y++)
@@ -105,10 +112,21 @@ bool Map::LoadColission() {
             iPoint posMapin = WorldToMap(app->scene->player->position.x - 1000, 0);
             iPoint posMapfi = WorldToMap(app->scene->player->position.x + 1250, 0);
 
+            if (posMapin.x < 0)
+            {
+                posMapin.x = 0;
+            }
+            if (posMapfi.x < 0)
+            {
+                posMapfi.x = 0;
+            }
+
             for (int x = 0; x < mapLayerItem->data->width; x++)
             {
                 for (int y = 0; y < mapLayerItem->data->height; y++)
                 {
+
+
                     int gid = mapLayerItem->data->Get(x, y);
                     TileSet* tileset = GetTilesetFromTileId(gid);
 
@@ -446,6 +464,7 @@ bool Map::LoadProperties(pugi::xml_node& node, Properties& properties)
 
 Properties::Property* Properties::GetProperty(const char* name)
 {
+
     ListItem<Property*>* item = list.start;
     Property* p = NULL;
 

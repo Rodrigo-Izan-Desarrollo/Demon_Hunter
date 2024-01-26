@@ -76,7 +76,7 @@ bool SceneLogo::Update(float dt)
 	}
 	//Change the scene if the count is bigger than 500
 	if (count > 500) {
-		app->fade->StartFadeToBlack(this, (Module*)app->sceneMenu, 60);
+		//app->fade->FadeToBlackScene(this, (Module*)app->sceneMenu, 60.0f);
 		app->sceneLogo->Disable();
 		app->sceneMenu->Enable();
 	}
@@ -91,7 +91,7 @@ bool SceneLogo::Update(float dt)
 
 	//Change the scene if the player press the space key
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
-		app->fade->StartFadeToBlack(this, (Module*)app->sceneMenu, 0);
+		//app->fade->FadeToBlackScene(this, (Module*)app->sceneMenu, 0.0f);
 		app->sceneLogo->Disable();
 		app->sceneMenu->Enable();
 	}
