@@ -54,7 +54,7 @@ bool SceneMenu::Start()
 		Credit_1 = app->tex->Load("Assets/Screens/Credits_1.png");
 
 		//Music
-		app->audio->PlayMusic("Assets/Audio/Music/Menu.ogg");
+		app->audio->PlayMusic("Assets/Audio/Music/Menu.ogg", NULL, app->audio->volume);
 
 		//Buttons
 		btn1 = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "Title", { 7, 30, 920, 290 }, this);

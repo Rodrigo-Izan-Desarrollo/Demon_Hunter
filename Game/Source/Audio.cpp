@@ -84,8 +84,8 @@ bool Audio::CleanUp()
 	return true;
 }
 
-// Play a music file
-bool Audio::PlayMusic(const char* path, float fadeTime)
+// Play a music file with volume
+bool Audio::PlayMusic(const char* path, float fade_time, int volume)
 {
 	bool ret = true;
 
@@ -94,16 +94,16 @@ bool Audio::PlayMusic(const char* path, float fadeTime)
 
 	if (music != NULL)
 	{
-		if (fadeTime > 0.0f)
+		if (fade_time > 0.0f)
 		{
-			Mix_FadeOutMusic(int(fadeTime * 1000.0f));
+			Mix_FadeOutMusic((int)(fade_time * 1000.0f));
 		}
 		else
 		{
 			Mix_HaltMusic();
 		}
 
-		// this call blocks until fade out is done
+		// This call blocks until fade out is done
 		Mix_FreeMusic(music);
 	}
 
@@ -116,11 +116,11 @@ bool Audio::PlayMusic(const char* path, float fadeTime)
 	}
 	else
 	{
-		if (fadeTime > 0.0f)
+		if (fade_time > 0.0f)
 		{
-			if (Mix_FadeInMusic(music, -1, (int)(fadeTime * 1000.0f)) < 0)
+			if (Mix_FadeInMusic(music, -1, (int)(fade_time * 1000.0f)) < 0)
 			{
-				LOG("Cannot fade in music %s. Mix_GetError(): %s", path, Mix_GetError());
+				LOG("Cannot fade in music %s. Mix_GetError(): %s\n", path, Mix_GetError());
 				ret = false;
 			}
 		}
@@ -128,15 +128,18 @@ bool Audio::PlayMusic(const char* path, float fadeTime)
 		{
 			if (Mix_PlayMusic(music, -1) < 0)
 			{
-				LOG("Cannot play in music %s. Mix_GetError(): %s", path, Mix_GetError());
+				LOG("Cannot play in music %s. Mix_GetError(): %s\n", path, Mix_GetError());
 				ret = false;
 			}
 		}
+		Mix_VolumeMusic(volume);
 	}
 
-	LOG("Successfully playing %s", path);
 	return ret;
 }
+
+
+
 //Load a music file
 unsigned int Audio::LoadMusic(const char* path)
 {

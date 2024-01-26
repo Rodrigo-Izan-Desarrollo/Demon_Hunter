@@ -44,7 +44,8 @@ bool SceneLogo::Start()
 	Intro_2 = app->tex->Load("Assets/Screens/Intro_2.png");
 
 	//PLay Fx
-	app->audio->PlayMusic("Assets/Audio/Music/Sound_efect_logo.wav");
+	logo_theme = app->audio->LoadFx("Assets/Audio/Music/Sound_efect_logo.wav");
+	app->audio->PlayFx(logo_theme);
 
 	//Disable the enable scenes
 	app->sceneMenu->Disable();

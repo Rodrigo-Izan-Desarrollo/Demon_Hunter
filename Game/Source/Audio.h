@@ -24,7 +24,8 @@ public:
 	bool CleanUp();
 
 	// Play a music file
-	bool PlayMusic(const char* path, float fadeTime = DEFAULT_MUSIC_FADE_TIME);
+	//Añadele al PlayMusic un volumen
+	bool PlayMusic(const char* path, float fade_time = DEFAULT_MUSIC_FADE_TIME, int volume = 128);
 
 	// Load a music file
 	unsigned int LoadMusic(const char* path);
