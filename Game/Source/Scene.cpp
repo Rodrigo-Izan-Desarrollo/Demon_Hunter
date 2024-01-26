@@ -282,10 +282,6 @@ bool Scene::Update(float dt)
 		app->SaveRequest();
 		player->save = true;
 	}
-	if (app->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN)
-	{
-		Mix_VolumeMusic(0);
-	}
 
 	if (player->dead==true && player->lifes<=0)
 	{
@@ -295,7 +291,7 @@ bool Scene::Update(float dt)
 	}
 
 
-	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
 	{
 		app->fade->StartFadeToBlack(this, (Module*)app->scenePause, 10);
 		app->scene->Disable();

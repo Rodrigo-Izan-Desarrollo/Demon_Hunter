@@ -248,14 +248,14 @@ bool Player::Update(float dt)
 
 		if (position.x > 14300 && position.x < 14500)
 		{
-			pbody->body->SetTransform({ PIXEL_TO_METERS(15232), PIXEL_TO_METERS(1024) }, 0);
+			pbody->body->SetTransform({ PIXEL_TO_METERS(15100), PIXEL_TO_METERS(1024) }, 0);
 			leftmode = true;
 			rightmode = false;
 		}
 
 		if (position.x > 14700)
 		{
-			pbody->body->SetTransform({ PIXEL_TO_METERS(14496), PIXEL_TO_METERS(1120) }, 0);
+			pbody->body->SetTransform({ PIXEL_TO_METERS(14520), PIXEL_TO_METERS(1120) }, 0);
 			rightmode = true;
 			leftmode = false;
 		}
