@@ -93,8 +93,15 @@ bool Player::Update(float dt)
 
 	if (nivel2Active)
 	{
-		app->fade->FadeToBlackFunction(120.0f);
-		pbody->body->SetTransform({ PIXEL_TO_METERS(12224), PIXEL_TO_METERS(928) }, 0);
+		app->fade->FadeToBlackFunction(10.0f);
+		if (position.x >= 12000)
+		{
+			pbody->body->SetTransform({ PIXEL_TO_METERS(11515), PIXEL_TO_METERS(928) }, 0);
+		}
+		if(position.x <= 12000)
+		{
+			pbody->body->SetTransform({ PIXEL_TO_METERS(12230), PIXEL_TO_METERS(928) }, 0);
+		}
 		nivel2Active = false;
 	}
 	//Camara movement
@@ -107,7 +114,7 @@ bool Player::Update(float dt)
 		app->render->camera.y = -(position.y - 550);
 	}
 
-	if (position.x >= 10680 && position.x < 12220 || position.x >= 14420)
+	if (position.x >= 10680 && position.x < 12200 || position.x >= 14420 && nivel2Active)
 	{
 		app->render->camera.x += 0;
 	}
@@ -298,12 +305,12 @@ bool Player::Update(float dt)
 			veljump.y = 5;
 		}
 		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
-			veljump.x = -8;
+			veljump.x = -12;
 			leftmode = true;
 			rightmode = false;
 		}
 		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
-			veljump.x = 8;
+			veljump.x = 12;
 			leftmode = false;
 			rightmode = true;
 		}
