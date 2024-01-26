@@ -219,17 +219,6 @@ bool Player::Update(float dt)
 			save = true;
 		}
 	}
-	if (position.x >= 10430 && position.y == 802)
-	{
-		if (!check_3)
-		{
-			app->SaveRequest();
-			check_1 = false;
-			check_2 = false;
-			check_3 = true;
-			save = true;
-		}
-	}
 
 	//Portals 
 	if (portal)
@@ -431,7 +420,7 @@ bool Player::Update(float dt)
 
 
 		// Configura la posición de respawn según el checkpoint actual
-		if (!check_1 && !check_2 && !check_3)
+		if (!check_1 && !check_2)
 		{
 			pbody->body->SetTransform({ PIXEL_TO_METERS(-620 + 16), PIXEL_TO_METERS(950) }, 0);
 			app->render->camera.x = 0;
@@ -445,11 +434,6 @@ bool Player::Update(float dt)
 		{
 			pbody->body->SetTransform({ PIXEL_TO_METERS(5990 + 16), PIXEL_TO_METERS(1010) }, 0);
 			app->render->camera.x = -6610;
-		}
-		else if (check_3)
-		{
-			pbody->body->SetTransform({ PIXEL_TO_METERS(10436), PIXEL_TO_METERS(802) }, 0);
-			app->render->camera.x = -9535;
 		}
 
 		jumping = false;

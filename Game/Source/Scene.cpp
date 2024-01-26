@@ -262,6 +262,7 @@ bool Scene::Update(float dt)
 {
 	currentportal->Update();
 	currentcheckpoint->Update();
+	currentcheckpoint2->Update();
 	currentQ->Update();
 	currentClick->Update();
 	currentOne->Update();
