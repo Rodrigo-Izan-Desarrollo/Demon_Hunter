@@ -325,6 +325,8 @@ bool Scene::PostUpdate()
 	app->render->DrawTexture(Portal, 3328, 1536, &currentportal->GetCurrentFrame());
 	app->render->DrawTexture(Portal, 4672, 1314, &currentportal->GetCurrentFrame());
 	app->render->DrawTexture(Portal, 8660, 96, &currentportal->GetCurrentFrame(), SDL_FLIP_HORIZONTAL);
+	app->render->DrawTexture(Portal, 14496, 1120, &currentportal->GetCurrentFrame());
+	app->render->DrawTexture(Portal, 15232, 1024, &currentportal->GetCurrentFrame(), SDL_FLIP_HORIZONTAL);
 
 	app->render->DrawTexture(Carteles, 928, 832, &currentQ->GetCurrentFrame());
 	app->render->DrawTexture(Carteles, 980, 832, &currentClick->GetCurrentFrame());

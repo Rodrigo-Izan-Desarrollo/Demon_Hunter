@@ -219,6 +219,14 @@ bool Player::Update(float dt)
 			save = true;
 		}
 	}
+	if (check_3)
+	{
+		app->SaveRequest();
+		check_1 = false;
+		check_2 = false;
+		check_3 = true;
+		save = true;
+	}
 
 	//Portals 
 	if (portal)
@@ -240,14 +248,14 @@ bool Player::Update(float dt)
 
 		if (position.x > 14300 && position.x < 14500)
 		{
-			pbody->body->SetTransform({ PIXEL_TO_METERS(15328), PIXEL_TO_METERS(1184) }, 0);
+			pbody->body->SetTransform({ PIXEL_TO_METERS(15232), PIXEL_TO_METERS(1024) }, 0);
 			leftmode = true;
 			rightmode = false;
 		}
 
 		if (position.x > 14700)
 		{
-			pbody->body->SetTransform({ PIXEL_TO_METERS(14450), PIXEL_TO_METERS(1216) }, 0);
+			pbody->body->SetTransform({ PIXEL_TO_METERS(14496), PIXEL_TO_METERS(1120) }, 0);
 			rightmode = true;
 			leftmode = false;
 		}
@@ -710,6 +718,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	switch (physB->ctype) {
 	case ColliderType::VIDA:
 		lifes++;
+		app->audio->PlayFx(pick_up_Fx);
 		break;
 	case ColliderType::POWERUP_1:
 		canpower_1 = true;
