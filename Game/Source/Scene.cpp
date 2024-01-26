@@ -284,14 +284,11 @@ bool Scene::Update(float dt)
 
 	if (player->dead==true && player->lifes<=0)
 	{
-		app->fade->FadeToBlackScene(this, (Module*)app->lastScreen, 0);	
+		app->fade->FadeToBlackScene(this, (Module*)app->lastScreen, 60.0f);	
 	}
-
 
 	if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
 	{
-		app->scene->Disable();
-		app->scenePause->Enable();
 		pausa = true;
 	}
 

@@ -107,8 +107,7 @@ bool Slime::Update(float dt)
 			lastPath2 = app->map->pathfindingSuelo->GetLastPath();
 		}
 
-		if (!(app->scene->player->dead || app->scene->player->invisible)) //que si el player no esta muerto o invisible no le ataque
-		{
+		
 			onView = true;
 			iskilled = false;
 			currentAnimation = &slime;
@@ -124,11 +123,6 @@ bool Slime::Update(float dt)
 			{
 				currentAnimation = &slime_attack;
   			}
-		}
-		else
-		{
-			onView = false;
-		}
 	}
 	else
 	{
