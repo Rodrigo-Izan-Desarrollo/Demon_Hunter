@@ -32,6 +32,7 @@ enum class ColliderType {
 	WALL,
 	WALLE,
 	WALLE2,
+	TELEPORT,
 	ENEMY,
 	ENEMY_ATTACK,
 	VIDA,

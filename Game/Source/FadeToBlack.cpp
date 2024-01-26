@@ -78,7 +78,7 @@ bool FadeToBlack::PostUpdate()
 	return true;
 }
 
-bool FadeToBlack::FadeToBlackFunction(int levelIdx, float frames)
+bool FadeToBlack::FadeToBlackFunction( float frames)
 {
 	bool ret = false;
 

@@ -146,7 +146,7 @@ private:
 	Animation* currentArrow;
 
 	iPoint spawnnivel1{ 140, 925 };
-	iPoint spawnnivel2{ 12192, 928 };
+	iPoint spawnnivel2{ 12224, 928 };
 
 };
 

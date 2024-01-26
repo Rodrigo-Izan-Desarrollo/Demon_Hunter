@@ -284,8 +284,7 @@ bool Scene::Update(float dt)
 
 	if (player->dead==true && player->lifes<=0)
 	{
-		app->fade->FadeToBlackScene(this, (Module*)app->lastScreen, 0);
-		
+		app->fade->FadeToBlackScene(this, (Module*)app->lastScreen, 0);	
 	}
 
 
@@ -364,7 +363,8 @@ void Scene::nivel2funcion()
 	nivel1 = false;
 	nivel2 = true;
 	player->nivel2Active = true;
-	app->render->camera.x = -5124;
+	app->render->camera.x = spawnnivel2.x-125;
+	app->render->camera.y = spawnnivel2.y - 550;
 }
 
 // Called before quitting

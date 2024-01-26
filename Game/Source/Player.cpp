@@ -6,6 +6,7 @@
 #include "Render.h"
 #include "Scene.h"
 #include "Log.h"
+#include "FadeToBlack.h"
 #include "Point.h"
 #include "Physics.h"
 
@@ -90,6 +91,12 @@ bool Player::Update(float dt)
 	
 	b2Vec2 veljump = pbody->body->GetLinearVelocity();
 
+	if (nivel2Active)
+	{
+		app->fade->FadeToBlackFunction(120.0f);
+		pbody->body->SetTransform({ PIXEL_TO_METERS(12224), PIXEL_TO_METERS(928) }, 0);
+		nivel2Active = false;
+	}
 	//Camara movement
 	if (position.y <= 550)
 	{
@@ -100,7 +107,7 @@ bool Player::Update(float dt)
 		app->render->camera.y = -(position.y - 550);
 	}
 
-	if (position.x >= 10680 && position.x < 12250|| position.x >= 14420)
+	if (position.x >= 10680 && position.x < 12220 || position.x >= 14420)
 	{
 		app->render->camera.x += 0;
 	}
@@ -719,6 +726,9 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::VIDA:
 		lifes++;
 		app->audio->PlayFx(pick_up_Fx);
+		break;
+	case ColliderType::TELEPORT:
+		nivel2Active = true;
 		break;
 	case ColliderType::POWERUP_1:
 		canpower_1 = true;
