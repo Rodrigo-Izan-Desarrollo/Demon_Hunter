@@ -261,6 +261,7 @@ bool Scene::Update(float dt)
 {
 	currentportal->Update();
 	currentcheckpoint->Update();
+	currentcheckpoint2->Update();
 	currentQ->Update();
 	currentClick->Update();
 	currentOne->Update();
@@ -280,24 +281,13 @@ bool Scene::Update(float dt)
 		app->SaveRequest();
 		player->save = true;
 	}
-	if (app->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN)
-	{
-		Mix_VolumeMusic(0);
-	}
 
 	if (player->dead==true && player->lifes<=0)
 	{
 		app->fade->FadeToBlackScene(this, (Module*)app->lastScreen, 0);
 		
 	}
-	
-	if (app->sceneMenu->newgame == true)
-	{
-		player->position.x = 140;
-		player->position.y = 925;
-		player->pbody->body->SetTransform({ PIXEL_TO_METERS(player->position.x), PIXEL_TO_METERS(player->position.y) }, 0);
-		app->sceneMenu->newgame = false;
-	}
+
 
 	if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
 	{
@@ -329,6 +319,8 @@ bool Scene::PostUpdate()
 	app->render->DrawTexture(Portal, 3328, 1536, &currentportal->GetCurrentFrame());
 	app->render->DrawTexture(Portal, 4672, 1314, &currentportal->GetCurrentFrame());
 	app->render->DrawTexture(Portal, 8660, 96, &currentportal->GetCurrentFrame(), SDL_FLIP_HORIZONTAL);
+	app->render->DrawTexture(Portal, 14496, 1120, &currentportal->GetCurrentFrame());
+	app->render->DrawTexture(Portal, 15232, 1024, &currentportal->GetCurrentFrame(), SDL_FLIP_HORIZONTAL);
 
 	app->render->DrawTexture(Carteles, 928, 832, &currentQ->GetCurrentFrame());
 	app->render->DrawTexture(Carteles, 980, 832, &currentClick->GetCurrentFrame());

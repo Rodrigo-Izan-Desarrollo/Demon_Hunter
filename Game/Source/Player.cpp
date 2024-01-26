@@ -99,12 +99,12 @@ bool Player::Update(float dt)
 	{
 		app->render->camera.y = -(position.y - 550);
 	}
-	if (position.x >= 14500 && cameramove)
+
+	if (position.x >= 10680 && position.x < 12250|| position.x >= 14420)
 	{
 		app->render->camera.x += 0;
-		cameramove = false;
 	}
-	if (cameramove)
+	else
 	{
 		app->render->camera.x = -(position.x - 125);
 	}
@@ -219,16 +219,13 @@ bool Player::Update(float dt)
 			save = true;
 		}
 	}
-	if (position.x >= 10430 && position.y == 802)
+	if (check_3)
 	{
-		if (!check_3)
-		{
-			app->SaveRequest();
-			check_1 = false;
-			check_2 = false;
-			check_3 = true;
-			save = true;
-		}
+		app->SaveRequest();
+		check_1 = false;
+		check_2 = false;
+		check_3 = true;
+		save = true;
 	}
 
 	//Portals 
@@ -251,14 +248,14 @@ bool Player::Update(float dt)
 
 		if (position.x > 14300 && position.x < 14500)
 		{
-			pbody->body->SetTransform({ PIXEL_TO_METERS(15328), PIXEL_TO_METERS(1184) }, 0);
+			pbody->body->SetTransform({ PIXEL_TO_METERS(15100), PIXEL_TO_METERS(1024) }, 0);
 			leftmode = true;
 			rightmode = false;
 		}
 
 		if (position.x > 14700)
 		{
-			pbody->body->SetTransform({ PIXEL_TO_METERS(14450), PIXEL_TO_METERS(1216) }, 0);
+			pbody->body->SetTransform({ PIXEL_TO_METERS(14520), PIXEL_TO_METERS(1120) }, 0);
 			rightmode = true;
 			leftmode = false;
 		}
@@ -323,8 +320,8 @@ bool Player::Update(float dt)
 	{
 		//Is different because we want to stop the camera in a specific position
 		pbody->body->SetTransform({ PIXEL_TO_METERS(14000), PIXEL_TO_METERS(802) }, 0);
-		app->render->camera.x = -9535;
-		app->render->camera.y = -252;
+		//app->render->camera.x = -9535;
+		//app->render->camera.y = -252;
 	}
 
 	//Movement inputs
@@ -445,11 +442,6 @@ bool Player::Update(float dt)
 		{
 			pbody->body->SetTransform({ PIXEL_TO_METERS(5990 + 16), PIXEL_TO_METERS(1010) }, 0);
 			app->render->camera.x = -6610;
-		}
-		else if (check_3)
-		{
-			pbody->body->SetTransform({ PIXEL_TO_METERS(10436), PIXEL_TO_METERS(802) }, 0);
-			app->render->camera.x = -9535;
 		}
 
 		jumping = false;
@@ -726,6 +718,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	switch (physB->ctype) {
 	case ColliderType::VIDA:
 		lifes++;
+		app->audio->PlayFx(pick_up_Fx);
 		break;
 	case ColliderType::POWERUP_1:
 		canpower_1 = true;

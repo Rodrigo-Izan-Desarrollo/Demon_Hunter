@@ -49,7 +49,6 @@ bool LastScreen::Start()
 
 		// Disable the enable scenes
 		app->guiManager->Disable();
-		app->scene->Disable();
 	}
 	return true;
 }
@@ -74,14 +73,12 @@ bool LastScreen::Update(float dt)
 		app->audio->PlayFx(win_theme);
 	}
 	if (count > 375 && currentTexture == Gameover) {
-		app->fade->FadeToBlackScene(this, (Module*)app->sceneMenu, 0.0f);
-		app->lastScreen->Disable();
-		app->sceneMenu->Enable();
+
+		return false;
 	}
 	if (count > 250 && currentTexture == Missioncompleted) {
-		app->fade->FadeToBlackScene(this, (Module*)app->sceneMenu, 0.0f);
-		app->lastScreen->Disable();
-		app->sceneMenu->Enable();
+		return false;
+
 	}
 	else 
 	{

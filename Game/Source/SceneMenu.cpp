@@ -119,11 +119,13 @@ bool SceneMenu::Update(float dt)
 		//If the player press the button go to the scene
 		else if (btn2->state == GuiControlState::PRESSED) {
 			currentTexture = Menu_3;
+
 			app->fade->FadeToBlackScene(this, (Module*)app->scene, 60.0f);
 			app->map->Enable();
 			app->entityManager->Enable();
 			app->scene->player->lifes = 2;
 			newgame = true;
+
 		}
 
 		//If the player has a save active the button
