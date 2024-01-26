@@ -122,8 +122,6 @@ bool SceneMenu::Update(float dt)
 			app->fade->StartFadeToBlack(this, (Module*)app->scene, 60);
 			app->sceneMenu->Disable();
 			app->scene->Enable();
-			app->scene->player->lifes = 2;
-			newgame = true;
 		}
 
 		//If the player has a save active the button
