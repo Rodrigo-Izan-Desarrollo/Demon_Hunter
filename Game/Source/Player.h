@@ -144,7 +144,7 @@ public:
 	bool Godmode=false;
 
 		//Player canmove
-	bool canmove = true;
+	bool canmove=true;
 
 		//Player is dead
 	bool dead = false;

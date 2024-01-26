@@ -51,6 +51,6 @@
 	<guiManager />
 	<fadetoblack />
 	<renderer>
-		<camera x="-13672" y="-508" />
+		<camera x="-12185" y="-392" />
 	</renderer>
 </game_state>

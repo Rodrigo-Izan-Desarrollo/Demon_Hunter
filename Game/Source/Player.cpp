@@ -93,8 +93,10 @@ bool Player::Update(float dt)
 
 	if (nivel2Active)
 	{
-		app->fade->FadeToBlackFunction(120.0f);
-		pbody->body->SetTransform({ PIXEL_TO_METERS(12224), PIXEL_TO_METERS(928) }, 0);
+		app->fade->FadeToBlackFunction(10.0f);
+
+		pbody->body->SetTransform({ PIXEL_TO_METERS(12230), PIXEL_TO_METERS(928) }, 0);
+	
 		nivel2Active = false;
 	}
 	//Camara movement
@@ -107,7 +109,7 @@ bool Player::Update(float dt)
 		app->render->camera.y = -(position.y - 550);
 	}
 
-	if (position.x >= 10680 && position.x < 12220 || position.x >= 14420)
+	if (position.x >= 10680 && position.x < 12200 || position.x >= 14420)
 	{
 		app->render->camera.x += 0;
 	}
@@ -231,7 +233,6 @@ bool Player::Update(float dt)
 		app->SaveRequest();
 		check_1 = false;
 		check_2 = false;
-		check_3 = true;
 		save = true;
 	}
 
@@ -298,12 +299,12 @@ bool Player::Update(float dt)
 			veljump.y = 5;
 		}
 		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
-			veljump.x = -8;
+			veljump.x = -12;
 			leftmode = true;
 			rightmode = false;
 		}
 		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
-			veljump.x = 8;
+			veljump.x = 12;
 			leftmode = false;
 			rightmode = true;
 		}
@@ -325,10 +326,7 @@ bool Player::Update(float dt)
 	}
 	if (app->input->GetKey(SDL_SCANCODE_F4) == KEY_DOWN && !dead)
 	{
-		//Is different because we want to stop the camera in a specific position
-		pbody->body->SetTransform({ PIXEL_TO_METERS(14000), PIXEL_TO_METERS(802) }, 0);
-		//app->render->camera.x = -9535;
-		//app->render->camera.y = -252;
+		pbody->body->SetTransform({ PIXEL_TO_METERS(12230), PIXEL_TO_METERS(928) }, 0);
 	}
 
 	//Movement inputs
@@ -448,6 +446,11 @@ bool Player::Update(float dt)
 		else if (check_2)
 		{
 			pbody->body->SetTransform({ PIXEL_TO_METERS(5990 + 16), PIXEL_TO_METERS(1010) }, 0);
+			app->render->camera.x = -6610;
+		}
+		else if (check_3)
+		{
+			pbody->body->SetTransform({ PIXEL_TO_METERS(12230), PIXEL_TO_METERS(928) }, 0);
 			app->render->camera.x = -6610;
 		}
 
@@ -729,6 +732,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::TELEPORT:
 		nivel2Active = true;
+		check_3 = true;
 		break;
 	case ColliderType::POWERUP_1:
 		canpower_1 = true;
