@@ -151,9 +151,6 @@ bool SceneMenu::Update(float dt)
 		else if (btn4->state == GuiControlState::PRESSED) {
 			currentTexture = Menu_8;
 			app->fade->FadeToBlackScene(this, (Module*)app->sceneSettings, 60.0f);
-			app->sceneMenu->Disable();
-			app->scene->Disable();
-			app->sceneSettings->Enable();
 		}
 
 		else if (btn5->state == GuiControlState::FOCUSED) {
