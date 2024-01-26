@@ -141,6 +141,8 @@ bool Scene::Start()
 		checkpoint.PushBack({ 64,0,32,32 });
 		checkpoint.PushBack({ 96,0,32,32 });
 		checkpoint.PushBack({ 128,0,32,32 });
+		checkpoint.PushBack({ 160,0,32,32 });
+		checkpoint.PushBack({ 192,0,32,32 });
 		checkpoint.speed = 0.15f;
 		checkpoint.loop = false;
 
@@ -150,64 +152,66 @@ bool Scene::Start()
 		checkpoint_2.PushBack({ 0,0,32,32 });
 		checkpoint_2.PushBack({ 32,0,32,32 });
 		checkpoint_2.PushBack({ 64,0,32,32 });
-		checkpoint_2.PushBack({ 96,0,32,32 });
+		checkpoint_2.PushBack({96,0,32,32});
 		checkpoint_2.PushBack({ 128,0,32,32 });
+		checkpoint_2.PushBack({ 160,0,32,32 });
+		checkpoint_2.PushBack({ 192,0,32,32 });
 		checkpoint_2.speed = 0.15f;
 		checkpoint_2.loop = false;
 
 		checkpoint2_2.PushBack({ 0,0,32,32 });
 		checkpoint2_2.loop = false;
 
-		portalAnim.PushBack({ 0,14,38,36 });
-		portalAnim.PushBack({ 48,14,38,36 });
-		portalAnim.PushBack({ 96,14,38,36 });
-		portalAnim.PushBack({ 144,14,38,36 });
+		portalAnim.PushBack({ 0,0,30,31 });
+		portalAnim.PushBack({ 30,0,30,31 });
+		portalAnim.PushBack({ 60,0,30,31 });
+		portalAnim.PushBack({ 90,0,30,31 });
 		portalAnim.speed = 0.125f;
 		portalAnim.loop = true;
 
 		Q.PushBack({ 0,0,40,50 });
 		Q.PushBack({ 44,0,40,50 });
-		Q.speed= 0.2f;
+		Q.speed= 0.075f;
 		Q.loop = true;
 
 		Click.PushBack({ 88,0,31,50 });
 		Click.PushBack({ 123,0,31,50 });
-		Click.speed = 0.2f;
+		Click.speed = 0.075f;
 		Click.loop = true;
 
 		Arrow.PushBack({ 158,0,37,50 });
 		Arrow.PushBack({ 199,0,37,50 });
-		Arrow.speed = 0.2f;
+		Arrow.speed = 0.075f;
 		Arrow.loop = true;
 
 		One.PushBack({ 240,0,37,50 });
 		One.PushBack({ 281,0,37,50 });
-		One.speed = 0.2f;
+		One.speed = 0.075f;
 		One.loop = true;
 
-		LSHIFT.PushBack({ 322,0,66,50 });
-		LSHIFT.PushBack({ 390,0,66,50 });
-		LSHIFT.speed = 0.2f;
+		LSHIFT.PushBack({ 321,0,69,50 });
+		LSHIFT.PushBack({ 389,0,69,50 });
+		LSHIFT.speed = 0.075f;
 		LSHIFT.loop = true;
 
-		Two.PushBack({ 462,0,37,50 });
-		Two.PushBack({ 503,0,35,50 });
-		Two.speed = 0.2f;
+		Two.PushBack({ 462,0,38,50 });
+		Two.PushBack({ 502,0,38,50 });
+		Two.speed = 0.075f;
 		Two.loop = true;
 
 		E.PushBack({ 544,0,37,50 });
 		E.PushBack({ 585,0,37,50 });
-		E.speed = 0.2f;
+		E.speed = 0.075f;
 		E.loop = true;
 
 		Three.PushBack({ 626,0,37,50 });
 		Three.PushBack({ 667,0,37,50 });
-		Three.speed = 0.2f;
+		Three.speed = 0.075f;
 		Three.loop = true;
 
 		R.PushBack({ 708,0,37,50 });
 		R.PushBack({ 749,0,37,50 });
-		R.speed = 0.2f;
+		R.speed = 0.075f;
 		R.loop = true;
 		
 		
@@ -324,15 +328,15 @@ bool Scene::PostUpdate()
 	bool ret = true;
 
 	//Draw texture
-	app->render->DrawTexture(Portal, 3328, 1532, &currentportal->GetCurrentFrame());
-	app->render->DrawTexture(Portal, 4672, 1310, &currentportal->GetCurrentFrame());
-	app->render->DrawTexture(Portal, 8660, 92, &currentportal->GetCurrentFrame(), SDL_FLIP_HORIZONTAL);
+	app->render->DrawTexture(Portal, 3328, 1536, &currentportal->GetCurrentFrame());
+	app->render->DrawTexture(Portal, 4672, 1314, &currentportal->GetCurrentFrame());
+	app->render->DrawTexture(Portal, 8660, 96, &currentportal->GetCurrentFrame(), SDL_FLIP_HORIZONTAL);
 
 	app->render->DrawTexture(Carteles, 928, 832, &currentQ->GetCurrentFrame());
 	app->render->DrawTexture(Carteles, 980, 832, &currentClick->GetCurrentFrame());
 
 	app->render->DrawTexture(Carteles, 3328, 1350, &currentOne->GetCurrentFrame());
-	app->render->DrawTexture(Carteles, 3392, 1350, &currentLSHIFT->GetCurrentFrame());
+	app->render->DrawTexture(Carteles, 3385, 1350, &currentLSHIFT->GetCurrentFrame());
 
 	app->render->DrawTexture(Carteles, 4704, 1255, &currentTwo->GetCurrentFrame());
 	app->render->DrawTexture(Carteles, 4768, 1255, &currentE->GetCurrentFrame());
