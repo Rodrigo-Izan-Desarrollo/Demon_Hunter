@@ -99,12 +99,12 @@ bool Player::Update(float dt)
 	{
 		app->render->camera.y = -(position.y - 550);
 	}
-	if (position.x >= 14500 && cameramove)
+
+	if (position.x >= 10680 && position.x < 12250|| position.x >= 14420)
 	{
 		app->render->camera.x += 0;
-		cameramove = false;
 	}
-	if (cameramove)
+	else
 	{
 		app->render->camera.x = -(position.x - 125);
 	}
@@ -320,8 +320,8 @@ bool Player::Update(float dt)
 	{
 		//Is different because we want to stop the camera in a specific position
 		pbody->body->SetTransform({ PIXEL_TO_METERS(14000), PIXEL_TO_METERS(802) }, 0);
-		app->render->camera.x = -9535;
-		app->render->camera.y = -252;
+		//app->render->camera.x = -9535;
+		//app->render->camera.y = -252;
 	}
 
 	//Movement inputs
@@ -428,7 +428,7 @@ bool Player::Update(float dt)
 
 
 		// Configura la posición de respawn según el checkpoint actual
-		if (!check_1 && !check_2)
+		if (!check_1 && !check_2 && !check_3)
 		{
 			pbody->body->SetTransform({ PIXEL_TO_METERS(-620 + 16), PIXEL_TO_METERS(950) }, 0);
 			app->render->camera.x = 0;
