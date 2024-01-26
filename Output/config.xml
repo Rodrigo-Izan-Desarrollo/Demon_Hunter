@@ -39,6 +39,7 @@
 				soundportal= "Assets/Audio/Fx/Portal.wav" 
 		/>
 	  
+	  
 		<slime x="1200" y="994" 
 			   texturepathenemy_1="Assets/Textures/Enemies/Slime_1.png" 
 			   musicpathslime= "Assets/Audio/Fx/Slimedeath.wav"
@@ -60,101 +61,132 @@
 			   musicpathslime= "Assets/Audio/Fx/Slimedeath.wav"
 		/>
 		<slime x="7900" y="1350"
-		 texturepathenemy_1="Assets/Textures/Enemies/Slime_1.png"
-		 musicpathslime= "Assets/Audio/Fx/Slimedeath.wav"
+				texturepathenemy_1="Assets/Textures/Enemies/Slime_1.png"
+				musicpathslime= "Assets/Audio/Fx/Slimedeath.wav"
+		/>
+		<slime x="13408" y="704"
+				texturepathenemy_1="Assets/Textures/Enemies/Slime_1.png"
+				musicpathslime= "Assets/Audio/Fx/Slimedeath.wav"
+		/>
+		<slime x="13824" y="704"
+				texturepathenemy_1="Assets/Textures/Enemies/Slime_1.png"
+				musicpathslime= "Assets/Audio/Fx/Slimedeath.wav"
 		/>
 
-	  <slimevolador x="2560" y="672" 
+	  
+		<slimevolador x="2560" y="672" 
 					  leftmode="true" rightmode="false"
 					  texturepathenemy_3="Assets/Textures/Enemies/Dragon_bomba.png"
 					  musicpathslime= "Assets/Audio/Fx/Slimedeath.wav"
-					  />
+		/>
 		<slimevolador x="2760" y="672"
 					  leftmode="false" rightmode="true"
 					  texturepathenemy_3="Assets/Textures/Enemies/Dragon_bomba.png"
 	  				  musicpathslime= "Assets/Audio/Fx/Slimedeath.wav"
-					  />
+		/>
 		<slimevolador x="4750" y="576"
 					  leftmode="true" rightmode="false"
 					  texturepathenemy_3="Assets/Textures/Enemies/Dragon_bomba.png"
 					  musicpathslime= "Assets/Audio/Fx/Slimedeath.wav"
-					  />
+		/>
 		<slimevolador x="4900" y="576"
 					  leftmode="false" rightmode="true"
 					  texturepathenemy_3="Assets/Textures/Enemies/Dragon_bomba.png"
 					  musicpathslime= "Assets/Audio/Fx/Slimedeath.wav"
-					  />
+		/>
 		<slimevolador x="5000" y="576"
 					  leftmode="true" rightmode="false"
 					  texturepathenemy_3="Assets/Textures/Enemies/Dragon_bomba.png"
 					  musicpathslime= "Assets/Audio/Fx/Slimedeath.wav"
-					  />
+		/>
 		<slimevolador x="7264" y="608"
 					  leftmode="false" rightmode="true"
 					  texturepathenemy_3="Assets/Textures/Enemies/Dragon_bomba.png"
 					  musicpathslime= "Assets/Audio/Fx/Slimedeath.wav"
-					  />
+		/>
 		<slimevolador x="7584" y="416"
 					  leftmode="false" rightmode="true"
 					  texturepathenemy_3="Assets/Textures/Enemies/Dragon_bomba.png"
 					  musicpathslime= "Assets/Audio/Fx/Slimedeath.wav"
-					  />
+		/>
 		<slimevolador x="7968" y="224"
 					  leftmode="false" rightmode="true"
 					  texturepathenemy_3="Assets/Textures/Enemies/Dragon_bomba.png"
 					  musicpathslime= "Assets/Audio/Fx/Slimedeath.wav"
-					  />
+		/>
 		<slimevolador x="8256" y="32"
 					  leftmode="false" rightmode="true"
 					  texturepathenemy_3="Assets/Textures/Enemies/Dragon_bomba.png"
 					  musicpathslime= "Assets/Audio/Fx/Slimedeath.wav"
-					  />
-	  <slimevolador x="9300" y="736"
+		/>
+		<slimevolador x="9300" y="736"
 				leftmode="false" rightmode="true"
 				texturepathenemy_3="Assets/Textures/Enemies/Dragon_bomba.png"
 				musicpathslime= "Assets/Audio/Fx/Slimedeath.wav"
-					  />
-	  <slimevolador x="9950" y="544"
-			leftmode="false" rightmode="true"
-			texturepathenemy_3="Assets/Textures/Enemies/Dragon_bomba.png"
-			musicpathslime= "Assets/Audio/Fx/Slimedeath.wav"
-					  />
-	  <slimevolador x="10650" y="544"
-			leftmode="false" rightmode="true"
-			texturepathenemy_3="Assets/Textures/Enemies/Dragon_bomba.png"
-			musicpathslime= "Assets/Audio/Fx/Slimedeath.wav"
-					  />
-	  <bigslime x="2080" y="1312" 
-			   texturepathenemy_4="Assets/Textures/Enemies/Slime_2.png"
-			   musicpathslime= "Assets/Audio/Fx/Slimedeath.wav"
+		/>
+		<slimevolador x="9950" y="544"
+				leftmode="false" rightmode="true"
+				texturepathenemy_3="Assets/Textures/Enemies/Dragon_bomba.png"
+				musicpathslime= "Assets/Audio/Fx/Slimedeath.wav"
+		/>
+		<slimevolador x="10650" y="544"
+				leftmode="false" rightmode="true"
+				texturepathenemy_3="Assets/Textures/Enemies/Dragon_bomba.png"
+				musicpathslime= "Assets/Audio/Fx/Slimedeath.wav"
+		/>
+		<slimevolador x="12352" y="672"
+				leftmode="false" rightmode="true"
+				texturepathenemy_3="Assets/Textures/Enemies/Dragon_bomba.png"
+				musicpathslime= "Assets/Audio/Fx/Slimedeath.wav"
+		/>
+		<slimevolador x="12832" y="672"
+				leftmode="false" rightmode="true"
+				texturepathenemy_3="Assets/Textures/Enemies/Dragon_bomba.png"
+				musicpathslime= "Assets/Audio/Fx/Slimedeath.wav"
+		/>
+		<slimevolador x="13472" y="448"
+				leftmode="false" rightmode="true"
+				texturepathenemy_3="Assets/Textures/Enemies/Dragon_bomba.png"
+				musicpathslime= "Assets/Audio/Fx/Slimedeath.wav"
+		/>
+		<slimevolador x="13856" y="448"
+				leftmode="false" rightmode="true"
+				texturepathenemy_3="Assets/Textures/Enemies/Dragon_bomba.png"
+				musicpathslime= "Assets/Audio/Fx/Slimedeath.wav"
 		/>
 	  
-	  <bigslime x="5000	" y="1312"
-			  texturepathenemy_4="Assets/Textures/Enemies/Slime_2.png"
-			  musicpathslime= "Assets/Audio/Fx/Slimedeath.wav"
-		/>
 	  
-	  <bigslime x="6900	" y="448 "
-		  texturepathenemy_4="Assets/Textures/Enemies/Slime_2.png"
-		  musicpathslime= "Assets/Audio/Fx/Slimedeath.wav"
+		<bigslime x="2080" y="1312" 
+				texturepathenemy_4="Assets/Textures/Enemies/Slime_2.png"
+				musicpathslime= "Assets/Audio/Fx/Slimedeath.wav"
+		/>
+		<bigslime x="5000" y="1312"
+				texturepathenemy_4="Assets/Textures/Enemies/Slime_2.png"
+				musicpathslime= "Assets/Audio/Fx/Slimedeath.wav"
+		/>
+		<bigslime x="6900" y="448"
+				texturepathenemy_4="Assets/Textures/Enemies/Slime_2.png"
+				musicpathslime= "Assets/Audio/Fx/Slimedeath.wav"
+		/>
+		<bigslime x="13250" y="1120"
+				texturepathenemy_4="Assets/Textures/Enemies/Slime_2.png"
+				musicpathslime= "Assets/Audio/Fx/Slimedeath.wav"
 		/>
 
-	  <boss x="15040" y="1216"
+	  
+		<boss x="14880" y="1056"
 			   texturepathenemy_5="Assets/Textures/Enemies/Boss-2.png"
 			   musicpathslime= "Assets/Audio/Fx/Slimedeath.wav"
 		/>
 
+	  
 	    <vida x="2016" y="1248" texturevida="Assets/Textures/Player/Vidas.png"/>
-
 	    <vida x="7072" y="384" texturevida="Assets/Textures/Player/Vidas.png"/>
+	    <vida x="13056" y="672" texturevida="Assets/Textures/Player/Vidas.png"/>
 	     
 		<powerup_1 x="3520" y="1424" texturepathpower_1="Assets/Textures/Player/power_2.png"/>
-	  
 		<powerup_2 x="4750" y="1328" texturepathpower_2="Assets/Textures/Player/power_1.png"/>
-	  
 		<powerup_3 x="8576" y="112" texturepathpower_3="Assets/Textures/Player/power_3.png"/>
-
-		<chepoint texturepathcheck ="Assets/Textures/Player/Checkpoint.png" />
 		  
 		<music musicpathambient ="Assets/Audio/Music/Ambientmusic.ogg"/>
 	  
