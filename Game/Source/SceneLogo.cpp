@@ -42,9 +42,9 @@ bool SceneLogo::Start()
 	//Textures
 	Intro_1 = app->tex->Load("Assets/Screens/Intro_1.png");
 	Intro_2 = app->tex->Load("Assets/Screens/Intro_2.png");
-	
+
 	//PLay Fx
-	logo_theme = app->audio->LoadFx("Assets/Audio/Music/Sound_efect_logo.ogg");
+	logo_theme = app->audio->LoadFx("Assets/Audio/Music/Sound_efect_logo.wav");
 	app->audio->PlayFx(logo_theme);
 
 	//Disable the enable scenes
@@ -119,8 +119,8 @@ bool SceneLogo::CleanUp()
 	SDL_DestroyTexture(Intro_1);
 	SDL_DestroyTexture(Intro_2);
 
-	//Unload Fx
-	app->audio->UnloadFx(logo_theme);
+	//Unload Music
+	app->audio->UnloadMusic("Assets/Audio/Music/Sound_efect_logo.wav");
 
 	count = 0;
 

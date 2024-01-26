@@ -213,7 +213,7 @@ bool Scene::Start()
 		
 		//Music
 			//Game music
-		app->audio->PlayMusic(configNode.child("music").attribute("musicpathambient").as_string());
+		app->audio->PlayMusic(configNode.child("music").attribute("musicpathambient").as_string(), NULL, app->audio->volume);
 		//Get the size of the window
 		app->win->GetWindowSize(windowW, windowH);
 
