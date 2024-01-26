@@ -2,46 +2,46 @@
 
 ## Objectives 
 
-Your objective is to advance to the third checkpoint while navigating through a myriad of challenges. As a player, you start with three lives and have the opportunity to respawn twice throughout the game.
+Your objective is to advance to defeat the slime king while navigating through a myriad of challenges. As a player, you start with two lives and have the opportunity to respawn twice throughout the game.
 
-Be vigilant, as various types of obstacles await, and appearances can be deceiving. Don't underestimate even the simplest hurdles, as they may hold unexpected surprises. Stay focused, strategize wisely, and aim to reach that third checkpoint with at least one life intact. Good luck!
+Be careful, as various types of obstacles await, and appearances can be deceiving. Don't underestimate even the simplest hurdles, as they may hold unexpected surprises. Stay focused, strategize wisely, and aim to reach that third checkpoint with at least one life intact. Good luck!
 
 
 ## NEW FEATURES!!
 ### Player
-* Enabled the ability to attack
-* Implementation of powerups “You can switch between them”
-  * 1.More speed
-  * 2.More damage 
+* Implementation of powerups abilities
+  * 1.More speed and dashing
+  * 2.Additional attack
   * 3.Can get invisible
-* Automatic respawn
+* New Sound effects
 * Implementation of timers for habilies
   * Change power-up: 15s
   * Get invisible: 6s
   * Invisible couldown: 6s
 * Sound effects 
-* New type for idle animation: sleeping “Try to find it 🙂”
+* New powerup that monopolizes all the abilities“Try to find it 🙂”
 ### Map
  * New map composition
-*  Added two types of enemies “Each one with their behaviors”
-   *  Slime “Walk”
-   *  Bomber “Fly”
-*  Added three type of items “They are hidden look,  For them”
-   *  Powerup-1
-   *  Powerup-2
-   *  Powerup-3
-*  New checkpoint
-*  Adjusted map generation
-*  Adjusted camara movement
-*  Added navigation layer
-*  Added portal system after getting powerups
+* Added a new types of enemy
+   * Big Silme “Walk”
+*  Added new type of items
+   *  Lives “If you take one the player gets on more live”
+*  Adjusted map generation and camera movement
+*  Improved the portal system
+*  Added new map animations
+*  Added HUD
+*  New checkpoint logig that automatically save
+*  **Added a Second Stage**
+*  **Added the Silme Kings as a boss**
 ### Code
-*  Save and load implementation for:
-   *  Player
-   *  Enemies
-   *  Items
-   *  Camera  
-
+*  Added GuiManager and GuiControls
+*  Added Fade to Black
+*  New Scenes implemented
+   *  Logo Scene
+   *  Menu Scene
+   *  Settings Scene
+   *  Pause Scene
+   *  Last Scene _It changes depending if you die or you win_
 ## How to play 
 * Movement 
   * For walking: Keyboard = A/D 
@@ -52,11 +52,13 @@ Be vigilant, as various types of obstacles await, and appearances can be deceivi
   * For atack: Keyboard = Q / LEFT_CLICK 
 * Power-up’s
   * Activate powerup_1: Keyboard = 1
+    * Dashing: Keyboard = L_SHIFT 
   * Activate powerup_2: Keyboard = 2
+    * Light Sowrd: Keyboard = E 
   * Activate powerup_3: Keyboard = 3
-    * Get invisible: Keyboard = R (powerup_3 activated)
+    * Get invisible: Keyboard = R
   * Activate to use all power ups: Keyboard = P
-
+  * Activate powerup_4: Keyboard = 4 _You can use all the abilities with the same keyboard inputs_
 ## Debug options 
 * TP 
   * To respawn: Keyboard = F1 
@@ -73,15 +75,25 @@ Be vigilant, as various types of obstacles await, and appearances can be deceivi
 * Godmode 
   * Activate godmode: Keyboard = F10 
 * Cap fps 
-  * Cap to 30 fps: Keyboard = F11 
-
+  * Cap to 30 fps: Keyboard = F11
+* Activate pause menu in scene 
+  * Activate pause menu: Keyboard = M
 ## Additional comments  
 * We would like to express our gratitude to our teacher for their guidance and support throughout the development process. 
 * This project is licensed under an unmodified MIT license, which is an OSI-certified license that allows static linking with closed source software. Check [Mozilla Public License] [LICENSE](https://www.mozilla.org/en-US/MPL/) for further details. 
-* Link to the project: [https://github.com/Rodrigo-Izan-Desarrollo/Demon_Hunter](https://github.com/Rodrigo-Izan-Desarrollo/Demon_Hunter)
 * "_If you save with an enemy alive and then you kill it when you load the enemy will be dead because we want to be like this for future updates_"
-* "_The bomber does not dodge structures for gameplay propuses"_
-* "_When you start Realize you appear attacking since you attack with the left click of the mouse, it is solved either by clicking it again, sorry for the inconvenience._"
+## Repaired Bugs 
+* Attacking at the start of the gameplay
+* Pathfinding bomber/slime volador
+* Pathfinding at realise mode
+* Save and Load of player lives
+## Known bugs 
+* The music at Logo scene is not working
+* You can not modify the audio
+* The full screen option in Settings scene not always works well
+* In some scenes the FPS are not stables
+* When you use light sword beeing in leftmode the player sprites move to
+the right
 ## Team members
 * Izan Sánchez Lozano([@izansl](https://github.com/izansl)) 
 * Rodrigo Álvarez Moize([@Rodrigomoize](https://github.com/Rodrigomoize))
