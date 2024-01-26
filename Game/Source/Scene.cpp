@@ -287,6 +287,10 @@ bool Scene::Update(float dt)
 		app->fade->FadeToBlackScene(this, (Module*)app->lastScreen, 60.0f);	
 	}
 
+	if (boss->death)
+	{
+		app->fade->FadeToBlackScene(this, (Module*)app->lastScreen, 60.0f);
+	}
 	if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
 	{
 		pausa = true;
