@@ -123,8 +123,6 @@ bool SceneMenu::Update(float dt)
 			app->fade->FadeToBlackScene(this, (Module*)app->scene, 60.0f);
 			app->map->Enable();
 			app->entityManager->Enable();
-			app->scene->player->lifes = 2;
-			newgame = true;
 
 		}
 
@@ -141,7 +139,6 @@ bool SceneMenu::Update(float dt)
 			app->fade->FadeToBlackScene(this, (Module*)app->scene, 60.0f);
 			app->map->Enable();
 			app->entityManager->Enable();
-			app->scene->Enable();
 		}
 
 		else if (btn4->state == GuiControlState::FOCUSED) {

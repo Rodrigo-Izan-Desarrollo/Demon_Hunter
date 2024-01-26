@@ -83,8 +83,6 @@ bool ScenePause::PreUpdate()
 		currentTexture = Pause_7;
 		//Return to the main menu
 		app->fade->FadeToBlackScene(this, (Module*)app->sceneMenu, 60.0f);
-		app->scenePause->Disable();
-		app->sceneMenu->Enable();
 	}
 
 	if (btn2State == GuiControlState::FOCUSED)
@@ -107,8 +105,6 @@ bool ScenePause::PreUpdate()
 		currentTexture = Pause_5;
 		//Go to the settings menu
 		app->fade->FadeToBlackScene(this, (Module*)app->sceneSettings, 60.0f);
-		app->scenePause->Disable();
-		app->sceneSettings->Enable();
 	}
 
 	if (btn4State == GuiControlState::FOCUSED)

@@ -41,12 +41,21 @@ bool LastScreen::Start()
 
 		// Textures
 		Gameover = app->tex->Load("Assets/Screens/Menu_gameover.png");
-		Missioncompleted = app->tex->Load("Assets/Screens/Completed_1.png");
 
 		// Initialize fx
 		over_theme = app->audio->LoadFx("Assets/Audio/Fx/Game_over.wav");// 6s
 		win_theme = app->audio->LoadFx("Assets/Audio/Fx/Mission_completed.wav");// 4s
 
+		if (app->scene->boss->death)
+		{
+			app->audio->PlayFx(win_theme);
+		}
+		if (app->scene->player->dead)
+		{
+			app->audio->PlayFx(over_theme);
+		}
+
+		currentTexture = Gameover;
 		// Disable the enable scenes
 		app->guiManager->Disable();
 	}
@@ -62,23 +71,12 @@ bool LastScreen::PreUpdate()
 // Called each loop iteration
 bool LastScreen::Update(float dt)
 {
-	if (app->scene->player->dead==true && app->scene->player->lifes<=0)
-	{
-		currentTexture = Gameover;
-		app->audio->PlayFx(over_theme);
-	}
-	else
-	{
-		currentTexture = Missioncompleted;
-		app->audio->PlayFx(win_theme);
-	}
-	if (count > 375 && currentTexture == Gameover) {
+	if (count > 375 && app->scene->player->dead) {
 
 		return false;
 	}
-	if (count > 250 && currentTexture == Missioncompleted) {
+	if (count> 250 && app->scene->boss->death) {
 		return false;
-
 	}
 	else 
 	{
@@ -91,8 +89,11 @@ bool LastScreen::Update(float dt)
 bool LastScreen::PostUpdate()
 {
 	bool ret = true;
+	if (app->scene->player->dead)
+	{
+		app->render->DrawTexture(currentTexture, app->scene->player->position.x-125, app->scene->player->position.y-550);
+	}
 
-	app->render->DrawTexture(currentTexture, app->scene->player->position.x-125,app->scene->player->position.y - 550);
 	return ret;
 }
 
