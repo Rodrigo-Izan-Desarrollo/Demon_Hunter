@@ -87,7 +87,7 @@ bool GuiManager::Update(float dt)
 
 	const char* miVariable = buffer;
 
-	app->render->DrawText(miVariable, 60, 25, 35, 35);
+	app->render->DrawText(miVariable, 60, 20, 30, 45);
 
 	return true;
 }
