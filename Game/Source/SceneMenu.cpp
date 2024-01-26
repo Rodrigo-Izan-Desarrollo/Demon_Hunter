@@ -119,7 +119,7 @@ bool SceneMenu::Update(float dt)
 		//If the player press the button go to the scene
 		else if (btn2->state == GuiControlState::PRESSED) {
 			currentTexture = Menu_3;
-			app->fade->StartFadeToBlack(this, (Module*)app->scene, 60);
+			app->fade->FadeToBlackScene(this, (Module*)app->scene, 30.0f);
 			app->sceneMenu->Disable();
 			app->scene->Enable();
 			app->scene->player->lifes = 2;
@@ -135,7 +135,7 @@ bool SceneMenu::Update(float dt)
 		}
 		//If the player has a save and press the button go to the scene
 		else if (btn3->state == GuiControlState::PRESSED) {
-			app->fade->StartFadeToBlack(this, (Module*)app->scene, 60);
+			app->fade->FadeToBlackScene(this, (Module*)app->scene, 30.0f);
 			currentTexture = Menu_5;
 			app->sceneMenu->Disable();
 			app->LoadRequest();
@@ -148,7 +148,7 @@ bool SceneMenu::Update(float dt)
 		//If the player press the button go to the scenesettings
 		else if (btn4->state == GuiControlState::PRESSED) {
 			currentTexture = Menu_8;
-			app->fade->StartFadeToBlack(this, (Module*)app->sceneSettings, 60);
+			app->fade->FadeToBlackScene(this, (Module*)app->sceneSettings, 30.0f);
 			app->sceneMenu->Disable();
 			app->scene->Disable();
 			app->sceneSettings->Enable();

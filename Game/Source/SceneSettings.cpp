@@ -94,7 +94,7 @@ bool SceneSettings::Update(float dt)
 	{
 		if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		{
-			app->fade->StartFadeToBlack(this, (Module*)app->sceneMenu, 10);
+			app->fade->FadeToBlackScene(this, (Module*)app->sceneMenu, 60.0f);
 			app->sceneSettings->Disable();
 			app->sceneMenu->Enable();
 		}
@@ -104,7 +104,7 @@ bool SceneSettings::Update(float dt)
 	{
 		if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		{
-			app->fade->StartFadeToBlack(this, (Module*)app->scenePause, 10);
+			app->fade->FadeToBlackScene(this, (Module*)app->scenePause, 60.0f);
 			app->sceneSettings->Disable();
 			app->scenePause->Enable();
 		}

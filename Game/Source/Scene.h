@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "Slime.h"
 #include "Bomber.h"
+#include "Physics.h"
 #include "BigSlime.h"
 #include "Boss.h"
 #include "Vida.h"
@@ -41,6 +42,8 @@ public:
 	// Called before all Updates
 	bool PostUpdate();
 
+
+
 	// Called before quitting
 	bool CleanUp();
 	
@@ -63,6 +66,14 @@ public:
 	Powerup_3* powerup_3;
 
 	iPoint GetPLayerPosition();
+
+	void nivel1funcion();
+	void nivel2funcion();
+	bool nivel2Activo = false;
+	bool nivel1 = false;
+	bool nivel2= false;
+
+
 
 	virtual bool LoadState(pugi::xml_node node);
 	virtual bool SaveState(pugi::xml_node node);
@@ -133,6 +144,9 @@ private:
 
 	Animation Arrow;
 	Animation* currentArrow;
+
+	iPoint spawnnivel1{ 140, 925 };
+	iPoint spawnnivel2{ 12192, 928 };
 
 };
 

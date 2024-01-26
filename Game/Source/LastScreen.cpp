@@ -74,12 +74,12 @@ bool LastScreen::Update(float dt)
 		app->audio->PlayFx(win_theme);
 	}
 	if (count > 375 && currentTexture == Gameover) {
-		app->fade->StartFadeToBlack(this, (Module*)app->sceneMenu, 0);	
+		app->fade->FadeToBlackScene(this, (Module*)app->sceneMenu, 0.0f);
 		app->lastScreen->Disable();
 		app->sceneMenu->Enable();
 	}
 	if (count > 250 && currentTexture == Missioncompleted) {
-		app->fade->StartFadeToBlack(this, (Module*)app->sceneMenu, 0);
+		app->fade->FadeToBlackScene(this, (Module*)app->sceneMenu, 0.0f);
 		app->lastScreen->Disable();
 		app->sceneMenu->Enable();
 	}

@@ -8,42 +8,42 @@
 	<sceneLogo />
 	<scenePause />
 	<scene>
-		<playerposition x="3403" y="1058" />
+		<playerposition x="3387" y="1042" />
 		<modes sleeping="false" dead="false" canmove="true" inground="true" rightmode="true" leftmode="false" caninv="true" God-mode="true" lifes="2" save="true" />
 		<canpower canpower-1="false" canpower-2="false" canpower-3="false" />
 		<power power-1="false" power-2="false" power-3="false" canchange="true" />
 		<poweritem poweritem-1="false" poweritem-2="false" poweritem-3="false" />
-		<enemy1 death="false" x="1128" y="994" />
-		<enemy2 death="false" x="2886" y="1186" />
-		<enemy3 death="false" x="2937" y="1186" />
-		<enemy4 death="false" x="7279" y="1186" />
-		<enemy5 death="false" x="7807" y="1373" />
-		<enemy6 death="false" x="7902" y="1374" />
-		<venemy1 x="2415" y="672" />
-		<venemy2 x="2904" y="672" />
-		<venemy3 x="4605" y="576" />
-		<venemy4 x="4831" y="576" />
-		<venemy5 x="5068" y="576" />
-		<venemy6 x="7408" y="608" />
-		<venemy7 x="7728" y="416" />
-		<venemy8 x="8112" y="224" />
-		<venemy9 x="8400" y="32" />
-		<venemy10 x="9444" y="736" />
-		<venemy11 x="10094" y="544" />
-		<venemy12 x="10794" y="544" />
-		<boss1 x="15046" y="1363" />
-		<bigslime1 x="2091" y="1309" />
-		<bigslime2 x="4928" y="1309" />
-		<bigslime3 x="6828" y="445" />
+		<enemy1 death="false" x="1112" y="977" />
+		<enemy2 death="false" x="2869" y="1170" />
+		<enemy3 death="false" x="2921" y="1170" />
+		<enemy4 death="false" x="7263" y="1170" />
+		<enemy5 death="false" x="7791" y="1357" />
+		<enemy6 death="false" x="7885" y="1358" />
+		<venemy1 x="2399" y="656" />
+		<venemy2 x="2888" y="656" />
+		<venemy3 x="4589" y="560" />
+		<venemy4 x="4815" y="560" />
+		<venemy5 x="5052" y="560" />
+		<venemy6 x="7392" y="592" />
+		<venemy7 x="7712" y="400" />
+		<venemy8 x="8095" y="208" />
+		<venemy9 x="8384" y="16" />
+		<venemy10 x="9427" y="719" />
+		<venemy11 x="10077" y="528" />
+		<venemy12 x="10777" y="528" />
+		<boss1 x="15029" y="1347" />
+		<bigslime1 x="2075" y="1293" />
+		<bigslime2 x="4912" y="1293" />
+		<bigslime3 x="6812" y="428" />
 	</scene>
 	<sceneLogo />
 	<sceneLogo />
 	<sceneLogo />
-	<FadeToBlack />
 	<:anonymous />
 	<entitymanager />
 	<guiManager />
+	<fadetoblack />
 	<renderer>
-		<camera x="-3272" y="-508" />
+		<camera x="-3278" y="-508" />
 	</renderer>
 </game_state>

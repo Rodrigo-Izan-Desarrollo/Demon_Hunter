@@ -1,24 +1,38 @@
-#pragma once
 #ifndef __FADETOBLACK_H__
 #define __FADETOBLACK_H__
 
 #include "Module.h"
-#include "External/SDL/include/SDL_rect.h"
+#include "SDL\include\SDL_rect.h"
+#include "Textures.h"
 
 class FadeToBlack : public Module
 {
 public:
-	FadeToBlack(App* application, bool start_enabled = true);
+	//Constructor
+	FadeToBlack(App* app, bool start_enabled = true);
 
-	~FadeToBlack();
+	//Destructor
+	virtual ~FadeToBlack();
 
+	// Called when the module is activated
+	// Enables the blending mode for transparency
 	bool Start();
 
+	// Called at the middle of the application loop
+	// Updates the fade logic
 	bool Update(float dt);
 
+	// Called at the end of the application loop
+	// Performs the render call of a black rectangle with transparency
 	bool PostUpdate();
-	//call another module and starts the proces to fade
-	bool StartFadeToBlack(Module* toDisable, Module* toEnable, float frames = 60);
+
+	// Called from another module
+	// Starts the fade process which has two steps, fade_out and fade_in
+	// After the first step, the modules should be switched
+	bool FadeToBlackFunction(int levelIdx, float frames);
+
+	bool FadeToBlackScene(Module* moduleToDisable, Module* moduleToEnable, float frames);
+
 private:
 
 	enum Fade_Step
@@ -26,16 +40,22 @@ private:
 		NONE,
 		TO_BLACK,
 		FROM_BLACK
-	}currentStep = Fade_Step::NONE;
+	} currentStep = Fade_Step::NONE;
 
-	//frame count
+	// A frame count system to handle the fade time and ratio
 	Uint32 frameCount = 0;
 	Uint32 maxFadeFrames = 0;
-	//rectangle of the screen
+	int levelIdx = 0;
+
+	// The rectangle of the screen, used to render the black rectangle
 	SDL_Rect screenRect;
 
+	bool active = false;
+
+public:
+	bool fadeDone = false;
 	Module* moduleToEnable = nullptr;
 	Module* moduleToDisable = nullptr;
 };
 
-#endif //__MODULEFADETOBLACK_H__
+#endif //__FADETOBLACK_H__

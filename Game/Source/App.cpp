@@ -65,14 +65,15 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(sceneMenu);
 	AddModule(sceneLogo);
 
-	AddModule(fade);
-
 	AddModule(map);
 	AddModule(entityManager);
 	AddModule(guiManager);
 
+	AddModule(fade);
 	// Render last to swap buffer
 	AddModule(render);
+
+
 
 	LOG("Timer App Constructor: %f", timer.ReadMSec());
 }

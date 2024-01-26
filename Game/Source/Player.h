@@ -181,6 +181,9 @@ public:
 		//Conexion with config.xml
 	pugi::xml_node config;
 
+	//bool escenas
+	bool nivel2Active = false;
+
 };
 
 #endif // __PLAYER_H__

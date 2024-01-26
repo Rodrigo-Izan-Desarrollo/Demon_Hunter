@@ -6,7 +6,6 @@
 #include "Window.h"
 #include "Scene.h"
 #include "Map.h"
-#include "Physics.h"
 #include "Slime.h"
 #include "BigSlime.h"
 #include "Boss.h"
@@ -288,7 +287,7 @@ bool Scene::Update(float dt)
 
 	if (player->dead==true && player->lifes<=0)
 	{
-		app->fade->StartFadeToBlack(this, (Module*)app->lastScreen, 0);
+		app->fade->FadeToBlackScene(this, (Module*)app->lastScreen, 0);
 		app->scene->Disable();
 		app->lastScreen->Enable();
 	}
@@ -303,7 +302,7 @@ bool Scene::Update(float dt)
 
 	if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
 	{
-		app->fade->StartFadeToBlack(this, (Module*)app->scenePause, 10);
+		app->fade->FadeToBlackScene(this, (Module*)app->scenePause, 10);
 		app->scene->Disable();
 		app->scenePause->Enable();
 		pausa = true;
@@ -357,6 +356,24 @@ bool Scene::PostUpdate()
 iPoint Scene::GetPLayerPosition() {
 
 	return player->position;
+}
+
+void Scene::nivel1funcion()
+{
+	player->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(spawnnivel1.x), PIXEL_TO_METERS(spawnnivel1.y)), 0);
+	nivel1 = true;
+	nivel2 = false;
+	player->nivel2Active = false;
+	app->render->camera.x = -11;
+}
+
+void Scene::nivel2funcion()
+{
+	player->pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(spawnnivel2.x), PIXEL_TO_METERS(spawnnivel2.y)), 0);
+	nivel1 = false;
+	nivel2 = true;
+	player->nivel2Active = true;
+	app->render->camera.x = -5124;
 }
 
 // Called before quitting
@@ -571,6 +588,8 @@ bool Scene::SaveState(pugi::xml_node node) {
 
 	return true;
 }
+
+
 
 bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 {
