@@ -262,6 +262,7 @@ bool Scene::Update(float dt)
 {
 	currentportal->Update();
 	currentcheckpoint->Update();
+	currentcheckpoint2->Update();
 	currentQ->Update();
 	currentClick->Update();
 	currentOne->Update();
@@ -292,16 +293,9 @@ bool Scene::Update(float dt)
 		app->scene->Disable();
 		app->lastScreen->Enable();
 	}
-	
-	if (app->sceneMenu->newgame == true)
-	{
-		player->position.x = 140;
-		player->position.y = 925;
-		player->pbody->body->SetTransform({ PIXEL_TO_METERS(player->position.x), PIXEL_TO_METERS(player->position.y) }, 0);
-		app->sceneMenu->newgame = false;
-	}
 
-	if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
+
+	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN)
 	{
 		app->fade->StartFadeToBlack(this, (Module*)app->scenePause, 10);
 		app->scene->Disable();

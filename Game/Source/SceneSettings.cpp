@@ -160,7 +160,6 @@ bool SceneSettings::Update(float dt)
 	{
 		//Change fullscreen
 		fullscreen = !fullscreen;
-		app->win->fullscreen_window= !app->win->fullscreen_window;
 	}
 	if (btn2->state == GuiControlState::PRESSED)
 	{
@@ -169,7 +168,7 @@ bool SceneSettings::Update(float dt)
 		app->vsync = !app->vsync;
 	}
 
-	if (fullscreen && !vsync)
+	if (fullscreen)
 	{
 		currentTexture = Sound_2;
 		app->win->fullscreen_window = true;
@@ -181,6 +180,7 @@ bool SceneSettings::Update(float dt)
 		app->win->fullscreen_window	=false;
 		app->win->ToggleFullscreen();
 	}
+
 	if (vsync && !fullscreen)
 	{
 		currentTexture = Sound_3;
