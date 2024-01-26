@@ -82,6 +82,7 @@ Be careful, as various types of obstacles await, and appearances can be deceivin
 * We would like to express our gratitude to our teacher for their guidance and support throughout the development process. 
 * This project is licensed under an unmodified MIT license, which is an OSI-certified license that allows static linking with closed source software. Check [Mozilla Public License] [LICENSE](https://www.mozilla.org/en-US/MPL/) for further details. 
 * "_If you save with an enemy alive and then you kill it when you load the enemy will be dead because we want to be like this for future updates_"
+* _The boss get invisible when you hit it, it does this because we want to increase the difficult of the end of the game_
 ## Repaired Bugs 
 * Attacking at the start of the gameplay
 * Pathfinding bomber/slime volador
