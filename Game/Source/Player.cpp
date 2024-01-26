@@ -228,11 +228,12 @@ bool Player::Update(float dt)
 			save = true;
 		}
 	}
-	if (check_3)
+	if (position.x >= 12230)
 	{
 		app->SaveRequest();
 		check_1 = false;
 		check_2 = false;
+		check_3 = true;
 		save = true;
 	}
 
@@ -732,7 +733,6 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::TELEPORT:
 		nivel2Active = true;
-		check_3 = true;
 		break;
 	case ColliderType::POWERUP_1:
 		canpower_1 = true;
