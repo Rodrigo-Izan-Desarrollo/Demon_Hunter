@@ -40,7 +40,7 @@ bool Vida::Start() {
 	idle.PushBack({ 30, 0, 30, 32 });
 	idle.PushBack({ 60, 0, 30, 32 });
 	idle.loop = true;
-	idle.speed = 0.125f;
+	idle.speed = 0.1f;
 
 	currentAnimation = &idle;
 
